@@ -1,0 +1,1124 @@
+{% capture loader %}
+<span class="loader"><?xml version="1.0" encoding="utf-8"?>
+  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto; background: none; display: block; shape-rendering: auto;" width="200px" height="200px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+    <circle cx="50" cy="50" fill="none" stroke="#ffffff" stroke-width="10" r="35" stroke-dasharray="164.93361431346415 56.97787143782138">
+      <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="1s" values="0 50 50;360 50 50" keyTimes="0;1"></animateTransform>
+    </circle>
+  </svg>
+</span>
+{% endcapture %}
+<style>
+  @media (max-width: 600px) {
+div#accepts_marketing\ {
+    font-size: 15.8px!important;
+}
+}
+</style>
+<script id="AddressFormTemplate" type="text/ractive">
+{% raw  %}
+<div id="{{component_id()}}" class="AddressComponent">
+  {{#unless hide_shipping_method_picker || !cart}}
+  	<div class="form-el text-center">
+        <h2 class="form-title">Elige tu método de envío</h2>
+      	<div class="form-el" style="margin-bottom: 15px;">
+          <div class="shipping-method-selector">
+            <label class="text-center">
+              <input type="radio" name="{{shippingMethod}}" value="delivery" checked>
+              <img src="{{ icons.delivery }}">
+              <div>Despacho a Domicilio</div>
+            </label>
+            <label class="text-center" style="position: relative">
+              <input type="radio" name="{{shippingMethod}}" value="store_pickup">
+              <img src="{{ icons.storePickup }}">
+              <div><span>Recojo en Tienda</span> {{& loaders.shippingMethod }}</div>
+            </label>
+  		  </div>
+  		</div>
+        {{#if shippingMethod === 'store_pickup'}}
+          <div class="store-picker">
+            <h2 class="form-title">Elige tu tienda de Recojo</h2>
+            {{#if selectedPickupStore.province === 'XXXXXX'}}
+              <span class="help-text" style="margin-bottom: 10px;">Debido a la coyuntura social actual se pueden presentar retrasos en la preparación de tu pedido</span>
+            {{/if}}
+            <p class="form-el">
+                <label for="nombre">Tienda: </label>
+                <!-- autocomplete="shipping address-level3" -->
+                <select name="Tienda" autocomplete="off" value="{{selectedPickupStore}}">
+                  <option disabled selected hidden value="">Elige una opción para continuar</option>
+                  {{#each storePickupList:num }}
+                  	<option value="{{ this }}">{{ name }}</option>
+                  {{/each}}
+                </select>
+            </p>
+            <p></p>
+            {{#if selectedPickupStore }}
+              <div class="selected-store-data">
+                <h2 style="font-weight: bold;">Tienda de recojo:</h2>
+                <p><b>Nombre: </b><span data-selected-store="name">{{ selectedPickupStore.name }}</span></p>
+                <p><b>Dirección: </b><span data-selected-store="address1">{{ selectedPickupStore.address1 }}</span></p>
+                <p><b>Interior: </b><span data-selected-store="address2">{{ selectedPickupStore.interior }}</span></p>
+                <p><b>Referencias: </b><span data-selected-store="reference">{{ selectedPickupStore.address2 }}</span></p>
+                <p><b>Región: </b><span data-selected-store="province">{{ selectedPickupStore.province }}</span></p>
+                <p><b>Provincia: </b><span data-selected-store="city">{{ selectedPickupStore.city }}</span></p>
+                <p><b>Distrito: </b><span data-selected-store="zip">{{ selectedPickupStore.zip }}</span></p>
+              </div>
+        	{{/if}}
+          </div>
+      	{{/if}}
+  	</div>
+  {{/unless}}
+
+  {{ #unless shippingMethod === 'store_pickup' && !selectedPickupStore }}
+      <div class="form-wrapper {{ loading.form ? 'loading' : '' }}">
+        {{#unless hide_title || !cart }}
+            <h2 class="form-title">Ingresa aquí {{#if shippingMethod === 'delivery'}}tu dirección de envío{{else}}tus datos de envío{{/if}}</h2>
+        {{/unless}}
+        <p class="form-el">
+            <label for="tipo_recibo">Boleta o Factura</label>
+            <select name="Departamento" class="required {{ getFieldClass('receipt_type') }}" autocomplete="off" value="{{ receipt_type }}" on-change="@.onReceiptTypeChange()"> 
+                <option disabled selected hidden value="">Elige una opción</option>
+                <option value="BOLETA" selected>BOLETA</option>
+                <option value="FACTURA">FACTURA</option>
+            </select>
+        </p>
+        {{#if receipt_type === 'BOLETA'}}
+        <p class="form-el">
+            <label for="nombre">Nombre</label>
+            <input required class="required {{ getFieldClass('first_name') }}" type="text" name="Nombre" autocomplete="given-name" value="{{ address.first_name }}" on-input="@.clearfieldError('first_name')">
+        </p>
+          <p class="form-el">
+            <label for="apellido">Apellido</label>
+            <input required class="required {{ getFieldClass('last_name') }}" type="text" name="Apellido" autocomplete="additional-name family-name" value="{{ address.last_name }}" on-input="@.clearfieldError('last_name')">
+        </p>
+        <p class="form-el">
+            <label for="nombre">DNI</label>
+            <input required class="required {{ getFieldClass('company') }}" type="text" name="DNI" value="{{ address.company }}" on-input="@.clearfieldError('company')">
+        </p>
+        {{ else }}
+        <p class="form-el">
+            <label for="nombre">Razon Social</label>
+            <input required class="required {{ getFieldClass('last_name') }}" type="text" name="Nombre" autocomplete="given-name" value="{{ address.last_name }}" on-input="@.clearfieldError('last_name')">
+        </p>
+        <p class="form-el" style="text-align:left;">
+            <label for="nombre">RUC</label>
+            <input required class="required {{ getFieldClass('company') }}" type="text" name="DNI" value="{{ address.company }}" on-input="@.validateRUC()" on-blur="@.validateRUC()">
+            <span class="error-message" style="color: red; display: {{ errorRUC ? 'inline' : 'none' }}">
+              RUC debe tener al menos 11 caracteres.
+            </span>
+        </p>
+        {{/if}}
+        {{#if shippingMethod === 'delivery'}}
+          <p class="form-el">
+              <label for="nombre">Dirección (Ingresa tu Calle y Número/Lte/Mz) [Máximo, 90 caracteres]</label>
+              <input required class="required {{ getFieldClass('address1') }}" type="text" max-length="90" name="Dirección" autocomplete="shipping address-line1" value="{{ address.address1 }}" on-input="@.clearfieldError('address1')">
+          </p>
+          <p class="form-el">
+              <label for="nombre">Apartamento/Interior (opcional)</label>
+              <input type="text" max-length="10" name="Int/Dpto" autocomplete="shipping address-line2" value="{{ address.interior }}" on-input="@.clearfieldError('interior')">
+          </p>
+          <p class="form-el">
+              <label for="nombre">Referencias [Máximo, 100 caracteres]</label>
+              <input required class="required {{ getFieldClass('address2') }}" type="text" max-length="100" name="Referencias" value="{{ address.address2 }}" on-input="@.clearfieldError('address2')">
+          </p>
+          <p class="form-el">
+              <label for="nombre">País</label>
+              <select name="País" class="required {{ getFieldClass('country') }}" autocomplete="shipping country-name" aria-disabled="true" value="{{ address.country }}" on-input="@.clearfieldError('country')">
+                  {{#each countries: num }}
+                    <option value="{{ @.removeAccentsES(this) }}">{{ this }}</option>
+                  {{/each}}
+              </select>
+          </p>
+          <p class="form-el">
+              <label for="nombre">Departamento</label>
+              <!-- autocomplete="shipping region" -->
+              <select name="Departamento" class="required {{ getFieldClass('province_code') }}" autocomplete="off" value="{{ divisionsSelected.1 }}" on-change="@.clearfieldError('province_code')"> 
+                  <option disabled selected hidden value="">Elige una opción</option>
+                  {{#each politicalDivisions.1: num }}
+                    <option value="{{ code }}">{{ name }}</option>
+                  {{/each}}
+              </select>
+              {{#if divisionsSelected.1 === 'XX-XXX' || divisionsSelected.1 === 'XX-XXXX'}}
+                  <span class="help-text">Debido a las intensas lluvias se podrían presentar retrasos en las entregas a domicilio en los siguientes departamentos: AMAZONAS, ANCASH, CAJAMARCA, HUANUCO, LA LIBERTAD, LAMBAYEQUE, LORETO, PASCO, PIURA, SAN MARTIN, TUMBES
+                  </span>
+              {{/if}}
+          </p>
+          <p class="form-el">
+              <label for="nombre">Provincia</label>
+              <!-- autocomplete="shipping locality" -->
+              <select name="Provincia" class="required {{ getFieldClass('city') }}" autocomplete="off" value="{{ divisionsSelected.2 }}" disabled="{{ !divisionsSelected.1 }}" on-change="@.clearfieldError('city')">
+                  <option disabled selected hidden value="">Elige una opción</option>
+                  {{#if divisionsSelected.1 }}
+                    {{#each politicalDivisions.2: num }}
+                      <option value="{{ name }}" data-id="{{ id }}">{{ name }}</option>
+                    {{/each}}
+                  {{/if}}
+              </select>
+              {{#if divisionsSelected.2 === 'XXXXXX'}}
+                <span class="help-text">Ten en cuenta que si tu pedido es para la CIUDAD DE CAJAMARCA, únicamente podrás recogerlo en la agencia de OLVA en Jr. Los Nogales N° 425, Villa Universitaria, Cajamarca</span>
+              {{/if}}
+          </p>
+          <p class="form-el">
+              <label for="nombre">Distrito</label>
+              <!-- autocomplete="shipping address-level3" -->
+              <select name="Distrito" class="required {{ getFieldClass('zip') }}" autocomplete="off" value="{{ divisionsSelected.3 }}" disabled="{{ !divisionsSelected.2 }}" on-change="@.clearfieldError('zip')">
+                  <option disabled selected hidden value="">Elige una opción</option>
+                  {{#if divisionsSelected.2}}
+                    {{#each politicalDivisions.3: num }}
+                      <option value="{{ @.sanitizeDivision(name) }}" data-id="{{ id }}">{{ name }}</option>
+                    {{/each}}
+                  {{/if}}
+              </select>
+              {{#if divisionsSelected.3 === 'XXXXX' || divisionsSelected.1 === 'XXXXXX'}}
+                <span class="help-text">Debido a las intensas lluvias, si tu pedido es para Lurigancho - Chosica se podrían presentar retrasos en las entregas</span>
+              {{/if}}
+          </p>
+        {{/if}}
+        <p class="form-el">
+            <label for="nombre">Teléfono</label>
+            <input required class="required {{ getFieldClass('phone') }}" type="text" name="Teléfono" required autocomplete="tel" value="{{ address.phone }}" on-input="@.clearfieldError('phone')" on-blur="@this.addCountryPrefix()">
+        </p>
+        <p class="form-el">
+            <label for="nombre">Email</label>
+            <input required class="required {{ getFieldClass('email') }}" type="text" name="Email" required autocomplete="email" value="{{ email }}"  on-input="@.clearfieldError('email')">
+        </p>      
+        {{#unless cart}}
+          <p class="form-el checkbox-el">
+              <input id="checkbox-1" type="checkbox" id="address_default_address_{{ id }}" name="Defecto" checked="{{ address.default }}" value="true">
+              <label for="checkbox-1">Fijar como dirección por defecto</label>
+          </p>
+        {{/unless}}
+        <p class="form-el checkbox-el" {{#if cart}}style="margin-top: 25px;"{{/if}}>
+          <input id="checkbox-2" type="checkbox" class="required {{ getFieldClass('agree_terms') }}" name="agree_terms" checked="{{ address.agree_terms }}" on-input="@.clearfieldError('agree_terms')">
+          <label for="checkbox-2">Estoy de acuerdo con los <a href="/pages/terminos-y-condiciones" target="_blank">Términos y Condiciones </a> y la <a href="/pages/privacidad-y-confidencialidad" target="_blank"> Política de Tratamiento de Datos Personales.</a></label>
+        </p>
+        {{#if errors.messages.length }}
+          <div class="formErrorsWrapper form-message form-message--error">
+              <h2 class="h3 form-message__title " data-form-status="">Por favor, corrige lo siguiente:</h2>
+              <div class="formErrorsList errors">
+                <ul>
+                    {{#each errors.messages: num }}
+                      <li>{{ this }}</li>
+                    {{/each}}
+                </ul>
+              </div>
+          </div>
+        {{/if}}
+          <!--<div id="accepts_marketing " class="clearfix large_form" style="text-align: left;padding-bottom: 20px;font-size: 13px;line-height: 20px;">
+              <input style="float:none; vertical-align: middle; margin:0; margin-right: 6px;" type="checkbox" name="accepts_marketing" checked="{{ acceptsMarketing }}" value="true" id="marketing" />
+                <label style="display:inline; float:none" for="marketing" style="font-weight:normal"><strong>Acepto recibir promociones y nuevas novedades por correo electrónico de The Box.</strong></label>
+          </div>-->
+        {{#unless hide_action_button}}
+            <p class="form-el" style="margin-bottom: 15px">
+              <button type="button" class="btn btn--small-wide submit" on-click="@.submit()">
+                  <span class="default-text">Continuar {{& loaders.form }}</span>
+              </button>
+            </p>
+        {{/unless}}
+      </div>
+  {{/unless}}
+</div>
+{% endraw  %}
+</script>
+
+<script>
+  window.rxComponents.push({
+      template: '#AddressFormTemplate',
+      name: 'AddressFormComponent',
+      data: () => ({
+    	id: {{ id | json }},
+    	component_id() { return 'AddressFormComponent_'+ this.get('id') },
+        email: '{{ customer.email }}',
+      	address: {% unless address %}{{ customer.default_address | json }}{% else %}{{ address | json }}{% endunless %} || {},
+        receipt_type: 'BOLETA',
+		cart: {% unless cart == blank %}{{ cart | json }}{% else %}null{% endunless %},
+		customerTags: {{ customer.tags | json }} || [],
+		countries: {{ localization.available_countries | json }} || [],
+		divisionsKeyMap: {
+			1: {key: '', name: 'province_code', matchBy: 'code'},
+			2: {key: 'department_code', name: 'city', matchBy: 'name'},
+			3: {key: 'province', name: 'zip', matchBy: 'name' }
+		},
+        maxLevels: 3,
+		levels: [],
+		politicalDivisions: {},
+		divisionsSelected: {},
+		storePickupList: [],
+		shippingAddress: {},
+        acceptsMarketing: false,
+		init: {{ init_form | json }} === null ? true : {{ init_form | json }},
+		shippingMethod: 'delivery',
+		hide_shipping_method_picker: {{ hide_shipping_method_picker | json }} || false,
+		hide_action_button: {{ hide_action_button | json }} || false,
+        disable_auto_complete: {{ disable_auto_complete | json }} || false,
+		action: {{ action | json }} || 'create',
+        blackListedNames: window.tbx_bltdn || '',
+        blackListedEmails: window.tbx_bltde || '',
+        blackListedDocuments: window.tbx_bltdd || '',
+        blackListedAddresses: window.tbx_bltda || '',
+        blackListedReferences: window.tbx_bltdr || '',
+        blackListedPhones: window.tbx_bltdp || '',
+        blackListedIps: window.tbx_bltdi || '',
+        checkoutWindow: null,        
+		loading: {
+			form: false,
+			shippingMethod: false,
+		},
+		icons: {
+			delivery: '{{ 'cr-shipping-icon.png' | asset_url }}',
+			storePickup: '{{ 'cr-store-pickup-icon.png' | asset_url }}',
+        },
+		loaders: {
+			form: `{{ loader }}`, 
+			shippingMethod: `{{ loader | replace: 'class="loader"', 'class="loader abs"' | replace: 'stroke="#ffffff"', 'stroke="#000000"'}}`, 
+		},
+		errors: {
+            fields: [],
+            messages: [],
+        },
+        errorRUC: false,
+        getFieldClass(name) {
+            return (this.get('errors') && this.get('errors').fields && this.get('errors').fields[name]) ? 'input--error': ''
+        },
+      }),
+	  observe: {
+		'divisionsSelected.*': {
+			async handler (value, old, path, idx) {
+              const divisionsKeyMap = this.get('divisionsKeyMap')
+              const levels = this.get('levels')
+              const level = idx
+              const levelProps = divisionsKeyMap[level]
+              const nextLevel = Number(level) + 1
+			  const nextLevelProps = divisionsKeyMap[nextLevel]
+              let divisionValue = value
+              
+              if (!divisionValue) {
+              	return
+              }
+                            
+              if (divisionValue === 'PE-LIM') {
+              	divisionValue = 'PE-LMA'
+              } 
+              
+			  this.set(`address.${levelProps.name}`, divisionValue)
+              
+              if (levels.find(l => l === nextLevel)) {
+                const nextLevelDivisions = await this.getPoliticalDivisions(nextLevel, divisionValue)
+                this.set(`politicalDivisions[${nextLevel}]`, nextLevelDivisions)
+              }
+           },
+           strict: true,
+           init: false,
+        },
+        'shippingMethod': {
+          async handler (value, old, path, idx) {
+            if (value === 'store_pickup') {
+              const storesList = window['store-pickup-list'] || await this.getStoresList()
+                this.set('storePickupList', storesList)
+            }
+          },
+          strict: true,
+          init: true
+        }
+	  },
+      async oninit() {        
+        if (!this.get('init')) {
+          return false
+        }
+
+        if (this.get('disable_auto_complete') || 
+            !this.get('address') ||
+            !Object.keys(this.get('address')).length)  {
+          this.set('address', {})
+		}
+
+        const address = this.get('address')
+        const divisionsKeyMap = this.get('divisionsKeyMap')
+
+        this.set('levels', Array.from({length: this.get('maxLevels')}, (_, i) => i + 1))
+
+        const levels = this.get('levels')
+         
+		// GET FIRST LEVEL DIVISION ALWAYS AND CACHE IT
+		const divisions = window[`political_divisions_level_${levels[0]}`] || await this.getPoliticalDivisions(levels[0])
+        this.set(`politicalDivisions[${levels[0]}]`, divisions)
+		window[`political_divisions_level_${levels[0]}`] = divisions 
+        
+        if (address && Object.keys(address).length) {
+            for ([i, level] of levels.entries()) {
+              const key = divisionsKeyMap[level].name
+              const selectedValue = address[key]
+              await this.set(`divisionsSelected[${level}]`, selectedValue)
+            }
+         }
+
+        if (this.get('cart')) {
+          if (!this.get('hide_shipping_method_picker')) {
+            this.getStoresList()
+          }
+          const customerDocument = this.get('address.company');
+          if (customerDocument.length >= 11) {
+            this.set('receipt_type', 'FACTURA')
+          }
+        }
+        
+        this.addCountryPrefix()
+        
+      },
+      //methods:
+      async fetchDivision({ department_code, province, district } = {}) {
+        var SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVrZm91c3FvZmd6ZGR6ZXB4aGtkIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NDU2NDcwMTgsImV4cCI6MTk2MTIyMzAxOH0.BEGFANq0-6iGF3YJqPFZUF_8p0U5J6LkJFA20q97DaU'
+
+        var SUPABASE_URL = "https://ukfousqofgzddzepxhkd.supabase.co"
+
+        var supabaseDB = supabase.createClient(SUPABASE_URL, SUPABASE_KEY)
+
+        options = {}
+
+        if (province) {
+             options.procedure = 'get_formatted_districts_by_province'
+             options.parameters = { province_name: this.removeAccentsES(province) }
+
+        } else if (department_code) {
+             options.procedure = 'get_formatted_provinces_by_department_code'
+             options.parameters = { dp_code: department_code }
+
+        } else {
+             options.procedure = 'get_formatted_departments'
+             options.paramers = null
+        }
+        
+        const { data: division, error } = await supabaseDB
+        	.rpc(options.procedure, options.parameters)
+
+		return division      
+      },
+      async getPoliticalDivisions(level = 1, value) {
+        const divisionsKeyMap = this.get('divisionsKeyMap')
+        const levelProps = divisionsKeyMap[level]        
+
+        const divisions = await this.fetchDivision({ [levelProps.key]: value })
+        
+        return divisions
+      },
+      async getStoresList() {
+        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVrZm91c3FvZmd6ZGR6ZXB4aGtkIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NDU2NDcwMTgsImV4cCI6MTk2MTIyMzAxOH0.BEGFANq0-6iGF3YJqPFZUF_8p0U5J6LkJFA20q97DaU'
+
+        const SUPABASE_URL = "https://ukfousqofgzddzepxhkd.supabase.co"
+
+        const supabaseDB = supabase.createClient(SUPABASE_URL, SUPABASE_KEY)
+
+        const { data: storepickup_locations, error } = await supabaseDB
+        	.from('store_pickup_locations_v3')
+        	.select('*')
+            .order('sort_order')
+                
+        window['store-pickup-list'] = storepickup_locations.filter(s => s.active)
+        
+        return window['store-pickup-list'] 
+      },
+      clearfieldError(name) {
+        this.set(`errors.fields.${name}`, 0) 
+      },
+      capitalize(str) {
+       var splitStr = str.toLowerCase().split(' ');
+       for (var i = 0; i < splitStr.length; i++) {
+           // You do not need to check if i is larger than splitStr length, as your for does that for you
+           // Assign it back to the array
+           splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);     
+       }
+       // Directly return the joined string
+       return splitStr.join(' '); 
+     },
+      removeAccentsES(strAccents) {
+        var strAccents = strAccents.split('');
+        var strAccentsOut = new Array();
+        var strAccentsLen = strAccents.length;
+        var accents =    "ÀÁÂÃÄÅàáâãäåÒÓÔÕÕÖØòóôõöøÈÉÊËèéêëðÇçÐÌÍÎÏìíîïÙÚÛÜùúûüŠšŸÿýŽž";
+        var accentsOut = "AAAAAAaaaaaaOOOOOOOooooooEEEEeeeeeCcDIIIIiiiiUUUUuuuuSsYyyZz";
+        for (var y = 0; y < strAccentsLen; y++) {
+          if (accents.indexOf(strAccents[y]) != -1) {
+            strAccentsOut[y] = accentsOut.substr(accents.indexOf(strAccents[y]), 1);
+          } else
+            strAccentsOut[y] = strAccents[y];
+        }
+        strAccentsOut = strAccentsOut.join('');
+
+        return strAccentsOut;
+      },
+      sanitizeDivision(division) {
+        if (!division) return 
+		let sanitized = (this.removeAccentsES(division.replace(/ /g,''))) || ''
+        const itemTrimmedVal = sanitized.replace(/ /g,'')
+        if (itemTrimmedVal.length > 20) {
+          sanitized = itemTrimmedVal
+        }
+        return sanitized.toUpperCase()
+      },
+      intersectObjs(obj1, obj2, preserveKeys = []) {
+          const newObject = {}
+          for (const key in { ...obj1, ...obj2 }) {
+              const element1 = obj1[key];
+              const element2 = obj2[key];
+              if (element1 && element2)
+                  newObject[key] = element2
+              else if (element1)
+                  newObject[key] = element1
+              else if (element2 && preserveKeys.includes(key))
+                newObject[key] = element2
+          }
+          return newObject
+      },
+      onReceiptTypeChange() {
+        this.clearfieldError('receipt_type')
+        if (this.get('receipt_type') === 'FACTURA') {
+          this.set('address.first_name', '')
+        }
+      },
+      validateRUC() {
+        if (this.get('receipt_type') !== 'FACTURA') {
+            this.set('errorRUC', false);
+            this.clearfieldError('company');
+            return
+        }
+        const ruc = this.get('address.company');
+        if (ruc.length < 11) {
+            this.set('errorRUC', true);
+        } else {
+            this.set('errorRUC', false);
+            this.clearfieldError('company');
+        }
+      },
+      addCountryPrefix() {
+          let phoneStr = this.get('address.phone');  
+          // Verifica si ya tiene un prefijo válido (+ seguido de dígitos).
+          const hasValidPrefix = /^\+\d+/.test(phoneStr);
+          // Evita añadir "+51" si el valor es solo "+" o ya tiene un prefijo.
+          if (phoneStr === '+' || hasValidPrefix) {
+              return;
+          }
+          // Si no tiene un prefijo, añade "+51".
+          this.set('address.phone', `+51${phoneStr}`);
+      },
+      preventEnter(event) {
+        if (event.key === 'Enter') {
+          event.preventDefault(); // Evita el comportamiento predeterminado
+        }
+      },
+      validateForm(formObj) {    
+          var constraints = {
+            "first_name": {
+              presence: {allowEmpty: this.get('receipt_type') === 'FACTURA'},
+              alphanumericWithSpaces: true
+            },
+            "last_name": {
+              presence: {allowEmpty: false},
+              alphanumericWithSpaces: true
+            },
+            "company": {
+              presence: {allowEmpty: false},
+      		  numericality: true,
+              length: {maximum: 15},
+              alphanumericWithSpaces: true,
+            },
+            "address1": {
+              presence: {allowEmpty: false},
+              length: {maximum: 90},
+              noPipe: true,
+            },
+            "interior": {
+              length: {maximum: 100},
+              noPipe: true,
+            },
+            "address2": {
+              presence: {allowEmpty: false},
+              length: {maximum: 100},
+              noPipe: true,
+            },
+            "phone": {
+              presence: {allowEmpty: false},
+              noPipe: true,
+            },
+            "country": {
+              presence: {allowEmpty: false},
+              noPipe: true,
+            },
+            "province_code": {
+              presence: {allowEmpty: false},
+              noPipe: true,
+            },
+            "city": {
+              presence: {allowEmpty: false},
+              noPipe: true,
+            },
+			"zip": {
+              presence: {allowEmpty: false},
+              noPipe: true,
+            },
+            "email": {
+              presence: {allowEmpty: false},
+              noPipe: true,
+              email: true,
+            },
+            "agree_terms": {
+              inclusion: {
+                within: [true, 1], 
+                message: "Debes aceptar los términos y condiciones para continuar"   
+			  }
+            } 
+          };
+        
+          const aliases = {
+            "first_name": "Nombre",
+            "last_name": "Apellido",
+            "company": "DNI",
+			"address1": "Dirección",
+            "address2": "Referencias",
+            "interior": "Int/Dpto",
+            "phone": "Teléfono",
+            "country": "País",
+            "province_code": "Departamento",
+            "city": "Provincia",
+            "zip": "Distrito",
+            "email": "Email",
+            "agree_terms": " "
+          };
+
+          validate.validators.presence.options = { message: "no puede estar en blanco" };
+          validate.validators.numericality.options = { message: "debe ser numérico" };
+          validate.validators.length.options = { tooLong: "es demasiada larga, máximo %{count} caractéres" };
+
+          validate.validators.noPipe = function(value, options) {
+            if (!value) return;
+          
+            if (value.includes('|')) {
+              return options.message || "no puede contener el carácter |";
+            }
+          };
+        
+          validate.validators.alphanumericWithSpaces = function(value, options) {
+            if (!value) return;
+          
+            const regex = /^[a-zA-Z0-9\sáéíóúÁÉÍÓÚñÑüÜ]+$/;
+            if (!regex.test(value)) {
+              return options.message || "solo puede contener letras, números y espacios";
+            }
+          };
+
+          var validation = validate(formObj, constraints, {
+            prettify(string) {
+              return aliases[string] || validate.prettify(string);
+            }
+          }) || {};
+
+          var errors = Object.entries(validation);
+
+          // BLACKLIST VALIDATION
+          const blackLists = {
+            blackListedNames: { values: this.get('blackListedNames').split(','), prop: 'fullname' },
+            blackListedDocuments: { values: this.get('blackListedDocuments').split(','), prop: 'company' },
+            blackListedAddresses: { values: this.get('blackListedAddresses').split(','), prop: 'address1' },
+            blackListedReferences: { values: this.get('blackListedReferences').split(','), prop: 'address2' },
+            blackListedPhones: { values: this.get('blackListedPhones').split(','), prop: 'phone' },
+          }
+
+          const isBlackListed = Object.keys(blackLists).some(k => {
+            const bl = blackLists[k]
+            let objValue = formObj[bl.prop]  
+            if (bl.prop === 'fullname') {
+              objValue = `${formObj.first_name} ${formObj.last_name}`
+            } else if (bl.prop === 'phone') {
+                objValue = !objValue.startsWith('+') ? `+51${objValue}` : objValue;
+            }
+            return bl.values.find(v => { 
+              return objValue && (objValue.toUpperCase().replace(/\s+/g, '').trim() === v.toUpperCase().replace(/\s+/g, '').trim())
+            })
+          })
+
+          if (isBlackListed) {
+            window.alert('Ocurrió un error por favor inténtalo nuevamente mas tarde.')
+            return { fields: { blacklist: 1 }, messages: ['Ocurrió un error por favor inténtalo nuevamente mas tarde.'] }
+          }
+
+          if (this.get('errorRUC') && this.get('receipt_type') === 'FACTURA'){ 
+            errors = errors || []
+            errors.push(['ruc', ['RUC debe tener al menos 11 caracteres.']])
+          } 
+
+          // $.getJSON('https://api.ipify.org?format=jsonp&callback=?', function(data) {
+          //   console.log(JSON.stringify(data.ip, null, 2));
+          // });
+
+          if (!errors || !errors.length) {
+            return { success: true };
+          }
+          
+          const errorsMap = {
+            fields: {},
+            messages: [],
+          }
+
+          errors.forEach(item => {
+            const errorName = item && item[0];
+            const errorMesage = item && item[1] && item[1][0];
+            errorsMap.fields[errorName] = 1
+            errorsMap.messages.push(errorMesage)
+          });
+
+		  console.log(errorsMap)
+                  
+          return { success: false, errors: errorsMap };
+      },
+      submit() {        
+        let address = this.get('address')
+        const email = this.get('email')
+        const shippingMethod = this.get('shippingMethod')
+		const selectedPickupStore = this.get('selectedPickupStore')
+        
+        this.set('loading.form', true)
+                
+		if (shippingMethod === 'store_pickup') {
+//           address = this.intersectObjs(selectedPickupStore, address, ['first_name', 'last_name', 'phone', 'company', 'agree_terms'])
+          address = {...address, ...selectedPickupStore}
+        }
+                                
+        const formValidation = this.validateForm({ ...address, email })
+        
+        this.set('errors', formValidation.errors)
+
+        if (!formValidation.success) {
+          this.set('loading.form', false)
+          return false
+        }
+
+        let district = this.sanitizeDivision(address.zip)
+
+        let composedAddress = '';
+        composedAddress += address.address1
+
+        if (address.interior) {
+          composedAddress += ', ' + address.interior
+        }
+
+        const formatedDocumentNumber = address.company ? address.company.trim() : ''
+
+        const shippingAddress = {
+          "address1": composedAddress,
+          "address2": address.address2,
+          "city": address.city,
+          "company": formatedDocumentNumber,
+          "country": address.country,
+          "zip": district,
+          "province": address.province_code,
+          "firstName": address.first_name,
+          "lastName": address.last_name,
+          "phone": address.phone,
+        }
+                
+        this.set('shippingAddress', shippingAddress)
+        
+        console.log(shippingAddress)
+        
+        if (this.get('cart')) {
+            //this.set('checkoutWindow', window.open())
+            this.addCountryPrefix()
+        	return this.checkout()
+        } 
+        
+        if (this.get('action') === 'update') {
+        	return this.addressUpdate()
+        } else {
+        	return this.addressCreate()
+        }
+      },
+  	  addressCreate() {       
+        const shippingAddress = this.get('shippingAddress')
+        
+        const form = this.el.closest('form')
+        
+        Object.keys(shippingAddress).forEach((key) => {
+          const value = shippingAddress[key]
+          const input = form.querySelector(`[name="address[${key}]"]`)
+          if (!input) {
+            form.innerHTML += `<input type="hidden" name="address[${key}]" value="${value}" />`
+          } else {
+          	input.value = value
+          }
+		})
+        
+        form.submit()
+
+		this.set('loading.form', false)
+        
+  	  },
+  	  addressUpdate() {
+        const shippingAddress = this.get('shippingAddress')
+        
+        const form = this.el.closest('form')
+        
+        shippingAddress.default = this.get('address.default')
+        
+        Object.keys(shippingAddress).forEach((key) => {
+          const value = shippingAddress[key]
+          const input = form.querySelector(`[name="address[${key}]"]`)
+          if (!input) {
+            form.innerHTML += `<input type="hidden" name="address[${key}]" value="${value}" />`
+          } else {
+          	input.value = value
+          }
+		})
+        
+		form.submit()
+        
+        this.set('loading.form', false)
+  	  },
+      async checkout() {
+		const email = this.get('email')
+        let shippingAddress = this.get('shippingAddress')
+        const shippingMethod = this.get('shippingMethod')
+		const selectedPickupStore = this.get('selectedPickupStore')
+        const customerTags = this.get('customerTags')
+        const acceptsMarketing = this.get('acceptsMarketing')
+        const randomQuery =  '_' + Math.random().toString(36).substr(2, 9)
+        const checkoutWindow = this.get('checkoutWindow')
+        
+        const cartRequest = await fetch(
+          '/cart.js?v='+ randomQuery, 
+          {headers: {'Accept': 'application/json'}
+          });
+
+        const cartResponse = await cartRequest.json()
+
+        cartResponse.attributes.shipping_method = shippingMethod
+        delete cartResponse.attributes.store_pickup 
+
+        if (shippingMethod === 'store_pickup' && selectedPickupStore) {
+          cartResponse.attributes.store_pickup = selectedPickupStore.id + ''
+        }
+
+        if (customerTags.length) {
+          let genero = customerTags.find(tag => tag.toLowerCase().indexOf('genero') > -1) || 'genero:Otro'
+          genero = genero.replace('genero:', '')
+
+          var rms_genre_map = [
+            {name: "Hombre", value: "1"},
+            {name: "Mujer", value: "2"},
+            {name: "Otro", value: "4"},
+          ]
+
+          const genreValue = rms_genre_map.find(gn => gn.name.toLowerCase() === genero.toLowerCase()) || { value: "4" }
+
+          if (genreValue && genreValue.value) {
+            cartResponse.attributes.titleId = genreValue.value
+          }
+        }
+
+        const cartAttributes = Object.keys(cartResponse.attributes).map(k => ({ key: k, value: cartResponse.attributes[k]})) || []
+
+        ga(function(tracker) {
+          var clientId = tracker.get('clientId');
+          console.log(clientId);
+          if (clientId) {
+            cartAttributes.push({ key: 'clientId', value: clientId })
+          }
+        });
+
+        // v1
+        // const client = ShopifyBuy.buildClient({
+        //   //domain: 'dunkelvolk-peru.myshopify.com',
+        //   domain: 'dunkelvolk.com',
+        //   storefrontAccessToken: '0bf4d92f73686385488e961067017b50'
+        // });
+
+          //v2
+        const client = ShopifyStorefrontAPIClient.createStorefrontApiClient({
+            storeDomain: 'dunkelvolk.com',
+            apiVersion: '2025-01',
+            publicAccessToken: '0bf4d92f73686385488e961067017b50',
+        });
+
+        //v2
+        const cartCreateMutation = `
+          mutation CreateCart($input: CartInput!) {
+              cartCreate(input: $input) {
+                  cart {
+                      id
+                      checkoutUrl
+                      buyerIdentity {
+                          email
+                          phone
+                          countryCode
+                      }
+                      lines(first: 10) {
+                          edges {
+                              node {
+                                  merchandise {
+                                      ... on ProductVariant {
+                                          title
+                                          product {
+                                            title
+                                          }
+                                      }
+                                  }
+                                  quantity
+                              }
+                          }
+                      }
+                  }
+                  userErrors {
+                      field
+                      message
+                  }
+              }
+          }
+        `;
+
+        
+        // v2
+        const {data, errors, extensions} = await client.request(cartCreateMutation, {
+            variables: {
+                input: {
+                    lines: cartResponse.items.map(({ variant_id, quantity, properties }, idx) => {
+                        const lineItem = { 
+                          merchandiseId: `gid://shopify/ProductVariant/${variant_id}`, 
+                          quantity, 
+                          attributes: properties && Object.keys(properties).map(k => ({ key: k, value: properties[k]}))
+                        }
+            
+                        lineItem.attributes = lineItem.attributes || []
+                        // if (idx === 0) {
+                          const lineItemShippingFlagIdx = lineItem.attributes.findIndex(atr => atr.key === 'shipping_method')
+                          console.log(lineItemShippingFlagIdx)
+                          if (lineItemShippingFlagIdx > -1) {
+                            lineItem.attributes[lineItemShippingFlagIdx].value = shippingMethod
+                          } else {
+                            lineItem.attributes.push({ key: 'shipping_method', value: shippingMethod })
+                          }
+                        // }
+                        return lineItem
+                    }),
+                    buyerIdentity: {
+                      email: email,
+                      countryCode: 'PE',
+                      phone: shippingAddress.phone,
+                      deliveryAddressPreferences: {
+                        deliveryAddress: shippingAddress,
+                        deliveryAddressValidationStrategy: 'COUNTRY_CODE_ONLY'
+                      }
+                    },
+                    note: cartResponse.note,
+                    attributes: cartAttributes,
+                },
+            },
+        });
+
+        //v2
+        console.log(data, errors, extensions)
+
+        //v1
+        // const checkout = await client.checkout.create({
+        //   email: email,  
+        //   shippingAddress: shippingAddress,
+        //   lineItems: cartResponse.items.map(({ variant_id, quantity, properties }, idx) => {
+            
+        //     console.log(properties && Object.keys(properties).map(k => ({ key: k, value: properties[k]})))
+
+        //     const lineItem = { 
+        //       variantId: `gid://shopify/ProductVariant/${variant_id}`, 
+        //       quantity, 
+        //       customAttributes: properties && Object.keys(properties).map(k => ({ key: k, value: properties[k]}))
+        //     } 
+        //     lineItem.customAttributes = lineItem.customAttributes || []
+        //     //if (idx === 0) {
+        //       const lineItemShippingFlagIdx = lineItem.customAttributes.findIndex(atr => atr.key === 'shipping_method')
+        //       console.log(lineItemShippingFlagIdx)
+        //       if (lineItemShippingFlagIdx > -1) {
+        //         lineItem.customAttributes[lineItemShippingFlagIdx].value = shippingMethod
+        //       } else {
+        //         lineItem.customAttributes.push({ key: 'shipping_method', value: shippingMethod })
+        //       }
+        //     //}
+        //     return lineItem
+        //   }),
+        //   note: cartResponse.note,
+        //   customAttributes: cartAttributes,
+        //   //buyer_accepts_merketing: acceptsMarketing,
+        // })
+
+        // await client.checkout.updateAttributes(checkout.id,  {customAttributes: cartAttributes})
+
+        try  {
+          //Analitycs Event snippet for CM - Inicio de confirmación de compra conversion page
+            gtag('event', 'inicio de compra', {
+                'value': 1.0,
+                'currency': 'PEN'
+            });
+
+            //Adwords Event snippet for CM - Inicio de confirmación de compra conversion page
+            gtag('event', 'conversion', {
+                'send_to': 'AW-835488098/NmrNCKiMuNoDEOKSso4D',
+                'value': 1.0,
+                'currency': 'PEN'
+            });
+          
+        } catch {
+          console.log(error)
+        }
+
+        //checkoutWindow.location = window.open(checkout.webUrl, 'tbx-checkout'); 
+        // checkoutWindow.location = checkout.webUrl
+        // setTimeout(function () { checkoutWindow.location = checkout.webUrl },3000);
+        
+        this.set('loading.form', false)
+
+        //v2
+        const hasShopifyValidationErrors = (data && data.cartCreate && data.cartCreate.userErrors && data.cartCreate.userErrors.length)
+        this.set('submitError', hasShopifyValidationErrors ? data.cartCreate.userErrors[0].message : errors && errors[0])
+
+         //v1
+         // window.location.href = checkout.webUrl
+        
+        //v2
+        if (!errors) {
+          window.location.href = data.cartCreate.cart.checkoutUrl
+        }
+
+      },
+  });
+</script>
+
+
+<style>
+  .AddressComponent {
+    margin: auto;
+    width: 500px;
+    max-width: 100%;
+  }
+  .AddressComponent .selected-store-data {
+    width: 100%;
+    margin: auto;
+    margin-bottom: 35px;
+    border: 1px solid #ccc;
+    padding: 25px;
+    font-size: 0.8rem;
+  }
+  .AddressComponent .selected-store-data p {
+    text-align: left;
+    padding-bottom: 25px;
+    margin-bottom: 10px;
+  }
+  .AddressComponent .selected-store-data p:not(:last-of-type) {
+    border-bottom: 1px solid #ccc;
+  }
+  .AddressComponent .selected-store-data span {
+    float: right;
+    max-width: 70%;
+    text-transform: lowercase;
+  }
+  .AddressComponent .selected-store-data span::first-letter {
+    text-transform: uppercase;
+  }
+  .AddressComponent .shipping-method-selector h2 {
+    font-weight: bold;
+  }
+  .AddressComponent .shipping-method-selector label {
+    display: inline-block;
+    margin: 1rem;
+    cursor: pointer;
+    text-align: center;
+  }
+  .AddressComponent .shipping-method-selector img {
+    height: 80px;
+  }
+  /* HIDE RADIO */
+  .AddressComponent .shipping-method-selector [type=radio] { 
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  /* IMAGE STYLES */
+  .AddressComponent .shipping-method-selector [type=radio] + img {
+    cursor: pointer;
+  }
+  /* CHECKED STYLES */
+  .AddressComponent .shipping-method-selector [type=radio]:checked + img {
+    outline: 2px solid #212b36;
+  }
+  .AddressComponent .form-title {
+    text-align: center;
+    font-weight: bold;
+  }
+  .AddressComponent .form-el label {
+    text-align: left;
+    font-size: 13px;
+    font-weight: bold;
+  }
+  .AddressComponent .form-el label a {
+    text-decoration: underline;
+  }
+  .AddressComponent input,
+  .AddressComponent select {
+    width: 100%;
+  }
+  .AddressComponent .form-el input[type=number]::-webkit-inner-spin-button,
+  .AddressComponent .form-el input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  .AddressComponent .form-el select:disabled::-ms-expand {
+    background-image: none;
+    display: none;
+  }
+  .AddressComponent .form-el select:disabled {
+    background-image: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+  }
+  .AddressComponent .checkbox-el {
+  	text-align: left;
+  }
+  .AddressComponent .checkbox-el label {
+    font-size: 13px;
+    display: inline-block;
+    width: 90%;
+    position: relative;
+    top: -5px;
+  }
+  .AddressComponent input[type="checkbox"] {
+    display: inline-block;
+    width: auto;
+    margin-right: 8px;
+    vertical-align: top;
+    margin-bottom: 0;
+  }
+  .AddressComponent .submit {
+    margin: auto;
+    display: block;
+  }
+  .AddressComponent .loader {
+    display: none;
+    vertical-align: text-bottom;
+  }
+  .AddressComponent .loader.abs {
+    vertical-align: bottom;
+    position: absolute;
+    right: -25px;
+    top: 83px;
+  }
+  .AddressComponent .loader svg {
+    height: 20px;
+    width: 20px;
+  }
+  .AddressComponent .loading .loader,
+  .AddressComponent .form-wrapper .loading .loader {
+    display: inline-block;
+  }
+  .AddressComponent .form-el .help-text {
+    display: inline-block;
+    background: #000;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    margin-top: 15px;
+  }
+</style>

@@ -1,0 +1,124 @@
+{%- comment -%}
+  Brand fonts only.
+    - Display: FatFrank Heavy (single weight)
+    - Body:    Avenir 300 / 400 / 500 / 800
+
+  Source mapping (file names preserved for traceability):
+    avenir_6.woff2 → 300 Light
+    avenir_0.woff2 → 400 Book
+    avenir_8.woff2 → 500 Medium
+    avenir_2.woff2 → 800 Black
+
+  Total ≈ 215 KB. All served from /assets via asset_url.
+
+  This snippet is for typography only. Page-specific layout overrides
+  (hero height, header overlay, etc.) live in dunk-home-overrides.liquid.
+{%- endcomment -%}
+<style id="dunk-fonts">
+  @font-face {
+    font-family: 'FatFrank';
+    src: url('{{ "FatFrank_Heavy.otf" | asset_url }}') format('opentype');
+    font-weight: 800 900;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'Avenir';
+    src: url('{{ "avenir_6.woff2" | asset_url }}') format('woff2');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Avenir';
+    src: url('{{ "avenir_0.woff2" | asset_url }}') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Avenir';
+    src: url('{{ "avenir_8.woff2" | asset_url }}') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+  }
+  @font-face {
+    font-family: 'Avenir';
+    src: url('{{ "avenir_2.woff2" | asset_url }}') format('woff2');
+    font-weight: 800;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  :root {
+    --font-display: 'FatFrank', 'Avenir', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+    --font-body: 'Avenir', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+  }
+
+  /* Body / Avenir */
+  html body,
+  html body .rte,
+  html body input,
+  html body textarea,
+  html body select,
+  html body button,
+  html body p,
+  html body span,
+  html body li,
+  html body a,
+  html body label,
+  .dunk-utility-row,
+  .dunk-header__nav a {
+    font-family: var(--font-body) !important;
+  }
+
+  /* Mega-display ONLY (FatFrank Heavy is a single weight; misuse looks too heavy) */
+  .dunk-explorers-club__brand,
+  .art-of-journey__title {
+    font-family: var(--font-display) !important;
+    font-weight: 800 !important;
+  }
+
+  /* Section titles + headings → Avenir (lighter than FatFrank Heavy) */
+  html body h1, html body h2, html body h3, html body h4, html body h5, html body h6,
+  html body .h1, html body .h2, html body .h3, html body .h4, html body .h5, html body .h6,
+  .feature-columns-dunk__title,
+  .image-quote-split__heading,
+  .pima-tee-grid__title,
+  .dunk-explorers-club__title {
+    font-family: var(--font-body) !important;
+  }
+
+  /* Buttons keep body font */
+  html body .btn,
+  html body button.btn,
+  .feature-columns-dunk__cta,
+  .art-of-journey__cta,
+  .pima-tee-grid__cta,
+  .dunk-explorers-club__submit {
+    font-family: var(--font-body) !important;
+  }
+
+  /* Footer typography */
+  .site-footer,
+  .site-footer p,
+  .site-footer a,
+  .site-footer h4,
+  .site-footer .h4,
+  .site-footer__linklist-item a,
+  .site-footer__rte {
+    font-family: var(--font-body) !important;
+    font-size: 13px;
+    line-height: 1.6;
+  }
+  .site-footer h4,
+  .site-footer .h4 {
+    font-size: 13px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.05em;
+    margin-bottom: 12px;
+  }
+  .site-footer__linklist-item { margin-bottom: 4px; }
+</style>

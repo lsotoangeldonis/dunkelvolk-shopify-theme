@@ -1,0 +1,225 @@
+{%- comment -%} Boost Library CSS {%- endcomment -%}
+
+{%- if request.page_type == 'collection' or request.page_type == 'search'  -%}
+  {{ 'boost-pfs-init.scss.css' | asset_url | stylesheet_tag }}
+  <link rel="preload stylesheet" href="{{ 'boost-pfs-general.scss.css' | asset_url }}" as="style">
+  <link rel="preload stylesheet" href="{{ 'boost-pfs-otp.scss.css' | asset_url }}" as="style">
+{%- else -%}
+  <link rel="preload stylesheet" href="{{ 'boost-pfs-instant-search.scss.css' | asset_url }}" as="style">
+{%- endif -%}
+{{ 'boost-pfs-custom.scss.css' | asset_url | stylesheet_tag }}
+
+{%- comment -%} 
+BC Style Setting 
+
+fTitleTextColor,
+fTitleFontSize,
+fTitleFontWeight,
+fTitleFontTransform,
+fTitleFontFamily,
+fOptionTextColor,
+fOptionFontSize,
+fOptionFontFamily,
+fMobileButtonTextColor,
+fMobileButtonFontSize,
+fMobileButtonFontWeight,
+fMobileButtonFontTransform,
+fMobileButtonFontFamily,
+fMobileButtonBackgroundColor
+{%- endcomment -%}
+
+{%- assign bc_shop_metafields = shop.metafields.bc-sf-filter -%}
+{%- assign bc_settings = shop.metafields.bc-sf-filter.settings -%}
+{%- if bc_settings contains 'style":{' -%}
+  <style data-id="boost-pfs-style" type="text/css">
+      .boost-pfs-filter-option-title-text {
+        {%- if bc_shop_metafields.fTitleTextColor != nil and bc_shop_metafields.fTitleTextColor != blank -%}
+          color: {{ bc_shop_metafields.fTitleTextColor | replace: '"','' | replace: '||',',' | strip | strip_html }};
+        {%- endif -%}
+
+        {%- if bc_shop_metafields.fTitleFontSize != nil and bc_shop_metafields.fTitleFontSize != blank -%}
+          font-size: {{ bc_shop_metafields.fTitleFontSize | strip | strip_html }}px;
+        {%- endif -%}
+
+        {%- if bc_shop_metafields.fTitleFontWeight != nil and bc_shop_metafields.fTitleFontWeight != blank -%}
+          font-weight: {{ bc_shop_metafields.fTitleFontWeight | strip | strip_html }};
+        {%- endif -%}
+
+        {%- if bc_shop_metafields.fTitleFontTransform != nil and bc_shop_metafields.fTitleFontTransform != blank -%}
+          text-transform: {{ bc_shop_metafields.fTitleFontTransform | strip | strip_html }};
+        {%- endif -%}
+
+        {%- if bc_shop_metafields.fTitleFontFamily != nil and bc_shop_metafields.fTitleFontFamily != blank -%}
+          font-family: {{ bc_shop_metafields.fTitleFontFamily | strip | strip_html }};
+        {%- endif -%}
+      }
+
+     .boost-pfs-filter-tree-v .boost-pfs-filter-option-title-text:before {
+        {%- if bc_shop_metafields.fTitleTextColor != nil and bc_shop_metafields.fTitleTextColor != blank -%}
+          border-top-color: {{ bc_shop_metafields.fTitleTextColor | replace: '"','' | replace: '||',',' | strip | strip_html }};
+        {%- endif -%}
+      }
+      .boost-pfs-filter-tree-v .boost-pfs-filter-option.boost-pfs-filter-option-collapsed .boost-pfs-filter-option-title-text:before {
+        {%- if bc_shop_metafields.fTitleTextColor != nil and bc_shop_metafields.fTitleTextColor != blank -%}
+          border-bottom-color: {{ bc_shop_metafields.fTitleTextColor | replace: '"','' | replace: '||',',' | strip | strip_html }};
+        {%- endif -%}
+      }
+      .boost-pfs-filter-tree-h .boost-pfs-filter-option-title-heading:before {
+        border-right-color: {{ bc_shop_metafields.fTitleTextColor | replace: '"','' | replace: '||',',' | strip | strip_html }};
+        border-bottom-color: {{ bc_shop_metafields.fTitleTextColor | replace: '"','' | replace: '||',',' | strip | strip_html }};
+      }
+
+      .boost-pfs-filter-option-content .boost-pfs-filter-option-item-list .boost-pfs-filter-option-item button,
+      .boost-pfs-filter-tree-v .boost-pfs-filter-refine-by .boost-pfs-filter-refine-by-items .refine-by-item,
+      .boost-pfs-filter-refine-by-wrapper-v .boost-pfs-filter-refine-by .boost-pfs-filter-refine-by-items .refine-by-item,
+      .boost-pfs-filter-refine-by .boost-pfs-filter-option-title,
+      .boost-pfs-filter-refine-by .boost-pfs-filter-refine-by-items .refine-by-item>a,
+      .boost-pfs-filter-refine-by>span,
+      .boost-pfs-filter-clear,
+      .boost-pfs-filter-clear-all{
+        {%- if bc_shop_metafields.fOptionTextColor != nil and bc_shop_metafields.fOptionTextColor != blank -%}
+          color: {{ bc_shop_metafields.fOptionTextColor | replace: '"','' | replace: '||',',' | strip | strip_html }};
+        {%- endif -%}
+
+        {%- if bc_shop_metafields.fOptionFontSize != nil and bc_shop_metafields.fOptionFontSize != blank -%}
+          font-size: {{ bc_shop_metafields.fOptionFontSize | strip | strip_html }}px;
+        {%- endif -%}
+
+        {%- if bc_shop_metafields.fOptionFontFamily != nil and bc_shop_metafields.fOptionFontFamily != blank -%}
+          font-family: {{ bc_shop_metafields.fOptionFontFamily | strip | strip_html }};
+        {%- endif -%}
+      }
+      .boost-pfs-filter-refine-by .boost-pfs-filter-refine-by-items .refine-by-item .boost-pfs-filter-clear:before,
+      .boost-pfs-filter-refine-by .boost-pfs-filter-refine-by-items .refine-by-item .boost-pfs-filter-clear:after {
+        background: {{ bc_shop_metafields.fOptionTextColor | replace: '"','' | replace: '||',',' | strip | strip_html }};
+      }
+
+      .boost-pfs-filter-tree-mobile-button button,
+      .boost-pfs-filter-top-sorting-mobile button {
+        {%- if bc_shop_metafields.fMobileButtonTextColor != nil and bc_shop_metafields.fMobileButtonTextColor != blank -%}
+          color: {{ bc_shop_metafields.fMobileButtonTextColor | replace: '"','' | replace: '||',',' | strip | strip_html }} !important;
+        {%- endif -%}
+
+        {%- if bc_shop_metafields.fMobileButtonFontSize != nil and bc_shop_metafields.fMobileButtonFontSize != blank -%}
+          font-size: {{ bc_shop_metafields.fMobileButtonFontSize | strip | strip_html }}px !important;
+        {%- endif -%}
+
+        {%- if bc_shop_metafields.fMobileButtonFontWeight != nil and bc_shop_metafields.fMobileButtonFontWeight != blank -%}
+          font-weight: {{ bc_shop_metafields.fMobileButtonFontWeight | strip | strip_html }} !important;
+        {%- endif -%}
+
+        {%- if bc_shop_metafields.fMobileButtonFontTransform != nil and bc_shop_metafields.fMobileButtonFontTransform != blank -%}
+          text-transform: {{ bc_shop_metafields.fMobileButtonFontTransform | strip | strip_html }} !important;
+        {%- endif -%}
+
+        {%- if bc_shop_metafields.fMobileButtonFontFamily != nil and bc_shop_metafields.fMobileButtonFontFamily != blank -%}
+          font-family: {{ bc_shop_metafields.fMobileButtonFontFamily | strip | strip_html }} !important;
+        {%- endif -%}
+
+        {%- if bc_shop_metafields.fMobileButtonBackgroundColor != nil and bc_shop_metafields.fMobileButtonBackgroundColor != blank -%}
+          background: {{ bc_shop_metafields.fMobileButtonBackgroundColor | replace: '"','' | replace: '||',',' | strip | strip_html }} !important;
+        {%- endif -%}
+      }
+      .boost-pfs-filter-top-sorting-mobile button>span:after {
+        {%- if bc_shop_metafields.fMobileButtonTextColor != nil and bc_shop_metafields.fMobileButtonTextColor != blank -%}
+          color: {{ bc_shop_metafields.fMobileButtonTextColor | replace: '"','' | replace: '||',',' | strip | strip_html }} !important;
+        {%- endif -%}
+      }
+    </style>
+{%- endif -%}
+
+{%- comment -%}
+BC Quickview + Addtocart Style
+
+actTitle
+alStyle
+atcBtnBackgroundColor
+atcBtnBorderColor
+atcBtnHoverBackgroundColor
+atcBtnHoverBorderColor
+atcBtnHoverTextColor
+atcBtnTextColor
+atcEnable
+
+qvAtcMessage
+qvBtnBackgroundColor
+qvBtnBorderColor
+qvBtnHoverBackgroundColor
+qvBtnHoverBorderColor
+qvBtnHoverTextColor
+qvBtnTextColor
+qvEnable
+qvTitle
+{%- endcomment -%}
+
+{%- if template contains 'collection' or template contains 'search' -%}
+  {%- comment -%} Check enable {%- endcomment -%}
+  {%- if bc_shop_metafields.settings contains 'actionlist' and bc_shop_metafields.qvEnable == 'true' or bc_shop_metafields.atcEnable == 'true' -%}
+    <style data-id="boost-pfs-otp-style" type="text/css">
+      .boost-pfs-quickview-btn {
+        {%- if bc_shop_metafields.atcBtnBackgroundColor != nil and bc_shop_metafields.qvBtnBackgroundColor != blank -%}
+          background: {{ bc_shop_metafields.qvBtnBackgroundColor | replace: '"','' | replace: '||',',' | strip }} !important;
+        {%- endif -%}
+
+        {%- if bc_shop_metafields.qvBtnTextColor != nil and bc_shop_metafields.qvBtnTextColor != blank -%}
+          color: {{ bc_shop_metafields.qvBtnTextColor | replace: '"','' | replace: '||',',' | strip }} !important;
+        {%- endif -%}
+
+        {%- if bc_shop_metafields.qvBtnBorderColor != nil and bc_shop_metafields.qvBtnBorderColor != blank -%}
+          border-color: {{ bc_shop_metafields.qvBtnBorderColor | replace: '"','' | replace: '||',',' | strip }} !important;
+        {%- endif -%}
+      }
+      .boost-pfs-quickview-btn svg {
+        fill: {{ bc_shop_metafields.qvBtnTextColor | replace: '"','' | replace: '||',',' | strip }} !important;
+      }
+      .boost-pfs-quickview-btn:hover {
+        {%- if bc_shop_metafields.qvBtnHoverBackgroundColor != nil and bc_shop_metafields.qvBtnHoverBackgroundColor != blank -%}
+          background: {{ bc_shop_metafields.qvBtnHoverBackgroundColor | replace: '"','' | replace: '||',',' | strip }} !important;
+        {%- endif -%}
+
+        {%- if bc_shop_metafields.qvBtnHoverTextColor != nil and bc_shop_metafields.qvBtnHoverTextColor != blank -%}
+          color: {{ bc_shop_metafields.qvBtnHoverTextColor | replace: '"','' | replace: '||',',' | strip }} !important;
+        {%- endif -%}
+
+        {%- if bc_shop_metafields.qvBtnHoverBorderColor != nil and bc_shop_metafields.qvBtnHoverBorderColor != blank -%}
+          border-color: {{ bc_shop_metafields.qvBtnHoverBorderColor | replace: '"','' | replace: '||',',' | strip }} !important;
+        {%- endif -%}
+      }
+      .boost-pfs-quickview-btn:hover svg {
+        fill: {{ bc_shop_metafields.qvBtnHoverTextColor | replace: '"','' | replace: '||',',' | strip }} !important;
+      }
+      .boost-pfs-addtocart-btn {
+        {%- if bc_shop_metafields.atcBtnBackgroundColor != nil and bc_shop_metafields.atcBtnBackgroundColor != blank -%}
+          background: {{ bc_shop_metafields.atcBtnBackgroundColor | replace: '"','' | replace: '||',',' | strip }} !important;
+        {%- endif -%}
+
+        {%- if bc_shop_metafields.atcBtnTextColor != nil and bc_shop_metafields.atcBtnTextColor != blank -%}
+          color: {{ bc_shop_metafields.atcBtnTextColor | replace: '"','' | replace: '||',',' | strip }} !important;
+        {%- endif -%}
+
+        {%- if bc_shop_metafields.atcBtnBorderColor != nil and bc_shop_metafields.atcBtnBorderColor != blank -%}
+          border-color: {{ bc_shop_metafields.atcBtnBorderColor | replace: '"','' | replace: '||',',' | strip }} !important;
+        {%- endif -%}
+      }
+      .boost-pfs-addtocart-btn svg {
+        fill: {{ bc_shop_metafields.atcBtnTextColor | replace: '"','' | replace: '||',',' | strip }} !important;
+      }
+      .boost-pfs-addtocart-btn:hover {
+        {%- if bc_shop_metafields.atcBtnHoverBackgroundColor != nil and bc_shop_metafields.atcBtnHoverBackgroundColor != blank -%}
+          background: {{ bc_shop_metafields.atcBtnHoverBackgroundColor | replace: '"','' | replace: '||',',' | strip }} !important;
+        {%- endif -%}
+
+        {%- if bc_shop_metafields.atcBtnHoverTextColor != nil and bc_shop_metafields.atcBtnHoverTextColor != blank -%}
+          color: {{ bc_shop_metafields.atcBtnHoverTextColor | replace: '"','' | replace: '||',',' | strip }} !important;
+        {%- endif -%}
+
+        {%- if bc_shop_metafields.atcBtnHoverBorderColor != nil and bc_shop_metafields.atcBtnHoverBorderColor != blank -%}
+          border-color: {{ bc_shop_metafields.atcBtnHoverBorderColor | replace: '"','' | replace: '||',',' | strip }} !important;
+        {%- endif -%}
+      }
+      .boost-pfs-addtocart-btn:hover svg {
+        fill: {{ bc_shop_metafields.atcBtnHoverTextColor | replace: '"','' | replace: '||',',' | strip }} !important;
+      }
+    </style>
+  {%- endif -%}
+{%- endif -%}

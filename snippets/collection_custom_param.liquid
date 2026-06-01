@@ -1,0 +1,12 @@
+{% assign collection_description_striped = collection.description | strip %}
+
+{% assign search_key = key | append: ':' %}
+
+{% assign collection_custom_param_wrapper = collection_description_striped | split: search_key %}
+{% assign collection_custom_param_content = collection_custom_param_wrapper[1] | split: '-->' %}
+
+{% if collection_custom_param_content[0] != blank %}
+	{{ collection_custom_param_content[0] | strip }}
+{% else if default != blank %}
+	{{ default | strip  }}
+{% endif %}

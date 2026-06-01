@@ -1,0 +1,137 @@
+{%- assign component_class = 'full-bleed-image__' | append: section.id -%}
+
+<style>
+  .{{ component_class }} {
+    width: 100%;
+    margin: {{ section.settings.margin_top }}px 0 {{ section.settings.margin_bottom }}px;
+  }
+  .{{ component_class }}__media {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+    background: #1a1a1a;
+  }
+  .{{ component_class }}__media img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: block;
+  }
+  .{{ component_class }}__placeholder {
+    width: 100%;
+    aspect-ratio: 16 / 7;
+    background: linear-gradient(135deg, #d8d8d8 0%, #f4f4f4 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6a6a6a;
+    font-family: var(--font-body, sans-serif);
+    font-size: 14px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  @media (max-width: 749px) {
+    .{{ component_class }} {
+      margin: {{ section.settings.margin_top_mobile }}px 0 {{ section.settings.margin_bottom_mobile }}px;
+    }
+    .{{ component_class }}__placeholder { aspect-ratio: 4 / 5; }
+  }
+</style>
+
+<section class="{{ component_class }}" data-section-id="{{ section.id }}" data-section-type="full-bleed-image">
+  {%- if section.settings.link != blank -%}
+    <a class="{{ component_class }}__media" href="{{ section.settings.link }}">
+  {%- else -%}
+    <div class="{{ component_class }}__media">
+  {%- endif -%}
+    {%- if section.settings.image != blank -%}
+      {%- assign desktop_img = section.settings.image -%}
+      {%- assign mobile_img = section.settings.image_mobile | default: desktop_img -%}
+      <picture>
+        <source media="(min-width: 750px)" srcset="{{ desktop_img | img_url: '2000x' }} 1x, {{ desktop_img | img_url: '3200x' }} 2x">
+        <source media="(max-width: 749px)" srcset="{{ mobile_img | img_url: '900x' }} 1x, {{ mobile_img | img_url: '1800x' }} 2x">
+        <img src="{{ desktop_img | img_url: '2000x' }}" alt="{{ desktop_img.alt | escape }}" loading="lazy">
+      </picture>
+    {%- else -%}
+      <div class="{{ component_class }}__placeholder">
+        {{ section.settings.placeholder_text | default: 'Imagen full-width · sube tu foto' }}
+      </div>
+    {%- endif -%}
+  {%- if section.settings.link != blank -%}
+    </a>
+  {%- else -%}
+    </div>
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": {
+    "en": "Full-bleed image",
+    "es": "Imagen full-width"
+  },
+  "class": "index-section index-section--flush full-bleed-image",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": { "en": "Image (desktop)", "es": "Imagen (desktop)" }
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": { "en": "Image (mobile)", "es": "Imagen (mobile)" }
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": { "en": "Link (optional)", "es": "Enlace (opcional)" }
+    },
+    {
+      "type": "text",
+      "id": "placeholder_text",
+      "label": { "en": "Placeholder text", "es": "Texto del placeholder" },
+      "default": "Imagen full-width · sube tu foto"
+    },
+    {
+      "type": "header",
+      "content": { "en": "Spacing", "es": "Espaciado" }
+    },
+    {
+      "type": "range",
+      "id": "margin_top",
+      "min": 0, "max": 120, "step": 4, "unit": "px",
+      "label": { "en": "Top margin (desktop)", "es": "Margen superior (desktop)" },
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom",
+      "min": 0, "max": 120, "step": 4, "unit": "px",
+      "label": { "en": "Bottom margin (desktop)", "es": "Margen inferior (desktop)" },
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_top_mobile",
+      "min": 0, "max": 120, "step": 4, "unit": "px",
+      "label": { "en": "Top margin (mobile)", "es": "Margen superior (mobile)" },
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "margin_bottom_mobile",
+      "min": 0, "max": 120, "step": 4, "unit": "px",
+      "label": { "en": "Bottom margin (mobile)", "es": "Margen inferior (mobile)" },
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": { "en": "Full-bleed image", "es": "Imagen full-width" },
+      "category": { "en": "Dunkelvolk", "es": "Dunkelvolk" }
+    }
+  ]
+}
+{% endschema %}

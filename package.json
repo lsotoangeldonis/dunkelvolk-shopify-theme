@@ -1,0 +1,21 @@
+{
+  "name": "dunkelvolk",
+  "version": "1.0.0",
+  "description": "Dunkelvolk Perú Shopify theme",
+  "private": true,
+  "scripts": {
+    "dev": "shopify theme dev",
+    "dev:store": "shopify theme dev --store dunkelvolk-peru.myshopify.com",
+    "pull": "shopify theme pull --live",
+    "push:unpublished": "shopify theme push --unpublished",
+    "push:live": "shopify theme push --live",
+    "check": "shopify theme check"
+  },
+  "devDependencies": {
+    "@shopify/cli": "^4.0.0"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "packageManager": "pnpm@10.33.2"
+}

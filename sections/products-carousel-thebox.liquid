@@ -1,0 +1,553 @@
+<style>
+  .products-carousel-thebox-wrapper {
+  	margin-bottom: 4rem;
+  }
+  .products-carousel-thebox-wrapper .section-header {
+	margin-top: 20px;
+    margin-bottom: 50px;
+  }
+  .products-carousel-thebox-wrapper .section-header h2 {
+    margin: 0;
+    font-weight: bold;
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+    color: #626262;
+  }
+  .products-carousel-thebox-wrapper .product-card {
+  	width: 242px;
+/*     height: 380px; */
+    height: 360px;
+
+  }
+  .products-carousel-thebox-wrapper .grid-view-item__image-wrapper {
+  	height: 242px;
+  }
+  .products-carousel-thebox-wrapper .grid--view-items {
+  	overflow: inherit;
+    margin: 0;
+  }
+  .products-carousel-thebox-wrapper .grid-view-item {
+  	margin: auto;
+  }
+  .products-carousel-thebox-wrapper .grid-view-item__image {
+  	height: 242px;
+    width: 242px !important;
+  }
+  .products-carousel-thebox-wrapper .grid-view-item__title, .products-carousel-thebox-wrapper .grid-view-item__meta {
+  	max-width: 80%;
+  }
+  .products-carousel-thebox-wrapper .grid__item {
+  	padding: 0;
+  }
+  .products-carousel-thebox-wrapper .owl-prev {
+      width: 36px;
+/*       height: 100px; */
+      position: absolute;
+      top: 30%;
+      margin-left: -20px;
+      display: block !important;
+      border:0px solid black;
+  }
+  .products-carousel-thebox-wrapper .owl-prev:hover,
+  .products-carousel-thebox-wrapper .owl-prev:focus, 
+  .products-carousel-thebox-wrapper .owl-prev:active,
+  .products-carousel-thebox-wrapper .owl-next:hover,
+  .products-carousel-thebox-wrapper .owl-next:focus, 
+  .products-carousel-thebox-wrapper .owl-next:active{
+  	background: inherit !important;
+  }
+
+  .products-carousel-thebox-wrapper .owl-next {
+      width: 36px;
+/*       height: 100px; */
+      position: absolute;
+      top: 30%;
+      right: -25px;
+      display: block !important;
+      border:0px solid black;
+  }
+  .products-carousel-thebox-wrapper .owl-prev i, .owl-next i {transform : scale(1,6); color: #ccc;}
+
+  @media screen and (min-width: 768px) {
+    .products-carousel-thebox-wrapper-{{ section.id }} {
+      padding-bottom: {{ section.settings.custom_bottom_spacing | default: '4rem' }};
+      padding-top: {{ section.settings.custom_top_spacing | default: '4rem' }};
+    }
+  }
+</style> 
+
+{%- if section.settings.slideshow_height == 'adapt' -%}
+  {% comment %}
+    'min_aspect_ratio' is the minimum aspect ratio of images shown without
+    whitespace when 'slideshow_height' is set to 'adapt'.
+    The aspect ratio values for the first image in the slideshow will be used
+    unless it is blank, in that case a ratio of 2:1 will be used.
+  {% endcomment %}
+
+  {%- assign first_block = section.blocks[0] -%}
+  {%- if first_block.settings.image.aspect_ratio == blank -%}
+    {%- assign min_aspect_ratio = 2.0 -%}
+  {%- else -%}
+    {%- assign min_aspect_ratio = first_block.settings.image.aspect_ratio -%}
+  {%- endif -%}
+  {% assign wrapper_height = 100 | divided_by: min_aspect_ratio %}
+{%- endif -%}
+
+
+{% assign collection_handle = section.settings.collection | replace: '/collections/', '' %}
+{%- assign collection = collections[collection_handle] -%}
+
+{%- assign product_limit = section.settings.grid | times: section.settings.rows -%}
+
+
+
+
+<div class="products-carousel-thebox-wrapper products-carousel-thebox-wrapper-{{ section.id }} bgr_c_thebox">
+  {% unless section.settings.full_width %}
+  <div class="page-width">
+  {% endunless %}
+  {% if section.settings.title != blank %}
+    <div class="section-header text-center">
+      <h2>{{ section.settings.title | escape }}</h2>
+    </div>
+  {% endif %}
+  <ul class="grid grid--uniform grid--view-items gvi-c-thebox owl-carousel owl-theme owl-carousel-{{ section.id }}">
+    {% for product in collection.products limit: product_limit %}
+    <li class="grid__item grid__item--{{section.id}} gi-c-thebox item">
+      <div class="grid-view-item product-card">
+        <a class="grid-view-item__link grid-view-item__image-container full-width-link" href="{% if collection.products == empty %}#{% else %}{{ collection.url }}{% endif %}">
+          <span class="visually-hidden">{{ product.title }}</span>
+        </a>
+        <div class="grid-view-item__image-wrapper gviiw-c-thebox">
+          {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+          {%- assign preview_image = product.featured_media.preview_image -%}
+          {%- assign img_url = preview_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+          <img id="{{ img_id }}"
+               class="grid-view-item__image lazyload"
+               alt="{{ preview_image.alt }}"
+               data-src="{{ img_url }}"
+               data-widths="[200]"
+               data-aspectratio="{{ preview_image.aspect_ratio }}"
+               data-sizes="auto"
+               data-image>
+        </div>
+        {% comment %}
+        {% assign colors_size = product.options_by_name['Color'].values | size %}
+        <div class="product-attr">{{ colors_size }} Color {%- if colors_size > 1 -%} (es) {%- endif -%}</div>
+        {% endcomment %}
+        <div class="h4 grid-view-item__title_carousel" aria-hidden="true" style="height: auto !important">{{ product.title }}</div>
+        {% include 'product-price-listing', product: product, show_vendor: false %}
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+  
+    {% if section.settings.show_view_all %}
+    <hr class="hr--invisible" aria-hidden="true" style="margin-bottom: 0px; margin-top: 30px;" />
+    <div class="text-center">
+      <a href="{{ collection.url }}" class="btn" aria-label="{{ 'collections.general.view_all_label' | t: collection_name: collection.title }}">
+        {{ 'collections.general.view_all' | t }}
+      </a>
+    </div>
+  {% endif %}
+  {% unless section.settings.full_width %}
+  	</div>
+  {% endunless %}
+</div>
+
+
+{% schema %}
+{
+   "name":{
+  "en":"Products Carousel TheBox",
+  "es":"Carrusel de Productos TheBox"
+   },
+   "class":"thebox-section products-carousel-thebox",
+   "settings":[
+      {
+         "type":"checkbox",
+         "id":"colecction_thebox_active",
+         "label":{
+            "da":"Active",
+            "de":"Active",
+            "en":"Active",
+            "es":"Activo",
+            "fi":"Active",
+            "fr":"Active",
+            "hi":"Active",
+            "it":"Active",
+            "ja":"Active",
+            "ko":"Active",
+            "nb":"Active",
+            "nl":"Active",
+            "pt-BR":"Active",
+            "pt-PT":"Active",
+            "sv":"Active",
+            "th":"Active",
+            "zh-CN":"Active",
+            "zh-TW":"Active"
+         },
+         "default":true
+      },
+      {
+         "type":"text",
+         "id":"title",
+         "label":{
+            "da":"Overskrift",
+            "de":"Titel",
+            "en":"Heading",
+            "es":"Título",
+            "fi":"Otsake",
+            "fr":"En-tête",
+            "hi":"शीर्षक",
+            "it":"Heading",
+            "ja":"見出し",
+            "ko":"제목",
+            "nb":"Overskrift",
+            "nl":"Kop",
+            "pt-BR":"Título",
+            "pt-PT":"Título",
+            "sv":"Rubrik",
+            "th":"ส่วนหัว",
+            "zh-CN":"标题",
+            "zh-TW":"標題"
+         },
+         "default":{
+            "da":"Udvalgt kollektion",
+            "de":"Vorgestellte Kategorie",
+            "en":"Featured Products",
+            "es":"Producto Destacados",
+            "fi":"Esittelyssä oleva kokoelma",
+            "fr":"Collection en vedette",
+            "hi":"फ़ीचर्ड कलेक्शन",
+            "it":"Collezione in evidenza",
+            "ja":"特集コレクション",
+            "ko":"추천 컬렉션",
+            "nb":"Fremhevet samling",
+            "nl":"Uitgelichte collectie",
+            "pt-BR":"Coleção em destaque",
+            "pt-PT":"Coleção em destaque",
+            "sv":"Utvald kollektion",
+            "th":"คอลเลกชันแนะนำ",
+            "zh-CN":"特色产品系列",
+            "zh-TW":"精選商品系列"
+         }
+      },
+      {
+         "id":"collection",
+         "type":"url",
+         "label":{
+            "da":"Kollektion",
+            "de":"Kategorie",
+            "en":"Collection",
+            "es":"Colección",
+            "fi":"Kokoelma",
+            "fr":"Collection",
+            "hi":"कलेक्शन",
+            "it":"Collezione",
+            "ja":"コレクション",
+            "ko":"컬렉션",
+            "nb":"Samling",
+            "nl":"Collectie",
+            "pt-BR":"Coleção",
+            "pt-PT":"Coleção",
+            "sv":"Produktserie",
+            "th":"คอลเลกชัน",
+            "zh-CN":"收藏",
+            "zh-TW":"商品系列"
+         }
+      },
+      {
+         "type":"image_picker",
+         "id":"bg_image_c_thebox",
+         "label":{
+            "da":"Billede",
+            "de":"Foto",
+            "en":"Background Image",
+            "es":"Imagen de fondo",
+            "fi":"Kuva",
+            "fr":"Image",
+            "hi":"इमेज",
+            "it":"Immagine",
+            "ja":"画像",
+            "ko":"이미지",
+            "nb":"Bilde",
+            "nl":"Afbeelding",
+            "pt-BR":"Imagem",
+            "pt-PT":"Imagem",
+            "sv":"Bild",
+            "th":"รูปภาพ",
+            "zh-CN":"图片",
+            "zh-TW":"圖片"
+         }
+      },
+      {
+         "type":"color",
+         "default":"#03fcf0",
+         "id":"bg_color_c_thebox",
+         "label":{
+            "da":"Billede",
+            "de":"Foto",
+            "en":"Background Image",
+            "es":"Imagen de fondo",
+            "fi":"Kuva",
+            "fr":"Image",
+            "hi":"इमेज",
+            "it":"Immagine",
+            "ja":"画像",
+            "ko":"이미지",
+            "nb":"Bilde",
+            "nl":"Afbeelding",
+            "pt-BR":"Imagem",
+            "pt-PT":"Imagem",
+            "sv":"Bild",
+            "th":"รูปภาพ",
+            "zh-CN":"图片",
+            "zh-TW":"圖片"
+         }
+      },
+      {
+         "type":"range",
+         "id":"grid",
+         "label":{
+            "da":"Produkter pr. række",
+            "de":"Produkte per Reihe",
+            "en":"Products per row",
+            "es":"Productos por fila",
+            "fi":"Tuotteita per rivi",
+            "fr":"Produits par rangée",
+            "hi":"प्रति पंक्ति उत्पाद",
+            "it":"Prodotti per riga",
+            "ja":"行あたりの商品数",
+            "ko":"열 별 제품",
+            "nb":"Produkter per rad",
+            "nl":"Producten per rij",
+            "pt-BR":"Produtos por linha",
+            "pt-PT":"Produtos por linha",
+            "sv":"Produkter per rad",
+            "th":"สินค้าต่อแถว",
+            "zh-CN":"每行产品数",
+            "zh-TW":"每列產品數"
+         },
+         "min":2,
+         "max":9,
+         "step":1,
+         "default":6
+      },
+      {
+         "type":"range",
+         "id":"rows",
+         "label":{
+            "en":"Maximum Pages",
+            "es":"Páginas Máximas"
+         },
+         "min":1,
+         "max":5,
+         "step":1,
+         "default":2
+      },
+      {
+         "type":"checkbox",
+         "id":"show_vendor",
+         "label":{
+            "da":"Vis produktleverandører",
+            "de":"Produkt-Lieferanten anzeigen",
+            "en":"Show product vendors",
+            "es":"Mostrar proveedores del producto",
+            "fi":"Näytä tuotteen myyjät",
+            "fr":"Afficher les vendeurs",
+            "hi":"उत्पाद विक्रेताओं को दिखाएं",
+            "it":"Mostra fornitori prodotto",
+            "ja":"商品の販売元を表示する",
+            "ko":"제품 공급 업체 표시",
+            "nb":"Vis produktleverandører",
+            "nl":"Productleveranciers weergeven",
+            "pt-BR":"Exibir fornecedores do produto",
+            "pt-PT":"Mostrar fornecedores do produto",
+            "sv":"Visa produktleverantörer",
+            "th":"แสดงผู้ขายสินค้า",
+            "zh-CN":"显示产品厂商",
+            "zh-TW":"顯示產品廠商"
+         },
+         "default":false
+      },
+      {
+         "type":"checkbox",
+         "id":"show_view_all",
+         "label":{
+            "da":"Vis knappen \"Se flere\"",
+            "de":"'Alle anzeigen' Button anzeigen",
+            "en":"Show 'View all' button",
+            "es":"Mostrar el botón 'Ver todo'",
+            "fi":"Näytä \"Näytä kaikki\" -painike",
+            "fr":"Afficher le bouton “Tout voir”",
+            "hi":"'सभी देखें' बटन दिखाएं",
+            "it":"Mostra il pulsante \"Visualizza tutto\"",
+            "ja":"「すべて表示」ボタンを表示する",
+            "ko":"'모두 보기' 버튼 표시",
+            "nb":"Vis «Se alle»-knapp",
+            "nl":"Knop 'Alles weergeven' weergeven",
+            "pt-BR":"Exibir botão 'Visualizar tudo'",
+            "pt-PT":"Mostrar botão 'Ver tudo'",
+            "sv":"Visa \"Visa alla\"-knappen",
+            "th":"แสดงปุ่ม 'ดูทั้งหมด'",
+            "zh-CN":"显示“查看全部”按钮",
+            "zh-TW":"顯示「檢視全部」按鈕"
+         },
+         "default":false
+      },
+      {
+         "type":"checkbox",
+         "id":"show_navigation",
+         "label":{
+			"en": "Navigation Buttons",
+			"es": "Botones de Navegación"
+         },
+         "default":false
+      },
+      {
+         "type":"checkbox",
+         "id":"show_pagination",
+         "label":{
+			"en": "Pagination dots",
+			"es": "Paginación"
+         },
+         "default":false
+      },
+      {
+        "type": "text",
+        "id": "custom_top_spacing",
+        "label": {
+          "en": "Custom top spacing",
+          "es": "Espaciado superior"
+       }
+      },
+      {
+        "type": "text",
+        "id": "custom_bottom_spacing",
+        "label": {
+          "en": "Custom bottom spacing",
+          "es": "Espaciado inferior"
+       }
+      }
+   ],
+   "presets":[
+      {
+         "name":{
+            "en":"Products Carousel TheBox",
+            "es":"Carrusel de Productos TheBox"
+         },
+         "category":{
+            "en":"TheBox Theme",
+            "es":"TheBox Theme"
+         }
+      }
+   ]
+}
+{% endschema %}
+
+
+<script>
+ function defer(method, validation) {
+    if (validation()) {
+      method();
+    } else {
+      setTimeout(function() { defer(method, validation) }, 50);
+    }
+ }
+</script>
+
+<script>
+	defer(function(){
+    	$(document).ready(function() {
+
+          function initSlider() {
+
+            var $carousel = $('.owl-carousel-{{ section.id }}')
+                 
+			{% capture arrow_left %}{% include 'icon-chevron-left-alt-silver' %}{% endcapture %} 
+
+			var arrows = {
+				left: '{{ arrow_left | strip }}',  
+				right: '{{ arrow_left | strip | replace_first: '>', 'style="transform: scaleX(-1);" >' }}'              
+			}
+            
+            $carousel.owlCarousel({
+//                 stagePadding: 60,
+                loop:true,
+                margin:10,
+                nav:1,
+                responsive:{
+                    0:{
+                        items: {{ section.settings.grid | divided_by: 3.0 | round }}
+                    },
+                    600:{
+                      	items: {{ section.settings.grid | divided_by: 2.0 | round }}
+                    },
+                    1000:{
+                      	items: {{ section.settings.grid }}
+                    }
+                },
+				navText : [arrows.left, arrows.right]
+            })
+                      
+                      
+            $carousel.on('initialized.owl.carousel', function(event) {
+				{% if section.settings.show_navigation %}
+                    $carousel.find('.owl-nav').removeClass('disabled')
+                {% endif %}
+
+                {% if section.settings.show_pagination %}
+                    $carousel.find('.owl-dots').removeClass('disabled')
+                {% endif %}
+			})
+                      
+                      
+            var longestHeightTitle = 0;
+            var biggestImage = 0
+            //Reduce font-size based on lines
+
+            //Retrieve the biggest title
+            $(".products-carousel-thebox-wrapper .grid-view-item .grid-view-item__title_carousel").each(function(index){
+              if($(this).height() > longestHeightTitle){
+                longestHeightTitle = $(this).height()      
+              }
+            })
+              
+            //Retrieve the biggest image
+            $(".products-carousel-thebox-wrapper .grid-view-item .grid-view-item__image-wrapper").each(function(index){
+              if($(this).height() > biggestImage){
+                biggestImage = $(this).height();      
+              }
+            })
+            //Set equal height
+            $(".products-carousel-thebox-wrapper .grid-view-item .grid-view-item__title").css({
+              height: longestHeightTitle,
+              display: 'block'
+            }) 
+
+            $(".products-carousel-thebox-wrapper .grid-view-item .grid-view-item__image-wrapper").css({
+              height: biggestImage,
+              maxHeight: 'initial',
+              paddingTop: '0px'
+            }) 
+            $(".products-carousel-thebox-wrapper .grid-view-item .grid-view-item__image-wrapper div").css({
+              height: biggestImage,
+              paddingTop: '0px'
+            }) 
+            $(".products-carousel-thebox-wrapper .grid-view-item .grid-view-item__image-wrapper img").css({
+              height: biggestImage,
+              objectFit: 'contain'
+            })
+
+          }
+
+          initSlider();
+
+          $(document).on('shopify:section:load', function(){ 
+            initSlider();
+          });
+
+    	})
+    }, function() { return window.jQuery && window.jQuery().owlCarousel })
+</script>

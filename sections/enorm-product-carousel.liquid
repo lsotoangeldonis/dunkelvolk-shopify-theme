@@ -1,0 +1,177 @@
+{% capture component_class %}enorm-product-carousel_{{section.id}}{% endcapture %} 
+
+<style>
+.{{ component_class }} {
+    {%- if section.settings.custom_top_spacing_mobile or section.settings.custom_top_spacing -%}
+    margin-top: {{ section.settings.custom_top_spacing_mobile | default: section.settings.custom_top_spacing  }};
+    {%- endif -%}
+    {%- if section.settings.custom_bottom_spacing_mobile or section.settings.custom_bottom_spacing -%}
+    margin-bottom: {{ section.settings.custom_bottom_spacing_mobile | default: section.settings.custom_bottom_spacing }};
+    {%- endif -%}
+}
+
+.{{ component_class }} .enormproductslider {
+  float: none;
+  margin-bottom: 0;
+}
+
+.{{ component_class }} > div:first-of-type {
+    display: flex;
+    padding-top: 10px;
+    border-top: solid 1px #7a7a7a;
+    border-bottom: solid 1px #7a7a7a;
+    margin-bottom: 30px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+}
+
+.{{ component_class }} > div:first-of-type > .enapproductsliderTitle {
+  width: auto !important;
+  padding: 0 !important;
+}
+  
+. {{ component_class }} > div:first-of-type > .enap_pro_small_heading {
+  text-align: center !important; */
+    float: none;
+    display: inherit;
+    text-align: inherit;
+    margin-bottom: 0;
+}
+
+.{{ component_class }} .enap_pro_small_heading a {
+    font-size: 14px;
+    color: #000000 !important;
+    padding: 8px 15px;
+    border: 0;
+    text-decoration: underline !important;
+    font-weight: bold;
+}
+
+.{{ component_class }} .enap_pro_title {
+    font-weight: bold;
+}
+
+.{{ component_class }} .enap-o-price {
+    color: #000000!important;
+}
+  
+.{{ component_class }} .enormproductslider {
+  margin-bottom: 35px;
+}
+
+@media all and (min-width: 768px) {
+  .{{ component_class }} {
+      {%- if section.settings.custom_top_spacing -%}
+      margin-top: {{ section.settings.custom_top_spacing  }};
+      {%- endif -%}
+      {%- if section.settings.custom_bottom_spacing -%}
+      margin-bottom: {{ section.settings.custom_bottom_spacing }};
+      {%- endif -%}
+  }
+  .{{ component_class }} > div:first-of-type {
+    padding-left: 50px!important;
+    padding-right: 50px!important;
+  }
+}
+</style>
+
+{% if section.settings.custom_css != blank %}
+{% assign component_selector = component_class | prepend: '.' %} 
+<style>
+	{{ section.settings.custom_css | replace: '$component_class', component_selector }}
+</style>
+{% endif %}
+
+<div class="carrusel-de-pdtos-enorm {{ component_class }}" data-carousel-title="{{ section.settings.title }}">
+  {{ section.settings.content }}
+</div>
+
+{% if section.settings.custom_js != blank %}
+	<script>
+      function defer(method) {
+        if (window.jQuery) {
+          method();
+        } else {
+          setTimeout(function() { defer(method) }, 50);
+        }
+      }
+      defer(function(){
+        $(document).ready(function(){
+      		{{ section.settings.custom_js }}
+        })
+      })
+	</script>
+{% endif %}
+
+{% schema %}
+  {
+    "name": "Carrusel de Pdtos. Enorm",
+    "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "título",
+      "default": "Carrusel de Pdtos. Enorm"
+    },
+    {
+      "type":"html",
+      "id":"content",
+      "label": "Código de Carrusel"
+    },
+    {
+      "type": "text",
+      "id": "custom_top_spacing",
+      "label": {
+        "en": "Custom top spacing",
+        "es": "Espaciado superior"
+     },
+      "default": "40px"
+    },
+    {
+      "type": "text",
+      "id": "custom_bottom_spacing",
+      "label": {
+        "en": "Custom bottom spacing",
+        "es": "Espaciado inferior"
+     },
+     "default": "40px"
+    },
+    {
+      "type": "text",
+      "id": "custom_top_spacing_mobile",
+      "label": {
+        "en": "Custom top spacing",
+        "es": "Espaciado superior Mobile"
+     }
+    },
+    {
+      "type": "text",
+      "id": "custom_bottom_spacing_mobile",
+      "label": {
+        "en": "Custom bottom spacing",
+        "es": "Espaciado inferior Mobile"
+     }
+    },
+      {
+        "type": "html",
+        "id": "custom_css",
+        "label": "CSS personalizado"
+      },
+      {
+        "type": "html",
+        "id": "custom_html",
+        "label": "HTML personalizado"
+      }
+    ],
+    "presets": [{
+      "name": "Carrusel de Pdtos. Enorm"
+    }]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

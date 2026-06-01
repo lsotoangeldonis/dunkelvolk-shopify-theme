@@ -1,0 +1,368 @@
+{%- assign component_class = 'art-of-journey__' | append: section.id -%}
+
+<style>
+  .{{ component_class }} {
+    width: 100%;
+    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+    background: {{ section.settings.bg_color }};
+    color: {{ section.settings.text_color }};
+  }
+  .{{ component_class }}__inner {
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 0 56px;
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: 64px;
+    align-items: stretch;
+  }
+  .{{ component_class }}__text {
+    padding-left: 24px;
+    padding-right: 0;
+    max-width: 460px;
+  }
+  .{{ component_class }}__title-wrap {
+    border-left: 3px solid #111;
+    padding-left: 16px;
+    margin-bottom: 28px;
+    margin-left: -24px; /* extends the bar to the left of the text padding */
+  }
+  .{{ component_class }}__title {
+    font-family: var(--font-display, inherit) !important;
+    font-weight: 800;
+    font-size: clamp(36px, 4.4vw, 64px);
+    line-height: 1;
+    letter-spacing: -0.01em;
+    margin: 0;
+    color: inherit;
+  }
+  .{{ component_class }}__subtitle {
+    font-family: var(--font-body, 'Times New Roman', Times, serif);
+    font-style: italic;
+    font-size: 16px;
+    margin-top: 6px;
+    color: inherit;
+    opacity: .9;
+  }
+  .{{ component_class }}__body p {
+    font-family: var(--font-body, inherit);
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.55;
+    margin: 0 0 14px;
+    color: #111;
+  }
+  .{{ component_class }}__quote {
+    margin: 28px 0 22px;
+    font-family: 'Times New Roman', Times, serif;
+    font-style: italic;
+    font-size: 18px;
+    text-align: center;
+  }
+  .{{ component_class }}__cta {
+    display: inline-block;
+    padding: 6px 28px;
+    border: 1px solid #111;
+    background: transparent;
+    color: #111;
+    font-family: var(--font-body, inherit);
+    font-size: 12px;
+    line-height: 1.4;
+    letter-spacing: 0.01em;
+    text-decoration: none;
+    transition: background .2s ease, color .2s ease;
+  }
+  .{{ component_class }}__cta:hover {
+    background: #111;
+    color: #fff;
+  }
+  .{{ component_class }}__cta-wrap {
+    text-align: center;
+    margin-top: 8px;
+  }
+  .{{ component_class }}__image-mobile-1 { display: none; }
+  .{{ component_class }}__images {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    align-self: stretch;
+  }
+  .{{ component_class }}__image {
+    width: 100%;
+    height: 100%;
+    min-height: 580px;
+    aspect-ratio: auto;
+    overflow: hidden;
+    background: #1a1a1a;
+  }
+  .{{ component_class }}__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  @media (max-width: 749px) {
+    .{{ component_class }} {
+      padding: {{ section.settings.padding_top_mobile }}px 0 {{ section.settings.padding_bottom_mobile }}px;
+    }
+    .{{ component_class }}__inner {
+      grid-template-columns: 1fr;
+      gap: 0;
+      padding: 0 16px;
+    }
+    .{{ component_class }}__title {
+      font-size: 36px;
+    }
+    /* Hide desktop image grid on mobile, show interleaved version */
+    .{{ component_class }}__images { display: none; }
+    .{{ component_class }}__image-mobile-1 {
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      overflow: hidden;
+      background: #1a1a1a;
+      margin: 0 0 22px;
+    }
+    .{{ component_class }}__image-mobile-1 img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .{{ component_class }}__text { padding-right: 0; }
+    .{{ component_class }}__body p { font-size: 14px; }
+    .{{ component_class }}__title-wrap { margin-bottom: 18px; }
+    /* Image 2 appears below the body on mobile (last image stays at end) */
+    .{{ component_class }}__image-mobile-2 {
+      display: block;
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      overflow: hidden;
+      background: #1a1a1a;
+      margin: 22px 0 0;
+    }
+    .{{ component_class }}__image-mobile-2 img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+  }
+  @media (min-width: 750px) {
+    .{{ component_class }}__image-mobile-1,
+    .{{ component_class }}__image-mobile-2 { display: none; }
+  }
+</style>
+
+<section class="{{ component_class }}" data-section-id="{{ section.id }}" data-section-type="art-of-journey">
+  <div class="{{ component_class }}__inner">
+    <div class="{{ component_class }}__text">
+      {%- if section.settings.title != blank or section.settings.subtitle != blank -%}
+        <div class="{{ component_class }}__title-wrap">
+          {%- if section.settings.title != blank -%}
+            <h2 class="{{ component_class }}__title">{{ section.settings.title | escape }}</h2>
+          {%- endif -%}
+          {%- if section.settings.subtitle != blank -%}
+            <div class="{{ component_class }}__subtitle">{{ section.settings.subtitle | escape }}</div>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+
+      {%- comment -%} Mobile-only image 1 (interleaved between title and body) {%- endcomment -%}
+      <div class="{{ component_class }}__image-mobile-1">
+        {%- if section.settings.image_1 != blank -%}
+          <img src="{{ section.settings.image_1 | img_url: '900x' }}" alt="{{ section.settings.image_1.alt | escape }}" loading="lazy">
+        {%- else -%}
+          {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+        {%- endif -%}
+      </div>
+
+      {%- if section.settings.body != blank -%}
+        <div class="{{ component_class }}__body rte">{{ section.settings.body }}</div>
+      {%- endif -%}
+
+      {%- if section.settings.quote != blank -%}
+        <div class="{{ component_class }}__quote">{{ section.settings.quote }}</div>
+      {%- endif -%}
+
+      {%- if section.settings.button_label != blank -%}
+        {%- assign cta_href = section.settings.button_link | default: '#' -%}
+        <div class="{{ component_class }}__cta-wrap">
+          <a href="{{ cta_href }}" class="{{ component_class }}__cta">{{ section.settings.button_label | escape }}</a>
+        </div>
+      {%- endif -%}
+
+      {%- comment -%} Mobile-only image 2 (after body) {%- endcomment -%}
+      <div class="{{ component_class }}__image-mobile-2">
+        {%- if section.settings.image_2 != blank -%}
+          <img src="{{ section.settings.image_2 | img_url: '900x' }}" alt="{{ section.settings.image_2.alt | escape }}" loading="lazy">
+        {%- else -%}
+          {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
+        {%- endif -%}
+      </div>
+    </div>
+
+    {%- comment -%} Desktop-only side-by-side image grid {%- endcomment -%}
+    <div class="{{ component_class }}__images">
+      <div class="{{ component_class }}__image">
+        {%- if section.settings.image_1 != blank -%}
+          {%- assign img = section.settings.image_1 -%}
+          <img
+            srcset="{{ img | img_url: '600x' }} 600w, {{ img | img_url: '1200x' }} 1200w"
+            src="{{ img | img_url: '800x' }}"
+            sizes="(max-width: 749px) 100vw, 350px"
+            alt="{{ img.alt | escape }}"
+            loading="lazy">
+        {%- else -%}
+          {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+        {%- endif -%}
+      </div>
+      <div class="{{ component_class }}__image">
+        {%- if section.settings.image_2 != blank -%}
+          {%- assign img = section.settings.image_2 -%}
+          <img
+            srcset="{{ img | img_url: '600x' }} 600w, {{ img | img_url: '1200x' }} 1200w"
+            src="{{ img | img_url: '800x' }}"
+            sizes="(max-width: 749px) 100vw, 350px"
+            alt="{{ img.alt | escape }}"
+            loading="lazy">
+        {%- else -%}
+          {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": {
+    "en": "The Art of Journey",
+    "es": "The Art of Journey"
+  },
+  "class": "index-section art-of-journey",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": { "en": "Title", "es": "Título" },
+      "default": "THE ART OF JOURNEY"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": { "en": "Subtitle", "es": "Subtítulo" },
+      "default": "Exploring with intention"
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": { "en": "Body text", "es": "Cuerpo de texto" },
+      "default": "<p>En un mundo que no se detiene, la exploración se volvió ruido. Movimiento sin intención. Libertad sin profundidad.</p><p>Explorar no es escapar, es elegir salir del automático. Es un recorrido hacia adentro, para reconectar con uno mismo.</p><p>A través de la mirada de Lorenzo Urbina, filmmaker documentalista, este viaje propone otra forma de moverse: más consciente, más presente.</p><p>No se trata de llegar más lejos, sino de entender mejor. Un explorador consciente no busca acumular experiencias, sino conectar con lo que realmente importa.</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "quote",
+      "label": { "en": "Quote", "es": "Cita" },
+      "default": "<p>“Explorar no es llegar más lejos, es conectar más profundo.”</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": { "en": "Button label", "es": "Texto del botón" },
+      "default": "Ver más"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": { "en": "Button link", "es": "Enlace del botón" }
+    },
+    {
+      "type": "header",
+      "content": { "en": "Images", "es": "Imágenes" }
+    },
+    {
+      "type": "image_picker",
+      "id": "image_1",
+      "label": { "en": "Image 1", "es": "Imagen 1" }
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": { "en": "Image 2", "es": "Imagen 2" }
+    },
+    {
+      "type": "header",
+      "content": { "en": "Style", "es": "Estilo" }
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": { "en": "Background color", "es": "Color de fondo" },
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": { "en": "Text color", "es": "Color del texto" },
+      "default": "#111111"
+    },
+    {
+      "type": "header",
+      "content": { "en": "Spacing", "es": "Espaciado" }
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": { "en": "Top padding (desktop)", "es": "Padding superior (desktop)" },
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": { "en": "Bottom padding (desktop)", "es": "Padding inferior (desktop)" },
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": { "en": "Top padding (mobile)", "es": "Padding superior (mobile)" },
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 160,
+      "step": 4,
+      "unit": "px",
+      "label": { "en": "Bottom padding (mobile)", "es": "Padding inferior (mobile)" },
+      "default": 36
+    }
+  ],
+  "presets": [
+    {
+      "name": {
+        "en": "The Art of Journey",
+        "es": "The Art of Journey"
+      },
+      "category": {
+        "en": "Dunkelvolk",
+        "es": "Dunkelvolk"
+      }
+    }
+  ]
+}
+{% endschema %}

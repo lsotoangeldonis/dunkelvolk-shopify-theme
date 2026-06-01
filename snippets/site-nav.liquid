@@ -1,0 +1,188 @@
+<style>  
+nav .site-nav {
+    position: static;
+}
+.site-nav__dropdown {
+  width: 100vw; 
+  left: 50% !important;
+  right: 50% !important;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  top: 85px !important; /* this line added to avoid overlapping header logo */ 
+  text-align: center;
+  border-top: 0;
+}
+.site-nav__link--active .site-nav__label {
+  border-bottom-color: transparent;
+}
+.site-nav__child-link {
+/*   font-family: 'hurme'; */
+/*   font-size: 13px; */
+  font-weight: 400;
+  color: #181818;
+}
+.site-nav__link--main, .site-nav__child-link--parent {
+/*     font-family: 'hurme'; */
+    font-weight: 600;
+    text-transform: uppercase;
+    -webkit-transition: margin .4s ease 0s,padding .4s ease 0s;
+    -moz-transition: margin .4s ease 0s,padding .4s ease 0s;
+    -o-transition: margin .4s ease 0s,padding .4s ease 0s;
+    transition: margin .4s ease 0s,padding .4s ease 0s;
+    letter-spacing: 0.24px;
+/*     font-size: 14px; */
+    color: #181818;
+}  
+.site-nav__child-link--parent {
+    font-weight: 800;
+  	margin-bottom: 10px;
+}
+.site-nav__link.site-nav__link--main:focus .site-nav__label, .site-nav__link.site-nav__link--main:not([disabled]):hover .site-nav__label {
+    border-bottom-width: 2px;
+    padding-bottom: 8px;
+}
+.site-nav__link--button {
+  -webkit-transition: margin .4s ease 0s,padding .4s ease 0s;
+  -moz-transition: margin .4s ease 0s,padding .4s ease 0s;
+  -o-transition: margin .4s ease 0s,padding .4s ease 0s;
+  transition: margin .4s ease 0s,padding .4s ease 0s; 
+}
+.site-nav__link--button:focus, .site-nav__link--button:hover {
+  color: initial;
+  opacity: .4;
+}
+.mobile-nav-wrapper::after {
+	border-bottom: 0;
+}
+</style>
+
+{% comment %}
+    Renders a list of menu items
+    Accepts:
+    - linklist: {Object} Linklist Liquid object (required)
+    - wrapper_class: {String} CSS wrapper class for the navigation (optional)
+
+    Usage:
+    {% include 'site-nav', linklist: section.settings.main_linklist, wrapper_class: 'site-nav--centered' %}
+{% endcomment %}
+<ul class="site-nav list--inline{% if wrapper_class != blank %} {{ wrapper_class }}{% endif %}" id="SiteNav">
+  {% for link in linklists[linklist].links %}
+    {%- assign child_list_handle = link.title | handleize -%}
+
+    {% comment %}
+      Check if third-level nav exists on each parent link.
+    {% endcomment %}
+    {%- assign three_level_nav = false -%}
+    {% if link.links != blank %}
+      {% if link.levels == 2 %}
+        {%- assign three_level_nav = true -%}
+      {% endif %}
+    {% endif %}
+
+    {% if link.links != blank %}
+      <li class="site-nav--has-dropdown site-nav--has-centered-dropdown{% if link.active %} site-nav--active{% endif %}" data-has-dropdowns data-title="{{ link.title }}">
+        <button class="site-nav__link site-nav__link--main site-nav__link--button{% if link.child_active %} site-nav__link--active{% endif %}" type="button" aria-expanded="false" aria-controls="SiteNavLabel-{{ child_list_handle }}" data-href="{{ link.url }}">
+          <span class="site-nav__label">{{ link.title | escape }}</span>{% include 'icon-chevron-down' %}
+        </button>
+
+        <div class="site-nav__dropdown site-nav__dropdown--centered" id="SiteNavLabel-{{ child_list_handle }}">
+          {% if three_level_nav %}
+            <div class="site-nav__childlist">
+              <ul class="site-nav__childlist-grid">
+                {% if link.links != blank %}
+                  {% for childlink in link.links %}
+                    <li class="site-nav__childlist-item">
+                      <a href="{{ childlink.url }}"
+                        class="site-nav__link site-nav__child-link site-nav__child-link--parent"
+                        {% if childlink.current %} aria-current="page"{% endif %}
+                      >
+                        <span class="site-nav__label">{{ childlink.title | escape }}</span>
+                      </a>
+
+                      {% if childlink.links != blank %}
+                        <ul>
+                        {% for grandchildlink in childlink.links %}
+                          <li>
+                            <a href="{{ grandchildlink.url }}"
+                            class="site-nav__link site-nav__child-link"
+                            {% if grandchildlink.current %} aria-current="page"{% endif %}
+                          >
+                              <span class="site-nav__label">{{ grandchildlink.title | escape }}</span>
+                            </a>
+                          </li>
+                        {% endfor %}
+                        </ul>
+                      {% endif %}
+
+                    </li>
+                  {% endfor %}
+                {% endif %}
+              </ul>
+            </div>
+
+          {% else %}
+          <div class="site-nav__childlist">
+              <ul class="site-nav__childlist-grid">
+              {% for childlink in link.links %}
+               <li class="site-nav__childlist-item">
+                  <a href="{{ childlink.url }}"
+                  class="site-nav__link site-nav__child-link site-nav__child-link--parent{% if forloop.last %} site-nav__link--last{% endif %}"
+                  {% if childlink.current %} aria-current="page"{% endif %}
+                >
+                    <span class="site-nav__label">{{ childlink.title | escape }}</span>
+                  </a>
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+          {% endif %}
+        </div>
+      </li>
+    {% else %}
+      <li {% if link.active %} class="site-nav--active"{% endif %} data-title="{{ link.title }}">
+        <a href="{{ link.url }}"
+          class="site-nav__link site-nav__link--main{% if link.active %} site-nav__link--active{% endif %}"
+          {% if link.current %} aria-current="page"{% endif %}
+        >
+          <span class="site-nav__label">{{ link.title | escape }}</span>
+        </a>
+      </li>
+    {% endif %}
+  {% endfor %}
+</ul>
+
+
+<script>
+ function defer(method, validation) {
+    if (validation()) {
+      method();
+    } else {
+      setTimeout(function() { defer(method, validation) }, 50);
+    }
+ }
+  defer(function(){
+    var $ = window.jQuery
+    $('.site-nav.list--inline > .site-nav--has-dropdown').on('mouseenter', function(e) {
+      e.stopPropagation();
+      if (!$(this).is('.site-nav--active-dropdown')){
+      	$(this).trigger('click.siteNav')
+      }
+    })
+    $('.site-nav__dropdown').on('mouseleave', function(e) {
+      e.stopPropagation();
+      $(this).parent().trigger('click.siteNav')
+    })
+    
+    $('.site-nav.list--inline > .site-nav--has-dropdown [data-href]').on('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      var $el = $(this)
+      var href = $el.data('href')
+      if (!href) {
+        return false
+      }
+      window.location.href = href
+	})
+    
+  }, function() { return window.jQuery })
+</script>

@@ -1,0 +1,53 @@
+{% if content_for_header contains 'store-locator' %}
+              {% include 'bss-store-locator-data' %} 
+              <script id="bss-locator-config-data">
+              if (typeof BSS_SL == 'undefined') {
+                  var BSS_SL = {};
+                  var searchResult = []
+              }
+              BSS_SL.storeId = 193;
+              BSS_SL.configData = [].concat(bssStoreLocatorList0,);
+              BSS_SL.apiKey = "AIzaSyAXZVsGgGJirVcDoTQEjwVYe48yXVaCpds";
+              BSS_SL.translation = "{\"radius\":\"Radio\",\"tag\":\"Etiqueta\",\"search\":\"Buscar\",\"store\":\"Tienda\",\"find_my_location\":\"Encuentra mi Ubicación\",\"schedule\":\"Horario de Atención\",\"enter_your_location\":\"Ingresa tu Ubicación\",\"list\":\"Lista\",\"map\":\"Mapa\",\"monday\":\"Lunes\",\"tuesday\":\"Martes\",\"wednesday\":\"Miércoles\",\"thursday\":\"Jueves\",\"friday\":\"Viernes\",\"saturday\":\"Sábado\",\"sunday\":\"Domingo\",\"product\":\"Producto\",\"storeResult\":\"Resultados de Tiendas\",\"distance\":\"Distancia\",\"notFound\":\"No se encontró ninguna tienda\",\"noLimit\":\"Sin Limite\",\"youAreHere\":\"Tú estás aquí\",\"showing\":\"Mostrando\",\"all\":\"Todo\"}";
+              BSS_SL.planCode = "free";
+              BSS_SL.zoom_map = "6";
+              BSS_SL.storeLocatorServer = 'https://store-locator-api.bsscommerce.com';
+              BSS_SL.scheduleMenu = 1;
+              BSS_SL.addressMenu = 1;
+              BSS_SL.phoneMenu = 1;
+              BSS_SL.faxMenu = 1;
+              BSS_SL.emailMenu = 1;
+              BSS_SL.websiteMenu = 1;
+              BSS_SL.scheduleMap = 1;
+              BSS_SL.addressMap = 1;
+              BSS_SL.phoneMap = 1;
+              BSS_SL.faxMap = 1;
+              BSS_SL.emailMap = 1;
+              BSS_SL.websiteMap = 1;
+              BSS_SL.autoDetectAddress = 0;
+              BSS_SL.radiusSearch = 0;
+              BSS_SL.tagSearch = 1;
+              BSS_SL.findMyLocation = 1;
+              BSS_SL.template = 2;
+              BSS_SL.distanceUnit = "kilometers";
+              BSS_SL.zoomCountLocation = 0;
+              BSS_SL.customFieldMap = 1;
+              BSS_SL.customFieldMenu = 1;
+              </script>
+              {% endif %}
+              <script>
+              function fn(){
+                if (typeof BSS_SL.configData == 'undefined') {
+                    if(window.location.pathname == '/pages/store-locator'){
+                        document.getElementById("PageContainer").remove();
+                    }
+                }
+              }
+            if (document.readyState === "complete" || document.readyState === "interactive") {
+                setTimeout(fn, 1);
+            } else {
+            document.addEventListener("DOMContentLoaded", fn);
+            }
+          </script> <script id="bss-store-locator-cluster" src='https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js'>
+
+</script>

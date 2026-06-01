@@ -1,0 +1,487 @@
+<style>
+  html, body {
+    background: url(https://cdn.shopify.com/s/files/1/0270/6987/4274/files/banner-mob-formulario-join-art_1.jpg?v=1632856911);
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  .landing-campeonato-finalists {
+      min-height: 65vh;
+  }
+  .landing-campeonato-finalists h2 {
+	font-weight: bold !important;
+  	font-size: 1.3rem !important;
+  }
+  @media screen and (min-width: 768px) {
+    .landing-campeonato-finalists h2 {
+    	font-size: 28px !important;
+      	margin-bottom: 25px !important;
+    }
+  }
+  .landing-campeonato-finalists .description {
+    width: 1072px;
+    max-width: 90%;
+    margin: auto;
+    display: block;
+    text-align: justify;
+  }
+  .landing-campeonato-finalists .description h2 {
+  	text-align: center
+  }
+  .landing-campeonato-finalists .form-data-wrapper {
+    margin-top: 35px;
+  }
+  .landing-campeonato-finalists .gallery {
+  	padding-left: 20px;
+    padding-right: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  @media screen and (min-width: 768px) {
+  html, body {
+    background: url(https://cdn.shopify.com/s/files/1/0270/6987/4274/files/banner-escritorio-formulario-join-art_1.jpg?v=1632856911);
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+    .landing-campeonato-finalists .gallery {
+    	padding: inherit;
+      	margin-top: 45px;
+      	margin-bottom: 45px;
+    }
+  }
+</style>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/fontawesome.min.css" integrity="sha512-kJ30H6g4NGhWopgdseRb8wTsyllFUYIx3hiUwmGAkgA9B/JbzUBDQVr2VVlWGde6sdBVOG7oU8AL35ORDuMm8g==" crossorigin="anonymous" />
+
+<div class="page landing landing-campeonato-finalists">
+ <div id="shopify-section-lce-media-gallery" class="shopify-section">
+
+
+
+<style>
+  .lce-media-gallery .form-title {
+  	font-weight: bold !important;
+    background: #F16A3B;
+    border-radius: 6rem;
+    color: white;
+    padding: 10px;
+    color: #DBE5CE;
+    max-width: 90%;
+    margin: auto;
+    width: 500px;
+    margin-top: 25px;
+    margin-bottom: 35px !important;
+  }
+  .lce-media-gallery-thebox-id_lce-media-gallery .nGY2GThumbnail {
+/*   	min-height: 245px; */
+    min-height: 218px;
+  }
+  .lce-media-gallery-thebox-id_lce-media-gallery .nGY2GThumbnailIcon {
+  	display: none !important;
+  }
+  .lce-media-gallery-thebox-id_lce-media-gallery .action-vote {
+    padding: 5px 7px;
+    vertical-align: initial;
+  }
+  .lce-media-gallery-thebox-id_lce-media-gallery .nGY2GThumbnail .action-vote.active i {
+    color: #18de95;
+  }
+  .lce-media-gallery-thebox-id_lce-media-gallery .votes .lbl {
+/*   	display: none !important; */
+  }
+  .lce-media-gallery-thebox-id_lce-media-gallery .votes .count {
+/*   	display: none !important; */
+  }
+  .toolbarContainer.nGEvent .votes {
+/*     display: none; */
+  } 
+  @media screen and (min-width: 480px) {
+    .lce-media-gallery-thebox-id_lce-media-gallery .nGY2GThumbnail {
+/*     	min-height: 312px; */
+        min-height: 280px;
+    }
+    .lce-media-gallery-thebox-id_lce-media-gallery .nGY2GThumbnail .action-vote:hover i {
+        color: #18de95;
+    }
+    .lce-media-gallery-thebox-id_lce-media-gallery .nGY2GThumbnailIcons .nGY2GThumbnailIcon {
+  		display: none !important;
+  	}
+    .lce-media-gallery-thebox-id_lce-media-gallery .nGY2GThumbnailIcon {
+  		display: inline-block !important;
+  	}
+  }
+  .ngbt.ngy2viewerToolAction.ngy2CustomBtn.custom1.nGEvent:hover, 
+  .ngbt.ngy2viewerToolAction.ngy2CustomBtn.custom1.nGEvent:focus, 
+  .ngbt.ngy2viewerToolAction.ngy2CustomBtn.custom1.nGEvent:active, 
+  .ngbt.ngy2viewerToolAction.ngy2CustomBtn.custom1.nGEvent:visited,
+  .ngbt.ngy2viewerToolAction.ngy2CustomBtn.custom1.nGEvent.active {
+  	color: #18de95;
+  }
+  @media screen and (max-width: 479px) {
+    .nanogallery_gallerytheme_custom_nanogallery2 .nGY2GThumbnailLabel {
+      height: 76px;
+    }
+  }
+  
+</style>
+
+<div class="lce-media-gallery lce-media-gallery-thebox-id_lce-media-gallery">
+  <h2 class="form-title text-center ">JOIN ART - ENTRIES</h2>
+  <div id="nanogallery2" class="gallery"></div>
+</div>
+   
+{{ page.content }}
+  
+<script>
+ function defer(method, validation) {
+    if (validation()) {
+      method();
+    } else {
+      setTimeout(function() { defer(method, validation) }, 50);
+    }
+  }
+  
+  defer(function(){
+    $(document).ready(function () {
+      
+      
+      	function setup() {
+          
+          	var libs = [
+              {
+                href: 'https://cdn.jsdelivr.net/npm/nanogallery2@3/dist/css/nanogallery2.min.css',
+                type: 'text/css',
+                rel: 'stylesheet',
+                elem: 'link',
+              },
+              {
+                src: 'https://cdn.jsdelivr.net/npm/nanogallery2@3/dist/jquery.nanogallery2.min.js',
+                type: 'text/javascript',
+                elem: 'script',
+              },
+			  {
+                src: 'https://kit.fontawesome.com/e1a296c89a.js',
+                type: 'text/javascript',
+                elem: 'script',
+              }
+            ]
+        
+            libs.forEach(function(lib, idx) {
+                var script = document.createElement(lib.elem);
+				var head = document.head;
+              	var urlType = lib.href ? 'href' : 'src'
+                script.id = 'lib_script_PageDrop_' + lib.type  + '_' + idx
+                script.type = lib.type
+                script.rel =  lib.rel
+                script[urlType] = lib[urlType]
+                head.appendChild(script);
+            })
+      	}
+      
+      	function init() {
+          
+          defer(function(){
+            
+              var mediaGalleryItems = []
+              
+              var mediaApiUrl = 'https://api.oymbrands.pe/dunkelvolk/media-library'
+              
+              var URLS = {
+                ENTRIES: mediaApiUrl + '/entries',
+                VOTED_IPS_LIST: mediaApiUrl + '/voted_ips_list',
+                POST_VOTE: mediaApiUrl + '/vote',
+              }
+              
+			  var mediaType = 'image' // 'video' or 'all'
+              
+              var mediaExt = '.jpg' // '.mp4'
+              
+              var allowOnlyVoteOnce = false
+              
+			  var block_votation = false
+              
+			  if (window.JOIN_ART_ENTRIES_SETTINGS && window.JOIN_ART_ENTRIES_SETTINGS.CATEGORY) {
+                var category = window.JOIN_ART_ENTRIES_SETTINGS.CATEGORY
+     
+                URLS.ENTRIES =  URLS.ENTRIES + '/' + category ,
+                URLS.VOTED_IPS_LIST = URLS.VOTED_IPS_LIST + '/' + category,
+                URLS.POST_VOTE = URLS.POST_VOTE + '/' + category,
+                  
+                mediaType = window.JOIN_ART_ENTRIES_SETTINGS.MEDIA_TYPE || mediaType
+				mediaExt = window.JOIN_ART_ENTRIES_SETTINGS.MEDIA_EXT || mediaExt
+                
+                allowOnlyVoteOnce = window.JOIN_ART_ENTRIES_SETTINGS.ALLOW_ONLY_VOTE_ONCE|| allowOnlyVoteOnce
+
+              	$('.lce-media-gallery-thebox-id_lce-media-gallery .form-title').append(' - ' + window.JOIN_ART_ENTRIES_SETTINGS.CATEGORY.toUpperCase())
+              }
+              
+              var client_ip_address = null
+              
+              $.getJSON('https://jsonip.com/?callback=?').done(function(data) {
+                  var ip_address = window.JSON.parse(JSON.stringify(data, null, 2));
+                  client_ip_address = ip_address.ip;
+                
+                  $.getJSON(URLS.VOTED_IPS_LIST, {}, function(data) {
+                    var already_voted_ips = data
+
+                    $.getJSON(URLS.ENTRIES, {}, function(data) {
+
+                      try {
+
+                        var ipRegex = new RegExp('(^|,)\s*'+ client_ip_address +'s*($|,)')
+                        
+                        data.resources.forEach(function(item, idx) {
+                          var url = item.secure_url || item.url
+                          var pos = url.lastIndexOf(".");
+                          var fileName = url.substr(0, pos < 0 ? file.length : pos) + mediaExt;
+                          var thumbFileName = url.substr(0, pos < 0 ? file.length : pos) + ".jpg";
+                          var context = (item.context && item.context.custom) || {}
+                          var metadata_voted_ips_idx = already_voted_ips.voted_ips.findIndex(function(i) { return i.public_id === item.public_id });
+                          var voted_data_exists = metadata_voted_ips_idx !== -1;
+                          var voted_ips = voted_data_exists ? already_voted_ips.voted_ips[metadata_voted_ips_idx].voted_ips : ''
+
+                          item.metadata = item.metadata || {}
+                          item.metadata.voted_ips = voted_ips
+                          
+                          item.metadata.already_voted = ipRegex.test(item.metadata.voted_ips)
+                          
+                          if (allowOnlyVoteOnce && item.metadata.already_voted) {
+                          	block_votation = true
+                          }
+                          
+                          item.metadata.src_id = item.public_id
+
+                          mediaGalleryItems.push({ 
+                            ID: item.public_id.split('/')[1],
+                            asset_id: item.asset_id,
+                            public_id: item.public_id,
+                            src: fileName,
+                            srct: thumbFileName,
+                            title: context.caption || ' ',
+                            description: context.alt,
+                            metadata: item.metadata,
+                            customData: item.metadata,
+                          })
+                          
+                        }) 
+                      } catch(error) {
+                        console.log(error)
+                      }
+                      
+                                                console.log(mediaGalleryItems)
+
+                      
+                      $("#nanogallery2").nanogallery2({
+
+                        items: mediaGalleryItems,
+
+                        itemsBaseURL: 'https://res.cloudinary.com/oymsurfcloud/'+ mediaType +'/upload',
+
+                        // GALLERY AND THUMBNAIL LAYOUT
+                        galleryMaxRows: 3,
+                        galleryMaxItems: 500,
+                        galleryDisplayMode: 'moreButton',
+                        //               gallerySorting: 'random',
+                        galleryFilterTags: true,
+                        galleryL1FilterTags: true,
+                        galleryFilterTagsMode: 'multiple',
+
+                        // thumbnail
+                        thumbnailHeight: 209.5, 
+                        thumbnailWidth: '372 XSauto',
+                        thumbnailGutterWidth: 45,
+                        thumbnailGutterHeight: 75,
+                        thumbnailBorderHorizontal: 0,
+                        thumbnailBorderVertical: 0,
+
+                        thumbnailAlignment: 'center',
+
+                        // THUMBNAIL TOOLS & LABEL
+                        thumbnailToolbarImage : null,
+                        thumbnailToolbarAlbum: null,
+                        thumbnailLabel: { display: true, position:'onBottom', hideIcons: true, titleFontSize: '1.22em', align: 'center', titleMultiLine:true, displayDescription: true },
+
+                        // DISPLAY ANIMATION
+                        thumbnailL1DisplayTransition: 'fadeIn',         // first level display animation
+                        thumbnailDisplayTransition: 'slideDown',        // other levels display animation
+                        thumbnailDisplayTransitionDuration: 500,
+                        thumbnailDisplayInterval: 30,
+
+                        // THUMBNAIL'S HOVER ANIMATION
+                        // first level
+                        thumbnailBuildInit2: 'title_font-weight_bold',
+                        thumbnailHoverEffect2: 'imageBlurOff',
+
+                        thumbnailToolbarImage: { topLeft: 'custom1' },
+
+                        fnThumbnailToolCustAction: function( action, item ) {},
+
+                        fnImgToolbarCustDisplay: function( $customToolbarElements, item ) {
+                          $customToolbarElements.each(function(idx) {
+                            var $this = $(this)
+                            var public_id = item.GetID()
+                            var $galleryButton = $('#nanogallery2').find('.action-vote[data-vote-id="'+ public_id +'"]')
+                            var alreadyVoted = item.customData.already_voted
+                            item = $galleryButton.data('item')
+                                                        console.log($this, public_id, $galleryButton, item)
+
+                            var votes = item.customData && item.customData.votes || 0
+                            $this.data('item', item)
+                            if ($this.is('.custom1')) {
+                              $this.find('.votes').remove()
+                              $this.append('<p class="votes">Votos: <span class="count">' + votes + '</span></p>')
+							  $this.toggleClass('active', alreadyVoted)
+                            }
+                          })
+                          $('video.nGY2ViewerMedia').each(function(idx) {
+                            this.autoplay = true;
+                            this.playsinline = true;
+                          });
+                        },
+
+                        fnImgToolbarCustClick: function( customElementName, $customIcon, item ) {
+                          if (customElementName === 'custom1') {
+                            var $button = $customIcon
+                            var $votesCount = $button.find('.votes .count')
+                            var item = $button.data('item')
+                            var public_id = item.GetID()
+                            var src_id = item.customData.src_id
+                            var $galleryButton = $('#nanogallery2').find('.action-vote[data-vote-id="'+ public_id +'"]')
+                            item.customData.already_voted = item.customData.already_voted ? 0 : 1
+                            $button.toggleClass('active', !!item.customData.already_voted);
+                            var votes = Number($votesCount.text()) + 1 * (item.customData.already_voted ? 1 : -1)
+                            $votesCount.text(votes)
+                            item.customData.voted_ips = toggleStr(item.customData.voted_ips, client_ip_address)
+                            $button.data('item', item)
+                            $galleryButton.toggleClass('active', !!item.customData.already_voted);
+                            $galleryButton.data('item', item)
+                            $galleryButton.closest('.nGY2GThumbnailDescription').find('.votes .count').text(votes)
+                            $.ajax({
+                              url: mediaApiUrl + '/vote',
+                              type:"POST",
+                          	  data: JSON.stringify({ public_id: src_id, client_ip: client_ip_address  }),
+                              contentType:"application/json; charset=utf-8",
+                              dataType:"json",
+                              success: function(e){}
+                            })
+                          }
+                        },
+
+
+                        icons: { 
+                          thumbnailCustomTool1: 'Votar <i class="fas fa-vote-yea"></i>', //nGY2Icon-star
+                          viewerCustomTool1: 'Votar <i class="fas fa-vote-yea"></i>',
+                        },
+
+                        // touch handling
+                        touchAnimation: false,
+                        touchAutoOpenDelay: 800,
+
+                        // GALLERY THEME
+                        galleryTheme : { 
+                          thumbnail: { titleShadow : '', descriptionShadow : 'none', titleColor: '#fff' },
+                          navigationBreadcrumb: { background : '#3C4B5B' },
+                          navigationFilter: { background : '#003C3F', backgroundSelected: '#2E7C7F', color: '#fff' }
+                        },
+
+                        viewerToolbar: {
+                          display:    true,
+                          standard:   'minimizeButton, label, custom1',
+                          minimized:  'minimizeButton, label, fullscreenButton, downloadButton, infoButton'
+                        },
+
+                        // DEEP LINKING
+                        locationHash: false,
+
+                        //Add custom elements after one thumbnail is build
+                        fnThumbnailInit: function( $e, item, GOMidx ) {
+                          var votes = item.customData && item.customData.votes || 0
+                          var style = 'color: white; margin-top: 5px; font-size: 0.85rem;'
+                          var alreadyVoted = item.customData.already_voted
+                          var buttonClass = 'btn btn-link action-vote'
+                          buttonClass += alreadyVoted ? ' active' : '' 
+                          var $description = $e.find('.nGY2GThumbnailDescription')
+                          var $toolBarButton = $e.find('.nGY2GThumbnailIcon')
+                          var $button = $toolBarButton.clone(true)
+                          $toolBarButton.hide()
+                          $button.addClass(buttonClass).attr('data-vote-id', item.GetID()).data('item', item)
+                          $description.append('<p class="votes" style="'+ style +'">&nbsp; <span class="lbl">Votos: </span> <span class="count">' + votes + '</span></p>')
+                          $description.find('.votes').prepend($button)
+                        }
+
+                      })
+
+                      function toggle(collection, item) {
+                        var idx = _.indexOf(collection, item);
+                        if(idx !== -1) {
+                          collection.splice(idx, 1);
+                        } else {
+                          collection.push(item);
+                        }
+                      }
+
+                      function toggleStr(str, item) {
+                        var arr = str.split(',')
+                        toggle(arr, item)
+                        str = arr.join(',')
+                        return str
+                      }
+
+                      $(document).on('click', '.action-vote', function(e) {
+                        e.stopImmediatePropagation()
+                        e.stopPropagation();
+                        var $button = $(this)
+                        var $parent = $button.closest('.nGY2GThumbnailDescription')
+                        var $votesCount = $parent.find('.votes .count')
+                        var item = $button.data('item')
+                        var src_id = item.customData.src_id
+                        if (allowOnlyVoteOnce && block_votation && !item.customData.already_voted) {
+                        	return false
+                        }
+                        item.customData.already_voted = item.customData.already_voted ? 0 : 1 // TOGGLE VOTATION HERE
+                        if (allowOnlyVoteOnce) {
+							block_votation = item.customData.already_voted
+                        }
+                        $button.toggleClass('active', !!item.customData.already_voted);
+                        var votes = Number($votesCount.text()) + 1 * (item.customData.already_voted ? 1 : -1)
+                        $votesCount.text(votes)
+                        item.customData.voted_ips = toggleStr(item.customData.voted_ips, client_ip_address)
+                        $button.data('item', item)
+                        $.ajax({
+                          url: URLS.POST_VOTE,
+                          type:"POST",
+                          data: JSON.stringify({ public_id: src_id, client_ip: client_ip_address, media_type: mediaType  }),
+                          contentType:"application/json; charset=utf-8",
+                          dataType:"json",
+                          success: function(e){}
+                        })
+                        return false
+                      })
+
+                      return false
+
+                    });
+                 })
+              	                  
+
+                
+              });
+            
+          }, function() { return $().nanogallery2 } )
+          
+      	}
+      
+       function hooks() {
+      	 setup()
+         init()
+       }
+      
+      hooks()
+
+    });
+  }, function() { return window.jQuery })
+</script>
+
+
+
+</div>
+</div>

@@ -1,0 +1,110 @@
+<style>
+  .rich-text-thebox.top-bordered {
+    padding-top: 31px;
+    border-top: 1.5px solid #d1d1d1;
+  }
+  .rich-text-thebox.bottom-bordered {
+	padding-bottom: 31px;
+    border-bottom: 1.5px solid #d1d1d1;
+  }
+  .rich-text-thebox.fw {
+    margin: 0;
+    max-width: 100%;
+  }
+  .rich-text.text-justified p {
+	text-align: justify;
+  }
+  .rich-text .secondary-text {
+  	display: none;
+  }
+  .rich-text.toggled-text .secondary-text {
+  	display: block;
+  }
+  .rich-text-thebox .r-f-seodesc-vm {
+    background-color: transparent;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: auto 20px;
+    background-image: url(https://cdn.shopify.com/s/files/1/0373/4513/2676/files/plus.svg?v=1595848637);
+    width: 50px;
+    height: 25px;
+    cursor: pointer;
+    margin: auto;
+    margin-top: 10px;
+  }
+  .rich-text .r-f-seodesc-vm:hover {
+    -webkit-opacity: .4;
+    -moz-opacity: .4;
+    -khtml-opacity: .4;
+    opacity: .4;
+  }
+  .rich-text.toggled-text .r-f-seodesc-vm {
+    background-image: url(https://cdn.shopify.com/s/files/1/0373/4513/2676/files/moins.svg?v=1595848637);
+  }
+  .rich-text-thebox .r-f-seodesc-vm {
+    margin-top: 20px;
+  }
+  @media only screen and (max-width: 768px) { 
+    .rich-text-thebox {
+      padding-top: 14px !important;
+      padding-left: 14px;
+      padding-right: 14px;
+    }
+  }
+  .rich-text-thebox .rich-text__text-wrapper > div, 
+  .rich-text-thebox .rich-text__text-wrapper > p,
+  .rich-text-thebox .rich-text__text-wrapper > span {
+    text-align: center;
+  	display: none;
+  }
+  .rich-text-thebox .rich-text__text-wrapper > div:first-of-type,
+  .rich-text-thebox .rich-text__text-wrapper > p:first-of-type, 
+  .rich-text-thebox .rich-text__text-wrapper > span:first-of-type {
+    display: block;
+  }
+  .rich-text-thebox.toggled-text .rich-text__text-wrapper > div,
+  .rich-text-thebox.toggled-text .rich-text__text-wrapper > p,
+  .rich-text-thebox.toggled-text .rich-text__text-wrapper > span {
+    display: block;
+  }
+
+</style>
+
+<div id="rich-text-thebox-{{ id }}" class="page-width rich-text rich-text-thebox text-justified fw top-bordered">
+  <div class="grid">
+    <div class="grid__item">
+      {% if text != blank %}
+        <div class="rich-text__text--small rte-setting text-center rich-text__text-wrapper">{{ text }}</div>
+      {% endif %}
+      
+      <div id="toggleableButton-{{ id }}" class="r-f-seodesc-vm"></div>
+    
+    </div>
+  </div>
+</div>
+
+<script>
+   document.addEventListener('click', function(e) {
+    if (e.target && e.target.id === 'toggleableButton-{{ id }}') {
+      
+      var element = document.getElementById('rich-text-thebox-{{ id }}')
+      
+      if (element.classList) { 
+          element.classList.toggle('toggled-text');
+          return;
+      }
+
+      var classes = element.className.split(' ');
+      var i = classes.indexOf('toggled-text');
+
+      if (i >= 0) {
+        classes.splice(i, 1);
+      } else {
+        classes.push('toggled-text');
+      }
+
+      element.className = classes.join(' '); 
+    }
+    
+ });
+</script>

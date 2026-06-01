@@ -1,0 +1,42 @@
+# Dependencies
+node_modules/
+
+# Shopify CLI cache / state
+.shopify/
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.#*
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Atomic-save temp files (also in .shopifyignore)
+*.tmp
+*.tmp.*
+
+# Build/backup artifacts
+*.bak
+*.orig
+*.rej
+
+# Env / secrets
+.env
+.env.local
+.env.*.local
+
+# Local source assets (already copied into /assets with clean names)
+/fonts/
+/sources/
+/Avenir.ttc
+/FatFrank_Heavy.otf
+/fonnts.com-FatFrank_Heavy.otf
+
+# Design source PDFs (not part of the theme; share via Drive/Figma instead)
+*.pdf

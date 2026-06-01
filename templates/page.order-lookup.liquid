@@ -1,0 +1,718 @@
+{% layout 'theme' %}
+{{ page.content }}
+
+{%- style -%}
+/* Variables CSS personalizadas */
+:root {
+  --primary-color: #007bff;
+  --success-color: #28a745;
+  --warning-color: #ffc107;
+  --danger-color: #dc3545;
+  --gray-100: #f8f9fa;
+  --gray-200: #e9ecef;
+  --gray-300: #dee2e6;
+  --gray-600: #6c757d;
+  --gray-800: #343a40;
+  --border-radius: 8px;
+  --box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  --transition: all 0.3s ease;
+}
+
+/* Estilos base mejorados */
+.order-lookup-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.search-card {
+  background: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  padding: 2rem;
+  margin-bottom: 2rem;
+  transition: var(--transition);
+}
+
+.search-card:hover {
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+/* Estilos de formulario mejorados */
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.input-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--gray-800);
+  font-weight: 500;
+}
+
+.input-hint {
+  display: block;
+  font-size: 0.875rem;
+  color: var(--gray-600);
+  margin-top: 0.25rem;
+}
+
+.form-control {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--gray-300);
+  border-radius: var(--border-radius);
+  transition: var(--transition);
+  font-size: 1rem;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(0,123,255,0.25);
+}
+
+.btn-primary {
+  background: var(--primary-color);
+  color: white;
+  border: none;
+  padding: 0.75rem 2rem;
+  border-radius: var(--border-radius);
+  font-weight: 500;
+  transition: var(--transition);
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background: #0056b3;
+  transform: translateY(-1px);
+}
+
+.btn-primary:disabled {
+  background: var(--gray-600);
+  cursor: not-allowed;
+}
+
+/* Spinner mejorado */
+.spinner-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 2rem;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid var(--gray-200);
+  border-top: 4px solid var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Estilos de resultados mejorados */
+.order-card {
+  background: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--box-shadow);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  transition: var(--transition);
+}
+
+.order-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.order-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.order-number {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--gray-800);
+}
+
+.status-badge {
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: 500;
+  font-size: 0.875rem;
+}
+
+.status-pending { background: var(--warning-color); color: #000; }
+.status-paid { background: var(--success-color); color: white; }
+.status-shipped { background: var(--primary-color); color: white; }
+.status-cancelled { background: var(--danger-color); color: white; }
+
+.order-info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.info-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.info-label {
+  font-size: 0.875rem;
+  color: var(--gray-600);
+  margin-bottom: 0.25rem;
+}
+
+.info-value {
+  font-weight: 500;
+  color: var(--gray-800);
+}
+
+.products-list {
+  background: var(--gray-100);
+  border-radius: var(--border-radius);
+  padding: 1rem;
+}
+
+.product-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.product-item:last-child {
+  border-bottom: none;
+}
+
+.shipping-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--gray-100);
+  border-radius: var(--border-radius);
+  padding: 1rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+  gap: 25px;
+}
+
+.shipping-map img {
+  border-radius: var(--border-radius);
+}
+
+.tracking-timeline {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+/* Mensajes de error mejorados */
+.error-message {
+  background: #fff5f5;
+  border: 1px solid #feb2b2;
+  color: #c53030;
+  padding: 1rem;
+  border-radius: var(--border-radius);
+  margin-bottom: 1rem;
+}
+
+/* Responsive improvements */
+@media (max-width: 768px) {
+  .order-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .order-info {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (min-width: 1024px) {
+  .shipping-info {
+    justify-content: space-around;
+  }
+  .shipping-address {
+    width: 49%;
+  }
+  .shipping-map {
+    width: 39%;
+  }
+}
+{%- endstyle -%}
+
+<div class="order-lookup-container">
+  <div class="search-card">
+    <div class="text-center" style="margin-bottom: 2rem;">
+      <h1 style="font-size: 2rem; margin-bottom: 1rem;">{{ page.title }}</h1>
+      <p style="color: var(--gray-600);">
+        Ingresa el número de pedido o el email asociado a tu compra
+      </p>
+    </div>
+
+    <form id="order-lookup-form">
+      <div class="grid grid--half-gutters">
+        <div class="grid__item medium-up--one-half">
+          <div class="form-group">
+            <label class="input-label" for="order-number">
+              Número de Pedido
+            </label>
+            <input 
+              style="display:none;"
+              type="text" 
+              id="order-number" 
+              class="form-control"
+              placeholder="Ingresa tu número de pedido"
+            >
+            <input 
+              type="text" 
+              id="order-name" 
+              class="form-control"
+              placeholder="Ingresa tu número de pedido"
+            >
+            <span class="input-hint">Opcional si ingresas email</span>
+          </div>
+        </div>
+        <div class="grid__item medium-up--one-half">
+          <div class="form-group">
+            <label class="input-label" for="order-email">
+              Email
+            </label>
+            <input 
+              type="email" 
+              id="order-email" 
+              class="form-control"
+              placeholder="Ej: cliente@ejemplo.com"
+            >
+            <span class="input-hint">Opcional si ingresas número de pedido</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="text-center">
+        <button type="submit" class="btn" id="submit-button">
+          Buscar Pedido(s)
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <div id="loading" class="spinner-container" style="display: none;">
+    <div class="spinner"></div>
+    <span>Buscando tu pedido...</span>
+  </div>
+
+  <div id="order-error" class="error-message" style="display: none;"></div>
+
+  <div id="order-result" style="display: none;">
+    <div id="order-details"></div>
+  </div>
+</div>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Elementos del DOM
+  const form = document.getElementById('order-lookup-form');
+  const orderNumberInput = document.getElementById('order-number');
+  const orderNameInput = document.getElementById('order-name');
+  const orderEmailInput = document.getElementById('order-email');
+  const submitButton = document.getElementById('submit-button');
+  const loadingDiv = document.getElementById('loading');
+  const resultDiv = document.getElementById('order-result');
+  const errorDiv = document.getElementById('order-error');
+  const orderDetails = document.getElementById('order-details');
+
+  // Configuración
+  const CONFIG = {
+    apiUrl: 'https://api.oymbrands.pe/shopify-proxy/api/order-lookup',
+    webCode: '{{ shop.domain }}',
+    timeoutDuration: 30000, // 30 segundos
+    statuses: {
+      pendiente: { class: 'status-pending', name: 'Pendiente', step: 1 },
+      pagado: { class: 'status-paid', name: 'Pagado', step: 2 },
+      preparado: { class: 'status-shipped', name: 'Preparado', step: 3 },
+      preparado_pickup: { class: 'status-shipped', name: 'Listo para recojer', step: 3 },
+      cancelado: { class: 'status-cancelled', name: 'Cancelado', step: -1 }
+    },
+    shippingMethods: {
+      delivery: { code: 'delivery', name: 'Delivery' },
+      store_pickup: { code: 'store_pickup', name: 'Recojo en tienda' },
+    },
+    shippingStatuses: {
+      pending: { class: 'status-pending', key: 'pending', name: 'Pendiente', step: 3 },
+      out_for_delivery: { class: 'status-paid', key: 'out_for_delivery', name: 'En Ruta', step: 4 },
+      delivered: { class: 'status-shipped', key: 'delivered', name: 'Entregado', step: 5 },
+    },
+    assetsImgUrl: "{{ '' | asset_img_url: 'master' | split: '/cdn' | first }}/cdn/shop/t/42/assets/",
+    gmpAkey: '08c4b60f48f141e097fc7aaff92e4f2f',
+  };
+
+  // Funciones de utilidad
+  const utils = {
+    formatDate(dateString) {
+      return new Date(dateString).toLocaleDateString('es-ES', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+      });
+    },
+
+    formatCurrency(amount, currency = 'PEN') {
+      return new Intl.NumberFormat('es-PE', {
+        style: 'currency',
+        currency: currency,
+        currencyDisplay: 'symbol' // Asegura que se use el símbolo en lugar del código
+      }).format(amount);
+    },
+
+    getStatusInfo(order) {
+      let statusKey = order.status.toLowerCase();
+      const shippingMethod = this.getShippingMethod(order)
+      const shippingStatus = this.getShippingStatus(order)
+      if (statusKey === 'preparado') {
+          if (shippingMethod.code === 'store_pickup') {
+              statusKey = 'preparado_pickup'
+          } else if (shippingStatus.key !== 'pending') {
+              return CONFIG.shippingStatuses[shippingStatus.key]
+          }
+      }
+      // console.log(statusKey, CONFIG.statuses, CONFIG.statuses[statusKey])
+      return CONFIG.statuses[statusKey] || CONFIG.statuses.pendiente;
+    },
+
+    getShippingMethod(order) {
+      const noteAttributes = order.note_attributes || []
+      const shippingMethod = noteAttributes.find(attr => attr.name === 'shipping_method') || { value: 'delivery' }
+      return (shippingMethod && shippingMethod.value && CONFIG.shippingMethods[shippingMethod.value])
+    },
+
+    getShippingStatus(order) {
+      console.log(order, order.shipment_status)
+      const shippingStatusKey = order.shipment_status?.toLowerCase()
+      return CONFIG.shippingStatuses[shippingStatusKey] || CONFIG.shippingStatuses.pending;
+    },
+
+    getStorePickupStore(order) {
+      const noteAttributes = order.note_attributes || []
+      const storePickup = noteAttributes.find(attr => attr.name === 'store_pickup')
+      return (storePickup && storePickup.value) || null
+    },
+
+    getShippingAddressLatLng(order) {
+      const { lat, lng } = order.shipping_address || {}
+      return lat && lng && { lat, lng }
+    },
+
+    getGMapsUrl(order) {
+      const latLng = this.getShippingAddressLatLng(order)
+      let query = latLng ? `${latLng.lat},${latLng.lng}` : order.shipping_address.address1
+      return `http://maps.google.com/?q=${encodeURIComponent(query)}`
+    },
+
+    getTrackingTimelineImg(order) {
+      const { step } = this.getStatusInfo(order)
+      const shippingMethod = this.getShippingMethod(order)
+
+      // console.log(shippingMethod, this.getStatusInfo(order))
+      
+      let img = `${CONFIG.assetsImgUrl}/TRACKING_DELIVERY_STEP_3.jpg`
+      
+      if (shippingMethod.code === 'store_pickup') {
+        img = img.replace('DELIVERY', 'STOREPICKUP')
+      }
+
+      if (step) {
+        img = img.replace('STEP_3', `STEP_${step}`)
+      }
+
+      return img
+    },
+
+    async getGeocodedAddress(address) {
+        const url = `https://api.geoapify.com/v1/geocode/search?text=${encodeURIComponent(address)}&format=json&apiKey=${CONFIG.gmpAkey}`;
+    
+        try {
+            const response = await fetch(url);
+            const data = await response.json();
+    
+            if (data.results && data.results.length > 0) {
+                const { lat, lon } = data.results[0]; // Extrae la latitud y longitud
+                return { lat, lng: lon };
+            } else {
+                throw new Error("No se encontraron coordenadas para la dirección.");
+            }
+        } catch (error) {
+            console.error("Error obteniendo coordenadas:", error);
+            return null;
+        }
+    },
+
+    getStaticMap(lat, lng) {
+        return `https://maps.geoapify.com/v1/staticmap?style=osm-bright&width=600&height=400&center=lonlat:${lng},${lat}&zoom=15&marker=lonlat:${lng},${lat};color:red;size:medium&apiKey=${CONFIG.gmpAkey}`;
+    },
+
+    validateEmail(email) {
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    },
+
+    validateOrderNumber(number) {
+      return /^\d+$/.test(number);
+    }
+  };
+
+  // Funciones de UI
+  const UI = {
+    showError(message) {
+      errorDiv.textContent = message;
+      errorDiv.style.display = 'block';
+      resultDiv.style.display = 'none';
+    },
+
+    clearMessages() {
+      errorDiv.style.display = 'none';
+      resultDiv.style.display = 'none';
+      loadingDiv.style.display = 'none';
+    },
+
+    showLoading() {
+      loadingDiv.style.display = 'block';
+      submitButton.disabled = true;
+    },
+
+    hideLoading() {
+      loadingDiv.style.display = 'none';
+      submitButton.disabled = false;
+    },
+
+    generateOrderHTML(order) {
+      const orderLatLng = utils.getShippingAddressLatLng(order)
+      let staticMapImg = '' 
+      if (orderLatLng) {
+        staticMapImg = utils.getStaticMap(orderLatLng.lat, orderLatLng.lng);
+      }
+      const mapPlaceHolderImg = "https://cdn.shopify.com/s/files/1/0270/6987/4274/files/blurred-map.png?v=1742683010";
+      
+      return `
+        <div class="order-card">
+          <div class="order-header">
+            <span class="order-number">Pedido ${order.order_name}</span>
+           <span class="status-badge ${utils.getStatusInfo(order).class}">
+              ${utils.getStatusInfo(order).name}
+            </span>
+          </div>
+
+          <div class="order-info">
+            <div class="info-group">
+              <span class="info-label">Fecha</span>
+              <span class="info-value">${utils.formatDate(order.created_at)}</span>
+            </div>
+            <div class="info-group">
+              <span class="info-label">Estado de pago</span>
+              <span class="info-value">${order.financial_status}</span>
+            </div>
+            <div class="info-group">
+              <span class="info-label">Tipo Entrega</span>
+              <span class="info-value" style="text-transform: capitalize">${utils.getShippingMethod(order).name}</span>
+            </div>
+            <div class="info-group">
+              <span class="info-label">Total</span>
+              <span class="info-value">${order.total_price}</span>
+            </div>
+          </div>
+
+          <div class="tracking-timeline">
+            <img src="${utils.getTrackingTimelineImg(order)}" class="step"> 
+          </div>
+
+          <div class="products-list">
+            <h4 style="margin-bottom: 1rem;">Productos</h4>
+            ${order.line_items.map(item => `
+              <div class="product-item">
+                <div class="product-info">
+                  <span class="product-name">- ${item.title}</span>
+                  <span class="product-quantity">(Cantidad: ${item.quantity})</span>
+                </div>
+                <span class="product-price">${item.price}</span>
+              </div>
+            `).join('')}
+          </div>
+
+          ${order.shipping_address ? `
+            <div class="shipping-info">
+              <div class="shipping-address">
+                <h4 style="margin-bottom: 1rem;">Dirección de ${utils.getShippingMethod(order).code === 'delivery' ? 'envío': 'recojo'}</h4>
+                <p style="margin: 0;">
+                  ${order.shipping_address.name}<br>
+                  ${order.shipping_address.address1}<br>
+                  ${order.shipping_address.address2 ? order.shipping_address.address2 + '<br>' : ''}
+                  ${order.shipping_address.city}, ${order.shipping_address.province}<br>
+                  ${order.shipping_address.country} ${order.shipping_address.zip}
+                </p>
+              </div>
+              <div class="shipping-map">
+                <a class="map-link" href="${utils.getGMapsUrl(order)}" target="_blank">
+                  <img src="${mapPlaceHolderImg}" 
+                      class="map-image"
+                      data-real-src="${staticMapImg}"
+                      data-address="${order.shipping_address.address1}"
+                  >
+                </a>
+              </div>
+            </div>
+  
+          ` : ''}
+        </div>
+      `;
+    },
+
+    displayOrders(orders) {
+      orderDetails.innerHTML = orders.map(order => this.generateOrderHTML(order)).join('');
+      resultDiv.style.display = 'block';
+    },
+
+      displayOrdersMaps() {
+        document.querySelectorAll('.map-image').forEach((img) => {
+          (async () => {
+            let realSrc = img.getAttribute('data-real-src');
+            if (!realSrc) {
+              const address = img.getAttribute('data-address');
+              utils.getGeocodedAddress(address).then(({ lat, lng }) => {
+                const link = img.closest('.map-link')
+                link.href = utils.getGMapsUrl({shipping_address: { lat, lng}})
+                realSrc = utils.getStaticMap(lat, lng);
+                const tempImg = new Image();
+                tempImg.src = realSrc;
+                tempImg.onload = () => img.src = realSrc; // Reemplaza la imagen cuando cargue
+              }).catch(error => console.error('Error al obtener la geocodificación:', error));
+            } else {
+              const tempImg = new Image();
+              tempImg.src = realSrc;
+              tempImg.onload = () => img.src = realSrc; // Reemplaza la imagen cuando cargue
+            }
+          })();
+        });
+      }
+
+  };
+
+  // Funciones de API
+  const API = {
+    async searchOrders(params) {
+      const queryParams = new URLSearchParams();
+      if (params.orderNumber) queryParams.append('order_number', params.orderNumber);
+      if (params.orderName) queryParams.append('order_name', params.orderName);
+      if (params.email) queryParams.append('email', params.email);
+      queryParams.append('webCode', CONFIG.webCode);
+
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), CONFIG.timeoutDuration);
+
+      try {
+        const response = await fetch(`${CONFIG.apiUrl}?${queryParams.toString()}`, {
+          method: 'GET',
+          signal: controller.signal,
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+
+        clearTimeout(timeoutId);
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        return data;
+
+      } catch (error) {
+        if (error.name === 'AbortError') {
+          throw new Error('La búsqueda ha excedido el tiempo límite');
+        }
+        throw error;
+      }
+    }
+  };
+
+  // Validación en tiempo real
+  function validateInputs() {
+    const hasOrderNumber = orderNumberInput.value.trim() !== '';
+    const hasOrderName = orderNameInput.value.trim() !== '';
+    const hasEmail = orderEmailInput.value.trim() !== '';
+    submitButton.disabled = !hasOrderNumber && !hasOrderName && !hasEmail;
+  }
+
+  // Event Listeners
+  orderNumberInput.addEventListener('input', validateInputs);
+  orderNameInput.addEventListener('input', validateInputs);
+  orderEmailInput.addEventListener('input', validateInputs);
+
+  // Manejador del formulario
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    const orderNumber = orderNumberInput.value.trim();
+    const orderName = orderNameInput.value.trim();
+    const orderEmail = orderEmailInput.value.trim();
+    
+    // Validaciones
+    if (!orderNumber && !orderName && !orderEmail) {
+      UI.showError('Por favor, ingresa un número de pedido o un email para realizar la búsqueda.');
+      return;
+    }
+
+    if (orderEmail && !utils.validateEmail(orderEmail)) {
+      UI.showError('Por favor, ingresa un email válido.');
+      return;
+    }
+
+    if (orderNumber && !utils.validateOrderNumber(orderNumber)) {
+      UI.showError('Por favor, ingresa un número de pedido válido.');
+      return;
+    }
+
+    // Iniciar búsqueda
+    UI.clearMessages();
+    UI.showLoading();
+
+    try {
+      const data = await API.searchOrders({
+        orderNumber,
+        orderName,
+        email: orderEmail
+      });
+
+      if (data.success && data.orders && data.orders.length > 0) {
+        UI.displayOrders(data.orders);
+        UI.displayOrdersMaps();
+      } else {
+        UI.showError('No se encontraron pedidos con los datos proporcionados.');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      UI.showError(error.message || 'Error al procesar la solicitud. Por favor, intente más tarde.');
+    } finally {
+      UI.hideLoading();
+    }
+  });
+
+  // Inicialización
+  validateInputs();
+});
+</script>

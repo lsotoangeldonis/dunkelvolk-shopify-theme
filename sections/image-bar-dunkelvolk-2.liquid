@@ -1,0 +1,907 @@
+{% capture component_class %}images-bar-thebox-v2_{{section.id}}{% endcapture %} 
+
+<style data-width="{{ section.settings.width }}">
+  .{{ component_class }}  {
+    margin: auto;
+	max-width: 100%;
+    {% if section.settings.width == blank or section.settings.full_width %}
+    	width: 100%;
+    {% else %}
+        width: {{ section.settings.width }};
+    {% endif %}
+    {% if section.settings.custom_top_spacing_mobile != blank %}
+    	margin-top: {{ section.settings.custom_top_spacing_mobile }};
+    {% endif %}
+    {% if section.settings.custom_bottom_spacing_mobile != blank %}
+    	margin-bottom: {{ section.settings.custom_bottom_spacing_mobile }};
+    {% endif %}
+  }
+  .{{ component_class }} .picture {
+       display: none;
+  }
+  .{{ component_class }} .picture-mobile {
+       display: block;
+  }
+  .{{ component_class }} .r-ups {
+      position: relative;
+      margin: 40px 20px;
+      margin-bottom: 20px;
+      margin-top: 0;
+  }
+  .{{ component_class }} .r-ups .r-3ups-titles-below {
+      position: relative;
+  }
+  .{{ component_class }} .swiper-container {
+      margin: 0 auto;
+      position: relative;
+/*       overflow: hidden; */
+      list-style: none;
+      padding: 0;
+      z-index: 1;
+  }
+  .{{ component_class }} .owl-carousel  {
+  	display: block;
+  }
+  .{{ component_class }} .owl-theme .owl-nav {
+  	margin-top: 0;
+  }
+  .{{ component_class }} .owl-theme .owl-nav.disabled+.owl-dots {
+  	margin-top: 5px;
+  }
+  .{{ component_class }} .owl-theme .owl-dots .owl-dot span {
+    width: 18px;
+    height: 3px;
+  	border-radius: 0;
+  }
+  .{{ component_class }} .owl-theme .owl-dots .owl-dot.active span, .{{ component_class }} .owl-theme .owl-dots .owl-dot:hover span {
+    height: 4px;
+  }
+  .{{ component_class }} .r-ups .r-3ups-titles-below .swiper-container {
+      margin: 0 auto;
+      width: 100%;
+  }
+  .{{ component_class }} .swiper-wrapper {
+      display: none;
+      position: relative;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+      -webkit-transition-property: -webkit-transform;
+      transition-property: -webkit-transform;
+      -o-transition-property: transform;
+      transition-property: transform;
+      transition-property: transform,-webkit-transform;
+      -webkit-box-sizing: content-box;
+      box-sizing: content-box;
+      -webkit-align-items: stretch;
+      -moz-align-items: stretch;
+      -ms-align-items: stretch;
+      align-items: stretch;
+  }
+  .{{ component_class }} .swiper-wrapper.mobile {
+     display: block; 
+  }
+
+  .{{ component_class }} .swiper-slide {
+      -webkit-flex-shrink: 0;
+      -ms-flex-negative: 0;
+      flex-shrink: 0;
+      width: 100%;
+      height: 100%;
+      position: relative;
+      -webkit-transition-property: -webkit-transform;
+      transition-property: -webkit-transform;
+      -o-transition-property: transform;
+      transition-property: transform;
+      transition-property: transform,-webkit-transform;
+  }
+  .{{ component_class }} .r-ups .r-3ups-titles-below .swiper-title {
+      color: #000;
+	  font-size: 27px;
+	  line-height: 20px;
+      margin-bottom: 15px;
+      text-align: center;
+  }
+  .{{ component_class }} .r-ups .r-3ups-titles-below .r-3ups-description {
+      position: relative;
+  }
+  .{{ component_class }} .r-ups .r-3ups-titles-below .swiper-slide {
+      height: auto;
+  }
+  .{{ component_class }} .swiper-wrapper.mobile .r-3ups-description {
+    margin-bottom: {{ section.settings.block_spacing_vertical }};
+  }
+  .{{ component_class }} .r-ups .r-3ups-titles-below .swiper-slide:last-of-type {
+    	margin-bottom: 0;
+  }
+  .{{ component_class }} .swiper-wrapper.mobile .slick-track .r-3ups-description {
+    	margin-bottom: 0;
+   }
+  .{{ component_class }} .swiper-wrapper.mobile .r-3ups-description img {
+    	width: 100%;
+   }
+  .{{ component_class }} .r-ups picture {
+      position: relative;
+      display: block;
+      font-size: 0;
+  }
+  .{{ component_class }} .r-ups .href-js {
+      cursor: pointer;
+  }
+  .{{ component_class }} .r-ups .r-3ups-titles-below .r-3ups-description-wrapper {
+      max-width: 90vw;
+      margin: 3rem 0 5rem;
+      padding-right: 0px;
+      margin: 1.5rem 0;
+      margin-bottom: 0;
+      font-size: 10px;
+      margin-top: 15px;
+  }
+  .{{ component_class }} .r-ups .r-ups-heading, 
+  .{{ component_class }} .r-ups .r-ups-product-price, 
+  .{{ component_class }} .r-ups a, 
+  .{{ component_class }} .r-ups h2,
+  .{{ component_class }} .r-ups h3, 
+  .{{ component_class }} .r-ups p {
+      position: relative;
+      line-height: normal;
+      color: #4d4b4c;
+      font-weight: normal;
+      letter-spacing: 0.1px;
+  }
+  .{{ component_class }} .r-ups h2 {
+      font-family: roboto-bold,Arial,sans-serif;
+      font-weight: 700;
+      font-size: 7.2vw;
+      line-height: 7.2vw;
+      letter-spacing: 0;
+      margin-bottom: 1.2rem;
+  }
+  .{{ component_class }} .r-ups .r-ups-heading, 
+  .{{ component_class }} .r-ups .r-ups-product-price, .{{ component_class }} 
+  .{{ component_class }} .r-ups a, 
+  .{{ component_class }} .r-ups h2, 
+  .{{ component_class }} .r-ups h3, 
+  .{{ component_class }} .r-ups p {
+      position: relative;
+      line-height: normal;
+  color: #4d4b4c;
+      margin-bottom: 0;
+      text-align: center;
+  }
+  .{{ component_class }} .r-ups p {
+      font-size: 14px;
+      font-family: roboto-regular,Arial,sans-serif;
+      margin: 0;
+      text-align: left;
+      font-size: 20px;
+      color: #000000;
+      font-weight: bold;
+  }
+  .{{ component_class }} .r-ups .r-3ups-titles-below .r-linkcta {
+      position: relative;
+      display: inline-block;
+      font-family: roboto-medium,Arial,sans-serif;
+      font-weight: 500;
+      font-size: 1.6rem;
+/*       overflow: hidden; */
+      -webkit-transition: all .3s;
+      -moz-transition: all .3s;
+      -o-transition: all .3s;
+      transition: all .3s;
+  	  color: #636363;
+      font-size: 12px;
+      font-weight: bold;
+      margin-top: 10px;
+  }
+  .{{ component_class }} .r-ups .href-js {
+      cursor: pointer;
+  }
+  .{{ component_class }} .r-ups .r-3ups-titles-below .margin-top {
+      margin-top: 1.3rem;
+  }
+  .{{ component_class }} .r-ups .r-3ups-titles-below .r-linkcta::after, 
+  .{{ component_class }} .r-ups .r-3ups-titles-below .r-linkcta::before {
+      content: '';
+      display: inline-block;
+      width: 27px;
+      height: 12px;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
+      -webkit-transition: all .3s;
+      -moz-transition: all .3s;
+      -o-transition: all .3s;
+      transition: all .3s;
+  }
+  .{{ component_class }} .r-ups .r-3ups-titles-below .r-linkcta::before {
+      left: -2.1rem;
+      -webkit-opacity: 0;
+      -moz-opacity: 0;
+      -khtml-opacity: 0;
+      opacity: 0;
+      display: none;
+  }
+  .{{ component_class }} .r-ups .r-3ups-titles-below .r-linkcta::after {
+      right: 0;
+      top: 3px;
+      height: 10px;
+      -webkit-opacity: 1;
+      -moz-opacity: 1;
+      -khtml-opacity: 1;
+      opacity: 1;
+      display: inline-block;
+  }
+  .{{ component_class }} .r-ups.full-width .r-3ups-description-wrapper {
+    padding-right: 0px;
+    padding-left: 0px;
+    text-align: center;
+  }
+  .{{ component_class }} .r-ups .r-3ups-titles-below .r-linkcta::after, 
+  .{{ component_class }} .r-ups .r-3ups-titles-below .r-linkcta::before {
+  	background-image: url('{{ 'light-caret.png' | asset_url }}');
+  }
+  .{{ component_class }} .side-arrow {
+    display: none;
+    position: absolute;
+    z-index: 999;
+    top: 32%;
+    height: 40px;
+    width: 40px;
+    cursor: pointer;
+}
+  .{{ component_class }} .side-arrow.square {
+      background: #e6e6e6;
+      padding: 9px 5px;
+    display: none;
+  }
+  .{{ component_class }} .side-arrow.side-arrow-right {
+      right: 0;
+  }
+  .{{ component_class }} .side-arrow.square.side-arrow-right {
+      background: #e6e6e6;
+      padding: 9px;
+      display: none;
+  }
+  .{{ component_class }} .side-arrow.side-arrow-left {
+    left: 0;
+  }
+  .{{ component_class }} .side-arrow svg {
+      cursor: pointer;
+      height: 20px;
+      width: 24px;
+  }
+  .{{ component_class }}.slider-enabled .side-arrow {
+     display: block;
+    display: none;
+  }
+  @media (max-width: 742px){
+    .mobile-carousel:not(.owl-loaded) .r-3ups-description:not(.mobile-show) {
+    	display:none;
+    }
+    {% if section.settings.preview_of_next_item %}
+      .{{ component_class }} .owl-stage {
+        padding-left: 0px !important;
+      }
+    {% endif %}
+  }
+  @media only screen and (min-width: 425px) {
+      .{{ component_class }} .r-ups {
+       margin-bottom: 40px;
+      }
+      .{{ component_class }} .r-ups .r-3ups-titles-below .r-3ups-description-wrapper {
+          max-width: 100%;
+      }
+      .{{ component_class }} .swiper-wrapper {
+        display: flex;
+      }
+      .{{ component_class }} .swiper-wrapper.mobile {
+        display: none;
+      }
+      .{{ component_class }} .side-arrow {
+          display: none !important;
+      }
+  }
+  @media only screen and (min-width: 768px) {
+      .{{ component_class }}  {
+        {% if section.settings.custom_top_spacing != blank %}
+            margin-top: {{ section.settings.custom_top_spacing }};
+        {% endif %}
+        {% if section.settings.custom_bottom_spacing != blank %}
+            margin-bottom: {{ section.settings.custom_bottom_spacing }};
+        {% endif %}
+      }
+      .{{ component_class }} .picture {
+           display: block;
+      }
+     .{{ component_class }} .picture-mobile {
+           display: none;
+      }
+      .{{ component_class }} .swiper-wrapper {
+          display: -webkit-box;
+          display: -webkit-flex;
+          display: -ms-flexbox;
+          display: flex;
+      }
+      .{{ component_class }} .r-ups {
+          max-width: 190rem;
+          margin: 0 auto;
+          padding: 0 60px;
+      }
+      .{{ component_class }} .r-ups.full-width {
+        padding: 0;
+      }
+      .{{ component_class }} .r-ups.full-width .r-3ups-description-wrapper {
+          margin: 1.8rem 0;
+          padding-right: 0px;
+          padding-left: 0px;
+          text-align: center;
+          margin-top: 15px;
+      }
+      .{{ component_class }} .r-ups .r-3ups-titles-below .swiper-wrapper {
+          -webkit-flex-direction: row;
+          -moz-flex-direction: row;
+          -ms-flex-direction: row;
+          flex-direction: row;
+          -webkit-justify-content: space-between;
+          -moz-justify-content: space-between;
+          -ms-justify-content: space-between;
+          justify-content: space-between;
+          -ms-flex-pack: space-between;
+          -webkit-flex-wrap: nowrap;
+          -moz-flex-wrap: nowrap;
+          -ms-flex-wrap: nowrap;
+          flex-wrap: nowrap;
+      }
+      .{{ component_class }} .r-ups .r-3ups-titles-below .r-3ups-description {
+          -webkit-flex-basis: calc(100%/{{ section.blocks.size }} - 1rem);
+          -moz-flex-basis: calc(100%/{{ section.blocks.size }} - 1rem);
+          -ms-flex-basis: calc(100%/{{ section.blocks.size }} - 1rem);
+          flex-basis: calc(100%/{{ section.blocks.size }} - 1rem);
+      }
+   	  .{{ component_class }} .r-ups .r-3ups-titles-below .r-3ups-description:not(:last-of-type) {
+        margin-right: {{ section.settings.block_spacing }};
+      }
+      .{{ component_class }} .r-ups .r-3ups-titles-below .swiper-title {
+        font-size: 28px;
+        margin-bottom: 40px;
+      }
+      .{{ component_class }} .r-ups.no-spacing .r-3ups-titles-below .r-3ups-description {
+        flex-basis: calc(100%/{{ section.blocks.size }});
+      }
+  }
+  @media only screen and (min-width: 1024px) {
+      .{{ component_class }} .r-ups.swiper--enabled {
+          margin-left: auto;
+          margin-right: auto;
+      }
+      .{{ component_class }} .r-ups .r-3ups-titles-below .swiper-container {
+          width: auto;
+      }
+      .{{ component_class }} .r-ups .r-3ups-titles-below .r-3ups-description-wrapper {
+          margin: 1.8rem 0;
+          padding-right: 0px;
+		  margin-bottom: 0;
+          margin-top: 15px;
+      }
+      .{{ component_class }} .r-ups h2 {
+          font-size: 2vw;
+          line-height: 2vw;
+      }
+      .{{ component_class }} .r-ups .r-3ups-titles-below .r-linkcta:focus, 
+      .{{ component_class }} .r-ups .r-3ups-titles-below .r-linkcta:hover {
+      }
+      .{{ component_class }} .r-ups .r-3ups-titles-below .r-linkcta:focus::after, 
+      .{{ component_class }} .r-3ups-titles-below .r-linkcta:active::after, 
+      .{{ component_class }} .r-ups .r-3ups-titles-below .r-linkcta:hover::after {
+        background-image: url('{{ 'light-arrow.gif' | asset_url }}');
+     	width: 21px;
+      }
+  }
+  @media only screen and (min-width: 1281px) {
+    .{{ component_class }} .r-ups h2 {
+          font-size: 2.6rem;
+          line-height: 2.6rem;
+      }
+  }
+  .{{ component_class }} .r-ups .r-3ups-titles-below .r-linkcta::after, 
+  .{{ component_class }} .r-ups .r-3ups-titles-below .r-linkcta::before{
+	margin-top: 3px;
+    height: 10px;
+  }
+
+
+</style>
+
+{% if section.settings.custom_css != blank %}
+{% assign component_selector = component_class | prepend: '.' %} 
+<style>
+	{{ section.settings.custom_css | replace: '$component_class', component_selector }}
+</style>
+{% endif %}
+
+<div class="{{ component_class }}">
+<article class="r-ups swiper--enabled space-thebox4 {% if section.settings.full_width != blank %} full-width{% endif %} {% if section.settings.spacing == blank %} no-spacing{% endif %}">
+  <div class="r-3ups-titles-below">
+    {% if section.settings.show_title != blank and section.settings.title != blank %}<h2 class="swiper-title">{{ section.settings.title }}</h3>{% endif %}
+    <div class="swiper-container">
+      <div class="swiper-wrapper">
+        {% for block in section.blocks %}
+          <div class="r-3ups-description swiper-slide js" {{ block.shopify_attributes }}>
+              {% if block.settings.link != blank %}
+                <a href="{{ block.settings.link }}">
+              {% endif %}
+              <picture>
+                <source srcset="{{ block.settings.image | img_url: 'master' }} 575w 575h" media="(min-width: 725px)">
+                <source srcset="{{ block.settings.image_mobile | img_url: 'master' }} 300w 300h" media="(min-width: 0)">
+                <img class="lazyload lazypreload" loading="lazy" srcset="{{ block.settings.image_mobile | img_url: 'master' }} 300w 300h" alt="{{ block.settings.cta_label }}">
+              </picture>
+				 {% if block.settings.cta_label != blank or block.settings.cta_description != blank or block.settings.button_text != blank %}
+                  <div class="r-3ups-description-wrapper">
+                    {% if block.settings.cta_label != blank %}
+                      <h2>
+                        {% if block.settings.link != blank %}
+                            <a href="{{ block.settings.link }}">
+                         {% endif %}
+                            {{ block.settings.cta_label }}
+                         {% if block.settings.link != blank %}
+                            </a>
+                         {% endif %}
+                        </a>
+                      </h2>
+                      {% endif %}
+                      {% if block.settings.cta_description != blank %}
+                       	<p>{{ block.settings.cta_description }}</p>
+                      {% endif %}
+                      {% if block.settings.button_text != blank %}
+                      	{% if block.settings.link != blank %}
+                  			<a href="{{ block.settings.link }}">
+                      	{% endif %}
+                      	<div class="r-linkcta href-js">
+                        	{{ block.settings.button_text }}
+                      	</div>
+                        {% if block.settings.link != blank %}
+                          </a>
+                        {% endif %}
+          			  {% endif %}
+                  </div>
+            	  {% endif %}
+                  {% if block.settings.link != blank %}
+                    </a>
+                 {% endif %}
+            </div>
+         {% endfor %}
+      </div>
+      <span class="side-arrow side-arrow-left square">
+      {% include 'icon-chevron-left-alt' %}
+    </span>
+      <div class="swiper-wrapper mobile owl-carousel owl-theme {% if section.settings.mobile_carousel != blank %}mobile-carousel{% endif%}" data-side-arrows="true">
+        {% for block in section.blocks %}
+          <div class="r-3ups-description swiper-slide js {% if forloop.index <= section.settings.blocks_shown_mobile %}mobile-show{% endif %}" {{ block.shopify_attributes }}>
+              {% if block.settings.link != blank %}
+                <a href="{{ block.settings.link }}">
+              {% endif %}
+              <picture>
+                <source srcset="{{ block.settings.image | img_url: '575x575' }} 575w 575h" media="(min-width: 725px)">
+                <source srcset="{{ block.settings.image_mobile | img_url: '300x300' }} 300w 300h" media="(min-width: 0)">
+                <img class="lazyload lazypreload" loading="lazy" srcset="{{ block.settings.image_mobile | img_url: '300x300' }} 300w 300h" alt="{{ block.settings.cta_label }}">
+              </picture>
+				  {% if block.settings.cta_label != blank or block.settings.cta_description != blank or block.settings.button_text != blank %}
+                  <div class="r-3ups-description-wrapper">
+                    {% if block.settings.cta_label != blank %}
+                      <h2>
+                        {% if block.settings.link != blank %}
+                            <a href="{{ block.settings.link }}">
+                         {% endif %}
+                            {{ block.settings.cta_label }}
+                         {% if block.settings.link != blank %}
+                            </a>
+                         {% endif %}
+                        </a>
+                      </h2>
+          			{% endif %}
+                    {% if block.settings.cta_description != blank %}
+                    	<p>{{ block.settings.cta_description }}</p>
+                    {% endif %}
+                    {% if block.settings.button_text != blank %}
+                    	{% if block.settings.link != blank %}
+                            <a href="{{ block.settings.link }}">
+                      	{% endif %}
+                      <div class="r-linkcta href-js">
+                        {{ block.settings.button_text }}
+                      </div>
+                      {% if block.settings.link != blank %}
+                        </a>
+                      {% endif %}
+          			{% endif %}
+                  </div>
+            	  {% endif %}
+                  {% if block.settings.link != blank %}
+                    </a>
+                 {% endif %}
+            </div>
+         {% endfor %}
+      </div>
+      <span class="side-arrow side-arrow-right square">
+        {% include 'icon-chevron-right-alt' %}
+      </span>
+    </div>
+  </div>
+</article>
+</div>
+
+<script>
+ function defer(method, validation) {
+    if (validation()) {
+      method();
+    } else {
+      setTimeout(function() { defer(method, validation) }, 50);
+    }
+ }
+</script>
+
+{% if section.settings.mobile_carousel != blank %} 
+<script>
+  defer(function(){
+
+   var $carousel = null
+    
+   function toggleCarousel() {
+       if ($(window).width() < 767) {
+
+          {% capture arrow %}{%- include 'icon-chevron-left-alt' -%}{% endcapture %}
+
+          $carousel = $('.{{ component_class }} .owl-carousel').owlCarousel({
+              stagePadding: 0,
+              loop: true,
+              margin: parseInt('{{ section.settings.block_spacing }}'),
+              nav: {{ section.settings.show_arrows }}, // if there are no more items to show it will hide regardless
+              dots: {{ section.settings.show_dots }},
+              navText : ['{{ arrow | strip }}', '{{ arrow | strip }}'],
+              autoplay: {{ section.settings.autoplay }}, 
+              autoplayTimeout: {{ 1000 | times: section.settings.autoplay_timeout  }},
+              {% if section.settings.preview_of_next_item %}
+              stagePadding: 40,
+			  {% endif %}
+              responsive:{
+                  0:{
+                      items: {{ section.settings.blocks_shown_mobile }}
+                  },
+                  768:{
+                      items: {{ section.settings.blocks_shown }}
+                  },
+              }
+         })
+
+         {% if section.settings.show_arrows %}
+            $carousel.find('.owl-nav').removeClass('disabled')
+         {% endif %}
+            
+       } else if ($carousel && $carousel.owlCarousel) {
+       		$carousel.owlCarousel('destroy')
+       }
+   }
+
+  toggleCarousel();
+
+  $(document).on('shopify:section:load', function(){
+      toggleCarousel();
+  });
+    
+    
+  {% if section.settings.mobile_carousel == blank %} 
+  $(window).on('resize', function() {
+    toggleCarousel();
+  });
+  {% endif %} 
+
+  }, function() { return window.jQuery && $() && $().owlCarousel })
+</script>
+{% endif %}
+
+
+{% if section.settings.custom_js != blank %}
+	<script>
+      function defer(method) {
+        if (window.jQuery) {
+          method();
+        } else {
+          setTimeout(function() { defer(method) }, 50);
+        }
+      }
+      defer(function(){
+        $(document).ready(function(){
+      		{{ section.settings.custom_js }}
+        })
+      })
+	</script>
+{% endif %}
+
+{% schema %}
+{
+"name": {
+  "en": "Image Bar TBX v2",
+  "es": "Barra de Imágenes TBX v2"
+},
+"class": "thebox-section images-bar-thebox-v2-wrapper",
+"settings": [
+  {
+    "type": "checkbox",
+    "id": "spacing",
+    "label": {
+      "en": "Spacing between blocks",
+      "es": "Espaciado entre bloques"
+    },
+    "default": true
+  },
+  {
+    "type": "checkbox",
+    "id": "full_width",
+    "label": {
+      "en": "Full width",
+      "es": "Ancho completo"
+    },
+    "default": false
+  },
+  {
+    "type": "checkbox",
+    "id": "show_title",
+    "label": {
+      "en": "Show Title",
+      "es": "Mostrar Título"
+    },
+    "default": true
+  },
+  {
+    "type": "text",
+    "id": "title",
+    "label": {
+      "en": "Title",
+      "es": "Título"
+   }
+  },
+  {
+    "type": "text",
+    "id": "width",
+    "label": {
+      "en": "Custom width",
+      "es": "Ancho personalizado"
+   }
+  },
+  {
+    "type": "text",
+    "id": "custom_height",
+    "label": {
+      "en": "Custom height",
+      "es": "Altura personalizada"
+   }
+  },
+  {
+    "type": "text",
+    "id": "custom_top_spacing",
+    "label": {
+      "en": "Custom top spacing",
+      "es": "Espaciado superior"
+   }
+  },
+  {
+    "type": "text",
+    "id": "custom_bottom_spacing",
+    "label": {
+      "en": "Custom bottom spacing",
+      "es": "Espaciado inferior"
+   }
+  },
+  {
+    "type": "text",
+    "id": "custom_top_spacing_mobile",
+    "label": {
+      "en": "Custom top spacing mobile",
+      "es": "Espaciado superior mobile"
+   }
+  },
+  {
+    "type": "text",
+    "id": "custom_bottom_spacing_mobile",
+    "label": {
+      "en": "Custom bottom spacing mobile",
+      "es": "Espaciado inferior mobile"
+   }
+  },
+  {
+    "type": "checkbox",
+    "id": "mobile_carousel",
+    "label": {
+      "en": "Mobile Carousel",
+      "es": "Carrusel en Mobile"
+    },
+    "default": true
+  },
+  {
+    "type": "checkbox",
+    "id": "preview_of_next_item",
+    "label": {
+      "en": "Show preview of next item",
+      "es": "Mostrar parte de siguiente bloque"
+    },
+    "default": true
+  },
+  {
+    "type": "range",
+    "id": "blocks_shown",
+    "min": 3,
+    "max": 10,
+    "step": 1,
+    "label": "Bloques Mostrados Desktop",
+    "default": 8
+  },
+  {
+    "type": "range",
+    "id": "blocks_shown_mobile",
+    "min": 1,
+    "max": 10,
+    "step": 1,
+    "label": "Bloques Mostrados Mobile",
+    "default": 1
+  },
+  {
+    "type": "text",
+    "id": "block_width",
+    "label": {
+      "en": "Block Width",
+      "es": "Ancho del Bloque"
+   }
+  },
+  {
+    "type": "text",
+    "id": "block_spacing",
+    "label": {
+      "en": "Block Spacing",
+      "es": "Espaciado Horizontal del Bloque"
+   },
+   "default": "18px"
+  },
+  {
+    "type": "text",
+    "id": "block_spacing_vertical",
+    "label": {
+      "en": "Block Spacing",
+      "es": "Espaciado Vertical del Bloque"
+   },
+   "default": "50px"
+  },
+  {
+    "type": "text",
+    "id": "carousel_width",
+    "label": {
+      "en": "Carousel Width",
+      "es": "Ancho del Carrusel"
+   }
+  },
+  {
+    "type": "checkbox",
+    "id": "show_arrows",
+    "label": {
+      "en": "Show Arrows",
+      "es": "Mostrar flechas"
+    },
+    "default": false
+  },
+  {
+    "type": "checkbox",
+    "id": "show_dots",
+    "label": {
+      "en": "Show Dots",
+      "es": "Mostrar Puntos"
+    },
+    "default": false
+  },
+  {
+    "type": "checkbox",
+    "id": "autoplay",
+    "label": {
+      "en": "Autoplay",
+      "es": "Autoplay"
+    },
+    "default": true
+  },
+  {
+    "type": "range",
+    "id": "autoplay_timeout",
+    "min": 1,
+    "max": 10,
+    "step": 1,
+    "label": "Segundos para autoplay",
+    "default": 5
+  },
+  {
+    "type": "html",
+    "id": "custom_js",
+    "label": "Código JS personalizado"
+  },
+  {
+    "type": "html",
+    "id": "custom_css",
+    "label": "Código CSS personalizado"
+  }
+],
+"blocks": [
+  {
+    "type": "image",
+    "name": {
+      "en": "Image",
+      "es": "Imagen"
+    },
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": {
+          "en": "Image",
+          "es": "Imagen"
+        }
+      },
+      {
+        "type": "image_picker",
+        "id": "image_mobile",
+        "label": {
+          "en": "Mobile Image",
+          "es": "Imagen Mobile"
+        }
+      },
+      {
+        "type": "url",
+        "id": "link",
+        "label": {
+          "en": "Link",
+          "es": "Enlace"
+        },
+        "info": {
+          "en": "Optional",
+          "es": "Opcional"
+        }
+      },
+      {
+        "type": "text",
+        "id": "cta_description",
+        "label": {
+          "en": "Title",
+          "es": "Titulo"
+        }
+      },
+      {
+        "type": "text",
+        "id": "button_text",
+        "label": {
+          "en": "Button Text",
+          "es": "Texto del Botón"
+        }
+      }
+    ]
+  }
+],
+"presets": [
+  {
+    "name": {
+		"en": "Images Bar TBX v2",
+        "es": "Barra de Imágenes TBX v2"
+	},
+    "category": {
+      "en": "TheBox Theme v2",
+      "es": "TheBox Theme v2"
+    },
+    "blocks": [
+      {
+        "type": "image"
+      },
+      {
+        "type": "image"
+      },
+      {
+        "type": "image"
+      }
+    ]
+  }
+]
+}
+{% endschema %}

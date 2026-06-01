@@ -1,0 +1,2634 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "current": {
+    "color_text": "#3a3a3a",
+    "color_body_text": "#333232",
+    "color_sale_text": "#fa4545",
+    "color_button": "#3a3a3a",
+    "color_button_text": "#ffffff",
+    "color_small_button_text_border": "#3a3a3a",
+    "color_text_field_text": "#000000",
+    "color_text_field_border": "#cccccc",
+    "color_text_field": "#ebebed",
+    "color_image_overlay_text": "#ffffff",
+    "color_image_overlay": "#e6dede",
+    "image_overlay_opacity": 0,
+    "color_borders": "#a09f9f",
+    "color_body_bg": "#ffffff",
+    "type_header_font": "abel_n4",
+    "type_header_base_size": 24,
+    "type_base_font": "abel_n4",
+    "type_base_size": 16,
+    "predictive_search_enabled": true,
+    "predictive_search_show_vendor": false,
+    "predictive_search_show_price": false,
+    "share_image": "",
+    "share_facebook": true,
+    "share_twitter": true,
+    "share_pinterest": true,
+    "social_twitter_link": "",
+    "social_facebook_link": "https://www.facebook.com/dunkelvolkofficial",
+    "social_pinterest_link": "",
+    "social_instagram_link": "https://instagram.com/dunkelvolkofficial",
+    "social_tumblr_link": "",
+    "social_snapchat_link": "",
+    "social_youtube_link": "",
+    "social_vimeo_link": "",
+    "favicon": "shopify://shop_images/Logo_Dunkelvolk_para_cuadrados_1.jpg",
+    "enable_ajax": true,
+    "checkout_header_image": "",
+    "checkout_logo_image": "",
+    "checkout_logo_position": "left",
+    "checkout_logo_size": "medium",
+    "checkout_body_background_image": "",
+    "checkout_body_background_color": "#fff",
+    "checkout_input_background_color_mode": "white",
+    "checkout_sidebar_background_image": "",
+    "checkout_sidebar_background_color": "#fafafa",
+    "checkout_heading_font": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
+    "checkout_body_font": "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'",
+    "checkout_accent_color": "#197bbd",
+    "checkout_button_color": "#197bbd",
+    "checkout_error_color": "#e32c2b",
+    "sections": {
+      "header": {
+        "type": "header",
+        "settings": {
+          "full_width_nav": false,
+          "align_logo": "left",
+          "logo": "shopify://shop_images/DUNKELVOLK_WEB.png",
+          "logo_max_width": 250,
+          "logo_max_width_mobile": 170,
+          "main_linklist": "main-menu",
+          "top_linklist": "menu-superior",
+          "secondary_linklist": "",
+          "farleft_text": "Tiendas",
+          "farleft_link": "",
+          "enable_dunk_header": true,
+          "transparent_on_index": true,
+          "transparent_text_color": "#ffffff",
+          "utility_left_text": "Move. Explore. Connect",
+          "utility_left_link": "",
+          "utility_right_text": "Lima - Perú · Since 1996",
+          "utility_right_link": "",
+          "message": true,
+          "home_page_only": false,
+          "message_text": "NEW LAUNCH COMING SOON",
+          "message_link": "https://dunkelvolk.com/collections/calzado/new-in",
+          "color_bg": "#000000",
+          "color_text": "#ffffff",
+          "show_announcement_bar_line": false,
+          "announcement_bar_line_bg": "#064888"
+        }
+      },
+      "feature-row": {
+        "type": "feature-row",
+        "disabled": true,
+        "settings": {
+          "layout": "left",
+          "title": "ART FOR HELP - El Arte de Ayudar",
+          "text": "<p>Con la compra de este polo estás aportando S/20, a las familias de Alto Perú, una organización que ayuda a los jóvenes del barrio que lleva el mismo nombre, en el que es difícil crecer debido a los diferentes problemas sociales, ayudándolos a hacer la conexión con la naturaleza y el deporte.Y Ruwasunchis, que cuenta con una plataforma de oportunidades que promueve el crecimiento personal y técnico de tejedoras de comunidades peruanas; conecta a los jóvenes con oportunidades de estudio y trabajo. Y, a los niños, les brinda juegos y aprendizajes libres.</p>",
+          "button_label": "COMPRAR AHORA",
+          "button_link": "shopify://products/polo-para-hombre-dunkelvolk-ts-positive-bl"
+        }
+      },
+      "feature-columns": {
+        "type": "feature-columns",
+        "blocks": {
+          "feature-columns-2": {
+            "type": "text_block",
+            "settings": {
+              "enable_image": true,
+              "image": "shopify://shop_images/Buttons_Zapatillas.jpg",
+              "title": "ZAPATILLAS",
+              "text": "",
+              "button_label": "COMPRAR AHORA >",
+              "button_link": "https://dunkelvolk.com/collections/calzado/zapatillas"
+            }
+          },
+          "7ea6f5d1-35b9-4a4c-bd35-417341da7085": {
+            "type": "text_block",
+            "settings": {
+              "enable_image": true,
+              "image": "shopify://shop_images/Buttons_Camisas.jpg",
+              "title": "CAMISAS",
+              "text": "",
+              "button_label": "COMPRAR AHORA >",
+              "button_link": "https://dunkelvolk.com/collections/ropa/camisas"
+            }
+          },
+          "8ee610e7-825c-4bbc-b86c-fb3bd495d154": {
+            "type": "text_block",
+            "settings": {
+              "enable_image": true,
+              "image": "shopify://shop_images/Buttons_Gorras_1.jpg",
+              "title": "GORRAS",
+              "text": "",
+              "button_label": "COMPRAR AHORA >",
+              "button_link": "https://dunkelvolk.com/collections/accesorios/gorras"
+            }
+          }
+        },
+        "block_order": [
+          "feature-columns-2",
+          "7ea6f5d1-35b9-4a4c-bd35-417341da7085",
+          "8ee610e7-825c-4bbc-b86c-fb3bd495d154"
+        ],
+        "disabled": true,
+        "settings": {
+          "title": "",
+          "align_text": "center"
+        }
+      },
+      "collection": {
+        "type": "collection",
+        "disabled": true,
+        "settings": {
+          "title": "NEW ARRIVALS",
+          "collection": "new-arrivals",
+          "grid": 4,
+          "rows": 1,
+          "show_vendor": false,
+          "show_view_all": false
+        }
+      },
+      "hero-2": {
+        "type": "hero",
+        "disabled": true,
+        "settings": {
+          "alignment": "center",
+          "hero_layout": "full_width",
+          "hero_size": "small",
+          "text_size": "medium",
+          "title": "",
+          "text": "",
+          "button_label": "",
+          "button_link": "shopify://collections/ropa-poleras"
+        }
+      },
+      "footer": {
+        "type": "footer",
+        "blocks": {
+          "footer-0": {
+            "type": "link_list",
+            "settings": {
+              "title": "SERVICIO AL CLIENTE",
+              "menu": "footer"
+            }
+          },
+          "8df2a06e-182d-4c37-93ef-65db995c7395": {
+            "type": "text",
+            "settings": {
+              "title": "NUESTRA TIENDA",
+              "text": "<p><a href=\"/apps/store-locator\" title=\"> Tienda Dunkelvolk\">&gt; Encuentra tu tienda más cercana</a></p>"
+            }
+          },
+          "1590214216202": {
+            "type": "text",
+            "settings": {
+              "title": "CONTÁCTANOS",
+              "text": "<p><a href=\"mailto:servicioalcliente@dunkelvolk.com\" title=\"mailto:servicioalcliente@dunkelvolk.com\">servicioalcliente@dunkelvolk.com</a></p>"
+            }
+          },
+          "footer-1": {
+            "type": "newsletter",
+            "disabled": true,
+            "settings": {
+              "title": "Boletín"
+            }
+          }
+        },
+        "block_order": [
+          "footer-0",
+          "8df2a06e-182d-4c37-93ef-65db995c7395",
+          "1590214216202"
+        ],
+        "settings": {
+          "show_payment_icons": false,
+          "color_footer_bg": "#000000",
+          "color_footer_text": "#ffffff",
+          "show_locale_selector": false,
+          "show_currency_selector": false
+        }
+      },
+      "1589503754226": {
+        "type": "rich-text",
+        "settings": {
+          "full_width": true,
+          "section_title": "SINCE 1996",
+          "text": "<p>Dunkelvolk nació en 1996, como una marca apasionada por el arte, la acción y la aventura. Tres amigos, entusiastas del patinaje en línea, vieron una oportunidad única: la creación de jeans anchos especialmente diseñados para patinadores, los cuales se vendieron de inmediato.<br/><br/>Impulsados por el éxito de estos jeans, continuaron expandiendo Dunkelvolk con polos, más jeans y prendas dirigidas a skaters y tablistas. Aunque inicialmente la marca se enfocó en patinadores, evolucionó para abrazar diversos estilos de vida, incluyendo skaters y bikers.<br/><br/>El año 2003 marcó un hito con la incursión de Dunkelvolk en el mundo del surf al auspiciar al campeón peruano Javier Swayne. Desde entonces, su presencia se ha extendido en distintos ámbitos urbanos. \"Dunkelvolk,\" de origen alemán que significa \"Pueblo Oscuro,\" se ha convertido en un símbolo de pasión, innovación y espíritu intrépido. ¡Únete a la aventura de Dunkelvolk!<br/></p><p></p><p>OLA Y MONTAÑA S.AC. RUC 20520673670</p>",
+          "text_size": "medium"
+        }
+      },
+      "blog-template": {
+        "type": "blog-template",
+        "settings": {
+          "layout": "grid",
+          "blog_show_author": false,
+          "blog_show_date": true
+        }
+      },
+      "collection-template": {
+        "type": "collection-template",
+        "blocks": {
+          "acb05167-4a07-4688-a5f0-7d51bcaeb0fc": {
+            "type": "collection",
+            "disabled": true,
+            "settings": {
+              "title": "Joggers Hombre",
+              "url": "shopify://collections/ropa-hombre",
+              "link_tag": "Joggers",
+              "image": "shopify://shop_images/JOGGER_FINAL_1.jpg",
+              "image_link": "",
+              "image2_link": "",
+              "image3_link": "",
+              "image4_link": "",
+              "image5_link": "",
+              "image6_link": "",
+              "image7_link": "",
+              "image8_link": "",
+              "description": ""
+            }
+          },
+          "006730a9-04da-4857-99dd-c9aa4d6125a9": {
+            "type": "collection",
+            "disabled": true,
+            "settings": {
+              "title": "Jeans Hombre",
+              "url": "https://dunkelvolk.com/collections/ropa-hombre/jeans",
+              "link_tag": "",
+              "image": "shopify://shop_images/JEANS_1.jpg",
+              "image_link": "",
+              "image2_link": "",
+              "image3_link": "",
+              "image4_link": "",
+              "image5_link": "",
+              "image6_link": "",
+              "image7_link": "",
+              "image8_link": "",
+              "description": ""
+            }
+          },
+          "299165a5-0d1a-49d2-b293-294c727ad992": {
+            "type": "collection",
+            "disabled": true,
+            "settings": {
+              "title": "Camisas Hombre",
+              "url": "https://dunkelvolk.com/collections/ropa-hombre/camisas",
+              "link_tag": "",
+              "image": "shopify://shop_images/camisas_1.jpg",
+              "image_link": "",
+              "image2_link": "",
+              "image3_link": "",
+              "image4_link": "",
+              "image5_link": "",
+              "image6_link": "",
+              "image7_link": "",
+              "image8_link": "",
+              "description": ""
+            }
+          },
+          "131075b5-a2e0-42fc-9985-7f87146b5aba": {
+            "type": "collection",
+            "disabled": true,
+            "settings": {
+              "title": "Shorts Hombre",
+              "url": "https://dunkelvolk.com/collections/ropa-hombre/shorts",
+              "link_tag": "",
+              "image": "shopify://shop_images/SHORT_FINAL_1.jpg",
+              "image_link": "",
+              "image2_link": "",
+              "image3_link": "",
+              "image4_link": "",
+              "image5_link": "",
+              "image6_link": "",
+              "image7_link": "",
+              "image8_link": "",
+              "description": ""
+            }
+          },
+          "e23aa5d9-c33b-4374-bc96-f1850bf34878": {
+            "type": "collection",
+            "disabled": true,
+            "settings": {
+              "title": "Polos Hombre",
+              "url": "https://dunkelvolk.com/collections/ropa-hombre/polos",
+              "link_tag": "",
+              "image": "shopify://shop_images/polos_final.jpg",
+              "image_link": "",
+              "image2_link": "",
+              "image3_link": "",
+              "image4_link": "",
+              "image5_link": "",
+              "image6_link": "",
+              "image7_link": "",
+              "image8_link": "",
+              "description": ""
+            }
+          },
+          "6dcf03c5-d8a9-4a5d-946a-d49366c183f5": {
+            "type": "collection",
+            "disabled": true,
+            "settings": {
+              "title": "Camisas Hombre",
+              "url": "shopify://collections/ropa-hombre",
+              "link_tag": "camisas",
+              "image": "shopify://shop_images/CAMISAS.jpg",
+              "image_link": "",
+              "image2_link": "",
+              "image3_link": "",
+              "image4_link": "",
+              "image5_link": "",
+              "image6_link": "",
+              "image7_link": "",
+              "image8_link": "",
+              "description": ""
+            }
+          },
+          "eb901c2d-2c80-4499-9b9d-7280cecf09c7": {
+            "type": "collection",
+            "disabled": true,
+            "settings": {
+              "title": "Casacas Hombre",
+              "url": "shopify://collections/ropa-hombre",
+              "link_tag": "casacas",
+              "image": "shopify://shop_images/CASACAS_88dbbdde-2d4b-4282-a70d-74ace7ce081f.jpg",
+              "image_link": "",
+              "image2_link": "",
+              "image3_link": "",
+              "image4_link": "",
+              "image5_link": "",
+              "image6_link": "",
+              "image7_link": "",
+              "image8_link": "",
+              "description": ""
+            }
+          },
+          "52063a6c-3e73-4b18-a3f5-8057aa79859a": {
+            "type": "collection",
+            "disabled": true,
+            "settings": {
+              "title": "Jeans Hombre",
+              "url": "shopify://collections/ropa-hombre",
+              "link_tag": "jeans",
+              "image": "shopify://shop_images/JEANS.jpg",
+              "image_link": "",
+              "image2_link": "",
+              "image3_link": "",
+              "image4_link": "",
+              "image5_link": "",
+              "image6_link": "",
+              "image7_link": "",
+              "image8_link": "",
+              "description": ""
+            }
+          },
+          "edb2bd68-cbc2-4a31-bb9f-1a8c91145762": {
+            "type": "collection",
+            "disabled": true,
+            "settings": {
+              "title": "Zapatillas Hombre",
+              "url": "shopify://collections/calzado-hombre",
+              "link_tag": "zapatillas",
+              "image": "shopify://shop_images/ZAPATILLAS-HOMBRE.jpg",
+              "image_link": "",
+              "image2_link": "",
+              "image3_link": "",
+              "image4_link": "",
+              "image5_link": "",
+              "image6_link": "",
+              "image7_link": "",
+              "image8_link": "",
+              "description": ""
+            }
+          },
+          "1b65472b-498e-4b76-868c-c945878590bf": {
+            "type": "collection",
+            "disabled": true,
+            "settings": {
+              "title": "Sandalias Hombre",
+              "url": "shopify://collections/calzado-hombre",
+              "link_tag": "sandalias",
+              "image": "shopify://shop_images/SANDALIAS-HOMBRE.jpg",
+              "image_link": "",
+              "image2_link": "",
+              "image3_link": "",
+              "image4_link": "",
+              "image5_link": "",
+              "image6_link": "",
+              "image7_link": "",
+              "image8_link": "",
+              "description": ""
+            }
+          },
+          "1011c9a1-0a27-4c49-b15c-4c67a2d9777b": {
+            "type": "collection",
+            "disabled": true,
+            "settings": {
+              "title": "Poleras Hombre",
+              "url": "shopify://collections/ropa-hombre",
+              "link_tag": "poleras",
+              "image_link": "",
+              "image2_link": "",
+              "image3_link": "",
+              "image4_link": "",
+              "image5_link": "",
+              "image6_link": "",
+              "image7_link": "",
+              "image8_link": "",
+              "description": ""
+            }
+          },
+          "a03b1e82-0a79-4be0-bfbd-f1d8bf842f8c": {
+            "type": "collection",
+            "disabled": true,
+            "settings": {
+              "title": "Ropas de Baño Hombre",
+              "url": "shopify://collections/ropa-hombre",
+              "link_tag": "Ropas de Baño hombre",
+              "image_link": "",
+              "image2_link": "",
+              "image3_link": "",
+              "image4_link": "",
+              "image5_link": "",
+              "image6_link": "",
+              "image7_link": "",
+              "image8_link": "",
+              "description": ""
+            }
+          },
+          "c6ce0089-e96f-4a1c-8e54-96d64c0ea576": {
+            "type": "collection",
+            "disabled": true,
+            "settings": {
+              "title": "Ropa Interior Hombre",
+              "url": "shopify://collections/ropa-hombre",
+              "link_tag": "ropa interior",
+              "image_link": "",
+              "image2_link": "",
+              "image3_link": "",
+              "image4_link": "",
+              "image5_link": "",
+              "image6_link": "",
+              "image7_link": "",
+              "image8_link": "",
+              "description": ""
+            }
+          },
+          "ac9b7269-5d8b-4009-abe6-505f0d4dc468": {
+            "type": "collection",
+            "disabled": true,
+            "settings": {
+              "title": "Bividís Hombre",
+              "url": "shopify://collections/ropa-hombre",
+              "link_tag": "tanks",
+              "image_link": "",
+              "image2_link": "",
+              "image3_link": "",
+              "image4_link": "",
+              "image5_link": "",
+              "image6_link": "",
+              "image7_link": "",
+              "image8_link": "",
+              "description": ""
+            }
+          },
+          "aefce2b7-7671-4f9c-9fe2-35adf391a91f": {
+            "type": "collection",
+            "disabled": true,
+            "settings": {
+              "title": "Ropas de Baño Hombre",
+              "url": "shopify://collections/ropa-hombre",
+              "link_tag": "ropas de baño",
+              "image_link": "",
+              "image2_link": "",
+              "image3_link": "",
+              "image4_link": "",
+              "image5_link": "",
+              "image6_link": "",
+              "image7_link": "",
+              "image8_link": "",
+              "description": ""
+            }
+          },
+          "6d4ec4c0-8455-4313-933c-3afc894e43fd": {
+            "type": "collection",
+            "disabled": true,
+            "settings": {
+              "title": "Casacas Niños",
+              "url": "shopify://collections/ropa-ninos",
+              "link_tag": "Casacas",
+              "image": "shopify://shop_images/CASACAS-NINOS.jpg",
+              "image_link": "",
+              "image2_link": "",
+              "image3_link": "",
+              "image4_link": "",
+              "image5_link": "",
+              "image6_link": "",
+              "image7_link": "",
+              "image8_link": "",
+              "description": ""
+            }
+          },
+          "ab0cc37b-36e1-4525-a41c-1e0637ef0722": {
+            "type": "collection",
+            "disabled": true,
+            "settings": {
+              "title": "Joggers niños",
+              "url": "shopify://collections/ropa-ninos",
+              "link_tag": "joggers",
+              "image": "shopify://shop_images/BUZOS-NINOS.jpg",
+              "image_link": "",
+              "image2_link": "",
+              "image3_link": "",
+              "image4_link": "",
+              "image5_link": "",
+              "image6_link": "",
+              "image7_link": "",
+              "image8_link": "",
+              "description": ""
+            }
+          },
+          "a7e0a127-4c0f-4adc-a1c4-a9a808f2c310": {
+            "type": "collection",
+            "disabled": true,
+            "settings": {
+              "title": "Camisas Niños",
+              "url": "shopify://collections/ropa-ninos",
+              "link_tag": "camisas",
+              "image": "shopify://shop_images/CAMISAS-NINOS.jpg",
+              "image_link": "",
+              "image2_link": "",
+              "image3_link": "",
+              "image4_link": "",
+              "image5_link": "",
+              "image6_link": "",
+              "image7_link": "",
+              "image8_link": "",
+              "description": ""
+            }
+          },
+          "8faf1e2e-7c20-425c-ae92-ace5ac7fed3e": {
+            "type": "collection",
+            "disabled": true,
+            "settings": {
+              "title": "Polos Niño",
+              "url": "shopify://collections/ropa-ninos",
+              "link_tag": "polos",
+              "image_link": "",
+              "image2_link": "",
+              "image3_link": "",
+              "image4_link": "",
+              "image5_link": "",
+              "image6_link": "",
+              "image7_link": "",
+              "image8_link": "",
+              "description": ""
+            }
+          },
+          "a1e40b4c-01de-44fb-8f81-fcab09f4880f": {
+            "type": "collection",
+            "disabled": true,
+            "settings": {
+              "title": "Poleras Niños",
+              "url": "shopify://collections/ropa-ninos",
+              "link_tag": "poleras",
+              "image_link": "",
+              "image2_link": "",
+              "image3_link": "",
+              "image4_link": "",
+              "image5_link": "",
+              "image6_link": "",
+              "image7_link": "",
+              "image8_link": "",
+              "description": ""
+            }
+          },
+          "c00261cd-6b07-41c4-bb45-90f5f4c7fc72": {
+            "type": "collection",
+            "disabled": true,
+            "settings": {
+              "title": "Shorts niños",
+              "url": "shopify://collections/ropa-ninos",
+              "link_tag": "shorts",
+              "image_link": "",
+              "image2_link": "",
+              "image3_link": "",
+              "image4_link": "",
+              "image5_link": "",
+              "image6_link": "",
+              "image7_link": "",
+              "image8_link": "",
+              "description": ""
+            }
+          },
+          "afa9b796-e033-49ac-87d3-a73552d57a91": {
+            "type": "collection",
+            "disabled": true,
+            "settings": {
+              "title": "Ropas de baño niños",
+              "url": "shopify://collections/ropa-ninos",
+              "link_tag": "ropas de baño",
+              "image_link": "",
+              "image2_link": "",
+              "image3_link": "",
+              "image4_link": "",
+              "image5_link": "",
+              "image6_link": "",
+              "image7_link": "",
+              "image8_link": "",
+              "description": ""
+            }
+          },
+          "cc849040-3489-4907-8c00-9cf1a9cf5b33": {
+            "type": "collection",
+            "disabled": true,
+            "settings": {
+              "title": "Jeans Niños",
+              "url": "shopify://collections/ropa-ninos",
+              "link_tag": "jeans",
+              "image_link": "",
+              "image2_link": "",
+              "image3_link": "",
+              "image4_link": "",
+              "image5_link": "",
+              "image6_link": "",
+              "image7_link": "",
+              "image8_link": "",
+              "description": ""
+            }
+          },
+          "fbbea93a-989c-4d88-87ef-3fc015454070": {
+            "type": "collection",
+            "disabled": true,
+            "settings": {
+              "title": "Pantalones niños",
+              "url": "shopify://collections/ropa-ninos",
+              "link_tag": "pantalones",
+              "image_link": "",
+              "image2_link": "",
+              "image3_link": "",
+              "image4_link": "",
+              "image5_link": "",
+              "image6_link": "",
+              "image7_link": "",
+              "image8_link": "",
+              "description": ""
+            }
+          },
+          "38c3a069-cebe-46cd-86cb-e71bd69ed080": {
+            "type": "collection",
+            "disabled": true,
+            "settings": {
+              "title": "Zapatillas",
+              "url": "shopify://collections/calzado-unisex",
+              "link_tag": "zapatillas",
+              "image_link": "",
+              "image2_link": "",
+              "image3_link": "",
+              "image4_link": "",
+              "image5_link": "",
+              "image6_link": "",
+              "image7_link": "",
+              "image8_link": "",
+              "description": ""
+            }
+          },
+          "5f006210-bcb9-4dd9-82bc-911ef15d39cb": {
+            "type": "collection",
+            "disabled": true,
+            "settings": {
+              "title": "Sandalias",
+              "url": "shopify://collections/calzado-unisex",
+              "link_tag": "sandalias",
+              "image_link": "",
+              "image2_link": "",
+              "image3_link": "",
+              "image4_link": "",
+              "image5_link": "",
+              "image6_link": "",
+              "image7_link": "",
+              "image8_link": "",
+              "description": ""
+            }
+          }
+        },
+        "block_order": [
+          "acb05167-4a07-4688-a5f0-7d51bcaeb0fc",
+          "006730a9-04da-4857-99dd-c9aa4d6125a9",
+          "299165a5-0d1a-49d2-b293-294c727ad992",
+          "131075b5-a2e0-42fc-9985-7f87146b5aba",
+          "e23aa5d9-c33b-4374-bc96-f1850bf34878",
+          "6dcf03c5-d8a9-4a5d-946a-d49366c183f5",
+          "eb901c2d-2c80-4499-9b9d-7280cecf09c7",
+          "52063a6c-3e73-4b18-a3f5-8057aa79859a",
+          "edb2bd68-cbc2-4a31-bb9f-1a8c91145762",
+          "1b65472b-498e-4b76-868c-c945878590bf",
+          "1011c9a1-0a27-4c49-b15c-4c67a2d9777b",
+          "a03b1e82-0a79-4be0-bfbd-f1d8bf842f8c",
+          "c6ce0089-e96f-4a1c-8e54-96d64c0ea576",
+          "ac9b7269-5d8b-4009-abe6-505f0d4dc468",
+          "aefce2b7-7671-4f9c-9fe2-35adf391a91f",
+          "6d4ec4c0-8455-4313-933c-3afc894e43fd",
+          "ab0cc37b-36e1-4525-a41c-1e0637ef0722",
+          "a7e0a127-4c0f-4adc-a1c4-a9a808f2c310",
+          "8faf1e2e-7c20-425c-ae92-ace5ac7fed3e",
+          "a1e40b4c-01de-44fb-8f81-fcab09f4880f",
+          "c00261cd-6b07-41c4-bb45-90f5f4c7fc72",
+          "afa9b796-e033-49ac-87d3-a73552d57a91",
+          "cc849040-3489-4907-8c00-9cf1a9cf5b33",
+          "fbbea93a-989c-4d88-87ef-3fc015454070",
+          "38c3a069-cebe-46cd-86cb-e71bd69ed080",
+          "5f006210-bcb9-4dd9-82bc-911ef15d39cb"
+        ],
+        "settings": {
+          "layout": "grid",
+          "grid": 4,
+          "rows": 8,
+          "show_collection_image": true,
+          "show_vendor": false,
+          "sort_enable": true,
+          "tags_enable": true
+        }
+      },
+      "article-template": {
+        "type": "article-template",
+        "settings": {
+          "blog_show_author": false,
+          "blog_show_date": true,
+          "show_share_buttons": true
+        }
+      },
+      "cart-template": {
+        "type": "cart-template",
+        "settings": {
+          "cart_ajax_enable": true,
+          "cart_notes_enable": false,
+          "blacklist_names": "AGUSTINA AYLAS QUISPE, Samy Bendez, Roberta Vilchez, CARLOS EDUARDO DIAZ MENDOZA,janet polar oblitas,Guiliana Catherine Vargas Valdivia,RUBEN LUIS VALENZUELA ALEJO,Jennifer Haelyn Medina Luque,diego arturo rodriguez malaver,CELIA HUAMANCUSI VENTURA,leydi brenda piscoya bazan,diego arturo rodriguez malaver,CELIA HUAMANCUSI VENTURA",
+          "blacklist_emails": "exabyte.lechuzas1x@icloud.com, binjose80+1@gmail.com,taiga_despierta.0j@icloud.com, jhonyindependencia@gmail.com, ciriacojherson05@gmail.com, esponjoso-03-jaspe@icloud.com, alt_bosquejo.08@icloud.com, peyatoti@gmail.com, valentino.seminario.2004@gmail.com, alisontorres56n78@gmail.com, juanajflores1802@gmail.com, scorhack@gmail.com,sandrolop17.11@gmail.com, luisdanielss122221@gmail.com, francheskajimenez606@gmail.com,segdfdrgdfg rtfhyfgvch,dianachincha.24@gmail.com,pieoguailupo@gmail.com,fabricioromanofabricio@gmail.com,vicktorreateguiramos@gmail.com,giazminlopez.legal@hotmail.com,friosruiz@hotmail.com, vicktorreateguiramos@gmail.com, farid12c@gmail.com,klkae2560@gmail.com,ramirezgorgojojunior@gmail.com,mariaalejand.36@gmail.com,cpimportperu@gmail.com,danielarroyoordinola@gmail.com,camposcabanillaswalter@gmail.com,tributaristasasociados@outlook.es,cesardiaz198@hotmail.com,ines.jimenez@proyectosvia.com,yordanobossio@gmail.com, hzegarra@outlook.com,alegonza237@protonmail.com,fabrolando80@gmail.com,cristianpadilla45@protonmail.com,oscarzamora234@protonmail.com,isolinabasadre@protonmail.com,mariaquispe20803@gmail.com,hapipoqui@gmail.com,raisacoronado10438@gmail.com,anacas1910@gmail.com,crazymo2621@gmail.com,sandramon002@hotmail.com,sonitahermosa1@gmail.com,adriannoriega94@outlook.es,lidiapilcoolazo@outlook.com,waljc15@gmail.com,shawerquintanna@gmail.com,sandramon001@hotmail.com,iris_8325@hotmail.com,chelitamonte1234@gmail.com,sofiamonte7777@gmail.com,crismo26@hotmail.com,alondras8197@hotmail.com,brayanmonte77@hotmail.com,01juanarias@gmail.com,irismon26@hotmail.com,crazymon3@hotmail.com,yosepina.zacarias1946@gmail.com,emersumo89@gmail.com,jeancha0210@gmail.com,irmacan1920@gmail.com,gabitoflor1@gmail.com,the_cris_al@hotmail.com,hermosaleo1234@gmail.com,minima_2683@hotmail.com,SOIMICUTIPA@OUTLOOK.COM,rutilacastilla56@gmail.com,sebastiancs_25@hotmail.com,domhuaman22@gmail.com,samuro8920@gmail.com,melvisrios362@gmail.com,gabrielvigaa@gmail.com,erikaarre1211@gmail.com,diacar1120@gmail.com,josees0911@gmail.com,waca1410@gmail.com,rafaelaaron1992@outlook.com,razeval88@gmail.com,Lf2176288@gmail.com,luismanoso19@gmail.com,lospepesx@gmail.com,impresraul@gmail.com,raiisa_sm@hotmail.com,Lm726754@gmail.com,marujaquispegamarra@hotmail.com,alexandermontes7778@gmail.com,diasil1311@gmail.com,dianasil1611@gmail.com,antuar.22@gmail.com,pepetantaruna@hotmail.com,Lm3510419@gmail.com,Mfer44587@gmail.com,pierrelh2003@gmail.com,luishm1616@gmail.com,maba231120@gmail.com,antuanethvv@hotmail.com,wallocoppoaramayo@hotmail.com,Miguelf69f@gmail.com,Ginobellido12@yahoo.com,andresgeancarlos470@gmail.com,elppepe005@gmail.com,julo271120@gmail.com,albertruji12@gmail.com,saul.jansen.sebass@gmail.com,sonitamonte1234@gmail.com,garniquesaavedraana@gmail.com,miguelangelesteladiaz04@gmail.com,celiarosegura@gmail.com,pevazmo@hotmail.com,vipa151220@gmail.com,luguti1712@gmail.com,manuelba1610@gmail.com,anaca810@mail.com,juanamonte12346@gmail.com,dinosfl8325@gmail.com,bellabestia4747@gmail.com,gianfranco.guerrero@gmail.com,pepetantaruna@hotmaio.com,01carlosndre1996moy@gmail.com,pitbichon@gmail.com,JUANADAVILA7777@GMAIL.COM,lzrdocornejo@gmail.com,excelperu.mede@hotmail.com,leonarddelacruz333@gmail.com,solorzanopaola555@gmail.com,playnetgamm@gmail.com,cielomonte7777@gmail.com,janethmendoza7777@hotmail.com,h.ruizcarpio@gmail.com,the_cris_al@hotmail.com,miguelestela05@gmail.com,michelflorr1999@gmail.com,michelflor1999@gmail.com,u18208213@utp.edu.pe,annievilchez1@gmail.com,raquelholguin2916@gmail.com,chavarrybj27@gmail.com,chavarrybj27@gmail.com,chavarrybj27@gmail.com,chavarrybj27@gmail.com,chavarrybj27@gmail.com,chavarrybj27@gmail.com,chavarrybj27@gmail.com,david.ventas29@gmail.com,moikah14@gmail.com,cristianriveram@protonmail.com,yahirsaez@protonmail.com,natalia.s4ez@gmail.com,robertyuta@protonmail.com,frankdelacruzcisneros@gmail.com,lemewe9338@royalka.com,jcagredav@gmail.com, aaodbv@gmail.com, lfmv0304@gmail.com,bmdaniel90@gmail.com,mpiaggioz@gmail.com, laudanter@icloud.com, luisangelaudante@gmail.com, luisaudanter@icloud.com, jorgematias.ti@hotmail.com, frank.slpk.41@gmail.com, am.melgarl@gmail.com, Os9278693@gmail.com, capris.tanojavi.ered.wi.n@gmail.com, mariaquispe20803@gmail.com,hapipoqui@gmail.com,raisacoronado10438@gmail.com,anacas1910@gmail.com,crazymo2621@gmail.com,sandramon002@hotmail.com,sonitahermosa1@gmail.com,adriannoriega94@outlook.es,lidiapilcoolazo@outlook.com,waljc15@gmail.com,shawerquintanna@gmail.com,sandramon001@hotmail.com,iris_8325@hotmail.com,chelitamonte1234@gmail.com,sofiamonte7777@gmail.com,crismo26@hotmail.com,alondras8197@hotmail.com,brayanmonte77@hotmail.com,01juanarias@gmail.com,irismon26@hotmail.com,crazymon3@hotmail.com,yosepina.zacarias1946@gmail.com,emersumo89@gmail.com,jeancha0210@gmail.com,irmacan1920@gmail.com,gabitoflor1@gmail.com,the_cris_al@hotmail.com,hermosaleo1234@gmail.com,minima_2683@hotmail.com,SOIMICUTIPA@OUTLOOK.COM,rutilacastilla56@gmail.com,sebastiancs_25@hotmail.com,domhuaman22@gmail.com,samuro8920@gmail.com,melvisrios362@gmail.com,gabrielvigaa@gmail.com,erikaarre1211@gmail.com,diacar1120@gmail.com,josees0911@gmail.com,waca1410@gmail.com,rafaelaaron1992@outlook.com,razeval88@gmail.com,Lf2176288@gmail.com,luismanoso19@gmail.com,lospepesx@gmail.com,impresraul@gmail.com,raiisa_sm@hotmail.com,Lm726754@gmail.com,marujaquispegamarra@hotmail.com,alexandermontes7778@gmail.com,diasil1311@gmail.com,dianasil1611@gmail.com,antuar.22@gmail.com,pepetantaruna@hotmail.com,Lm3510419@gmail.com,Mfer44587@gmail.com,pierrelh2003@gmail.com,luishm1616@gmail.com,maba231120@gmail.com,antuanethvv@hotmail.com,wallocoppoaramayo@hotmail.com,Miguelf69f@gmail.com,Ginobellido12@yahoo.com,andresgeancarlos470@gmail.com,elppepe005@gmail.com,julo271120@gmail.com,albertruji12@gmail.com,saul.jansen.sebass@gmail.com,sonitamonte1234@gmail.com,garniquesaavedraana@gmail.com,miguelangelesteladiaz04@gmail.com,celiarosegura@gmail.com,pevazmo@hotmail.com,vipa151220@gmail.com,luguti1712@gmail.com,manuelba1610@gmail.com,anaca810@mail.com,juanamonte12346@gmail.com,dinosfl8325@gmail.com,bellabestia4747@gmail.com,gianfranco.guerrero@gmail.com,pepetantaruna@hotmaio.com,01carlosndre1996moy@gmail.com,pitbichon@gmail.com,JUANADAVILA7777@GMAIL.COM,lzrdocornejo@gmail.com,excelperu.mede@hotmail.com,leonarddelacruz333@gmail.com,solorzanopaola555@gmail.com,playnetgamm@gmail.com,cielomonte7777@gmail.com,janethmendoza7777@hotmail.com,h.ruizcarpio@gmail.com,the_cris_al@hotmail.com,miguelestela05@gmail.com,michelflorr1999@gmail.com,michelflor1999@gmail.com,u18208213@utp.edu.pe,annievilchez1@gmail.com,raquelholguin2916@gmail.com,chavarrybj27@gmail.com,chavarrybj27@gmail.com,chavarrybj27@gmail.com,chavarrybj27@gmail.com,chavarrybj27@gmail.com,chavarrybj27@gmail.com,chavarrybj27@gmail.com,david.ventas29@gmail.com,moikah14@gmail.com,lemewe9338@royalka.com,jcagredav@gmail.com, lfmv0304@gmail.com,bmdaniel90@gmail.com,mpiaggioz@gmail.com, laudanter@icloud.com, luisangelaudante@gmail.com, luisaudanter@icloud.com",
+          "blacklist_documents": "16692160, 46665350, 70163486, 65456734, 72849490, 48951221, 47293756, 45673454,45676675, 40192629, 30311655,73150176,42631487,47731549,72196133,10799726, 80074110,80074110,17784593,07259342,70470471,42349854,44273683, 09442201,72727417,46967901,03440201,09843301,09845701,07502342,48025502,46644106,7960588,75221630,70925592,46652851,70925592",
+          "blacklist_addresses": "Jiron Zepita 611, libertad 1874, libertad 1874 san miguel, francizco torres 321 morales, francizco torres 320 morales, A H villa el triunfo mz c lt 12, AAHH villa el triunfo mz c lt 12 ,A..H.. villa el triunfo mz c lt 12, A.h. villa el triunfo mz c lt 12, Ah villa el triunfo mz c lt 12, C 12, A.H villa el triunfo mz c lt 12, A..h villa el triunfo mz c lt 12, C 12, urb piura 3ra etapa mz p4 lt 20, Jirón Ayacucho 108, Jirón Ayacucho 100,JIRON AYACUCHO 99, JIRON AYACUCHO 100,Jirón Ayacucho 106, Jirón Ayacucho 100,jiron ayacucho 104, casa,JIRON AYACUCHO 103, CASA,Jiron Ayacucho 100,jiron ayacucho 105, 1,JIRON AYACUCHO 103, CASA",
+          "blacklist_references": "al costado licoreria corona79, al costado licoreria corona 79, Diagonal al Chinito, a una cuadra del coloso sport factory, REF: POR LA RIEL, Al costado de la capilla villa el triunfo, Palmeras, Amarantos 927,Parque el pozo,PARQUE EL POZO,Parque el pozo,parque el pozo,JIRON AYACUCHO 100,villa señor de los milagros,parque el pozo,JIRON AYACUCHO 100",
+          "blacklist_phones": "+51 977 977 911, +51 996 243 687, +51 927 215 871, +51 928 716 748, +51 987 681 146, +51 996 752 521, +51 945 882 876, +51 933 394 223, +51 970 829 387,+51987654321,+51946683214,+51948929840,+51993813139,+51989796021, +51 948 929 840, +51 969 358 657,+51 988 374 579,+51 957 891 868,+51 948 807 426,+51 957 891 868,+51 948 807 426,+51 948 807 426,+51 957 891 868,+51 948 807 426,+51 957 891 868,+51 948 807 426,+51 957 891 868,+51 948 807 426,+51 957 891 868,+51 948 807 426",
+          "blacklist_ips": "",
+          "message": false,
+          "message_text": "Compra con Opción a Cambio de hasta 90 dias en Cualquiera de Nuestras Tiendas a Nivel Nacional. Ver Tiendas &gt;&gt;",
+          "message_link": "/apps/store-locator",
+          "message_color_bg": "#064888",
+          "message_color_text": "#ffffff",
+          "free_shipping_amount": 0
+        }
+      },
+      "product-template": {
+        "type": "product-template",
+        "settings": {
+          "show_quantity_selector": true,
+          "show_variant_labels": true,
+          "show_vendor": false,
+          "enable_payment_button": false,
+          "show_share_buttons": true,
+          "media_size": "medium",
+          "enable_image_zoom": true,
+          "enable_video_looping": false
+        }
+      },
+      "product-recommendations": {
+        "type": "product-recommendations",
+        "settings": {
+          "show_product_recommendations": true,
+          "heading": "También te puede interesar",
+          "show_vendor": false
+        }
+      },
+      "slideshow-thebox": {
+        "type": "slideshow-thebox",
+        "blocks": {
+          "212966f7-c17e-437c-b8b2-d2d66e595bd6": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/DUNK-NAVIDAD-BANNER_4f2e10dc-e21a-4add-9e0d-cc1de46e4218.jpg",
+              "alignment": "center center",
+              "slide_title": "",
+              "subheading": "",
+              "button_label": "",
+              "button_link": "shopify://collections/dunkelvolk"
+            }
+          }
+        },
+        "block_order": [
+          "212966f7-c17e-437c-b8b2-d2d66e595bd6"
+        ],
+        "settings": {
+          "slideshow_active": true,
+          "wide_screen": true,
+          "spacing": true,
+          "is_main_banner": true,
+          "slideshow_height": "adapt",
+          "text_size": "medium",
+          "text_alignment": "center center",
+          "show_controls": false,
+          "show_arrows": false,
+          "show_overlay": false,
+          "autorotate": false,
+          "autorotate_speed": 5
+        }
+      },
+      "slideshow-mobile-thebox": {
+        "type": "slideshow-mobile-thebox",
+        "blocks": {
+          "f4bb930e-4f54-43a9-9388-f0b45fff562d": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/DUNK-NAVIDAD-BANNER-MOB_6bdd15d2-fa23-4890-b0bf-16cbc5287a40.jpg",
+              "alignment": "center center",
+              "slide_title": "",
+              "subheading": "",
+              "button_label": "",
+              "button_link": "shopify://collections/dunkelvolk"
+            }
+          }
+        },
+        "block_order": [
+          "f4bb930e-4f54-43a9-9388-f0b45fff562d"
+        ],
+        "settings": {
+          "slideshow_active": true,
+          "spacing": false,
+          "is_main_banner": true,
+          "slideshow_height": "adapt",
+          "text_size": "medium",
+          "text_alignment": "center center",
+          "show_controls": false,
+          "show_arrows": false,
+          "show_overlay": false,
+          "autorotate": false,
+          "autorotate_speed": 5
+        }
+      },
+      "image-bar-thebox": {
+        "type": "image-bar-thebox",
+        "blocks": {
+          "f7a3f826-3dc2-40e8-9f97-940fd79e6944": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/CATEGORIAS-1_58abca8a-8dc9-4c5a-8326-516809750870.jpg",
+              "image_mobile": "shopify://shop_images/CATEGORIAS-1_fd04a811-6a73-4a1f-9df4-293e58d8c79d.jpg",
+              "alignment": "center",
+              "link": "shopify://collections/ropa-hombre",
+              "cta_label": "ROPA",
+              "cta_description": "",
+              "button_text": "COMPRAR AHORA"
+            }
+          },
+          "b61d8c37-61e8-48a5-ad62-c15414d702f2": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/CATEGORIAS-2_29aa8aa7-b29f-44fe-af18-b65d17f4c176.jpg",
+              "image_mobile": "shopify://shop_images/CATEGORIAS-2_adfc451d-4cbe-40c9-8c89-44dcdd8d6f92.jpg",
+              "alignment": "center",
+              "link": "shopify://collections/calzado-hombre",
+              "cta_label": "CALZADO",
+              "cta_description": "",
+              "button_text": "COMPRAR AHORA"
+            }
+          },
+          "88f6b2ac-edf7-4580-821b-c7466731f574": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/CATEGORIAS-3_22b45158-3e0f-4ea7-990c-74810c2a2efd.jpg",
+              "image_mobile": "shopify://shop_images/CATEGORIAS-3_cc2413f9-ad2d-42d0-9c40-46980da3ea5d.jpg",
+              "alignment": "center",
+              "link": "shopify://collections/accesorios",
+              "cta_label": "ACCESORIOS",
+              "cta_description": "",
+              "button_text": "COMPRAR AHORA"
+            }
+          }
+        },
+        "block_order": [
+          "f7a3f826-3dc2-40e8-9f97-940fd79e6944",
+          "b61d8c37-61e8-48a5-ad62-c15414d702f2",
+          "88f6b2ac-edf7-4580-821b-c7466731f574"
+        ],
+        "settings": {
+          "spacing": true,
+          "full_width": true,
+          "slider_mode": false,
+          "title": "COMPRAR POR CATEGORÍA",
+          "custom_height": "",
+          "custom_top_spacing": "20px",
+          "custom_bottom_spacing": "",
+          "cta_label_top": true,
+          "cta_label_color": "#000000",
+          "title_color": "#000000",
+          "cta_label_weight": "bold"
+        }
+      },
+      "image-bar-thebox-3": {
+        "type": "image-bar-thebox-3",
+        "blocks": {
+          "f8b4d9b1-3b58-4b06-befe-8e9cc6758ab3": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/PRECIO-1_d28d0cc8-251f-46bd-894c-48834e9b7221.jpg",
+              "image_mobile": "shopify://shop_images/PRECIO-1_831ea0a7-e49a-43a4-893c-435898c804bf.jpg",
+              "alignment": "center",
+              "link": "shopify://collections/regalos-hasta-51",
+              "cta_label": "",
+              "cta_description": "",
+              "button_text": ""
+            }
+          },
+          "c7484f80-68c0-4ec7-a62d-bbe7a44c503e": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/PRECIO-2_239d26ab-6f97-41d5-ab76-ea50a4b2e178.jpg",
+              "image_mobile": "shopify://shop_images/PRECIO-2_e3c6d86b-f5c7-46cd-bf19-e3186ce3b19c.jpg",
+              "alignment": "center",
+              "link": "shopify://collections/regalos-hasta-50",
+              "cta_label": "",
+              "cta_description": "",
+              "button_text": ""
+            }
+          },
+          "2ec74591-5b7d-4c4c-a2bc-cae72d83d3da": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/PRECIO-3_6a9bb252-82c8-496c-9a61-a229f7b58065.jpg",
+              "image_mobile": "shopify://shop_images/PRECIO-3_4a701955-5ab0-47a4-ac85-d3d7a87228f6.jpg",
+              "alignment": "center",
+              "link": "shopify://collections/regalos-hasta-150",
+              "cta_label": "",
+              "cta_description": "",
+              "button_text": ""
+            }
+          },
+          "10d8aada-981e-4b04-bc87-4bab97ad4aa9": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/PRECIO-4_2f6fc2b5-feeb-41fe-8475-732915aace22.jpg",
+              "image_mobile": "shopify://shop_images/PRECIO-4_177bbdee-22dd-4bfa-b647-8a0722e49832.jpg",
+              "alignment": "center",
+              "link": "shopify://collections/regalos-premium",
+              "cta_label": "",
+              "cta_description": "",
+              "button_text": ""
+            }
+          }
+        },
+        "block_order": [
+          "f8b4d9b1-3b58-4b06-befe-8e9cc6758ab3",
+          "c7484f80-68c0-4ec7-a62d-bbe7a44c503e",
+          "2ec74591-5b7d-4c4c-a2bc-cae72d83d3da",
+          "10d8aada-981e-4b04-bc87-4bab97ad4aa9"
+        ],
+        "settings": {
+          "spacing": true,
+          "full_width": true,
+          "slider_mode": true,
+          "title": "COMPRAR POR PRECIO",
+          "custom_height": "",
+          "custom_top_spacing": "",
+          "custom_bottom_spacing": "",
+          "cta_label_top": false,
+          "cta_label_color": "#000000",
+          "title_color": "#000000",
+          "cta_label_weight": "bold"
+        }
+      },
+      "image-bar-thebox-2": {
+        "type": "image-bar-thebox-2",
+        "blocks": {
+          "5870b049-47a2-42ae-b082-507f5c4d8ca0": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/CATEGORIAS-BEST-SELLERS_2c74bf01-b4ca-4c23-b15c-ed735a1ffa6a.jpg",
+              "image_mobile": "shopify://shop_images/CATEGORIAS-BEST-SELLERS_4f6bca52-6fe5-45b1-b9a8-750ecafc88ca.jpg",
+              "alignment": "center",
+              "link": "shopify://collections/regalos-best-seller",
+              "cta_label": "BEST SELLERS",
+              "cta_description": "",
+              "button_text": ""
+            }
+          },
+          "8e00d628-ef5a-424b-9796-3932090d2b39": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/CATEGORIAS-SOSTENIBLES_6f4fbecf-19f7-45cb-82fb-b7cb142d27e4.jpg",
+              "image_mobile": "shopify://shop_images/CATEGORIAS-SOSTENIBLES_7a13b641-cee4-4a68-ae0d-c0550bfc66d6.jpg",
+              "alignment": "center",
+              "link": "shopify://collections/regalos-sostenibles",
+              "cta_label": "SOSTENIBLES",
+              "cta_description": "",
+              "button_text": ""
+            }
+          },
+          "61d9911f-308d-4ca1-94d9-b150034aa969": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/CATEGORIAS-DETLLES_c33798fa-89ec-4b03-a32e-1c9d4ea0347a.jpg",
+              "image_mobile": "shopify://shop_images/CATEGORIAS-DETLLES_6f4d3fcc-d3fe-4a2b-a64b-6866512532ca.jpg",
+              "alignment": "center",
+              "link": "shopify://collections/detalles-navidenos",
+              "cta_label": "DETALLES NAVIDEÑOS",
+              "cta_description": "",
+              "button_text": ""
+            }
+          }
+        },
+        "block_order": [
+          "5870b049-47a2-42ae-b082-507f5c4d8ca0",
+          "8e00d628-ef5a-424b-9796-3932090d2b39",
+          "61d9911f-308d-4ca1-94d9-b150034aa969"
+        ],
+        "settings": {
+          "spacing": true,
+          "full_width": true,
+          "slider_mode": false,
+          "title": "",
+          "custom_height": "",
+          "custom_top_spacing": "",
+          "custom_bottom_spacing": "25px",
+          "cta_label_top": true,
+          "cta_label_color": "#000000",
+          "title_color": "#000000",
+          "cta_label_weight": "bold"
+        }
+      },
+      "slideshow-thebox-2": {
+        "type": "slideshow-thebox-2",
+        "blocks": {
+          "8c8a3f8b-6d05-486a-9b65-5b2fb92373f1": {
+            "type": "image",
+            "disabled": true,
+            "settings": {
+              "image": "shopify://shop_images/banner-escritorio-giftcard-dunk.jpg",
+              "video_link": "",
+              "video_full_width": true,
+              "loop": true,
+              "play_on_scroll": true,
+              "enable_sound": true,
+              "slide_title": "",
+              "subheading": "",
+              "button_label": "",
+              "button_link": "shopify://products/gift-card-dia-del-padre-dunkelvolk"
+            }
+          }
+        },
+        "block_order": [
+          "8c8a3f8b-6d05-486a-9b65-5b2fb92373f1"
+        ],
+        "settings": {
+          "slideshow_active": true,
+          "wide_screen": true,
+          "spacing": false,
+          "is_main_banner": false,
+          "slideshow_height": "adapt",
+          "text_size": "medium",
+          "text_alignment": "center center",
+          "show_controls": false,
+          "show_arrows": false,
+          "show_overlay": false,
+          "autorotate": false,
+          "autorotate_speed": 5
+        }
+      },
+      "slideshow-mobile-thebox-2": {
+        "type": "slideshow-mobile-thebox-2",
+        "blocks": {
+          "959d27b4-ceeb-4da7-853d-cd59095a1de7": {
+            "type": "image",
+            "disabled": true,
+            "settings": {
+              "image": "shopify://shop_images/banner-mob-giftcard-dunk.jpg",
+              "alignment": "center center",
+              "slide_title": "",
+              "subheading": "",
+              "button_label": "",
+              "button_link": "shopify://products/gift-card-dia-del-padre-dunkelvolk"
+            }
+          }
+        },
+        "block_order": [
+          "959d27b4-ceeb-4da7-853d-cd59095a1de7"
+        ],
+        "settings": {
+          "slideshow_active": true,
+          "spacing": false,
+          "is_main_banner": false,
+          "slideshow_height": "adapt",
+          "text_size": "medium",
+          "text_alignment": "center center",
+          "show_controls": false,
+          "show_arrows": false,
+          "show_overlay": false,
+          "autorotate": false,
+          "autorotate_speed": 5
+        }
+      },
+      "icon-row-thebox": {
+        "type": "icon-row-thebox",
+        "settings": {
+          "image": "shopify://shop_images/flor.png",
+          "custom_icon_height": "45px",
+          "custom_icon_width": "",
+          "custom_top_spacing": "45px",
+          "custom_bottom_spacing": ""
+        }
+      },
+      "icon-row-thebox-2": {
+        "type": "icon-row-thebox-2",
+        "settings": {
+          "image": "shopify://shop_images/luna.png",
+          "custom_icon_height": "65px",
+          "custom_icon_width": "",
+          "custom_top_spacing": "20px",
+          "custom_bottom_spacing": ""
+        }
+      },
+      "icon-row-thebox-3": {
+        "type": "icon-row-thebox-3",
+        "settings": {
+          "image": "shopify://shop_images/estrella.png",
+          "custom_icon_height": "",
+          "custom_icon_width": "",
+          "custom_top_spacing": "25px",
+          "custom_bottom_spacing": ""
+        }
+      },
+      "160864399346742421": {
+        "type": "video-thebox",
+        "disabled": true,
+        "settings": {
+          "show_controls": false,
+          "loop": true,
+          "play_on_scroll": true,
+          "enable_sound": false,
+          "show_title": true,
+          "full_width": true,
+          "title": "",
+          "custom_height": "",
+          "custom_top_spacing": "40px",
+          "custom_bottom_spacing": "",
+          "custom_top_spacing_mobile": "40px",
+          "custom_bottom_spacing_mobile": "40px",
+          "video_link": "https://cdn.shopify.com/videos/c/o/v/15708964fd404d3fb8694b66552c2cb6.mov",
+          "video_link_mobile": "https://cdn.shopify.com/videos/c/o/v/807d65eeb37545e88cb7ccaab09710da.mov",
+          "link": "shopify://collections/all",
+          "image": "shopify://shop_images/DUNKELVOLK_CAMPANA___COVER_WEB.png",
+          "image_mobile": "shopify://shop_images/DUNKELVOLK_CAMPANA___COVER_MOBILE.png"
+        }
+      },
+      "password-header": {
+        "type": "password-header",
+        "settings": {
+          "logo_max_width": 270,
+          "header": "Desde 1996 viviendo a través del arte, la acción y la aventura #WildSpirit"
+        }
+      },
+      "password-content": {
+        "type": "password-content",
+        "settings": {
+          "newsletter_enable": true,
+          "newsletter_form_heading": "",
+          "newsletter_form_subheading": "",
+          "newsletter_placeholder": "ingresa tu correo de dirección electrónico",
+          "newsletter_button_text": "suscribirme para estar al tanto de las novedades"
+        }
+      },
+      "password-footer": {
+        "type": "password-footer",
+        "settings": {
+          "show_share_buttons": true,
+          "social_message": ""
+        }
+      },
+      "slideshow-dunkelvolk-etnia": {
+        "type": "slideshow-dunkelvolk-etnia",
+        "blocks": {
+          "433d313b-c582-4366-b7db-59e3bbc8ba8b": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/banner-web.jpg",
+              "image_mobile": "shopify://shop_images/Banner-mobile.jpg",
+              "video_link": "",
+              "video_link_mobile": "",
+              "video_full_width": true,
+              "loop": true,
+              "play_on_scroll": true,
+              "slide_title": "",
+              "subheading": "",
+              "button_link": "",
+              "left_button_label": "",
+              "right_button_label": "",
+              "left_button_link": "",
+              "right_button_link": ""
+            }
+          }
+        },
+        "block_order": [
+          "433d313b-c582-4366-b7db-59e3bbc8ba8b"
+        ],
+        "settings": {
+          "slideshow_active": true,
+          "wide_screen": true,
+          "spacing": false,
+          "is_main_banner": false,
+          "slideshow_height": "adapt",
+          "text_size": "medium",
+          "text_alignment": "center center",
+          "show_controls": false,
+          "show_arrows": true,
+          "show_overlay": true,
+          "autorotate": false,
+          "autorotate_speed": 5,
+          "custom_js": "",
+          "custom_css": ""
+        }
+      },
+      "rich-text-dunkelvolk-etnia": {
+        "type": "rich-text-dunkelvolk-etnia",
+        "settings": {
+          "full_width": false,
+          "top_bordered": true,
+          "bottom_bordered": false,
+          "text_justified": false,
+          "section_title": "DUNKELVOLK PRESENTA: ETNIA",
+          "text": "<p>Una colección inspirada en los Andes,<br/>sus colores y su cultura.<br/><br/>El propósito de esta colección,<br/>es crear una conciencia social a través de la ropa.<br/><br/>Las fibras empleadas para estas prendas son de<br/>algodón orgánico, lana de alpaca y oveja.<br/><br/>Diseñada por uno de los fundadores de Dunkelvolk,<br/>Dieter Zúñiga Giese.</p>",
+          "toggleable_text": false,
+          "secondary_text": "",
+          "text_size": "small",
+          "custom_js": "",
+          "custom_css": "$component_class.top-bordered {\n  padding-top: 90px !important;\n  margin-bottom: 20px;\n}"
+        }
+      },
+      "video-dunkelvolk-etnia": {
+        "type": "video-dunkelvolk-etnia",
+        "settings": {
+          "show_controls": true,
+          "loop": true,
+          "play_on_scroll": true,
+          "enable_sound": true,
+          "show_title": true,
+          "title": "",
+          "custom_height": "",
+          "custom_top_spacing": "",
+          "custom_bottom_spacing": "70px",
+          "custom_top_spacing_mobile": "",
+          "custom_bottom_spacing_mobile": "70px",
+          "video_link": "https://cdn.shopify.com/s/files/1/0270/6987/4274/files/VIDEO_POST_DIETER1.m4v?v=1654297987",
+          "video_link_mobile": "https://cdn.shopify.com/videos/c/o/v/cb69d0c80efe441e8aca1f3e97802b9f.mov",
+          "link": "",
+          "image": "shopify://shop_images/video-1.jpg",
+          "image_mobile": "shopify://shop_images/video-1.jpg",
+          "custom_js": "",
+          "custom_css": ""
+        }
+      },
+      "image-bar-dunkelvolk-2": {
+        "type": "image-bar-dunkelvolk-2",
+        "blocks": {
+          "da98266e-d173-4d99-8ff1-aabd89147ea0": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/2.jpg",
+              "image_mobile": "shopify://shop_images/2.jpg",
+              "link": "https://dunkelvolk.com/collections/dunkelvolk-etnia?pf_t_categorias=Chompas",
+              "cta_description": "SWEATERS",
+              "button_text": ""
+            }
+          },
+          "41057f96-b927-4228-96d7-590a967547cb": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/3.jpg",
+              "image_mobile": "shopify://shop_images/3.jpg",
+              "link": "https://dunkelvolk.com/collections/dunkelvolk-etnia?pf_t_categorias=Polos",
+              "cta_description": "T-SHIRTS",
+              "button_text": ""
+            }
+          },
+          "78fa2122-767c-45ab-acc0-070003e60496": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/1.jpg",
+              "image_mobile": "shopify://shop_images/1.jpg",
+              "link": "https://dunkelvolk.com/collections/dunkelvolk-etnia?pf_t_categorias=Gorras",
+              "cta_description": "BEANIES",
+              "button_text": ""
+            }
+          }
+        },
+        "block_order": [
+          "da98266e-d173-4d99-8ff1-aabd89147ea0",
+          "41057f96-b927-4228-96d7-590a967547cb",
+          "78fa2122-767c-45ab-acc0-070003e60496"
+        ],
+        "settings": {
+          "spacing": true,
+          "full_width": false,
+          "show_title": true,
+          "title": "",
+          "width": "",
+          "custom_height": "",
+          "custom_top_spacing": "",
+          "custom_bottom_spacing": "70px",
+          "custom_top_spacing_mobile": "",
+          "custom_bottom_spacing_mobile": "70px",
+          "mobile_carousel": true,
+          "preview_of_next_item": true,
+          "blocks_shown": 8,
+          "blocks_shown_mobile": 1,
+          "block_width": "",
+          "block_spacing": "18px",
+          "block_spacing_vertical": "50px",
+          "carousel_width": "",
+          "show_arrows": false,
+          "show_dots": false,
+          "autoplay": true,
+          "autoplay_timeout": 5,
+          "custom_js": "",
+          "custom_css": ""
+        }
+      },
+      "video-dunkelvolk-etnia-2": {
+        "type": "video-dunkelvolk-etnia-2",
+        "settings": {
+          "show_controls": true,
+          "loop": true,
+          "play_on_scroll": true,
+          "enable_sound": true,
+          "show_title": true,
+          "title": "",
+          "custom_height": "",
+          "custom_top_spacing": "",
+          "custom_bottom_spacing": "70px",
+          "custom_top_spacing_mobile": "",
+          "custom_bottom_spacing_mobile": "70px",
+          "video_link": "https://cdn.shopify.com/s/files/1/0270/6987/4274/files/VIDEO_POST_MATEO1.m4v?v=1654297988",
+          "video_link_mobile": "https://cdn.shopify.com/videos/c/o/v/a20e4c75ae554c929c1c1acd35c6a801.mov",
+          "link": "",
+          "image": "shopify://shop_images/video-2.jpg",
+          "image_mobile": "shopify://shop_images/video-2.jpg",
+          "custom_js": "",
+          "custom_css": ""
+        }
+      },
+      "splitted-video-dunkelvolk-etnia": {
+        "type": "splitted-video-dunkelvolk-etnia",
+        "blocks": {
+          "2ef23677-13ac-4dde-952a-cf7eec579c65": {
+            "type": "video",
+            "settings": {
+              "show_controls": true,
+              "loop": true,
+              "play_on_scroll": true,
+              "enable_sound": true,
+              "video_link": "https://cdn.shopify.com/videos/c/o/v/731709c464ad4160bfb61eea6392c62c.mp4",
+              "video_link_mobile": "https://cdn.shopify.com/videos/c/o/v/507f33536ea048aabb31e2026a630a93.mov",
+              "link": "",
+              "image": "shopify://shop_images/video-4-art-2.jpg",
+              "image_mobile": "shopify://shop_images/4-video-art-2.jpg"
+            }
+          },
+          "0cb52543-2225-4495-91af-fb6584eabd09": {
+            "type": "video",
+            "settings": {
+              "show_controls": true,
+              "loop": true,
+              "play_on_scroll": true,
+              "enable_sound": true,
+              "video_link": "https://cdn.shopify.com/videos/c/o/v/050e0e8271a24bd68b26a104595915c7.mp4",
+              "video_link_mobile": "https://cdn.shopify.com/videos/c/o/v/4239a7aa1c4944e082a31cc26b0b76cc.mov",
+              "link": "",
+              "image": "shopify://shop_images/video-3-art-1.jpg",
+              "image_mobile": "shopify://shop_images/3-video-art-1.jpg"
+            }
+          }
+        },
+        "block_order": [
+          "2ef23677-13ac-4dde-952a-cf7eec579c65",
+          "0cb52543-2225-4495-91af-fb6584eabd09"
+        ],
+        "settings": {
+          "show_title": true,
+          "title": "",
+          "custom_height": "",
+          "custom_top_spacing": "",
+          "custom_bottom_spacing": "",
+          "custom_top_spacing_mobile": "",
+          "custom_bottom_spacing_mobile": "",
+          "custom_js": "",
+          "custom_css": ""
+        }
+      },
+      "images-bar-dunk-etnia": {
+        "type": "images-bar-dunk-etnia",
+        "blocks": {
+          "c4a7cb9e-ae65-47b9-9be8-f09e5b6ab7ad": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/LOGOS.webp",
+              "image_mobile": "shopify://shop_images/LOGOS_66a35ab0-ba8b-42ed-ba69-bf1d24e434af.webp",
+              "link": "",
+              "cta_description": "",
+              "button_text": ""
+            }
+          }
+        },
+        "block_order": [
+          "c4a7cb9e-ae65-47b9-9be8-f09e5b6ab7ad"
+        ],
+        "settings": {
+          "spacing": true,
+          "full_width": false,
+          "show_title": true,
+          "title": "",
+          "width": "",
+          "custom_height": "",
+          "custom_top_spacing": "",
+          "custom_bottom_spacing": "",
+          "custom_top_spacing_mobile": "",
+          "custom_bottom_spacing_mobile": "",
+          "mobile_carousel": true,
+          "preview_of_next_item": true,
+          "blocks_shown": 8,
+          "blocks_shown_mobile": 1,
+          "block_width": "",
+          "block_spacing": "18px",
+          "block_spacing_vertical": "50px",
+          "carousel_width": "",
+          "show_arrows": false,
+          "show_dots": false,
+          "autoplay": true,
+          "autoplay_timeout": 5,
+          "custom_js": "",
+          "custom_css": "@media all and (min-width: 768px) {\n$component_class {\n   margin-top: 40px;\n   max-width: 50%;\n}\n}"
+        }
+      },
+      "video-tbx-v2-section": {
+        "type": "video-tbx-v2-section",
+        "settings": {
+          "show_controls": true,
+          "loop": true,
+          "play_on_scroll": true,
+          "enable_sound": false,
+          "show_title": true,
+          "title": "",
+          "custom_height": "",
+          "custom_top_spacing": "40px",
+          "custom_bottom_spacing": "40px",
+          "custom_top_spacing_mobile": "",
+          "custom_bottom_spacing_mobile": "",
+          "video_link": "https://cdn.shopify.com/videos/c/o/v/b9d91944f1d54c09a5e1ee7cb2fdf55c.mp4",
+          "video_link_mobile": "https://cdn.shopify.com/videos/c/o/v/c8a5a3aaeaf24a48a88c1b8ba8fbd02a.mp4",
+          "link": "",
+          "custom_js": "",
+          "custom_css": ""
+        }
+      },
+      "8057608e-f272-4618-ac43-8220d583259f": {
+        "type": "slideshow-tbx-v2",
+        "blocks": {
+          "image_cY64zj": {
+            "type": "image",
+            "disabled": true,
+            "settings": {
+              "image": "shopify://shop_images/Banner_Web_Dunk_ae5145b5-db84-45eb-95a9-6a7739d4ce14.jpg",
+              "image_mobile": "shopify://shop_images/Banner_Web_Dunk_ae5145b5-db84-45eb-95a9-6a7739d4ce14.jpg",
+              "video_link": "",
+              "video_link_mobile": "",
+              "video_full_width": true,
+              "loop": true,
+              "play_on_scroll": true,
+              "slide_title": "",
+              "subheading": "",
+              "button_link": "https://dunkelvolk.com/collections/catalogo",
+              "left_button_label": "",
+              "right_button_label": "",
+              "left_button_link": "",
+              "right_button_link": ""
+            }
+          },
+          "image_WVyfTf": {
+            "type": "image",
+            "disabled": true,
+            "settings": {
+              "image": "shopify://shop_images/Banner_web_9.jpg",
+              "image_mobile": "shopify://shop_images/Mobile.png",
+              "video_link": "",
+              "video_link_mobile": "",
+              "video_full_width": true,
+              "loop": true,
+              "play_on_scroll": true,
+              "slide_title": "",
+              "subheading": "",
+              "button_link": "https://dunkelvolk.com/search?q=Dunkelvolk+Velvet",
+              "left_button_label": "",
+              "right_button_label": "",
+              "left_button_link": "",
+              "right_button_link": ""
+            }
+          },
+          "image_qh8npz": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/Banner_Web_DSTW.jpg",
+              "image_mobile": "shopify://shop_images/Banner_Mobile_DSTW.jpg",
+              "asset_filename": "banner-ppal.png",
+              "asset_filename_mobile": "banner-ppal.png",
+              "video_link": "",
+              "video_link_mobile": "",
+              "video_full_width": true,
+              "loop": true,
+              "play_on_scroll": true,
+              "slide_title": "For those who've grown, but never stop searching.",
+              "subheading": "Not to escape — but to connect.",
+              "button_label": "Shop Now",
+              "button_link": "shopify://collections/catalogo",
+              "left_button_label": "",
+              "right_button_label": "",
+              "left_button_link": "",
+              "right_button_link": ""
+            }
+          },
+          "image_RJacBb": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/Banner_Web_The_Pima_Tee.jpg",
+              "image_mobile": "shopify://shop_images/Banner_Mobile_The_Pima_Tee.jpg",
+              "video_link": "",
+              "video_link_mobile": "",
+              "video_full_width": true,
+              "loop": true,
+              "play_on_scroll": true,
+              "slide_title": "",
+              "subheading": "",
+              "button_link": "https://dunkelvolk.com/search?q=Pima+Tee+Dunkelvolk",
+              "left_button_label": "",
+              "right_button_label": "",
+              "left_button_link": "",
+              "right_button_link": ""
+            }
+          },
+          "image_7mT6Up": {
+            "type": "image",
+            "disabled": true,
+            "settings": {
+              "video_link": "",
+              "video_link_mobile": "",
+              "video_full_width": true,
+              "loop": true,
+              "play_on_scroll": true,
+              "slide_title": "",
+              "subheading": "",
+              "button_link": "",
+              "left_button_label": "",
+              "right_button_label": "",
+              "left_button_link": "",
+              "right_button_link": ""
+            }
+          }
+        },
+        "block_order": [
+          "image_cY64zj",
+          "image_WVyfTf",
+          "image_qh8npz",
+          "image_RJacBb",
+          "image_7mT6Up"
+        ],
+        "settings": {
+          "slideshow_active": true,
+          "wide_screen": true,
+          "spacing": false,
+          "is_main_banner": true,
+          "slideshow_height": "adapt",
+          "text_size": "large",
+          "text_alignment": "right center",
+          "show_controls": false,
+          "show_arrows": false,
+          "show_overlay": false,
+          "autorotate": false,
+          "autorotate_speed": 5,
+          "custom_js": "",
+          "custom_css": ""
+        }
+      },
+      "slideshow-tbx-v2": {
+        "type": "slideshow-tbx-v2",
+        "blocks": {
+          "0ae633c4-7204-4377-8079-66b7cb0b036e": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/banner-web.jpg",
+              "image_mobile": "shopify://shop_images/Banner-mobile.jpg",
+              "video_link": "",
+              "video_link_mobile": "",
+              "video_full_width": true,
+              "loop": true,
+              "play_on_scroll": true,
+              "slide_title": "",
+              "subheading": "",
+              "button_link": "",
+              "left_button_label": "",
+              "right_button_label": "",
+              "left_button_link": "",
+              "right_button_link": ""
+            }
+          }
+        },
+        "block_order": [
+          "0ae633c4-7204-4377-8079-66b7cb0b036e"
+        ],
+        "settings": {
+          "slideshow_active": true,
+          "wide_screen": true,
+          "spacing": false,
+          "is_main_banner": true,
+          "slideshow_height": "adapt",
+          "text_size": "medium",
+          "text_alignment": "center center",
+          "show_controls": false,
+          "show_arrows": false,
+          "show_overlay": true,
+          "autorotate": false,
+          "autorotate_speed": 5,
+          "custom_js": "",
+          "custom_css": ""
+        }
+      },
+      "306f154b-34e6-4111-8de5-d021f44bc409": {
+        "type": "image-bar-dunkelvolk-2",
+        "blocks": {
+          "306f154b-34e6-4111-8de5-d021f44bc409-image-1": {
+            "type": "image",
+            "disabled": true,
+            "settings": {
+              "image": "shopify://shop_images/CAMISAS_BOTON_WEB.png",
+              "image_mobile": "shopify://shop_images/CAMISAS_BOTON_MOBILE_1a459fbc-8150-4d94-8201-e570e9a0e325.png",
+              "link": "https://dunkelvolk.com/collections/ropa/camisas",
+              "cta_description": "",
+              "button_text": ""
+            }
+          },
+          "306f154b-34e6-4111-8de5-d021f44bc409-image-2": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/GORRAS_BOTON_WEB.png",
+              "image_mobile": "shopify://shop_images/GORRAS_BOTON_MOBILE_263f48b2-c803-4187-8c1f-348f929e8a17.png",
+              "link": "https://dunkelvolk.com/collections/accesorios/gorras",
+              "cta_description": "",
+              "button_text": ""
+            }
+          }
+        },
+        "block_order": [
+          "306f154b-34e6-4111-8de5-d021f44bc409-image-1",
+          "306f154b-34e6-4111-8de5-d021f44bc409-image-2"
+        ],
+        "disabled": true,
+        "settings": {
+          "spacing": true,
+          "full_width": false,
+          "show_title": true,
+          "title": "",
+          "width": "",
+          "custom_height": "",
+          "custom_top_spacing": "20px",
+          "custom_bottom_spacing": "",
+          "custom_top_spacing_mobile": "",
+          "custom_bottom_spacing_mobile": "",
+          "mobile_carousel": false,
+          "preview_of_next_item": true,
+          "blocks_shown": 8,
+          "blocks_shown_mobile": 1,
+          "block_width": "",
+          "block_spacing": "18px",
+          "block_spacing_vertical": "20px",
+          "carousel_width": "",
+          "show_arrows": false,
+          "show_dots": false,
+          "autoplay": true,
+          "autoplay_timeout": 5,
+          "custom_js": "",
+          "custom_css": ""
+        }
+      },
+      "8fa368ff-4f91-4590-ab7a-e58d6746a9db": {
+        "type": "image-bar-dunkelvolk-2",
+        "blocks": {
+          "8fa368ff-4f91-4590-ab7a-e58d6746a9db-image-2": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/POLOS_BOTON_WEB.png",
+              "image_mobile": "shopify://shop_images/POLOS_BOTON_MOBILE_c22d98a1-59c6-42cb-a8d5-52cf33690fb8.png",
+              "link": "https://dunkelvolk.com/collections/ropa/polos",
+              "cta_description": "",
+              "button_text": ""
+            }
+          },
+          "8fa368ff-4f91-4590-ab7a-e58d6746a9db-image-1": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/JEANS_BOTON_WEB.png",
+              "image_mobile": "shopify://shop_images/JEANS_BOTON_MOBILE.png",
+              "link": "https://dunkelvolk.com/collections/ropa/jeans",
+              "cta_description": "",
+              "button_text": ""
+            }
+          }
+        },
+        "block_order": [
+          "8fa368ff-4f91-4590-ab7a-e58d6746a9db-image-2",
+          "8fa368ff-4f91-4590-ab7a-e58d6746a9db-image-1"
+        ],
+        "disabled": true,
+        "settings": {
+          "spacing": true,
+          "full_width": false,
+          "show_title": false,
+          "title": "",
+          "width": "",
+          "custom_height": "",
+          "custom_top_spacing": "30px",
+          "custom_bottom_spacing": "",
+          "custom_top_spacing_mobile": "40px",
+          "custom_bottom_spacing_mobile": "",
+          "mobile_carousel": false,
+          "preview_of_next_item": true,
+          "blocks_shown": 8,
+          "blocks_shown_mobile": 1,
+          "block_width": "",
+          "block_spacing": "18px",
+          "block_spacing_vertical": "20px",
+          "carousel_width": "",
+          "show_arrows": false,
+          "show_dots": false,
+          "autoplay": true,
+          "autoplay_timeout": 5,
+          "custom_js": "",
+          "custom_css": ""
+        }
+      },
+      "ba49d23b-7dde-48a0-b0b0-a646953800a6": {
+        "type": "enorm-product-carousel",
+        "settings": {
+          "title": "Dunkelvolk",
+          "content": "<div id=\"enapProductSlider-6194\" class=\"enapProductSlider\" data-id=\"6194\"></div>",
+          "custom_top_spacing": "29px",
+          "custom_bottom_spacing": "60px",
+          "custom_top_spacing_mobile": "",
+          "custom_bottom_spacing_mobile": "",
+          "custom_css": "",
+          "custom_html": ""
+        }
+      },
+      "51846056-0f6f-4e1e-a45d-fd4ce23006a4": {
+        "type": "video-tbx-v2",
+        "settings": {
+          "show_controls": false,
+          "loop": true,
+          "play_on_scroll": true,
+          "enable_sound": false,
+          "show_title": true,
+          "title": "",
+          "custom_height": "",
+          "custom_top_spacing": "40px",
+          "custom_bottom_spacing": "",
+          "custom_top_spacing_mobile": "40px",
+          "custom_bottom_spacing_mobile": "40px",
+          "video_link": "https://cdn.shopify.com/videos/c/o/v/9d92f56472194b839eb0a6eac336518a.mp4",
+          "video_link_mobile": "https://cdn.shopify.com/videos/c/o/v/3aab1430321743c2ad8443362af793f1.mp4",
+          "link": "shopify://collections/all",
+          "image": "shopify://shop_images/Portada_Video_Web.jpg",
+          "image_mobile": "shopify://shop_images/Portada_Video_Mobile.jpg",
+          "custom_js": "",
+          "custom_css": ""
+        }
+      },
+      "banner_with_carousel_thebox_v3_YxBmzr": {
+        "type": "banner-with-carousel-thebox-v3",
+        "blocks": {
+          "image_9YNtRa": {
+            "type": "image",
+            "settings": {
+              "image": "",
+              "image_mobile": "",
+              "link": "",
+              "cta_description": "",
+              "button_text": "Shop Now"
+            }
+          },
+          "image_QQffx9": {
+            "type": "image",
+            "settings": {
+              "image": "",
+              "image_mobile": "",
+              "link": "",
+              "cta_description": "",
+              "button_text": "Shop Now"
+            }
+          },
+          "image_eNGG8J": {
+            "type": "image",
+            "settings": {
+              "image": "",
+              "image_mobile": "",
+              "link": "",
+              "cta_description": "",
+              "button_text": "Shop Now"
+            }
+          },
+          "image_cViVKe": {
+            "type": "image",
+            "settings": {
+              "image": "",
+              "image_mobile": "",
+              "link": "",
+              "cta_description": "",
+              "button_text": "Shop Now"
+            }
+          }
+        },
+        "block_order": [
+          "image_9YNtRa",
+          "image_QQffx9",
+          "image_eNGG8J",
+          "image_cViVKe"
+        ],
+        "custom_css": [
+          ".banner-with-carousel-thebox-v3_banner_with_carousel_thebox_v3_YxBmzr .r-ups .r-3ups-titles-below .swiper-wrapper {justify-content: center;}",
+          ".banner-with-carousel-thebox-v3_banner_with_carousel_thebox_v3_YxBmzr .r-ups a {text-align: center;}"
+        ],
+        "settings": {
+          "spacing": true,
+          "full_width": true,
+          "show_title": true,
+          "title": "The Pima Tee: La prenda con más confort",
+          "width": "",
+          "custom_height": "",
+          "custom_top_spacing": "29px",
+          "custom_bottom_spacing": "29px",
+          "custom_top_spacing_mobile": "40px",
+          "custom_bottom_spacing_mobile": "40px",
+          "mobile_carousel": false,
+          "preview_of_next_item": false,
+          "blocks_shown": 4,
+          "blocks_shown_mobile": 2,
+          "block_width": "",
+          "block_spacing": "30px",
+          "block_spacing_vertical": "50px",
+          "carousel_width": "",
+          "show_arrows": false,
+          "show_dots": false,
+          "autoplay": false,
+          "autoplay_timeout": 5,
+          "custom_js": "",
+          "custom_css": ""
+        }
+      },
+      "newsletter-carousel": {
+        "type": "newsletter-carousel",
+        "blocks": {
+          "html_WkwAV6": {
+            "type": "html",
+            "disabled": true,
+            "settings": {
+              "home_page_only": true,
+              "message_text": "<strong style=\"color:#FFFFFF \"> \n¡CYBER DUNKELVOLK: HASTA 50% OFF!<span style=\"font-weight:normal\"> </span> <span style=\"font-weight:normal\"></span>  </strong>",
+              "link": "shopify://collections/catalogo",
+              "color_bg": "#000000",
+              "color_text": "#ffffff",
+              "show_announcement_bar_line": false,
+              "announcement_bar_line_bg": "#064888"
+            }
+          },
+          "html_VLxmG6": {
+            "type": "html",
+            "settings": {
+              "home_page_only": true,
+              "message_text": "<strong style=\"color:#FFFFFF \"> \n NEW DROP : DUNKELVOLK KICKS 🔥<span style=\"font-weight:normal\"> </span> <span style=\"font-weight:normal\"></span>  </strong>",
+              "link": "",
+              "color_bg": "#000000",
+              "color_text": "#ffffff",
+              "show_announcement_bar_line": false,
+              "announcement_bar_line_bg": "#064888"
+            }
+          }
+        },
+        "block_order": [
+          "html_WkwAV6",
+          "html_VLxmG6"
+        ],
+        "settings": {
+          "show_arrows": true,
+          "autoplay": true,
+          "autoplay_timeout": 10,
+          "custom_js": "",
+          "custom_css": "$component_class{\nposition: fixed;\ntop: 71px;\nz-index: 99;\nwidth : 100%;\n}\n@media (min-width: 768px){ $component_class{\ntop: 111px;\n}}\n@media (max-width: 767px) {\np.announcement-bar__message {\n    height: 70px;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n}"
+        }
+      },
+      "slideshow_tbx_v2_ip7dYR": {
+        "type": "slideshow-tbx-v2",
+        "blocks": {
+          "image_qwFi4F": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/Banner_Web_Accesorios.jpg",
+              "image_mobile": "shopify://shop_images/Banner_Mobile_Accesorios.jpg",
+              "video_link": "",
+              "video_link_mobile": "",
+              "video_full_width": true,
+              "loop": true,
+              "play_on_scroll": true,
+              "slide_title": "",
+              "subheading": "",
+              "button_link": "https://dunkelvolk.com/collections/catalogo",
+              "left_button_label": "",
+              "right_button_label": "",
+              "left_button_link": "",
+              "right_button_link": ""
+            }
+          }
+        },
+        "block_order": [
+          "image_qwFi4F"
+        ],
+        "disabled": true,
+        "custom_css": [
+          "{margin-top: 40px; margin-bottom: 29px;}"
+        ],
+        "settings": {
+          "slideshow_active": true,
+          "wide_screen": true,
+          "spacing": false,
+          "is_main_banner": true,
+          "slideshow_height": "adapt",
+          "text_size": "medium",
+          "text_alignment": "center top",
+          "show_controls": false,
+          "show_arrows": false,
+          "show_overlay": false,
+          "autorotate": true,
+          "autorotate_speed": 5,
+          "custom_js": "",
+          "custom_css": ""
+        }
+      },
+      "image_bar_dunkelvolk_2_HLR96g": {
+        "type": "image-bar-dunkelvolk-2",
+        "blocks": {
+          "image_FiNAXw": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/Banner_Web_Accesorios.jpg",
+              "image_mobile": "shopify://shop_images/Banner_Mobile_Accesorios.jpg",
+              "link": "",
+              "cta_description": "",
+              "button_text": ""
+            }
+          }
+        },
+        "block_order": [
+          "image_FiNAXw"
+        ],
+        "settings": {
+          "spacing": true,
+          "full_width": true,
+          "show_title": false,
+          "title": "",
+          "width": "",
+          "custom_height": "",
+          "custom_top_spacing": "30px",
+          "custom_bottom_spacing": "",
+          "custom_top_spacing_mobile": "40px",
+          "custom_bottom_spacing_mobile": "",
+          "mobile_carousel": false,
+          "preview_of_next_item": true,
+          "blocks_shown": 8,
+          "blocks_shown_mobile": 1,
+          "block_width": "",
+          "block_spacing": "18px",
+          "block_spacing_vertical": "20px",
+          "carousel_width": "",
+          "show_arrows": false,
+          "show_dots": false,
+          "autoplay": true,
+          "autoplay_timeout": 5,
+          "custom_js": "",
+          "custom_css": ""
+        }
+      },
+      "feature_columns_dunk_home": {
+        "type": "feature-columns-dunk",
+        "blocks": {
+          "col_explore": {
+            "type": "column",
+            "settings": {
+              "title": "EXPLORE",
+              "image": "",
+              "image_mobile": "",
+              "asset_filename": "dunk-explore.jpg",
+              "asset_filename_mobile": "",
+              "link": "",
+              "button_label": "Ver más"
+            }
+          },
+          "col_move": {
+            "type": "column",
+            "settings": {
+              "title": "MOVE",
+              "image": "",
+              "image_mobile": "",
+              "asset_filename": "dunk-move.jpg",
+              "asset_filename_mobile": "",
+              "link": "",
+              "button_label": "Ver más"
+            }
+          },
+          "col_connect": {
+            "type": "column",
+            "settings": {
+              "title": "CONNECT",
+              "image": "",
+              "image_mobile": "",
+              "asset_filename": "dunk-connect.jpg",
+              "asset_filename_mobile": "",
+              "link": "",
+              "button_label": "Ver más"
+            }
+          },
+          "col_quality": {
+            "type": "column",
+            "settings": {
+              "title": "QUALITY",
+              "image": "",
+              "image_mobile": "",
+              "asset_filename": "dunk-quality.jpg",
+              "asset_filename_mobile": "",
+              "link": "",
+              "button_label": "Ver más"
+            }
+          }
+        },
+        "block_order": [
+          "col_explore",
+          "col_move",
+          "col_connect",
+          "col_quality"
+        ],
+        "settings": {
+          "show_top_border": true,
+          "padding_top": 40,
+          "padding_bottom": 40,
+          "padding_top_mobile": 24,
+          "padding_bottom_mobile": 24
+        }
+      },
+      "image_quote_split_home": {
+        "type": "image-quote-split",
+        "settings": {
+          "layout": "single",
+          "image_left": "",
+          "image_left_mobile": "",
+          "asset_filename_left": "dunk-50-50.jpg",
+          "image_right": "",
+          "image_right_mobile": "",
+          "asset_filename_right": "",
+          "link_left": "",
+          "link_right": "",
+          "bg_color": "#ffffff",
+          "text_color": "#111111",
+          "padding_top": 40,
+          "padding_bottom": 40,
+          "padding_top_mobile": 24,
+          "padding_bottom_mobile": 24
+        }
+      },
+      "art_of_journey_home": {
+        "type": "art-of-journey",
+        "settings": {
+          "title": "THE ART OF JOURNEY",
+          "subtitle": "Exploring with intention",
+          "body": "<p>En un mundo que no se detiene, la exploración se volvió ruido. Movimiento sin intención. Libertad sin profundidad.</p><p>Explorar no es escapar, es elegir salir del automático. Es un recorrido hacia adentro, para reconectar con uno mismo.</p><p>A través de la mirada de Lorenzo Urbina, filmmaker documentalista, este viaje propone otra forma de moverse: más consciente, más presente.</p><p>No se trata de llegar más lejos, sino de entender mejor. Un explorador consciente no busca acumular experiencias, sino conectar con lo que realmente importa.</p>",
+          "quote": "<p>“Explorar no es llegar más lejos, es conectar más profundo.”</p>",
+          "button_label": "Ver más",
+          "button_link": "",
+          "image_1": "",
+          "image_2": "",
+          "bg_color": "#ffffff",
+          "text_color": "#111111",
+          "padding_top": 60,
+          "padding_bottom": 60,
+          "padding_top_mobile": 36,
+          "padding_bottom_mobile": 36
+        }
+      },
+      "full_bleed_image_home": {
+        "type": "full-bleed-image",
+        "settings": {
+          "image": "",
+          "image_mobile": "",
+          "link": "",
+          "placeholder_text": "Imagen full-width · sube tu foto",
+          "margin_top": 0,
+          "margin_bottom": 0,
+          "margin_top_mobile": 0,
+          "margin_bottom_mobile": 0
+        }
+      },
+      "logo_banner_home": {
+        "type": "logo-banner-dunk",
+        "settings": {
+          "logo": "shopify://shop_images/DUNKELVOLK_WEB.png",
+          "link": "",
+          "bg_color": "#ffffff",
+          "logo_max_width": 280,
+          "logo_max_width_mobile": 160,
+          "padding_top": 60,
+          "padding_bottom": 60,
+          "padding_top_mobile": 36,
+          "padding_bottom_mobile": 36
+        }
+      },
+      "pima_tee_grid_home": {
+        "type": "pima-tee-grid",
+        "blocks": {
+          "card_black_model": { "type": "card", "settings": { "image": "", "image_mobile": "", "asset_filename": "dunk-pima-tee-001.jpg", "link": "", "button_label": "Shop Now" } },
+          "card_black_tee":   { "type": "card", "settings": { "image": "", "image_mobile": "", "asset_filename": "", "link": "", "button_label": "Shop Now" } },
+          "card_brown_model": { "type": "card", "settings": { "image": "", "image_mobile": "", "asset_filename": "dunk-pima-tee-003.jpg", "link": "", "button_label": "Shop Now" } },
+          "card_brown_tee":   { "type": "card", "settings": { "image": "", "image_mobile": "", "asset_filename": "", "link": "", "button_label": "Shop Now" } }
+        },
+        "block_order": [
+          "card_black_model",
+          "card_black_tee",
+          "card_brown_model",
+          "card_brown_tee"
+        ],
+        "settings": {
+          "title": "The Pima Tee: La prenda con más confort",
+          "columns_desktop": 4,
+          "columns_mobile": 2,
+          "bg_color": "#ffffff",
+          "text_color": "#111111",
+          "padding_top": 60,
+          "padding_bottom": 60,
+          "padding_top_mobile": 36,
+          "padding_bottom_mobile": 36
+        }
+      },
+      "dunk_explorers_club_home": {
+        "type": "dunk-explorers-club",
+        "blocks": {
+          "benefit_1": { "type": "benefit", "settings": { "text": "SORTEO DE 1 PASAJE DOBLE A NIVEL NACIONAL PARA EXPLORAR EL PERÚ*" } },
+          "benefit_2": { "type": "benefit", "settings": { "text": "INVITACIÓN EXCLUSIVA A NUESTROS EVENTOS" } },
+          "benefit_3": { "type": "benefit", "settings": { "text": "EARLY ACCESS A NUEVOS LANZAMIENTOS" } },
+          "benefit_4": { "type": "benefit", "settings": { "text": "10% OFF EN TU PRIMERA COMPRA" } },
+          "benefit_5": { "type": "benefit", "settings": { "text": "CONTENIDO EXCLUSIVO" } }
+        },
+        "block_order": [
+          "benefit_1",
+          "benefit_2",
+          "benefit_3",
+          "benefit_4",
+          "benefit_5"
+        ],
+        "settings": {
+          "show_brand_text": true,
+          "brand_text": "DUNKELVOLK",
+          "brand_logo": "",
+          "title": "Regístrate en el Dunk Explorers Club y obtén los siguientes beneficios:",
+          "email_placeholder": "email *",
+          "phone_placeholder": "phone number",
+          "submit_label": "sign up",
+          "subscriber_tag": "dunk-explorers-club,newsletter",
+          "success_message": "¡Gracias por unirte al Dunk Explorers Club!",
+          "bg_color": "#ffffff",
+          "text_color": "#111111",
+          "padding_top": 80,
+          "padding_bottom": 80,
+          "padding_top_mobile": 48,
+          "padding_bottom_mobile": 48
+        }
+      }
+    },
+    "content_for_index": [
+      "8057608e-f272-4618-ac43-8220d583259f",
+      "feature_columns_dunk_home",
+      "image_quote_split_home",
+      "art_of_journey_home",
+      "full_bleed_image_home",
+      "pima_tee_grid_home",
+      "logo_banner_home",
+      "dunk_explorers_club_home"
+    ],
+    "blocks": {
+      "13549935337288218858": {
+        "type": "shopify://apps/labeler-product-labels/blocks/app-embed/38a5b8ec-f58a-4fa4-8faa-69ddd0f10a60",
+        "disabled": false,
+        "settings": {}
+      },
+      "5918445685253060206": {
+        "type": "shopify://apps/bundler/blocks/bundler-script-append/7a6ae1b8-3b16-449b-8429-8bb89a62c664",
+        "disabled": false,
+        "settings": {}
+      },
+      "12948015482042402483": {
+        "type": "shopify://apps/mercado-pago-antifraud-plus/blocks/embed-block/b19ea721-f94a-4308-bee5-0057c043bac5",
+        "disabled": false,
+        "settings": {}
+      }
+    }
+  },
+  "presets": {
+    "Default": {
+      "sections": {
+        "header": {
+          "type": "header",
+          "settings": {}
+        },
+        "hero-1": {
+          "type": "hero",
+          "settings": {
+            "hero_size": "large",
+            "text_size": "large"
+          }
+        },
+        "feature-row": {
+          "type": "feature-row",
+          "settings": {}
+        },
+        "feature-columns": {
+          "type": "feature-columns",
+          "blocks": {
+            "feature-columns-0": {
+              "type": "text_block",
+              "settings": {}
+            },
+            "feature-columns-1": {
+              "type": "text_block",
+              "settings": {}
+            },
+            "feature-columns-2": {
+              "type": "text_block",
+              "settings": {}
+            }
+          },
+          "block_order": [
+            "feature-columns-0",
+            "feature-columns-1",
+            "feature-columns-2"
+          ],
+          "settings": {
+            "title": ""
+          }
+        },
+        "collection": {
+          "type": "collection",
+          "settings": {
+            "grid": 4
+          }
+        },
+        "hero-2": {
+          "type": "hero",
+          "settings": {
+            "text_size": "large"
+          }
+        },
+        "quotes": {
+          "type": "quotes",
+          "blocks": {
+            "quotes-0": {
+              "type": "quote",
+              "settings": {}
+            },
+            "quotes-1": {
+              "type": "quote",
+              "settings": {}
+            },
+            "quotes-2": {
+              "type": "quote",
+              "settings": {}
+            }
+          },
+          "block_order": [
+            "quotes-0",
+            "quotes-1",
+            "quotes-2"
+          ],
+          "settings": {
+            "title": ""
+          }
+        },
+        "image-bar": {
+          "type": "image-bar",
+          "blocks": {
+            "image-bar-0": {
+              "type": "image",
+              "settings": {}
+            },
+            "image-bar-1": {
+              "type": "image",
+              "settings": {}
+            },
+            "image-bar-2": {
+              "type": "image",
+              "settings": {}
+            }
+          },
+          "block_order": [
+            "image-bar-0",
+            "image-bar-1",
+            "image-bar-2"
+          ],
+          "settings": {}
+        },
+        "footer": {
+          "type": "footer",
+          "blocks": {
+            "footer-0": {
+              "type": "link_list",
+              "settings": {}
+            },
+            "footer-1": {
+              "type": "newsletter",
+              "settings": {}
+            }
+          },
+          "block_order": [
+            "footer-0",
+            "footer-1"
+          ],
+          "settings": {
+            "show_payment_icons": true
+          }
+        }
+      },
+      "content_for_index": [
+        "hero-1",
+        "feature-row",
+        "feature-columns",
+        "collection",
+        "hero-2",
+        "quotes",
+        "image-bar"
+      ]
+    },
+    "Light": {
+      "color_text": "#162950",
+      "color_body_text": "#6d6d6d",
+      "color_sale_text": "#DA2F0C",
+      "color_borders": "#e4e4e4",
+      "color_button": "#DA2F0C",
+      "color_button_text": "#ffffff",
+      "color_small_button_text_border": "#162950",
+      "color_text_field": "#ffffff",
+      "color_text_field_text": "#162950",
+      "color_text_field_border": "#909090",
+      "color_image_overlay_text": "#ffffff",
+      "color_image_overlay": "#3d3d3d",
+      "image_overlay_opacity": 40,
+      "color_body_bg": "#f8f8f8",
+      "type_header_font": "muli_n6",
+      "type_header_base_size": 26,
+      "type_base_font": "muli_n4",
+      "type_base_size": 18,
+      "share_facebook": true,
+      "share_twitter": true,
+      "share_pinterest": true,
+      "social_twitter_link": "",
+      "social_facebook_link": "",
+      "social_pinterest_link": "",
+      "social_instagram_link": "",
+      "social_tumblr_link": "",
+      "social_snapchat_link": "",
+      "social_youtube_link": "",
+      "social_vimeo_link": "",
+      "favicon": "",
+      "checkout_header_image": "",
+      "checkout_logo_image": "",
+      "checkout_logo_position": "left",
+      "checkout_logo_size": "small",
+      "checkout_body_background_image": "",
+      "checkout_body_background_color": "#ffffff",
+      "checkout_input_background_color_mode": "white",
+      "checkout_sidebar_background_image": "",
+      "checkout_sidebar_background_color": "#e8f3f6",
+      "checkout_heading_font": "Roboto",
+      "checkout_body_font": "Source Sans Pro",
+      "checkout_accent_color": "#1990c6",
+      "checkout_button_color": "#23314e",
+      "checkout_error_color": "#ff6d6d",
+      "sections": {
+        "header": {
+          "type": "header",
+          "settings": {
+            "align_logo": "left",
+            "logo": "",
+            "logo_max_width": 135,
+            "main_linklist": "main-menu",
+            "message": true,
+            "color_bg": "#162950",
+            "color_text": "#ffffff"
+          }
+        },
+        "hero": {
+          "type": "hero",
+          "settings": {
+            "alignment": "center",
+            "hero_size": "x-large",
+            "text_size": "large"
+          }
+        },
+        "slideshow": {
+          "type": "slideshow",
+          "blocks": {
+            "slideshow-0": {
+              "type": "image",
+              "settings": {
+                "image": "",
+                "alignment": "center center"
+              }
+            },
+            "1492095993817": {
+              "type": "image",
+              "settings": {
+                "image": "",
+                "alignment": "center"
+              }
+            }
+          },
+          "block_order": [
+            "slideshow-0",
+            "1492095993817"
+          ],
+          "settings": {
+            "slideshow_height": "medium",
+            "text_size": "medium",
+            "autorotate": false,
+            "autorotate_speed": 5
+          }
+        },
+        "featured-collections": {
+          "type": "collection",
+          "settings": {
+            "grid": 3,
+            "rows": 1,
+            "show_vendor": true,
+            "show_view_all": true
+          }
+        },
+        "product-template": {
+          "type": "product-template",
+          "settings": {
+            "show_quantity_selector": false,
+            "show_variant_labels": true,
+            "show_vendor": false,
+            "show_share_buttons": true,
+            "media_size": "medium",
+            "enable_image_zoom": true,
+            "enable_video_looping": false
+          }
+        },
+        "collection-template": {
+          "type": "collection-template",
+          "settings": {
+            "layout": "grid",
+            "grid": 2,
+            "rows": 2,
+            "show_collection_image": true,
+            "show_vendor": false,
+            "sort_enable": true,
+            "tags_enable": true
+          }
+        },
+        "1492033809691": {
+          "type": "map",
+          "settings": {}
+        },
+        "1492033877875": {
+          "type": "quotes",
+          "blocks": {
+            "1492033877875-0": {
+              "type": "quote",
+              "settings": {}
+            }
+          },
+          "block_order": [
+            "1492033877875-0"
+          ],
+          "settings": {}
+        },
+        "1492033924902": {
+          "type": "custom-content",
+          "blocks": {
+            "1492033924902-0": {
+              "type": "text",
+              "settings": {
+                "width": "100%",
+                "alignment": "center",
+                "align_text": "center"
+              }
+            }
+          },
+          "block_order": [
+            "1492033924902-0"
+          ],
+          "settings": {
+            "title": ""
+          }
+        },
+        "1492096252560": {
+          "type": "collection-list",
+          "blocks": {
+            "1492096252560-0": {
+              "type": "featured_collection",
+              "settings": {}
+            },
+            "1492096252560-1": {
+              "type": "featured_collection",
+              "settings": {}
+            },
+            "1492096252560-2": {
+              "type": "featured_collection",
+              "settings": {}
+            }
+          },
+          "block_order": [
+            "1492096252560-0",
+            "1492096252560-1",
+            "1492096252560-2"
+          ],
+          "settings": {
+            "grid": 3
+          }
+        },
+        "blog-template": {
+          "type": "blog-template",
+          "settings": {
+            "layout": "grid",
+            "blog_show_author": true,
+            "blog_show_date": false
+          }
+        },
+        "article-template": {
+          "type": "article-template",
+          "settings": {
+            "blog_show_author": true,
+            "blog_show_date": true,
+            "show_share_buttons": true
+          }
+        },
+        "cart-template": {
+          "type": "cart-template",
+          "settings": {
+            "cart_notes_enable": false
+          }
+        },
+        "footer": {
+          "type": "footer",
+          "blocks": {
+            "link_list": {
+              "type": "link_list",
+              "settings": {}
+            },
+            "text": {
+              "type": "text",
+              "settings": {}
+            },
+            "newsletter": {
+              "type": "newsletter",
+              "settings": {}
+            }
+          },
+          "block_order": [
+            "link_list",
+            "text",
+            "newsletter"
+          ],
+          "settings": {
+            "color_footer_bg": "#f8f8f8",
+            "color_footer_text": "#6d6d6d"
+          }
+        }
+      },
+      "content_for_index": [
+        "hero",
+        "featured-collections",
+        "slideshow",
+        "1492033924902",
+        "1492096252560",
+        "1492033877875",
+        "1492033809691"
+      ]
+    }
+  }
+}

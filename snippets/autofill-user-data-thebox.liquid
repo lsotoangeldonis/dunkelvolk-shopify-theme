@@ -1,0 +1,352 @@
+{% comment %}
+    Renders a autofill user data form component
+
+    Accepts:
+    - id: {String} id to apply to container and form (required)
+
+    Usage:
+    {% include 'slideshow', form_id: 'slideshow-mobile' %}
+{% endcomment %}
+
+
+{% capture component_id %}autofill-user-data-thebox-id_{{ id }}{% endcapture %}
+{% capture form_id %}autofill-user-data-thebox-form-id_{{ id }}{% endcapture %}
+
+
+<style>
+  p#field {
+    background: #000;
+    color: #fff;
+    padding: 0px;
+}
+    .{{ component_id }}{
+        font-size: 13px;
+    }
+    .{{ component_id }} .d-none {
+        display: none;
+    }
+  	.{{ component_id }} .form-title {
+  		font-weight: bold !important;
+    }
+    .{{ component_id }} .autofill-user-data-thebox-main-title:not(.active) {
+      display: none;
+    }
+    .{{ component_id }} .line-item-property__field input,
+    .{{ component_id }} .line-item-property__field select {
+        width: 100%;
+    }
+    .{{ component_id }} .line-item-property__field input[type=number]::-webkit-inner-spin-button,
+    .{{ component_id }} .line-item-property__field input[type=number]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+  	.{{ component_id }} .auto-fill-user-data-form .line-item-property__field .agree-terms {
+      	width: inherit;
+        position: relative;
+        top: 1px;
+  	}
+    .{{ component_id }} .line-item-property__field select:disabled::-ms-expand {
+        background-image: none;
+        display: none;
+    }
+    .{{ component_id }} .line-item-property__field select:disabled {
+        background-image: none;
+        -moz-appearance: none;
+        -webkit-appearance: none;
+    }
+    .{{ component_id }} .line-item-property__field.terms-checkbox label {
+        display:inline; 
+        float:none;
+        font-size: 12px;
+    }
+    .{{ component_id }} .line-item-property__field.terms-checkbox span {
+        width: 96%;
+        text-align: center;
+        padding-left: 10px;
+    }
+    .{{ component_id }} .line-item-property__field label {
+        text-align: left;
+    }
+    .{{ component_id }} .rte {
+        padding: 10px 0 20px;
+        margin-bottom: 0;
+    }
+  	.{{ component_id }} .loader {
+      	display: none;
+		vertical-align: bottom;
+    }
+  	.{{ component_id }} .loader.abs {
+        position: absolute;
+        right: -25px;
+        top: 83px;
+  	}
+    .{{ component_id }} .loader svg {
+		height: 20px;
+      	width: 20px;
+    }
+  	.{{ component_id }} .loading .loader {
+  		display: inline-block;
+    }
+    .{{ component_id }} .store-picker:not(.active) {
+  		display: none;
+    }
+    .{{ component_id }} .selected-store-data {
+      width: 100%;
+      margin: auto;
+      margin-bottom: 35px;
+      border: 1px solid #ccc;
+      padding: 25px;
+      font-size: 0.8rem;
+    }
+    .{{ component_id }} .selected-store-data p {
+        text-align: left;
+        padding-bottom: 25px;
+    	margin-bottom: 10px;
+    }
+    .{{ component_id }} .selected-store-data p:not(:last-of-type) {
+        border-bottom: 1px solid #ccc;
+    }
+    .{{ component_id }} .selected-store-data span {
+        float: right;
+      	max-width: 70%;
+    }
+    .{{ component_id }} .store-picker .selected-store-data:not(.active) {
+      display: none;
+    }
+   	.{{ component_id }} .shipping-method-selector h2 {
+  		font-weight: bold;
+    }
+  	.{{ component_id }} .shipping-method-selector label {
+    	display: inline-block;
+      	margin: 1rem;
+      	cursor: pointer;
+    }
+  	.{{ component_id }} .shipping-method-selector img {
+  		height: 80px;
+    }
+    /* HIDE RADIO */
+    .{{ component_id }} .shipping-method-selector [type=radio] { 
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    /* IMAGE STYLES */
+    .{{ component_id }} .shipping-method-selector [type=radio] + img {
+      cursor: pointer;
+    }
+
+    /* CHECKED STYLES */
+    .{{ component_id }} .shipping-method-selector [type=radio]:checked + img {
+      outline: 2px solid #212b36;
+    }
+      @media only screen and (max-width: 749px) {
+        .{{ component_class }} .line-item-property__field.terms-checkbox label {
+                font-size: 0.85714em;
+        }
+    }
+</style>
+
+{% comment %}
+<script>
+  console.log("{{ 'ubigeos-departamentos.json' | asset_url  }}")
+  console.log("{{ 'ubigeos-provincias.json' | asset_url  }}")
+  console.log("{{ 'ubigeos-distritos.json' | asset_url  }}")
+  console.log("{{ 'store-pickup.json' | asset_url  }}")
+</script>
+{% endcomment %}
+
+<script id="validteJsScript" src="//cdnjs.cloudflare.com/ajax/libs/validate.js/0.13.1/validate.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+
+{% include 'ubigeos' %}
+{% include 'ubigeos-departamentos' %}
+{% include 'ubigeos-provincias' %}
+{% include 'ubigeos-distritos' %}
+
+{% comment %}
+{% unless hide_shipping_method_picker %}
+	{% include 'store-pickup' %}
+{% endunless %}
+{% endcomment %}
+
+{% if blacklist != blank %}
+{% assign blacklisted_emails = blacklist | strip | split: "," %}
+	<script>
+	  var bltd = [];
+      {% for email in blacklisted_emails %}
+      	bltd.push('{{email | strip }}');
+      {%- endfor -%}
+	  
+	  {% comment %}Floating in the space{% endcomment %}
+	  
+	  var section = '.{{ component_id }}'
+                  
+      function defer(method, validation) {
+          if (validation()) {
+            method();
+          } else {
+            setTimeout(function() { defer(method, validation) }, 50);
+          }
+      }
+  
+      defer(function(){
+        $(section).data('bltd', bltd)
+      }, function() { return window.jQuery })
+
+	</script>
+{% endif %}
+
+{% capture loader %}
+<span class="loader"><?xml version="1.0" encoding="utf-8"?>
+  <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin: auto; background: none; display: block; shape-rendering: auto;" width="200px" height="200px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+    <circle cx="50" cy="50" fill="none" stroke="#ffffff" stroke-width="10" r="35" stroke-dasharray="164.93361431346415 56.97787143782138">
+      <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="1s" values="0 50 50;360 50 50" keyTimes="0;1"></animateTransform>
+    </circle>
+  </svg>
+</span>
+{% endcapture %}
+
+<div id="{{ component_id }}" class="autofill-user-data-thebox {{ component_id }}">
+  	{% unless hide_shipping_method_picker %}
+  	<div id="shippingMethodForm">
+  		<p class="line-item-property__field">
+            <h2 class="form-title">Elige tu método de envío</h2>
+        </p>
+      	<p class="line-item-property__field">
+          <div class="shipping-method-selector">
+            <label>
+              <input type="radio" name="shipping_method" value="delivery" checked>
+              <img src="{{ 'cr-shipping-icon.png' | asset_url }}">
+              <div>Despacho a Domicilio</div>
+            </label>
+            <label style="position: relative">
+              <input type="radio" name="shipping_method" value="store_pickup" disabled="disabled">
+              <img src="{{ 'cr-store-pickup-icon.png' | asset_url }}">
+              <div><span>Recojo en Tienda</span> {{ loader | replace: 'class="loader"', 'class="loader abs"' | replace: 'stroke="#ffffff"', 'stroke="#000000"'}}</div>
+            </label>
+  		  </div>
+  		</p>
+		<div class="store-picker">
+          <h2 class="form-title">Elige tu tienda de Recojo</h2>
+          <p class="line-item-property__field">
+              <label for="nombre">Tienda: </label>
+              <!-- autocomplete="shipping address-level3" -->
+              <select name="Tienda" autocomplete="off">
+                <option disabled selected hidden value="">Elige una opción</option>
+              </select>
+          </p>
+          <p></p>
+          <div class="selected-store-data">
+            <h2 style="font-weight: bold;">Tienda de recojo:</h2>
+            <p><b>Nombre: </b><span data-selected-store="name"></span></p>
+            <p><b>Dirección: </b><span data-selected-store="address1"></span></p>
+			<p><b>Interior: </b><span data-selected-store="address2"></span></p>
+            <p><b>Referencias: </b><span data-selected-store="reference"></span></p>
+            <p><b>Departamento: </b><span data-selected-store="province"></span></p>
+            <p><b>Provincia: </b><span data-selected-store="city"></span></p>
+			<p><b>Distrito: </b><span data-selected-store="zip"></span></p>
+          </div>
+		</div>
+<!--         <p class="line-item-property__field rte store-pickup-action-checkout-wrapper" style="display: none">
+          <button type="button" class="btn btn--small-wide store-pickup-action-checkout">Continuar</button>
+		</p> -->
+  	</div>
+  	{% endunless %}
+    <div id="{{ form_id }}" class="auto-fill-user-data-form">
+      	{% unless hide_title != blank  %}
+      		<h2 class="form-title autofill-user-data-thebox-main-title active">Ingresa aquí tu dirección de envío</h2>
+  		{% endunless %}
+		{% if form != blank %}
+            {% assign data = form %}
+        {% else %}
+            {% assign data = customer.default_address %}
+        {% endif %}
+
+       	<p class="line-item-property__field">
+            <label for="nombre">Nombre</label>
+            <input required class="required" type="text" name="Nombre" autocomplete="given-name" value="{% unless disable_auto_complete %}{{ data.first_name }}{% endunless %}">
+        </p>
+        <p class="line-item-property__field">
+            <label for="nombre">Apellido</label>
+            <input required class="required" type="text" name="Apellido" autocomplete="additional-name family-name" value="{% unless disable_auto_complete %}{{ data.last_name }}{% endunless %}">
+        </p>
+        <p class="line-item-property__field">
+            <label for="nombre">DNI</label>
+            <input required class="required" type="text" name="DNI" value="{% unless disable_auto_complete %}{{ data.company }}{% endunless %}">
+        </p>
+        <p class="line-item-property__field">
+            <label for="nombre">Dirección (Ingresa tu Calle y Número/Lte/Mz) [Máximo, 90 caracteres]</label>
+            <input required class="required" type="text" max-length="90" name="Dirección" autocomplete="shipping address-line1" value="{% unless disable_auto_complete %}{{ data.address1 }}{% endunless %}">
+        </p>
+        <p class="line-item-property__field">
+            <label for="nombre">Apartamento/Interior (opcional)</label>
+            <input type="text" max-length="10" name="Int/Dpto" autocomplete="shipping address-line2">
+        </p>
+        <p class="line-item-property__field">
+            <label for="nombre">Referencias [Máximo, 100 caracteres]</label>
+            <input required class="required" type="text" max-length="100" name="Referencias" value="{% unless disable_auto_complete %}{{ data.address2 }}{% endunless %}">
+        </p>
+        <p class="line-item-property__field">
+            <label for="nombre" data-default="{{ data.country }}">País</label>
+            <select name="País" autocomplete="shipping country-name" aria-disabled="true" disabled="disabled">T
+                {{ country_option_tags }}
+            </select>
+        </p>
+        <p class="line-item-property__field">
+            <label for="nombre">Departamento</label>
+            <!-- autocomplete="shipping region" -->
+            <select name="Departamento"  id="myselect" autocomplete="off" data-default="{% unless disable_auto_complete %}{{ data.province }}{% endunless %}" onchange="myFunction()"> 
+                <option disabled selected hidden value="">Elige una opción</option>
+            </select>
+          	<input type="hidden" name="DepartamentoId" />
+          <p id="field"></p>
+        </p>
+        <p class="line-item-property__field">
+            <label for="nombre">Provincia</label>
+            <!-- autocomplete="shipping locality" -->
+            <select name="Provincia" autocomplete="off" data-default="{% unless disable_auto_complete %}{{ data.city }}{% endunless %}">
+                <option disabled selected hidden value="">Elige una opción</option>
+            </select>
+        </p>
+        <p class="line-item-property__field">
+            <label for="nombre">Distrito</label>
+            <!-- autocomplete="shipping address-level3" -->
+            <select name="Distrito" autocomplete="off" data-default="{% unless disable_auto_complete %}{{ data.zip }}{% endunless %}">
+                <option disabled selected hidden value="">Elige una opción</option>
+            </select>
+        </p>
+        <p class="line-item-property__field">
+            <label for="nombre">Teléfono</label>
+            <input required class="required" type="text" name="Teléfono" required autocomplete="tel" value="{% unless disable_auto_complete %}{{ data.phone }}{% endunless %}">
+  		</p>
+        <p class="line-item-property__field">
+            <label for="nombre">Email</label>
+            <input required class="required" type="text" name="Email" required {% comment %}{% if customer != blank %}disabled="disabled"{% endif %}{% endcomment %} autocomplete="email" value="{% unless disable_auto_complete %}{{ customer.email }}{% endunless %}">
+  		</p>      		
+        <div class="formErrorsWrapper form-message form-message--error d-none">
+            <h2 class="h3 form-message__title " data-form-status="">Por favor, corrige lo siguiente:</h2>
+            <div class="formErrorsList errors"><ul></ul></div>
+        </div>
+        <p class="line-item-property__field rte">
+            <label class="errorTermsLabel d-none" id="errorTermsLabel" style="color: red; float:none; font-size: 13.5px; margin-top: 0.6rem; text-align: center;">
+                Debes aceptar los términos y condiciones de venta para pagar.
+            <label>
+        </p>
+          <p class="line-item-property__field rte terms-checkbox">
+              <label>
+                <input class="agree-terms" type="checkbox" name="agree_terms" />
+                <span>Estoy de acuerdo con los <a href="/pages/terminos-y-condiciones" target="_blank">Términos y Condiciones </a> y la <a href="/pages/privacidad-y-confidencialidad" target="_blank"> Política de Tratamiento de Datos Personales.</a></span>
+              </label>
+          </p>
+        {% unless hide_action_button %}
+          <p class="line-item-property__field rte">
+            <button type="button" class="btn btn--small-wide autofill-user-data-thebox-action-submit">
+              <span class="default-text">Continuar</span>
+			  {{ loader }}
+            </button>
+          </p>
+        {% endunless %}
+    </div>
+</div>

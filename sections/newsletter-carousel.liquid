@@ -1,0 +1,337 @@
+{% capture component_class %}newsletter-carousel-tbx-v2_{{section.id}}{% endcapture %} 
+<style>
+  .{{component_class}} .mobile{
+    display: none;
+  }
+  .{{component_class}} .announcement-bar:not(:first-of-type) {
+    display: none;
+  }
+  .{{component_class}} .owl-item .announcement-bar:not(:first-of-type) {
+    display: block;
+  }
+  .{{component_class}} .section-padding.owl-carousel.owl-theme {
+    display: block !important; 
+  }
+  .{{ component_class }} .owl-carousel .owl-prev {
+    background: none!important;
+    width: 18px;
+    height: auto;
+    position: absolute;
+    top: 13%;
+    left: 7%;
+    margin-left: -20px;
+    display: block !important;
+    border: 0px solid black
+  }
+  .{{ component_class }} .owl-carousel .owl-next {
+    background: none!important;
+    width: 18px;
+    height: auto;
+    position: absolute;
+    top: 13%;
+    right: 1%;
+    display: block !important;
+    border: 0px solid black;
+    transform: scaleX(-1);
+  }
+  .{{ component_class }} .owl-nav {
+    display: none !important;
+  }
+@media (max-width: 600px) {
+  .{{ component_class }} .announcement-bar__message {
+    height: auto; 
+    padding: 7px 2px;
+  }
+  .{{ component_class }} .owl-carousel .owl-next {
+    top: 20px;
+  }
+    .{{component_class}} .mobile{
+    display: block;
+  }
+}
+
+@media (min-width: 1024px) {
+      .{{ component_class }} .owl-carousel .owl-prev {
+    left: 20%;
+  }
+  .{{ component_class }} .owl-carousel .owl-next {
+    right: 24%;
+  }
+}
+  @media (min-width: 1366px) {
+      .{{ component_class }} .owl-carousel .owl-prev {
+    left: 25%;
+  }
+  .{{ component_class }} .owl-carousel .owl-next {
+    right: 24%;
+  }
+}
+  .{{ component_class }} .owl-carousel .owl-prev i,
+  .{{ component_class }} .owl-carousel .owl-next i {
+    transform : scale(1,6); color: #ccc;
+  }
+</style>
+
+  
+{% if section.settings.custom_css != blank %}
+{% assign component_selector = component_class | prepend: '.' %} 
+<style>
+	{{ section.settings.custom_css | replace: '$component_class', component_selector }}
+</style>
+{% endif %}
+
+<div class="{{ component_class }}" data-blocks-size="{{ section.blocks.size }}">
+  <div class="carousel-wrapper">
+    <div class="section-padding owl-carousel owl-theme">
+    {% for block in section.blocks %}
+      {% if block.settings.link == blank %}
+        <div class="announcement-bar">
+      {% else %}
+        <a href="{{ block.settings.link }}" class="announcement-bar announcement-bar--link">
+      {% endif %}
+          <style>
+            .announcement-bar {
+              display: block;
+              background-color: {{ block.settings.color_bg }};
+            }
+            .announcement-bar--link:hover {
+              {% assign brightness = block.settings.color_bg | color_brightness %}
+              {% if brightness <= 192 %}
+                {% assign lightenAmount = 255 | minus: brightness | divided_by: 255 | times: 16 %}
+                background-color: {{ block.settings.color_bg | color_lighten: lightenAmount }};
+              {% else %}
+                {% assign darkenAmount = 255 | divided_by: brightness | times: 8 %}
+                background-color: {{ block.settings.color_bg | color_darken: darkenAmount }};
+              {% endif %}
+            }
+            .announcement-bar__message {
+              color: {{ block.settings.color_text }};
+            }
+            .announcement-bar__line {
+              margin: 0px;
+              padding: 0;
+          	height: 7px;
+              background: {{ block.settings.announcement_bar_line_bg }};
+              margin-top: -19px;
+            }
+          </style>
+          <p class="announcement-bar__message">{{ block.settings.message_text }}</p>
+          {%- if block.settings.show_announcement_bar_line != blank %}
+            <p class="announcement-bar__line"></p>
+          {%- endif -%}
+      {% if block.settings.link == blank %}
+        </div>
+      {% else %}
+        </a>
+      {% endif %}
+    {% endfor %}
+  </div>
+  </div>
+    {% if section.blocks.size > 0 %}
+      <script>
+        document.body.classList.add("announcement-bar-shown");
+      </script>
+    {% endif %}
+</div>
+
+      
+<script>
+  defer(function(){
+
+   var $carousel = null
+  {% capture arrow %}{%- include 'icon-chevron-left-alt' -%}{% endcapture %}
+   function toggleCarousel() {
+     
+          $('.{{component_class}} .owl-carousel').owlCarousel({
+          loop:true,
+          margin:0,
+          responsiveClass:true,
+          navText : ['{{ arrow | strip | replace: 'fill="#333"', 'fill="#ffffff"' }}', '{{ arrow | strip | replace: 'fill="#333"', 'fill="#ffffff"'}}'],
+          dots: false,
+          nav : true,
+          lazyLoad: true,
+          autoplay: {{ section.settings.autoplay }},
+          autoplaySpeed: 1000,
+          slideTransition: 'linear',
+          autoplayHoverPause: true,
+          autoplayTimeout: {{ 1000 | times: section.settings.autoplay_timeout  }},
+          responsive:{
+              0:{
+                  items:1, 
+              },
+              600:{
+                  items:1
+              },
+              1000:{
+                  items:1,
+              }
+          }
+      })
+   }
+function dynamicSize() {
+  var $headerSection = $('div#shopify-section-header');
+  var $headerHeight = $headerSection.outerHeight();
+ $('.{{component_class}}').css('top', $headerHeight)
+}
+  
+$(document).ready(function(){
+  toggleCarousel();
+  dynamicSize();
+})
+  $(document).on('shopify:section:load', function(){
+      toggleCarousel();
+      dynamicSize();
+  });
+    
+$(window).on("resize", $.debounce(500, dynamicSize));
+    
+  }, function() { return window.jQuery && $() && $().owlCarousel })
+</script>
+
+{% if section.settings.custom_js != blank %}
+	<script>
+      function defer(method) {
+        if (window.jQuery) {
+          method();
+        } else {
+          setTimeout(function() { defer(method) }, 50);
+        }
+      }
+      defer(function(){
+        $(document).ready(function(){
+      		{{ section.settings.custom_js }}
+        })
+      })
+	</script>
+{% endif %}
+
+{% schema %}
+{
+"name": {
+  "en": "Carousel Newsletter",
+  "es": "Carrusel Boletín"
+},
+"class": "thebox-section newsletter-carousel-tbx-v2-wrapper",
+"settings": [
+  {
+    "type": "header",
+      "content": "Carrusel"
+  },
+  {
+    "type": "checkbox",
+    "id": "show_arrows",
+    "label": {
+      "en": "Show Arrows",
+      "es": "Mostrar flechas"
+    },
+    "default": true
+  },
+  {
+    "type": "checkbox",
+    "id": "autoplay",
+    "label": {
+      "en": "Autoplay",
+      "es": "Autoplay"
+    },
+    "default": true
+  },
+  {
+    "type": "range",
+    "id": "autoplay_timeout",
+    "min": 1,
+    "max": 15,
+    "step": 1,
+    "label": "Segundos para autoplay",
+    "default": 10
+  },
+  {
+    "type": "html",
+    "id": "custom_js",
+    "label": "Código JS personalizado"
+  },
+  {
+    "type": "html",
+    "id": "custom_css",
+    "label": "Código CSS personalizado"
+  }
+],
+"blocks": [
+  {
+    "type": "html",
+    "name": "Anuncio",
+    "settings": [
+      {
+      "type":"checkbox",
+      "id":"home_page_only",
+      "label" :"Solo página de inicio",
+      "default":true
+    },
+      {
+        "type": "html",
+        "id": "message_text",
+        "label": "Mensaje"
+      },
+      {
+        "type": "url",
+        "id": "link",
+        "label": {
+          "en": "Link",
+          "es": "Enlace"
+        },
+        "info": {
+          "en": "Optional",
+          "es": "Opcional"
+        }
+      },
+      {
+      "type":"color",
+      "id":"color_bg",
+      "label":"Barra",
+      "default":"#000000"
+    },
+    {
+      "type":"color",
+      "id":"color_text",
+      "label": "Texto",
+      "default":"#ffffff"
+    },
+    {
+      "type":"checkbox",
+      "id":"show_announcement_bar_line",
+      "label":{
+        "en":"Show bottom line",
+        "es":"Mostrar línea inferior"
+      },
+      "default":true
+    },
+    {
+      "type":"color",
+      "id":"announcement_bar_line_bg",
+      "label":{
+        "en":"Line",
+        "es":"Linea"
+      },
+      "default":"#064888"
+    }
+    ]
+  }
+],
+"presets": [
+  {
+    "name": {
+      "en": "Carousel Newsletter",
+      "es": "Boletín Carrusel"
+    },
+    "category": {
+      "en": "TheBox Theme v2",
+      "es": "TheBox Theme v2"
+    },
+    "blocks": [
+      {
+        "type": "html"
+      }
+    ]
+  }
+]
+}
+{% endschema %}

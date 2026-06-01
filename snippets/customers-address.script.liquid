@@ -1,0 +1,42 @@
+<script src="https://cdn.jsdelivr.net/npm/ractive"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+<script defer id="validteJsScript" src="//cdnjs.cloudflare.com/ajax/libs/validate.js/0.13.1/validate.min.js"></script>
+
+<script>
+  window.rxComponents = []
+</script>
+
+{% include 'address-form-component' %}
+
+<script>
+  Ractive.DEBUG = false
+
+  window.rxComponents.forEach(cmp => {
+  	Ractive.components[cmp.name] = Ractive.extend(cmp)
+  })
+    
+  var ractive = Ractive({
+    target: '#rxApp',
+    template: '#rxAppTemplate'
+  });  
+</script>
+
+<script>
+  window.addEventListener('load', function() {
+    document.addEventListener('click', async function(evt) {
+        if (evt.target.classList.contains('address-edit-toggle') || evt.target.classList.contains('address-new-toggle')) {
+          const form = document.getElementById(`EditAddress_${evt.target.dataset.formId}`) || document.getElementById('AddressFormComponent_new')
+		  if (!form.classList.contains('hide')) {
+            for (rxAddressForm of ractive.findAllComponents('AddressFormComponent')) {
+              if (rxAddressForm.get('id') === Number(evt.target.dataset.formId) || rxAddressForm.get('id') === 'new') {
+                rxAddressForm.set('init', true)
+                console.log('loading')
+                await rxAddressForm.oninit()
+              }
+            }
+          }
+        } 
+    })
+  })
+</script>
+

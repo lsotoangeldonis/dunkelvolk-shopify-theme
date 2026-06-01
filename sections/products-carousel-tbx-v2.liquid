@@ -1,0 +1,605 @@
+{% capture component_class %}products-carousel-tbx-v2_{{section.id}}{% endcapture %} 
+
+<style>
+  .{{ component_class }} {
+    font-family: roboto-bold,Arial,sans-serif;
+    margin: auto;
+	max-width: 100%;
+    {% if section.settings.width == blank or section.settings.full_width %}
+    	width: 100%;
+    {% else %}
+        width: {{ section.settings.width }};
+    {% endif %}
+    {% if section.settings.custom_top_spacing_mobile != blank %}
+    	margin-top: {{ section.settings.custom_top_spacing_mobile }};
+    {% endif %}
+    {% if section.settings.custom_bottom_spacing != blank %}
+    	margin-bottom: {{ section.settings.custom_bottom_spacing_mobile }};
+    {% endif %}
+  }
+  .{{ component_class }} .bg-panel {
+  	padding: 20px;
+    background: {{ section.settings.panel_bg_color }};
+    margin-bottom: 15px;
+    text-align: center;
+  }
+  .{{ component_class }} .main-title {
+    color: #000;
+    font-family: roboto-bold,Arial,sans-serif;
+    font-size: 28px;
+	font-weight: 700;
+    line-height: 20px;
+    letter-spacing: 0;
+    text-align: center;
+    margin-bottom: 15px;
+  }
+  .{{ component_class }} .see-more-button {
+    margin: auto;
+    text-align: center;
+	max-width: 100%;
+    width: 280px;
+	display: inline-block;
+  }
+  .{{ component_class }} .see-more-button.btn--small {
+    width: 220px;
+  }
+  .{{ component_class }} .carousel-wrapper {
+    {% if section.settings.carousel_width == blank %}
+    	width: 100%;
+    {% else %}
+        width: {{ section.settings.carousel_width }};
+    {% endif %}
+	max-width: 87%;
+    margin: auto;
+  }
+  .{{ component_class }} .owl-carousel{
+/*     display: block !important; */
+    {% if section.settings.carousel_padding %}
+    padding: {{ section.settings.carousel_padding }};
+    {% endif %}
+    background-color: {{ section.settings.carousel_bg_color }};
+  }
+  .{{ component_class }} .owl-carousel .owl-prev {
+    width: 33px;
+    height: 100px;
+    position: absolute;
+    top: 25%;
+    left: -33px;
+    margin-left: -20px;
+    display: block !important;
+    border:0px solid black;
+  }
+  .{{ component_class }} .owl-carousel .owl-next {
+      width: 33px;
+      height: 100px;
+      position: absolute;
+      top: 25%;
+      right: -54px;
+      display: block !important;
+      border:0px solid black;
+      transform: scaleX(-1);
+  }
+  .{{ component_class }} .owl-carousel .owl-prev i,
+  .{{ component_class }} .owl-carousel .owl-next i {
+    transform : scale(1,6); color: #ccc;
+  }
+  .{{ component_class }} .single-logo {
+	display: inline-block;
+    max-width: 100%;
+    margin-right: {{ section.settings.block_spacing }}px;
+    width: {{ 100 | divided_by: section.settings.blocks_shown_mobile }}%;
+  }
+  .{{ component_class }} .single-logo img {
+    {% if section.settings.block_width == blank %}
+    	width: 100%;
+    {% else %}
+        width: {{ section.settings.block_width }};
+    {% endif %}
+  }
+  .{{ component_class }} .owl-item .single-logo {
+    width: auto;
+    margin-right: initial;
+  }
+  .{{ component_class }} .product-card {
+  	margin-bottom: 20px;
+    max-width: 100%;
+    width: 190px;
+  }
+
+  @media only screen and (max-width: 767px) {
+    {% if section.settings.preview_of_next_item %}
+    .{{ component_class }} .owl-stage {
+        padding-left: 0px !important;
+    }
+    {% endif %}
+    .{{ component_class }} .owl-carousel .single-logo {
+    	width: 29%;
+    	margin-left: 0.5rem;
+        margin-right: 0;
+    	margin-bottom: 0.4rem;
+    }
+  }
+
+  @media screen and (min-width: 768px) {
+    .{{ component_class }} {
+      {% if section.settings.custom_top_spacing != blank %}
+    	margin-top: {{ section.settings.custom_top_spacing }};
+      {% endif %}
+   	  {% if section.settings.custom_bottom_spacing != blank %}
+          margin-bottom: {{ section.settings.custom_bottom_spacing }};
+      {% endif %}
+    }
+    .{{ component_class }} .main-title-wrapper {
+      margin-bottom: 40px;
+    }
+    .{{ component_class }} .owl-carousel {
+      	white-space: nowrap;
+    	overflow: hidden;
+    }
+    .{{ component_class }} .owl-carousel.owl-loaded {
+      	white-space: initial;
+    	overflow: initial;
+    }
+    .{{ component_class }} .single-logo {
+   		width: {{ 100 | divided_by: section.settings.blocks_shown }}%;
+    }
+    .{{ component_class }} .owl-carousel .owl-item .single-logo {
+    	width: auto;
+  	}
+  }
+</style>
+
+{% if section.settings.custom_css != blank %}
+{% assign component_selector = component_class | prepend: '.' %} 
+<style>
+	{{ section.settings.custom_css | replace: '$component_class', component_selector }}
+</style>
+{% endif %}
+
+
+{%- assign collection = collections[section.settings.collection] -%}
+
+{%- assign product_limit = section.settings.grid | times: section.settings.rows -%}
+
+<div class="{{ component_class }} {% if section.settings.slider_mode %} slider-enabled{% endif %}" data-blocks-size="{{ section.blocks.size }}">
+  {% if section.settings.show_more_button != blank %}
+  	<div class="bg-panel">
+    {% if section.settings.title != blank %}<h2 class="main-title">{{ section.settings.title }}</h2>{% endif %}
+    {% if section.settings.show_more_button_image %}
+      <{% if section.settings.show_more_button_link != blank %}a{% else %}div{% endif %} class="see-more-button" {% if section.settings.show_more_button_link != blank %} href="{{ section.settings.show_more_button_link  }}"{% endif %}>
+        <img class="main-image" src="{{ section.settings.show_more_button_image | img_url: 'master' }}">
+      </{% if section.settings.show_more_button_link != blank %}a{% else %}div{% endif %}>
+   	{% elsif section.settings.show_more_button_text != blank %}
+      <{% if section.settings.show_more_button_link != blank %}a{% else %}div{% endif %} class="see-more-button btn btn--primmary btn--small" {% if section.settings.show_more_button_link != blank %} href="{{ section.settings.show_more_button_link  }}"{% endif %}>
+       	{{ section.settings.show_more_button_text }}
+      </{% if section.settings.show_more_button_link != blank %}a{% else %}div{% endif %}>
+    {% endif %}
+  	</div>
+  {% elsif section.settings.title != blank %}
+    <div class="main-title-wrapper">
+      <h2 class="main-title">{{ section.settings.title }}</h2>
+    </div>
+  {% endif %}
+  
+  <div class="carousel-wrapper">
+  	<div class="section-padding owl-carousel">
+    {% for product in collection.products %}
+      <div class="grid-view-item product-card">
+        <a class="grid-view-item__link grid-view-item__image-container full-width-link" href="{% if collection.products == empty %}#{% else %}{{ product.url }}{% endif %}">
+          <span class="visually-hidden">{{ product.title }}</span>
+        </a>
+        <div class="grid-view-item__image-wrapper gviiw-c-thebox">
+          {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+          {%- assign preview_image = product.featured_media.preview_image -%}
+          {%- assign img_url = preview_image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+          <img id="{{ img_id }}"
+               class="grid-view-item__image lazyload"
+               alt="{{ preview_image.alt }}"
+               data-src="{{ img_url }}"
+               data-widths="[200]"
+               data-aspectratio="{{ preview_image.aspect_ratio }}"
+               data-sizes="auto"
+               data-image>
+        </div>
+        {% comment %}
+        {% assign colors_size = product.options_by_name['Color'].values | size %}
+        <div class="product-attr">{{ colors_size }} Color {%- if colors_size > 1 -%} (es) {%- endif -%}</div>
+        {% endcomment %}
+        <div class="h4 grid-view-item__title" aria-hidden="true">{{ product.title }}</div>
+        {% include 'product-price-listing', product: product, show_vendor: false %}
+      </div>
+    {% endfor %}
+  </div>
+  </div>
+</div>
+
+<script>
+  defer(function(){
+
+   var $carousel = null
+    
+   function toggleCarousel() {
+       {% if section.settings.mobile_carousel == blank %} 
+       if ($(window).width() > 767) {
+       {% endif %} 
+
+          {% capture arrow %}{%- include 'icon-chevron-left-alt' -%}{% endcapture %}
+
+          $carousel = $('.{{ component_class }} .owl-carousel').owlCarousel({
+              stagePadding: 0,
+              loop: true,
+              margin: parseInt('{{ section.settings.block_spacing }}'),
+              nav: {{ section.settings.show_arrows }}, // if there are no more items to show it will hide regardless
+              dots: {{ section.settings.show_dots }},
+              navText : ['{{ arrow | strip }}', '{{ arrow | strip }}'],
+              autoplay: {{ section.settings.autoplay }}, 
+              autoplayTimeout: {{ 1000 | times: section.settings.autoplay_timeout }},
+			  autoplayHoverPause: true,
+			  {% if section.settings.preview_of_next_item %}
+              stagePadding: 40,
+			  {% endif %}
+              responsive:{
+                  0:{
+                      items: {{ section.settings.blocks_shown_mobile }},
+                  },
+                  600:{
+                      items: 2,
+                  },
+                  768:{
+                      items: 3,
+                  },
+				  800:{
+                      items: 4,
+                  },
+                  1200: {
+                        items: 5,
+                  },
+                  1500: {
+                        items: {{ section.settings.blocks_shown }},         
+                  },
+              },
+			  onInitialized: function(event) {
+                  var longestHeightTitle = 78;
+                  var biggestImage = 226
+                  //Reduce font-size based on lines
+
+                  //Retrieve the biggest title
+                  $(".{{ component_class }} .grid-view-item .grid-view-item__title").each(function(index){
+                    if($(this).height() > longestHeightTitle){
+                      longestHeightTitle = $(this).height()      
+                    }
+                  })
+                  //Retrieve the biggest image
+                  $(".{{ component_class }} .grid-view-item .grid-view-item__image-wrapper").each(function(index){
+                        if($(this).height() > biggestImage){
+                        biggestImage = $(this).height();      
+                      }
+                   })
+                 //Set equal height
+                 $(".{{ component_class }} .grid-view-item .grid-view-item__title").css({
+                   height: longestHeightTitle,
+                   display: 'block'
+                  }) 
+                 $(".{{ component_class }} .grid-view-item .grid-view-item__image-wrapper").css({
+                   height: biggestImage,
+                   maxHeight: 'initial',
+                   paddingTop: '0px'
+                   }) 
+                 $(".{{ component_class }} .grid-view-item .grid-view-item__image-wrapper div").css({
+                   height: biggestImage,
+                   paddingTop: '0px'
+                   }) 
+                 $(".{{ component_class }} .grid-view-item .grid-view-item__image-wrapper img").css({
+                   height: biggestImage,
+//                    objectFit: 'contain'
+                 })
+              } 
+         })
+
+         {% if section.settings.show_arrows %}
+            $carousel.find('.owl-nav').removeClass('disabled')
+         {% endif %}
+            
+       }
+     
+       {% if section.settings.mobile_carousel == blank %} 
+        else if ($carousel && $carousel.owlCarousel) {
+       		$carousel.owlCarousel('destroy')
+       }
+	   {% endif %} 
+ 
+  toggleCarousel();
+
+  $(document).on('shopify:section:load', function(){
+      toggleCarousel();
+  });
+    
+    
+  {% if section.settings.mobile_carousel == blank %} 
+  $(window).on('resize', function() {
+    toggleCarousel();
+  });
+  {% endif %} 
+
+  }, function() { return window.jQuery && $() && $().owlCarousel })
+</script>
+
+{% if section.settings.custom_js != blank %}
+	<script>
+      function defer(method) {
+        if (window.jQuery) {
+          method();
+        } else {
+          setTimeout(function() { defer(method) }, 50);
+        }
+      }
+      defer(function(){
+        $(document).ready(function(){
+      		{{ section.settings.custom_js }}
+        })
+      })
+	</script>
+{% endif %}
+
+{% schema %}
+{
+"name": {
+  "en": "Products Carousel TBX v2",
+  "es": "Carrusel de Productos TBX v2"
+},
+"class": "thebox-section products-carousel-tbx-v2-wrapper",
+"settings": [
+  {
+    "type": "text",
+    "id": "title",
+    "label": {
+      "en": "Title",
+      "es": "Título"
+   }
+  },
+  {
+    "type": "checkbox",
+    "id": "show_more_button",
+	"label": "Botón Mostrar más",
+    "default": true
+  },
+  {
+  	"type": "image_picker",
+    "id": "show_more_button_image",
+    "label": "Imagen Botón Mostrar más"
+  },
+  {
+    "type": "url",
+    "id": "show_more_button_link",
+    "label": "Link Botón Mostrar más"
+  },
+  {
+    "type": "text",
+    "id": "show_more_button_text",
+    "label": "Texto Botón Mostrar más"
+  },
+  {
+    "type": "color",
+    "id": "panel_bg_color",
+    "label": "Color de Fondo de panel",
+    "default": "#ffffff"
+  },
+  {
+    "type": "header",
+      "content": "Carrusel"
+  },
+  {
+    "type": "checkbox",
+    "id": "preview_of_next_item",
+    "label": {
+      "en": "Show preview of next item",
+      "es": "Mostrar parte de siguiente bloque"
+    },
+    "default": true
+  },
+  {
+  "id":"collection",
+  "type":"collection",
+  "label":{
+      "en":"Collection",
+      "es":"Colección"
+    }
+  },
+  {
+    "type": "checkbox",
+    "id": "mobile_carousel",
+    "label": {
+      "en": "Mobile Carousel",
+      "es": "Carrusel en Mobile"
+    },
+    "default": false
+  },
+  {
+    "type": "range",
+    "id": "blocks_shown",
+    "min": 3,
+    "max": 10,
+    "step": 1,
+    "label": "Bloques Mostrados Desktop",
+    "default": 8
+  },
+  {
+    "type": "range",
+    "id": "blocks_shown_mobile",
+    "min": 1,
+    "max": 10,
+    "step": 1,
+    "label": "Bloques Mostrados Mobile",
+    "default": 1
+  },
+  {
+    "type": "text",
+    "id": "block_width",
+    "label": {
+      "en": "Block Width",
+      "es": "Ancho del Bloque"
+   }
+  },
+  {
+    "type": "number",
+    "id": "block_spacing",
+    "label": {
+      "en": "Block Spacing",
+      "es": "Espaciado del Bloque"
+   },
+   "default": 18
+  },
+  {
+    "type": "text",
+    "id": "carousel_padding",
+    "label": {
+      "en": "Carousel Spacing",
+      "es": "Espaciado de Carrusel"
+   },
+   "default": "25px"
+  },
+  {
+    "type": "color",
+    "id": "carousel_bg_color",
+    "label": "Color de Fondo de panel",
+    "default": "#f7f7f7"
+  },
+  {
+    "type": "text",
+    "id": "carousel_width",
+    "label": {
+      "en": "Carousel Width",
+      "es": "Ancho del Carrusel"
+   }
+  },
+  {
+    "type": "checkbox",
+    "id": "show_arrows",
+    "label": {
+      "en": "Show Arrows",
+      "es": "Mostrar flechas"
+    },
+    "default": true
+  },
+  {
+    "type": "checkbox",
+    "id": "show_dots",
+    "label": {
+      "en": "Show Dots",
+      "es": "Mostrar Puntos"
+    },
+    "default": false
+  },
+  {
+    "type": "checkbox",
+    "id": "autoplay",
+    "label": {
+      "en": "Autoplay",
+      "es": "Autoplay"
+    },
+    "default": true
+  },
+  {
+    "type": "range",
+    "id": "autoplay_timeout",
+    "min": 1,
+    "max": 10,
+    "step": 1,
+    "label": "Segundos para autoplay",
+    "default": 5
+  },
+  {
+    "type": "header",
+      "content": "Dimensiones"
+  },
+  {
+    "type": "checkbox",
+    "id": "full_width",
+    "label": {
+      "en": "Full width",
+      "es": "Ancho completo"
+    },
+    "default": false
+  },
+  {
+    "type": "text",
+    "id": "width",
+    "label": {
+      "en": "Custom width",
+      "es": "Ancho personalizado"
+   }
+  },
+  {
+    "type": "text",
+    "id": "custom_height",
+    "label": {
+      "en": "Custom height",
+      "es": "Altura personalizada"
+   }
+  },
+  {
+    "type": "header",
+    "content": "Espaciado Desktop"
+  },
+  {
+    "type": "text",
+    "id": "custom_top_spacing",
+    "label": {
+      "en": "Custom top spacing",
+      "es": "Espaciado superior"
+   }
+  },
+  {
+    "type": "text",
+    "id": "custom_bottom_spacing",
+    "label": {
+      "en": "Custom bottom spacing",
+      "es": "Espaciado inferior"
+   }
+  },
+  {
+    "type": "header",
+    "content": "Espaciado Mobile"
+  },
+  {
+    "type": "text",
+    "id": "custom_top_spacing_mobile",
+    "label": {
+      "en": "Custom top spacing mobile",
+      "es": "Espaciado superior mobile"
+   }
+  },
+  {
+    "type": "text",
+    "id": "custom_bottom_spacing_mobile",
+    "label": {
+      "en": "Custom bottom spacing mobile",
+      "es": "Espaciado inferior mobile"
+   }
+  },
+  {
+    "type": "html",
+    "id": "custom_js",
+    "label": "Código JS personalizado"
+  },
+  {
+    "type": "html",
+    "id": "custom_css",
+    "label": "Código CSS personalizado"
+  }
+],
+"presets": [
+  {
+    "name": {
+      "en": "Products Carousel TBX v2",
+      "es": "Carrusel de Productos TBX v2"
+    },
+    "category": {
+      "en": "TheBox Theme v2",
+      "es": "TheBox Theme v2"
+    }
+  }
+]
+}
+{% endschema %}
+

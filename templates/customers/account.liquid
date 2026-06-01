@@ -1,0 +1,104 @@
+<style>
+  .page-customers-account p {
+    font-weight: normal;
+  }
+  .page-customers-account h1,
+  .page-customers-account h2,
+  .page-customers-account h3,
+  .page-customers-account h4,
+  .page-customers-account h5,
+  .page-customers-account h6 {
+  	font-weight: bold;
+  }
+  .page-customers-account .order-number {
+  	color: white;
+    background-color: #1990c6;
+    border-color: #1990c6;
+    border-radius: 5px;
+  }
+  @media screen and (max-width: 749px) {
+    .page-customers-account .responsive-table tr {
+      margin-bottom: 35px;
+    }
+    .page-customers-account .responsive-table th, .page-customers-account .responsive-table td {
+  		padding-bottom: 0;
+    }
+    .page-customers-account .responsive-table td:first-of-type {
+     	padding-top: 15px;
+    }
+    .page-customers-account .responsive-table td:last-of-type {
+     	padding-bottom: 30px;
+    }
+  }
+</style>
+
+
+<div class="page-width page-customers-account">
+  <div class="section-header text-center">
+    <h1>{{ 'customer.account.title' | t }}</h1>
+    {{ 'layout.customer.log_out' | t | customer_logout_link }}
+  </div>
+
+  <div class="grid myaccount">
+    <div class="grid__item myaccount__order-history">
+      <h2>{{ 'customer.orders.title' | t }}</h2>
+      <p>Para hacerle seguimiento a tu Pedido, haz click en el Número de Pedido</p>
+      
+      {% paginate customer.orders by 20 %}
+        {% if customer.orders.size != 0 %}
+
+          <table class="responsive-table">
+            <thead>
+              <tr>
+                <th scope="col">{{ 'customer.orders.order_number' | t }}</th>
+                <th scope="col">{{ 'customer.orders.date' | t }}</th>
+                <th scope="col">{{ 'customer.orders.payment_status' | t }}</th>
+                <th scope="col">{{ 'customer.orders.fulfillment_status' | t }}</th>
+				<th scope="col">Método de Entrega</th>
+                <th scope="col">{{ 'customer.orders.total' | t }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for order in customer.orders %}
+                <tr>
+                  <th data-label="{{ 'customer.orders.order_number' | t }}" scope="row">
+                    <a href="{{ order.customer_url }}" class="btn btn--secondary btn--small order-number" aria-label="{{ 'customer.orders.order_number_link' | t: number: order.name }}">
+                      <svg style="display none; height:45px; width:45px;" class="icon icon-tracking" id='Capa_1' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><style>.st0{fill:#303030}</style><path class='st0' d='M22.9 12l-3.1-4.5h-2.7l.2-1.5H6.9L5.5 16.4h1.4c.2.9 1 1.6 2 1.6s1.8-.7 2-1.6h5.4v.1c.2.9 1 1.5 1.9 1.5s1.7-.6 1.9-1.5v-.1h2.2l.6-4.4zm-1.9-.9h-2.3v-1h1.6l.7 1zM8.9 17.2c-.6 0-1-.3-1.1-.8 0-.1-.1-.3-.1-.4s0-.3.1-.4c.2-.5.6-.8 1.1-.8.5 0 .9.3 1.1.8 0 .1.1.3.1.4s0 .3-.1.4c-.1.5-.5.8-1.1.8zm2-1.6c-.2-.9-1-1.6-2-1.6s-1.8.7-2 1.6h-.5l1.2-8.8h8.8l-1.2 8.8h-4.3zm7.3 1.6c-.5 0-.9-.3-1.1-.7-.1-.2-.1-.3-.1-.5 0-.1 0-.2.1-.3.1-.5.6-.9 1.1-.9.5 0 1 .4 1.1.9 0 .1.1.2.1.3 0 .2 0 .3-.1.5-.2.4-.6.7-1.1.7zm3.3-1.6h-1.4c-.2-.9-1-1.6-1.9-1.6-1 0-1.8.7-1.9 1.6h-.2l.1-.5 1-6.8h2.2l.7 1H18v2.6h3.9l.2.3-.6 3.4zM1.1 8.1h4.8v.8H1.1zM2.8 10.7h2.8v.8H2.8zM4.1 12.9h1.1v.8H4.1z'/></svg>	
+                      Ver Seguimiento de mi pedido {{ order.name }}
+                   	</a>
+                  </th>
+                  <td data-label="{{ 'customer.orders.date' | t }}">{{ order.created_at | time_tag: format: 'date' }}</td>
+                  <td data-label="{{ 'customer.orders.payment_status' | t }}">{{ order.financial_status_label }}</td>
+                  <td data-label="{{ 'customer.orders.fulfillment_status' | t }}">{{ order.fulfillment_status_label }}</td>
+				  <td data-label="Método de Entrega">
+                    {%- if order.attributes['shipping_method'] == 'store_pickup' -%}
+                    	Recojo en Tienda
+                    {% else %}
+                    	Despacho a Domicilio
+                    {%- endif -%}
+                  </td>
+                  <td data-label="{{ 'customer.orders.total' | t }}">{{ order.total_price | money }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+
+        {% else %}
+      
+          <p>{{ 'customer.orders.none' | t }}</p>
+
+        {% endif %}
+        {%- if paginate.pages > 1 -%}
+          {% include 'pagination', paginate: paginate %}
+        {%- endif -%}
+      {% endpaginate %}
+    </div>
+    <div class="grid__item myaccount__account-details">
+      <h2>{{ 'customer.account.details' | t }}</h2>
+
+      {{ customer.default_address | format_address }}
+
+      <p><a href="{{ routes.account_addresses_url }}" class="btn btn--small">{{ 'customer.account.view_addresses' | t }} ({{ customer.addresses_count }})</a></p>
+    </div>
+  </div>
+</div>

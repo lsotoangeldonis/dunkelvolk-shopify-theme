@@ -1,0 +1,292 @@
+{%- assign component_class = 'image-quote-split__' | append: section.id -%}
+
+<style>
+  .{{ component_class }} {
+    width: 100%;
+    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+    background: {{ section.settings.bg_color }};
+    color: {{ section.settings.text_color }};
+    position: relative;
+  }
+  .{{ component_class }}__media-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    width: 100%;
+  }
+  .{{ component_class }}--single .{{ component_class }}__media-row {
+    grid-template-columns: 1fr;
+  }
+  .{{ component_class }}--single .{{ component_class }}__media {
+    aspect-ratio: 16 / 9;
+  }
+  .{{ component_class }}__media {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    background: #1a1a1a;
+  }
+  .{{ component_class }}__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  /* Caption sits inside the LEFT image, occupying 50% width (matching the image) */
+  .{{ component_class }}__text {
+    position: absolute;
+    left: 0;
+    bottom: 32px;
+    width: 100%;
+    padding: 0 28px;
+    box-sizing: border-box;
+    color: #fff;
+    z-index: 2;
+    pointer-events: none;
+  }
+  .{{ component_class }}__heading {
+    font-family: var(--font-body, inherit);
+    font-weight: 800;
+    font-size: clamp(22px, 2.4vw, 36px);
+    line-height: 1.15;
+    letter-spacing: -0.005em;
+    margin: 0 0 6px;
+    color: #fff;
+    text-shadow: 0 2px 12px rgba(0,0,0,.35);
+  }
+  .{{ component_class }}__sub {
+    font-family: var(--font-body, inherit);
+    font-weight: 400;
+    font-size: 14px;
+    margin: 0;
+    color: #fff;
+    opacity: .95;
+    text-shadow: 0 2px 12px rgba(0,0,0,.35);
+  }
+  @media (max-width: 749px) {
+    .{{ component_class }} {
+      padding: {{ section.settings.padding_top_mobile }}px 0 {{ section.settings.padding_bottom_mobile }}px;
+    }
+    .{{ component_class }}__media-row { grid-template-columns: 1fr 1fr; }
+    .{{ component_class }}__heading { font-size: 14px; }
+    .{{ component_class }}__sub { font-size: 11px; }
+    .{{ component_class }}__text { padding: 0 14px; bottom: 14px; }
+  }
+</style>
+
+{%- comment -%}
+  Layout modes:
+    - split  → two 50/50 images
+    - single → one full-width image (caption baked into image; no overlay text)
+{%- endcomment -%}
+{%- assign layout = section.settings.layout | default: 'split' -%}
+
+{%- comment -%} Resolve LEFT image (asset_filename has priority) {%- endcomment -%}
+{%- assign left_src = '' -%}
+{%- if section.settings.asset_filename_left != blank -%}
+  {%- assign left_src = section.settings.asset_filename_left | asset_url -%}
+{%- elsif section.settings.image_left != blank -%}
+  {%- assign left_src = section.settings.image_left | img_url: '1200x' -%}
+{%- endif -%}
+
+{%- comment -%} Resolve RIGHT image {%- endcomment -%}
+{%- assign right_src = '' -%}
+{%- if section.settings.asset_filename_right != blank -%}
+  {%- assign right_src = section.settings.asset_filename_right | asset_url -%}
+{%- elsif section.settings.image_right != blank -%}
+  {%- assign right_src = section.settings.image_right | img_url: '1200x' -%}
+{%- endif -%}
+
+<section class="{{ component_class }} {{ component_class }}--{{ layout }}" data-section-id="{{ section.id }}" data-section-type="image-quote-split">
+  <div class="{{ component_class }}__media-row">
+    {%- comment -%} LEFT (or single) image {%- endcomment -%}
+    {%- if section.settings.link_left != blank -%}
+      <a class="{{ component_class }}__media" href="{{ section.settings.link_left }}">
+    {%- else -%}
+      <div class="{{ component_class }}__media">
+    {%- endif -%}
+      {%- if left_src != '' -%}
+        <img src="{{ left_src }}" alt="" loading="lazy">
+      {%- else -%}
+        {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg placeholder-svg--full' }}
+      {%- endif -%}
+    {%- if section.settings.link_left != blank -%}
+      </a>
+    {%- else -%}
+      </div>
+    {%- endif -%}
+
+    {%- comment -%} RIGHT image (only in split layout) {%- endcomment -%}
+    {%- if layout == 'split' -%}
+      {%- if section.settings.link_right != blank -%}
+        <a class="{{ component_class }}__media" href="{{ section.settings.link_right }}">
+      {%- else -%}
+        <div class="{{ component_class }}__media">
+      {%- endif -%}
+        {%- if right_src != '' -%}
+          <img src="{{ right_src }}" alt="" loading="lazy">
+        {%- else -%}
+          {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg placeholder-svg--full' }}
+        {%- endif -%}
+      {%- if section.settings.link_right != blank -%}
+        </a>
+      {%- else -%}
+        </div>
+      {%- endif -%}
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": {
+    "en": "Image quote split",
+    "es": "Imágenes con cita"
+  },
+  "class": "index-section image-quote-split",
+  "settings": [
+    {
+      "type": "select",
+      "id": "layout",
+      "label": {
+        "en": "Layout",
+        "es": "Layout"
+      },
+      "options": [
+        { "value": "split",  "label": { "en": "Split (50/50 — two images)", "es": "Split (50/50 — dos imágenes)" } },
+        { "value": "single", "label": { "en": "Single (full width — one image)", "es": "Single (ancho completo — una imagen)" } }
+      ],
+      "default": "split"
+    },
+    {
+      "type": "header",
+      "content": { "en": "Left / Single image", "es": "Imagen izquierda / única" }
+    },
+    {
+      "type": "image_picker",
+      "id": "image_left",
+      "label": { "en": "Image", "es": "Imagen" }
+    },
+    {
+      "type": "image_picker",
+      "id": "image_left_mobile",
+      "label": { "en": "Image (mobile)", "es": "Imagen (mobile)" }
+    },
+    {
+      "type": "text",
+      "id": "asset_filename_left",
+      "label": { "en": "Theme asset filename (overrides Image)", "es": "Nombre del asset (anula Imagen)" },
+      "info": { "en": "e.g. dunk-50-50.jpg — file in /assets/. Takes priority.", "es": "ej. dunk-50-50.jpg — archivo en /assets/. Tiene prioridad." }
+    },
+    {
+      "type": "url",
+      "id": "link_left",
+      "label": { "en": "Link", "es": "Enlace" }
+    },
+    {
+      "type": "header",
+      "content": { "en": "Right image (split layout only)", "es": "Imagen derecha (solo layout split)" }
+    },
+    {
+      "type": "image_picker",
+      "id": "image_right",
+      "label": { "en": "Right image", "es": "Imagen derecha" }
+    },
+    {
+      "type": "image_picker",
+      "id": "image_right_mobile",
+      "label": { "en": "Right image (mobile)", "es": "Imagen derecha (mobile)" }
+    },
+    {
+      "type": "text",
+      "id": "asset_filename_right",
+      "label": { "en": "Right asset filename", "es": "Nombre del asset derecho" }
+    },
+    {
+      "type": "url",
+      "id": "link_right",
+      "label": { "en": "Right image link", "es": "Enlace imagen derecha" }
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": {
+        "en": "Background color",
+        "es": "Color de fondo"
+      },
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": {
+        "en": "Text color",
+        "es": "Color del texto"
+      },
+      "default": "#111111"
+    },
+    {
+      "type": "header",
+      "content": {
+        "en": "Spacing",
+        "es": "Espaciado"
+      }
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": { "en": "Top padding (desktop)", "es": "Padding superior (desktop)" },
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": { "en": "Bottom padding (desktop)", "es": "Padding inferior (desktop)" },
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": { "en": "Top padding (mobile)", "es": "Padding superior (mobile)" },
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": { "en": "Bottom padding (mobile)", "es": "Padding inferior (mobile)" },
+      "default": 24
+    }
+  ],
+  "presets": [
+    {
+      "name": {
+        "en": "Image quote split",
+        "es": "Imágenes con cita"
+      },
+      "category": {
+        "en": "Dunkelvolk",
+        "es": "Dunkelvolk"
+      }
+    }
+  ]
+}
+{% endschema %}

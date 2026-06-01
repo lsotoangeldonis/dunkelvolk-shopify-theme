@@ -1,0 +1,414 @@
+{%- assign component_class = 'dunk-explorers-club__' | append: section.id -%}
+{%- assign formId = 'DunkExplorersClub_' | append: section.id -%}
+
+<style>
+  .{{ component_class }} {
+    width: 100%;
+    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+    background: {{ section.settings.bg_color }};
+    color: {{ section.settings.text_color }};
+  }
+  .{{ component_class }}__brand-row {
+    width: 100%;
+    text-align: center;
+    margin: 0 0 32px;
+    padding: 0 24px;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+  .{{ component_class }}__inner {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+    text-align: center;
+    box-sizing: border-box;
+  }
+  .{{ component_class }}__brand {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font-display, 'FatFrank', 'Helvetica Neue', Arial, sans-serif) !important;
+    font-weight: 800;
+    /* CSS scales the text to fit the row width without overflowing */
+    font-size: clamp(40px, 14vw, 220px);
+    line-height: 0.95;
+    letter-spacing: 0;
+    color: inherit;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: clip;
+  }
+  .{{ component_class }}__brand-logo {
+    display: block;
+    margin: 0 auto 12px;
+    max-width: 110px;
+    height: auto;
+  }
+  .{{ component_class }}__title {
+    font-family: var(--font-body, inherit) !important;
+    font-weight: 800;
+    font-size: 18px;
+    margin: 0 0 22px;
+    color: inherit;
+  }
+  .{{ component_class }}__benefits {
+    list-style: disc !important;
+    list-style-type: disc !important;
+    list-style-position: outside !important;
+    text-align: left;
+    max-width: 720px;
+    margin: 0 auto 36px;
+    padding-left: 28px !important;
+    font-family: var(--font-body, inherit);
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.8;
+  }
+  .{{ component_class }}__benefits li {
+    margin: 0 0 4px;
+    display: list-item !important;
+  }
+  .{{ component_class }}__benefits li::marker {
+    color: #111;
+    font-size: 1em;
+  }
+  .{{ component_class }}__form {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .{{ component_class }}__fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 12px;
+  }
+  .{{ component_class }}__field {
+    width: 100%;
+    padding: 18px 28px;
+    border: 1px solid #ccc;
+    background: #fafafa;
+    color: #111;
+    font-family: var(--font-body, inherit);
+    font-size: 15px;
+    font-weight: 800;
+    box-sizing: border-box;
+    border-radius: 0;
+  }
+  .{{ component_class }}__field::placeholder {
+    color: #111;
+    font-weight: 800;
+    opacity: 1;
+  }
+  .{{ component_class }}__field:focus {
+    outline: none;
+    border-color: #111;
+  }
+  .{{ component_class }}__submit {
+    display: block;
+    width: 100%;
+    padding: 18px;
+    background: #000;
+    color: #fff;
+    border: 0;
+    cursor: pointer;
+    font-family: var(--font-body, inherit);
+    font-size: 15px;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: lowercase;
+    border-radius: 0;
+  }
+  .{{ component_class }}__submit:hover {
+    background: #222;
+  }
+  .{{ component_class }}__success,
+  .{{ component_class }}__error {
+    margin: 0 auto 16px;
+    max-width: 700px;
+    padding: 12px;
+    font-size: 14px;
+  }
+  .{{ component_class }}__success {
+    background: #e8f5e9;
+    color: #1b5e20;
+  }
+  .{{ component_class }}__error {
+    background: #ffebee;
+    color: #b71c1c;
+  }
+  @media (max-width: 749px) {
+    .{{ component_class }} {
+      padding: {{ section.settings.padding_top_mobile }}px 0 {{ section.settings.padding_bottom_mobile }}px;
+    }
+    .{{ component_class }}__inner { padding: 0 20px; }
+    .{{ component_class }}__brand-row { margin-bottom: 18px; }
+    /* Hide huge wordmark on mobile, show round logo instead (matches PDF mobile p7) */
+    .{{ component_class }}__brand { display: none; }
+    .{{ component_class }}__brand-logo { display: block; max-width: 90px; }
+    .{{ component_class }}__fields { grid-template-columns: 1fr; gap: 10px; }
+    .{{ component_class }}__title { font-size: 16px; }
+    .{{ component_class }}__benefits { font-size: 12px; padding-left: 18px; }
+  }
+  @media (min-width: 750px) {
+    /* On desktop the round logo stays small and sits above (or hidden if not provided) */
+    .{{ component_class }}__brand-logo { max-width: 70px; margin-bottom: 16px; }
+  }
+</style>
+
+<section class="{{ component_class }}" data-section-id="{{ section.id }}" data-section-type="dunk-explorers-club">
+
+  {%- if section.settings.brand_logo != blank or section.settings.show_brand_text -%}
+    <div class="{{ component_class }}__brand-row">
+      {%- if section.settings.brand_logo != blank -%}
+        <img class="{{ component_class }}__brand-logo" src="{{ section.settings.brand_logo | img_url: '320x' }}" alt="{{ section.settings.brand_logo.alt | default: shop.name | escape }}" loading="lazy">
+      {%- endif -%}
+      {%- if section.settings.show_brand_text and section.settings.brand_text != blank -%}
+        <div class="{{ component_class }}__brand">{{ section.settings.brand_text | escape }}</div>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+
+  <div class="{{ component_class }}__inner">
+    {%- if section.settings.title != blank -%}
+      <h2 class="{{ component_class }}__title">{{ section.settings.title | escape }}</h2>
+    {%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <ul class="{{ component_class }}__benefits">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'benefit' and block.settings.text != blank -%}
+            <li {{ block.shopify_attributes }}>{{ block.settings.text | escape }}</li>
+          {%- endif -%}
+        {%- endfor -%}
+      </ul>
+    {%- endif -%}
+
+    {% form 'customer', id: formId, class: 'dunk-explorers-club-form' %}
+      <input type="hidden" name="contact[tags]" value="{{ section.settings.subscriber_tag | default: 'dunk-explorers-club,newsletter' }}">
+
+      {%- if form.posted_successfully? -%}
+        <p class="{{ component_class }}__success" tabindex="-1" data-form-status>
+          {%- if section.settings.success_message != blank -%}
+            {{ section.settings.success_message }}
+          {%- else -%}
+            {{ 'general.newsletter_form.confirmation' | t }}
+          {%- endif -%}
+        </p>
+      {%- endif -%}
+
+      {%- if form.errors -%}
+        <p class="{{ component_class }}__error" tabindex="-1" data-form-status>
+          {%- for field in form.errors -%}
+            {{ form.errors.translated_fields[field] }}: {{ form.errors.messages[field] }}.
+          {%- endfor -%}
+        </p>
+      {%- endif -%}
+
+      <div class="{{ component_class }}__form">
+        <div class="{{ component_class }}__fields">
+          <input
+            type="email"
+            name="contact[email]"
+            id="{{ formId }}-email"
+            class="{{ component_class }}__field"
+            value="{{ form.email }}"
+            placeholder="{{ section.settings.email_placeholder | default: 'email *' }}"
+            aria-label="{{ section.settings.email_placeholder | default: 'email *' }}"
+            aria-required="true"
+            autocorrect="off"
+            autocapitalize="off"
+            required>
+          <input
+            type="tel"
+            name="contact[phone]"
+            id="{{ formId }}-phone"
+            class="{{ component_class }}__field"
+            placeholder="{{ section.settings.phone_placeholder | default: 'phone number' }}"
+            aria-label="{{ section.settings.phone_placeholder | default: 'phone number' }}"
+            autocomplete="tel">
+        </div>
+        <button type="submit" class="{{ component_class }}__submit" name="commit">
+          {{ section.settings.submit_label | default: 'sign up' }}
+        </button>
+      </div>
+    {% endform %}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": {
+    "en": "Dunk Explorers Club",
+    "es": "Dunk Explorers Club"
+  },
+  "class": "index-section dunk-explorers-club",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_brand_text",
+      "label": { "en": "Show brand text", "es": "Mostrar texto de marca" },
+      "info": {
+        "en": "Large 'DUNKELVOLK' wordmark above the form (desktop)",
+        "es": "Texto grande 'DUNKELVOLK' encima del formulario (desktop)"
+      },
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "brand_text",
+      "label": { "en": "Brand text", "es": "Texto de marca" },
+      "default": "DUNKELVOLK"
+    },
+    {
+      "type": "image_picker",
+      "id": "brand_logo",
+      "label": { "en": "Brand logo (optional)", "es": "Logo de marca (opcional)" },
+      "info": {
+        "en": "Shown above brand text. Leave empty to skip.",
+        "es": "Se muestra encima del texto de marca. Déjalo vacío para omitir."
+      }
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": { "en": "Title", "es": "Título" },
+      "default": "Regístrate en el Dunk Explorers Club y obtén los siguientes beneficios:"
+    },
+    {
+      "type": "header",
+      "content": { "en": "Form", "es": "Formulario" }
+    },
+    {
+      "type": "text",
+      "id": "email_placeholder",
+      "label": { "en": "Email placeholder", "es": "Placeholder de email" },
+      "default": "email *"
+    },
+    {
+      "type": "text",
+      "id": "phone_placeholder",
+      "label": { "en": "Phone placeholder", "es": "Placeholder de teléfono" },
+      "default": "phone number"
+    },
+    {
+      "type": "text",
+      "id": "submit_label",
+      "label": { "en": "Submit button label", "es": "Texto del botón" },
+      "default": "sign up"
+    },
+    {
+      "type": "text",
+      "id": "subscriber_tag",
+      "label": { "en": "Customer tags", "es": "Tags del cliente" },
+      "info": {
+        "en": "Comma-separated tags applied on signup",
+        "es": "Etiquetas separadas por comas aplicadas al suscriptor"
+      },
+      "default": "dunk-explorers-club,newsletter"
+    },
+    {
+      "type": "text",
+      "id": "success_message",
+      "label": { "en": "Success message", "es": "Mensaje de éxito" },
+      "default": "¡Gracias por unirte al Dunk Explorers Club!"
+    },
+    {
+      "type": "header",
+      "content": { "en": "Style", "es": "Estilo" }
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": { "en": "Background color", "es": "Color de fondo" },
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": { "en": "Text color", "es": "Color del texto" },
+      "default": "#111111"
+    },
+    {
+      "type": "header",
+      "content": { "en": "Spacing", "es": "Espaciado" }
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": { "en": "Top padding (desktop)", "es": "Padding superior (desktop)" },
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": { "en": "Bottom padding (desktop)", "es": "Padding inferior (desktop)" },
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": { "en": "Top padding (mobile)", "es": "Padding superior (mobile)" },
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px",
+      "label": { "en": "Bottom padding (mobile)", "es": "Padding inferior (mobile)" },
+      "default": 48
+    }
+  ],
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": { "en": "Benefit", "es": "Beneficio" },
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": { "en": "Benefit text", "es": "Texto del beneficio" },
+          "default": "EARLY ACCESS A NUEVOS LANZAMIENTOS"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": {
+        "en": "Dunk Explorers Club",
+        "es": "Dunk Explorers Club"
+      },
+      "category": {
+        "en": "Dunkelvolk",
+        "es": "Dunkelvolk"
+      },
+      "blocks": [
+        { "type": "benefit", "settings": { "text": "SORTEO DE 1 PASAJE DOBLE A NIVEL NACIONAL PARA EXPLORAR EL PERÚ*" } },
+        { "type": "benefit", "settings": { "text": "INVITACIÓN EXCLUSIVA A NUESTROS EVENTOS" } },
+        { "type": "benefit", "settings": { "text": "EARLY ACCESS A NUEVOS LANZAMIENTOS" } },
+        { "type": "benefit", "settings": { "text": "10% OFF EN TU PRIMERA COMPRA" } },
+        { "type": "benefit", "settings": { "text": "CONTENIDO EXCLUSIVO" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,96 @@
+<style>
+  .{{ section.id }}.icon-row {
+    display: block;
+  	margin: auto;
+    width 100%;
+    text-align: center;
+    {%- if section.settings.custom_bottom_spacing != blank -%}
+      padding-bottom: {{ section.settings.custom_bottom_spacing }};
+    {%- endif -%}
+      {%- if section.settings.custom_top_spacing != blank -%}
+      padding-top: {{ section.settings.custom_top_spacing }};
+    {%- endif -%}
+  }
+  .{{ section.id }}.icon-row img {
+    {%- if section.settings.custom_icon_height != blank -%}
+    	height: {{ section.settings.custom_icon_height }};
+    {%- endif -%}
+    {%- if section.settings.custom_icon_width != blank -%}
+    	width: {{ section.settings.custom_icon_width }};
+    {%- endif -%}
+  }
+</style>
+
+<div class="{{ section.id }} icon-row">
+  <img src="{{ section.settings.image | img_url: master }}">
+</div>
+
+{% schema %}
+  {
+    "name": {
+    "en": "Icon Row TheBox",
+    "es": "Línea de Ícono TheBox"
+    },
+    "class": "thebox-section icon-row-thebox-wrapper",
+    "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": {
+            "en": "Imagen Ícono",
+            "es": "Imagen Ícono"
+          }
+        },
+		{
+          "type": "text",
+          "id": "custom_icon_height",
+          "label": {
+            "en": "Custom Icon Height",
+            "es": "Alto de Ícono"
+         }
+        },
+		{
+          "type": "text",
+          "id": "custom_icon_width",
+          "label": {
+            "en": "Custom Icon width",
+            "es": "Ancho de Ícono"
+         }
+        },
+		{
+          "type": "text",
+          "id": "custom_top_spacing",
+          "label": {
+            "en": "Custom top spacing",
+            "es": "Espaciado superior"
+         }
+        },
+        {
+          "type": "text",
+          "id": "custom_bottom_spacing",
+          "label": {
+            "en": "Custom bottom spacing",
+            "es": "Espaciado inferior"
+         }
+		}
+	],
+    "presets": [
+    {
+      "name": {
+      "en": "Image Bar TheBox",
+      "es": "Línea de Ícono TheBox"
+      },
+      "category": {
+        "en": "TheBox Theme",
+        "es": "TheBox Theme"
+      }
+    }
+]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

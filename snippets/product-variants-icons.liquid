@@ -1,0 +1,46 @@
+
+{% if product.metafields.references != blank %}
+{% assign related_variant_handlers = product.metafields.references.handlers | split: ',' %}
+{% assign related_varaints_count = 0 %}
+{% for related_v_handle in related_variant_handlers %}
+    {% assign handle = related_v_handle | lstrip | rstrip %}
+    {% assign related_v_product = all_products[handle] %}
+    {% if related_v_product.available != blank %} 
+        {% assign related_varaints_count = related_varaints_count | plus: 1 %}
+    {% endif %}
+{% endfor %}
+{% if related_variants_count <= 0 %}
+    {% assign related_varaints_count = 1 %}
+{% endif %}
+<p class="grid-view-item-variants-count">{{ related_varaints_count }} {{ related_varaints_count | pluralize: 'color', 'colores' }}</p>
+<div class="grid-view-item-icons">
+    {% for related_v_handle in related_variant_handlers %}
+        {% assign handle = related_v_handle | lstrip | rstrip %}
+        {% assign related_v_product = all_products[handle] %}
+        {% if related_v_product.available != blank %}
+        {% assign discount = 0 %}
+        {% if related_v_product.compare_at_price_max > related_v_product.price %}
+            {% assign discount = related_v_product.compare_at_price_max | minus: related_v_product.price | times: 100.0 | divided_by: related_v_product.compare_at_price_max | money_without_currency | times: 100 | remove: '.0' %}
+        {% endif %}
+        {% if product.handle == related_v_product.handle %}
+                {% assign icon_class = 'active' %}
+                {% assign icon_data_origin = 'data-origin="1"' %}
+            {% else %}
+                {% assign icon_class = '' %}
+                {% assign icon_data_origin = '' %}
+            {% endif %}
+        {% for tag in related_v_product.tags %}
+            {% if tag contains "color:" %}
+                {% assign related_v_color = tag | remove: 'color:' %}
+            {% endif %}
+            {% endfor %}
+                <a href="/products/{{ related_v_product.handle }}"class="grid-view-item__image related-image" {{ icon_data_origin }} data-discount="{{ discount }}"><img height="42" src="{{ related_v_product.featured_image.src | product_img_url: 'master' }}"></a>
+            {% comment %}
+                <a href="/products/{{ related_v_product.handle }}"class="grid-view-item__color" title="{{ related_v_color }}" {{ icon_data_origin }}><img class="visually-hidden" height="42" src="{{ related_v_product.featured_image.src | product_img_url: 'master' }}"></a>
+            {% endcomment %}
+        {% endif %}
+        {% else %}
+            <a href="/products/{{ product.handle }}"class="grid-view-item__image related-image" data-origin="1" data-discount="{{ discount }}"><img height="42" src="{{ product | img_url }}"></a>
+    {% endfor %}
+</div>
+{% endif %}

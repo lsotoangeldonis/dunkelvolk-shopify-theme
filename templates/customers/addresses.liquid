@@ -1,0 +1,112 @@
+<style>
+  .autofill-user-data-wrapper {
+    width: 500px;
+    margin: auto;
+    max-width: 95%;
+  }
+</style>
+
+<script>
+  window.rxAdressFormPool = []
+</script>
+
+
+<div id="rxApp"></div>
+
+<script id="rxAppTemplate" type="text/ractive">
+{% paginate customer.addresses by 5 %}
+<div class="page-width text-center">
+  <header class="section-header">
+    <h1>{{ 'customer.addresses.title' | t }}</h1>
+    <p><a href="{{ routes.account_url }}">{{ 'customer.account.return' | t }}</a></p>
+    <p>
+      <button type="button" class="btn address-new-toggle" id="AddressNewButton" aria-expanded="false" aria-owns="AddressNewForm" data-formId="AddressFormComponent_new">{{ 'customer.addresses.add_new' | t }}</button>
+    </p>
+  </header>
+</div>
+
+<div class="page-width">
+  <div class="grid">
+    <div class="grid__item medium-up--two-thirds medium-up--push-one-sixth">
+      {% comment %}
+        Add address form, hidden by default
+      {% endcomment %}
+      <div id="AddressNewForm" class="form-vertical hide">
+        {% form 'customer_address', customer.new_address %}
+          <div class="text-center">
+            <h2>{{ 'customer.addresses.add_new' | t }}</h2>
+            {% assign address = customer.new_address %}
+            <AddressFormComponent id="{{form.id}}" cart="false" init="false" action="update" hide_shipping_method_picker="true"></AddressFormComponent>
+          </div>
+          <div class="text-center">
+            <div><input type="submit" class="btn" value="{{ 'customer.addresses.add' | t }}"></div>
+          </div>
+        {% endform %}
+        <hr>
+      </div>
+
+      {% comment %}
+        List all customer addresses with a unique edit form.
+        Also add pagination in case they have a large number of addresses
+      {% endcomment %}
+      <ul>
+        {% for address in customer.addresses %}
+          <li>
+            <div class="address text-center">
+              {% if address == customer.default_address %}
+              <h2 class="h4"><b>{{ 'customer.addresses.default' | t }}</b></h2>
+              {% endif %}
+              {{ address | format_address }}
+              
+              <ul class="list--inline">
+                <li>
+                  <button
+                    id="EditFormButton_{{ address.id }}"
+                    type="button"
+                    class="btn btn--small address-edit-toggle"
+                    data-form-id="{{ address.id }}"
+                    aria-owns="EditAddress_{{ address.id }}"
+                    aria-expanded="false"
+                  >
+                    {{ 'customer.addresses.edit' | t }}
+                  </button>
+                </li>
+                <li>
+                  <button
+                    type="button"
+                    class="btn btn--secondary btn--small address-delete"
+                    data-target="{{ address.url }}"
+                    data-confirm-message="{{ 'customer.addresses.delete_confirm' | t }}"
+                  >
+                    {{ 'customer.addresses.delete' | t }}
+                  </button>
+                </li>
+              </ul>
+            </div>
+            <div id="EditAddress_{{ address.id }}" class="form-vertical hide">
+              {% form 'customer_address', address %}
+                <div class="text-center">
+                  <h2>{{ 'customer.addresses.edit' | t }}</h2>
+                  <AddressFormComponent id="{{form.id}}" address="{{ address | json | escape }}" cart="false" init="false" action="update" hide_shipping_method_picker="true"></AddressFormComponent>
+                </div>
+                <div class="text-center">
+                  <div><button type="button" class="text-link address-edit-toggle" data-form-id="{{ form.id }}">{{ 'customer.addresses.cancel' | t }}</button></div>
+                </div>
+              {% endform %}
+              <hr>
+            </div>
+          </li>
+        {% endfor %}
+      </ul>
+
+      {%- if paginate.pages > 1 -%}
+        {% include 'pagination', paginate: paginate %}
+      {%- endif -%}
+    </div>
+  </div>
+
+</div>
+{% endpaginate %}
+</script>
+
+

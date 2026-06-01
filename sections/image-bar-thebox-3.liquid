@@ -1,0 +1,924 @@
+<style>
+    .{{ section.id }} .picture {
+         display: none;
+    }
+    .{{ section.id }}  .picture-mobile {
+         display: block;
+    }
+    .{{ section.id }} .h2-legend {
+    	text-align: center;
+      	{% if section.settings.cta_label_color != blank %}
+      		color: {{ section.settings.cta_label_color }};
+      	{% endif %}
+      	{% if section.settings.cta_label_weight != blank %}
+      		font-weight: {{ section.settings.cta_label_weight }} !important;
+      	{% endif %}
+    }
+  	.{{ section.id }} .slick-slide img {
+  		width: 100%;
+    }
+  	.{{ section.id }} .swiper-title {
+      {% if section.settings.title_color != blank %}
+      	    color: {{ section.settings.title_color }};
+      {% endif %}
+    } 
+    .{{ section.id }} .r-ups {
+        position: relative;
+        margin: 40px 20px;
+      	margin-bottom: 20px;
+    }
+    .{{ section.id }} .r-ups .r-3ups-titles-below {
+        position: relative;
+    }
+    .{{ section.id }} .swiper-container {
+        margin: 0 auto;
+        position: relative;
+        overflow: hidden;
+        list-style: none;
+        padding: 0;
+        z-index: 1;
+    }
+  	.{{ section.id }} .swiper-wrapper {
+       	display: none;
+     }
+    .{{ section.id }} .swiper-wrapper.mobile {
+     	display: block; 
+    }
+    .{{ section.id }} .r-ups .r-3ups-titles-below .swiper-container {
+        margin: 0 auto;
+        width: 100%;
+    }
+    .{{ section.id }} .r-ups .r-3ups-titles-below .swiper-container {
+        width: auto;
+    }
+    .{{ section.id }} .swiper-wrapper {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        -webkit-transition-property: -webkit-transform;
+        transition-property: -webkit-transform;
+        -o-transition-property: transform;
+        transition-property: transform;
+        transition-property: transform,-webkit-transform;
+        -webkit-box-sizing: content-box;
+        box-sizing: content-box;
+    }
+    .{{ section.id }} .swiper-container-android .swiper-slide, .swiper-wrapper {
+        -webkit-transform: translate3d(0,0,0);
+        transform: translate3d(0,0,0);
+    }
+    .{{ section.id }} .r-ups .r-3ups-titles-below .swiper-wrapper {
+        -webkit-align-items: stretch;
+        -moz-align-items: stretch;
+        -ms-align-items: stretch;
+        align-items: stretch;
+    }
+    .{{ section.id }} .swiper-slide {
+        -webkit-flex-shrink: 0;
+        -ms-flex-negative: 0;
+        flex-shrink: 0;
+        width: 100%;
+        height: 100%;
+        position: relative;
+        -webkit-transition-property: -webkit-transform;
+        transition-property: -webkit-transform;
+        -o-transition-property: transform;
+        transition-property: transform;
+        transition-property: transform,-webkit-transform;
+    }
+    .{{ section.id }} .r-ups .r-3ups-titles-below .swiper-title {
+        font-size: 1.1rem;
+        margin-bottom: 15px;
+        text-align: center;
+    }
+    .{{ section.id }} .r-ups .r-3ups-titles-below .r-3ups-description {
+        position: relative;
+    }
+    {%- if section.settings.title == blank -%}
+      .{{ section.id }} .r-ups .r-3ups-titles-below .r-3ups-description {
+          {%- if section.settings.custom_bottom_spacing != blank -%}
+            padding-bottom: {{ section.settings.custom_bottom_spacing }};
+          {%- endif -%}
+          {%- if section.settings.custom_top_spacing != blank -%}
+            padding-top: {{ section.settings.custom_top_spacing }};
+          {%- endif -%}
+      }
+    {%- else -%}
+      @media screen and (min-width: 768px) {
+        .{{ section.id }} .r-ups .r-3ups-titles-below {
+          {%- if section.settings.custom_bottom_spacing != blank -%}
+            padding-bottom: {{ section.settings.custom_bottom_spacing }};
+          {%- endif -%}
+          {%- if section.settings.custom_top_spacing != blank -%}
+            padding-top: {{ section.settings.custom_top_spacing }};
+          {%- endif -%}
+        }
+      }
+    {%- endif -%}
+    .{{ section.id }} .r-ups .r-3ups-titles-below .swiper-slide {
+        height: auto;
+    }
+    .{{ section.id }} .r-ups picture {
+        position: relative;
+        display: block;
+        font-size: 0;
+    }
+    .{{ section.id }} .r-ups .href-js {
+        cursor: pointer;
+    }
+    .{{ section.id }} .r-ups .r-3ups-titles-below .r-3ups-description-wrapper {
+        max-width: 90vw;
+        margin: 3rem 0 5rem;
+        padding-right: 10px;
+        margin: 1.5rem 0;
+        font-size: 10px;
+    }
+    .{{ section.id }} .r-ups .r-ups-heading, .r-ups .r-ups-product-price, .r-ups a, .r-ups h2, .r-ups h3, .r-ups p {
+        position: relative;
+        line-height: normal;
+        color: #181818;
+    }
+    .{{ section.id }} .r-ups h2 {
+        font-family: roboto-bold,Arial,sans-serif;
+        font-weight: 700;
+        font-size: 7.2vw;
+        line-height: 7.2vw;
+        letter-spacing: 0;
+        margin-bottom: 1.2rem;
+    }
+    .{{ section.id }} .r-ups .r-3ups-titles-below h2 {
+        font-size: 20px;
+        line-height: 20px;
+    }
+    .{{ section.id }} .r-ups .r-ups-heading, .r-ups .r-ups-product-price, .r-ups a, .r-ups h2, .r-ups h3, .r-ups p {
+        position: relative;
+        line-height: normal;
+        color: #181818;
+    }
+    .{{ section.id }} .r-ups p {
+        font-size: 14px;
+        font-family: roboto-regular,Arial,sans-serif;
+        margin: 0;
+    }
+    .{{ section.id }} .r-ups .r-3ups-titles-below .r-linkcta {
+        position: relative;
+        display: inline-block;
+        font-family: roboto-medium,Arial,sans-serif;
+        font-weight: 500;
+        font-size: 1.6rem;
+        overflow: hidden;
+        padding-right: 2.1rem;
+        -webkit-transition: all .3s;
+        -moz-transition: all .3s;
+        -o-transition: all .3s;
+        transition: all .3s;
+        color: #181818;
+        font-size: 16px;
+        font-weight: bold;
+    }
+    .{{ section.id }} .r-ups .href-js {
+        cursor: pointer;
+    }
+    .{{ section.id }} .r-ups .r-3ups-titles-below .margin-top {
+        margin-top: 1.3rem;
+    }
+    .{{ section.id }} .r-ups .r-3ups-titles-below .r-linkcta::after, .r-ups .r-3ups-titles-below .r-linkcta::before {
+        content: '';
+        position: absolute;
+        width: 1.4rem;
+        height: 1.4rem;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: contain;
+        -webkit-transition: all .3s;
+        -moz-transition: all .3s;
+        -o-transition: all .3s;
+        transition: all .3s;
+    }
+    .{{ section.id }} .r-ups .r-3ups-titles-below .r-linkcta::before {
+        left: -2.1rem;
+        -webkit-opacity: 0;
+        -moz-opacity: 0;
+        -khtml-opacity: 0;
+        opacity: 0;
+    }
+    .{{ section.id }} .r-ups .r-3ups-titles-below .r-linkcta::after {
+        right: 0;
+        -webkit-opacity: 1;
+        -moz-opacity: 1;
+        -khtml-opacity: 1;
+        opacity: 1;
+    }
+    .{{ section.id }} .r-ups .r-3ups-titles-below .r-linkcta::after, .r-ups .r-3ups-titles-below .r-linkcta::before {
+        background-image: url('https://www.dcshoes.com/on/demandware.static/Sites-DC-US-Site/-/en_US/v1595092640502/images/icons/arrow_181818.svg');
+    }
+    .{{ section.id }} .side-arrow {
+      display: none;
+      position: absolute;
+      z-index: 999;
+      top: 32%;
+      height: 40px;
+      width: 40px;
+      cursor: pointer;
+	}
+  	.{{ section.id }} .side-arrow.square {
+        background: #e6e6e6;
+        padding: 9px 5px;
+    }
+    .{{ section.id }} .side-arrow.side-arrow-right {
+        right: 0;
+    }
+    .{{ section.id }} .side-arrow.square.side-arrow-right {
+        background: #e6e6e6;
+        padding: 9px;
+    }
+  	.{{ section.id }} .side-arrow.side-arrow-left {
+    	left: 0;
+	}
+  	.{{ section.id }} .side-arrow svg {
+        cursor: pointer;
+        height: 20px;
+        width: 24px;
+    }
+    .{{ section.id }}.slider-enabled .side-arrow {
+   		display: block;
+    }
+    @media only screen and (min-width: 425px) {
+      	.{{ section.id }} .r-ups {
+         margin-bottom: 40px;
+        }
+        .{{ section.id }} .r-ups .r-3ups-titles-below .r-3ups-description-wrapper {
+            max-width: 40rem;
+        }
+      	.{{ section.id }} .swiper-wrapper {
+      		display: flex;
+        }
+      	.{{ section.id }} .swiper-wrapper.mobile {
+        	display: none;
+        }
+        .{{ section.id }} .side-arrow {
+            display: none !important;
+        }
+    }
+    @media only screen and (min-width: 768px) {
+      	.{{ section.id }} .picture {
+             display: block;
+        }
+     	.{{ section.id }} .picture-mobile {
+             display: none;
+        }
+        .{{ section.id }} .swiper-wrapper {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+        }
+        .{{ section.id }} .r-ups {
+            max-width: 190rem;
+            margin: 0 auto;
+            padding: 0 60px;
+            margin-top: 25px;
+        }
+        .{{ section.id }} .r-ups .r-3ups-titles-below .swiper-wrapper {
+            -webkit-flex-direction: row;
+            -moz-flex-direction: row;
+            -ms-flex-direction: row;
+            flex-direction: row;
+            -webkit-justify-content: space-between;
+            -moz-justify-content: space-between;
+            -ms-justify-content: space-between;
+            justify-content: space-between;
+            -ms-flex-pack: space-between;
+            -webkit-flex-wrap: nowrap;
+            -moz-flex-wrap: nowrap;
+            -ms-flex-wrap: nowrap;
+            flex-wrap: nowrap;
+        }
+        .{{ section.id }} .r-ups .r-3ups-titles-below .r-3ups-description {
+          -webkit-flex-basis: calc(100%/{{ section.blocks.size }} - 1rem);
+          -moz-flex-basis: calc(100%/{{ section.blocks.size }} - 1rem);
+          -ms-flex-basis: calc(100%/{{ section.blocks.size }} - 1rem);
+          flex-basis: calc(100%/{{ section.blocks.size }} - 1rem);
+        }
+    }
+    @media only screen and (min-width: 1024px) {
+        .{{ section.id }} .r-ups.swiper--enabled {
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .{{ section.id }} .r-ups .r-3ups-titles-below .swiper-container {
+            width: auto;
+        }
+        .{{ section.id }} .r-ups .r-3ups-titles-below .r-3ups-description-wrapper {
+            margin: 1.8rem 0;
+            padding-right: 30px;
+        }
+        .{{ section.id }} .r-ups h2 {
+            font-size: 2vw;
+            line-height: 2vw;
+        }
+        .{{ section.id }} .r-ups .r-3ups-titles-below .r-linkcta:focus, .r-ups .r-3ups-titles-below .r-linkcta:hover {
+            padding-left: 2.1rem;
+            padding-right: 0;
+        }
+        .{{ section.id }} .r-ups .r-3ups-titles-below .r-linkcta:focus::before, .r-ups .r-3ups-titles-below .r-linkcta:hover::before {
+            left: 0;
+            -webkit-opacity: 1;
+            -moz-opacity: 1;
+            -khtml-opacity: 1;
+            opacity: 1;
+        }
+        .{{ section.id }} .r-ups .r-3ups-titles-below .r-linkcta:focus::after, .r-ups .r-3ups-titles-below .r-linkcta:hover::after {
+            right: -3rem;
+            -webkit-opacity: 0;
+            -moz-opacity: 0;
+            -khtml-opacity: 0;
+            opacity: 0;
+        }
+    }
+    @media only screen and (min-width: 1281px) {
+        .{{ section.id }} .r-ups h2 {
+            font-size: 2.6rem;
+            line-height: 2.6rem;
+        }
+    }
+</style>
+
+<div class="{{ section.id }} image-bar-thebox {% if section.settings.slider_mode %} slider-enabled{% endif %}">
+  <article class="r-ups swiper--enabled">
+    <div class="r-3ups-titles-below">
+      {% if section.settings.title != blank %}<h2 class="swiper-title">{{ section.settings.title }}</h3>{% endif %}
+      <div class="swiper-container slideshow-wrapper">
+        <div class="swiper-wrapper">
+          {% for block in section.blocks %}
+          	<div class="r-3ups-description swiper-slide js" {{ block.shopify_attributes }}>
+                {% if block.settings.link != blank %}
+                  <a href="{{ block.settings.link }}">
+                {% endif %}
+				{% if section.settings.cta_label_top != blank %}
+                    {% if block.settings.cta_label != blank %}
+                      <h2 class="h2-legend">
+						{{ block.settings.cta_label }}
+                      </h2>
+                	{% endif %}
+                {% endif %}
+                <picture>
+                  <source srcset="{{ block.settings.image | img_url: '575x575' }} 575w 575h" media="(min-width: 725px)">
+                  <img loading="lazy" srcset="{{ block.settings.image_mobile | img_url: 'master' }}" alt="{{ block.settings.cta_label }}">
+                </picture>
+                    <div class="r-3ups-description-wrapper">
+                      {% unless section.settings.cta_label_top != blank %}
+                        {% if block.settings.cta_label != blank %}
+                          <h2 class="h2-legend">
+                            {% if block.settings.link != blank %}
+                                <a href="{{ block.settings.link }}">
+                             {% endif %}
+                                  {{ block.settings.cta_label }}
+                             {% if block.settings.link != blank %}
+                                </a>
+                             {% endif %}
+                            </a>
+                          </h2>
+                        {% endif %}
+                      {% endunless %}
+					  {% if block.settings.cta_description != blank %}
+                      	<p>{{ block.settings.cta_description }}</p>
+					  {% endif %}
+					  {% if block.settings.button_text != blank %}
+                        <div class="r-linkcta href-js margin-top" data-href="https://www.dcshoes.com/josh-kalis-collection/#?intcmp=dc_542092">
+                          {{ block.settings.button_text }}
+                        </div>
+					  {% endif %}
+                    </div>
+                    {% if block.settings.link != blank %}
+                      </a>
+                   {% endif %}
+              </div>
+           {% endfor %}
+        </div>
+      	<span class="slideshow__arrow slideshow__arrow-left side-arrow side-arrow-left square">
+        {% include 'icon-chevron-left-alt' %}
+    	</span>
+        <div class="swiper-wrapper mobile {% if section.settings.slider_mode %} slider-thebox{% endif %}" data-side-arrows="true">
+          {% for block in section.blocks %}
+          	<div class="r-3ups-description swiper-slide js" {{ block.shopify_attributes }}>
+                {% if block.settings.link != blank %}
+                  <a href="{{ block.settings.link }}">
+                {% endif %}
+                <picture>
+                  <source srcset="{{ block.settings.image | img_url: '575x575' }} 575w 575h" media="(min-width: 725px)">
+                  <img loading="lazy" srcset="{{ block.settings.image_mobile | img_url: 'master' }}" alt="{{ block.settings.cta_label }}">
+                </picture>
+                    <div class="r-3ups-description-wrapper">
+                      {% if block.settings.cta_label != blank %}
+                      	<h2>
+                          {% if block.settings.link != blank %}
+                              <a href="{{ block.settings.link }}">
+                           {% endif %}
+                            	{{ block.settings.cta_label }}
+                           {% if block.settings.link != blank %}
+                              </a>
+                           {% endif %}
+                          </a>
+                      	</h2>
+					  {% endif %}
+					  {% if block.settings.cta_description != blank %}
+                      	<p>{{ block.settings.cta_description }}</p>
+					  {% endif %}
+					  {% if block.settings.button_text != blank %}
+						{% if block.settings.link != blank %}
+                              <a href="{{ block.settings.link }}">
+                        {% endif %}
+                        <div class="r-linkcta href-js margin-top" data-href="https://www.dcshoes.com/josh-kalis-collection/#?intcmp=dc_542092">
+                          {{ block.settings.button_text }}
+                        </div>
+                        {% if block.settings.link != blank %}
+                        	</a>
+                       	{% endif %}
+					  {% endif %}
+                    </div>
+                    {% if block.settings.link != blank %}
+                      </a>
+                   {% endif %}
+              </div>
+           {% endfor %}
+        </div>
+        <span class="slideshow__arrow slideshow__arrow-right side-arrow side-arrow-right square">
+          {% include 'icon-chevron-right-alt' %}
+        </span>
+      </div>
+    </div>
+  </article>
+</div>
+
+{% javascript %}
+	
+  function initSlider() {
+    var $sliderSelector = $('.slider-thebox');
+    var $sliderContainer = $sliderSelector.closest('.slideshow-wrapper');
+
+	if (!$sliderSelector.length) {
+		return false;	
+	}
+
+    /* Slider settings */
+    var settings = {
+      accessibility: true,
+      arrows: false,
+      dots: false,
+      fade: true,
+      draggable: true,
+      touchThreshold: 20,
+      centerMode: true,
+      centerPadding: '40px',
+      slidesToShow: 1,
+      mobileFirst: true,
+      responsive: [{
+        breakpoint: 767,
+        settings: "unslick"
+      }]
+    }
+
+    // data options
+    settings.autoplay = $sliderSelector.data('autorotate');
+    settings.autoplaySpeed = $sliderSelector.data('speed');
+
+    var adaptHeight = $sliderSelector.data('adapt-height');
+    var minAspectRatio = $sliderSelector.data('min-aspect-ratio');
+    var sideArrows = $sliderSelector.data('side-arrows');
+
+    if (adaptHeight) {
+      $sliderSelector.height($(document).width() / minAspectRatio);
+      $(window).resize($.debounce(50, function() {
+        $sliderSelector.height($(document).width() / minAspectRatio);
+      }));
+    }
+
+    var slider = $sliderSelector.slick(settings);
+
+    var $prevArrow = $sliderContainer.find('.side-arrow.side-arrow-left')
+    var $nextArrow = $sliderContainer.find('.side-arrow.side-arrow-right')
+
+    if (sideArrows && $sliderSelector.hasClass('slick-initialized')) {
+      if ($prevArrow && $prevArrow.length) {
+        $prevArrow.on('click', function() {
+          $sliderSelector.slick('slickPrev');
+        });
+      }
+      if ($nextArrow && $nextArrow.length) {
+        $nextArrow.on('click', function() {
+          $sliderSelector.slick('slickNext');
+        });
+      }
+    }
+
+    /* Do this every time window gets resized */
+    $(window).on('resize', function() {
+      if ($(window).width() < 767) {
+      /* We are below mobile breakpoint, initialize the slider
+        if it is not already initialized */
+      if (!slider.hasClass('slick-initialized')){
+          return slider.slick(settings);
+        }
+      }
+    })
+  }
+                                  
+  initSlider();
+
+
+{% endjavascript %}
+
+{% schema %}
+{
+"name": {
+"en": "Image Bar TheBox 2",
+"es": "Barra de Imágenes TheBox 2"
+},
+"class": "thebox-section image-bar-thebox-section-2",
+"max_blocks": 4,
+"settings": [
+{
+  "type": "checkbox",
+  "id": "spacing",
+  "label": {
+    "en": "Spacing between blocks",
+    "es": "Espaciado entre bloques"
+  },
+  "default": true
+},
+{
+  "type": "checkbox",
+  "id": "full_width",
+  "label": {
+    "en": "Full width",
+    "es": "Ancho completo"
+  },
+  "default": false
+},
+{
+  "type": "checkbox",
+  "id": "slider_mode",
+  "label": {
+    "en": "Slider Mode on Mobile",
+    "es": "Modo Slider en Mobile"
+  },
+  "default": true
+},
+{
+  "type": "text",
+  "id": "title",
+  "label": {
+    "en": "Title",
+    "es": "Título"
+ }
+},
+{
+  "type": "text",
+  "id": "custom_height",
+  "label": {
+    "en": "Custom height",
+    "es": "Altura personalizada"
+ }
+},
+{
+  "type": "text",
+  "id": "custom_top_spacing",
+  "label": {
+    "en": "Custom top spacing",
+    "es": "Espaciado superior"
+ }
+},
+{
+  "type": "text",
+  "id": "custom_bottom_spacing",
+  "label": {
+    "en": "Custom bottom spacing",
+    "es": "Espaciado inferior"
+ }
+},
+{
+    "type": "checkbox",
+    "id": "cta_label_top",
+    "label": {
+    "en": "Top Caption",
+    "es": "Leyenda Superior"
+    }
+},
+{
+    "type": "color",
+    "id": "cta_label_color",
+    "label": {
+    "en": "Caption Color",
+    "es": "Color de Leyenda"
+    },
+	"default": "#000"
+},
+{
+    "type": "color",
+    "id": "title_color",
+    "label": {
+    "en": "Title Color",
+    "es": "Color de Título"
+    },
+	"default": "#000"
+},
+{
+	"type": "select",
+    "id": "cta_label_weight",
+	"label": {
+    "en": "Caption Weight",
+    "es": "Grosor de Leyenda"
+    },
+	"default": "bold",
+      "options": [
+        {
+          "value": "bold",
+          "label": {
+            "en": "bold",
+            "es": "bold"
+          }
+        },
+		{
+          "value": "normal",
+          "label": {
+            "en": "normal",
+            "es": "normal"
+          }
+        },
+		{
+          "value": "light",
+          "label": {
+            "en": "light",
+            "es": "light"
+          }
+        }
+	  ]
+}
+],
+"blocks": [
+{
+  "type": "image",
+  "name": {
+    "da": "Billede",
+    "de": "Foto",
+    "en": "Image",
+    "es": "Imagen",
+    "fi": "Kuva",
+    "fr": "Image",
+    "hi": "इमेज",
+    "it": "Immagine",
+    "ja": "画像",
+    "ko": "이미지",
+    "nb": "Bilde",
+    "nl": "Afbeelding",
+    "pt-BR": "Imagem",
+    "pt-PT": "Imagem",
+    "sv": "Bild",
+    "th": "รูปภาพ",
+    "zh-CN": "图片",
+    "zh-TW": "圖片"
+  },
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": {
+        "da": "Billede",
+        "de": "Foto",
+        "en": "Image",
+        "es": "Imagen",
+        "fi": "Kuva",
+        "fr": "Image",
+        "hi": "इमेज",
+        "it": "Immagine",
+        "ja": "画像",
+        "ko": "이미지",
+        "nb": "Bilde",
+        "nl": "Afbeelding",
+        "pt-BR": "Imagem",
+        "pt-PT": "Imagem",
+        "sv": "Bild",
+        "th": "รูปภาพ",
+        "zh-CN": "图片",
+        "zh-TW": "圖片"
+      }
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": {
+        "en": "Mobile Image",
+        "es": "Imagen Mobile"
+      }
+    },
+    {
+      "type": "select",
+      "id": "alignment",
+      "label": {
+        "da": "Justering af billede",
+        "de": "Fotoausrichtung",
+        "en": "Image alignment",
+        "es": "Alineación de imagen",
+        "fi": "Kuvan tasaus",
+        "fr": "Alignement de l'image",
+        "hi": "इमेज पंक्तिबद्ध करना",
+        "it": "Allineamento immagine",
+        "ja": "画像アラインメント",
+        "ko": "이미지 정렬",
+        "nb": "Bildejustering",
+        "nl": "Afbeelding uitlijnen",
+        "pt-BR": "Alinhamento da imagem",
+        "pt-PT": "Alinhamento da imagem",
+        "sv": "Bildjustering",
+        "th": "การจัดวางรูปภาพ",
+        "zh-CN": "图片对齐方式",
+        "zh-TW": "圖片對齊"
+      },
+      "default": "center",
+      "options": [
+        {
+          "value": "top",
+          "label": {
+            "da": "Top",
+            "de": "Oben",
+            "en": "Top",
+            "es": "Superior",
+            "fi": "Ylös",
+            "fr": "Haut",
+            "hi": "सबसे ऊपर",
+            "it": "Alto",
+            "ja": "上",
+            "ko": "위쪽",
+            "nb": "Topp",
+            "nl": "Boven",
+            "pt-BR": "Acima",
+            "pt-PT": "Acima",
+            "sv": "Högst upp",
+            "th": "ด้านบน",
+            "zh-CN": "顶部",
+            "zh-TW": "頂部"
+          }
+        },
+        {
+          "value": "center",
+          "label": {
+            "da": "I midten",
+            "de": "Mitte",
+            "en": "Middle",
+            "es": "Centrada",
+            "fi": "Keskelle",
+            "fr": "Milieu",
+            "hi": "मध्य में",
+            "it": "Centrale",
+            "ja": "中央",
+            "ko": "중간",
+            "nb": "Midten",
+            "nl": "Midden",
+            "pt-BR": "Meio",
+            "pt-PT": "Meio",
+            "sv": "Mitten",
+            "th": "ตรงกลาง",
+            "zh-CN": "中间",
+            "zh-TW": "中央"
+          }
+        },
+        {
+          "value": "bottom",
+          "label": {
+            "da": "Bund",
+            "de": "Unten",
+            "en": "Bottom",
+            "es": "Inferior",
+            "fi": "Alas",
+            "fr": "Bas",
+            "hi": "नीचे का",
+            "it": "Basso",
+            "ja": "下",
+            "ko": "아래쪽",
+            "nb": "Bunn",
+            "nl": "Onder",
+            "pt-BR": "Abaixo",
+            "pt-PT": "Abaixo",
+            "sv": "Längst ner",
+            "th": "ด้านล่าง",
+            "zh-CN": "底部",
+            "zh-TW": "底部"
+          }
+        }
+      ]
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": {
+        "da": "Link",
+        "de": "Link",
+        "en": "Link",
+        "es": "Enlace",
+        "fi": "Linkki",
+        "fr": "Lien",
+        "hi": "लिंक",
+        "it": "Link",
+        "ja": "リンク",
+        "ko": "링크",
+        "nb": "Kobling",
+        "nl": "Link",
+        "pt-BR": "Link",
+        "pt-PT": "Ligação",
+        "sv": "Länk",
+        "th": "ลิงก์",
+        "zh-CN": "链接",
+        "zh-TW": "連結"
+      },
+      "info": {
+        "da": "Valgfri",
+        "de": "Optional",
+        "en": "Optional",
+        "es": "Opcional",
+        "fi": "Valinnainen",
+        "fr": "Facultatif",
+        "hi": "वैकल्पिक",
+        "it": "Facoltativo",
+        "ja": "オプション",
+        "ko": "선택 사항",
+        "nb": "Valgfritt",
+        "nl": "Optioneel",
+        "pt-BR": "Opcional",
+        "pt-PT": "Opcional",
+        "sv": "Valfritt",
+        "th": "ไม่จำเป็น",
+        "zh-CN": "可选",
+        "zh-TW": "(選填)"
+      }
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": {
+        "da": "Billedtekst",
+        "de": "Unterschrift",
+        "en": "Caption",
+        "es": "Leyenda",
+        "fi": "Kuvateksti",
+        "fr": "Légende",
+        "hi": "कैप्शन",
+        "it": "Didascalia",
+        "ja": "キャプション",
+        "ko": "캡션",
+        "nb": "Bildetekst",
+        "nl": "Bijschrift",
+        "pt-BR": "Legenda",
+        "pt-PT": "Legenda",
+        "sv": "Rubrik",
+        "th": "คำบรรยาย",
+        "zh-CN": "字幕",
+        "zh-TW": "說明"
+      }
+    },
+    {
+      "type": "text",
+      "id": "cta_description",
+      "label": {
+        "en": "Description",
+        "es": "Descripción"
+      }
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": {
+        "en": "Button Text",
+        "es": "Texto del Botón"
+      }
+    }
+  ]
+}
+],
+"presets": [
+{
+  "name": {
+  "en": "Image Bar TheBox 2",
+  "es": "Barra de Imágenes TheBox 2"
+  },
+  "category": {
+    "en": "TheBox Theme",
+    "es": "TheBox Theme"
+  },
+  "blocks": [
+    {
+      "type": "image"
+    },
+    {
+      "type": "image"
+    },
+    {
+      "type": "image"
+    }
+  ]
+}
+]
+}
+{% endschema %}
+

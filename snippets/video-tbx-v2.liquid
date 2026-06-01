@@ -1,0 +1,162 @@
+
+{% if block != blank %}
+	{% assign parent = block %}
+{% else %}
+	{% assign parent = section %}
+{% endif %}
+
+
+<style>
+  .video-thebox video[poster] {
+    width: 100%;
+    height: 100%;
+  }
+  .video-thebox video {
+    object-fit: unset;
+  }
+</style>
+
+<style>
+    .video-thebox-{{ parent.id }} .title {
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 20px;
+        letter-spacing: 0;
+        margin-bottom: 1.2rem;
+        margin: 30px auto;
+    }
+	.video-thebox-{{ parent.id }} video {
+        height: 462px !important;
+        {%- if parent.settings.custom_height != blank -%}
+      		height: {{ parent.settings.custom_height }} !important;
+      	{%- endif -%}
+		max-width: 90%;
+        width: 90%;
+        margin: auto;
+    }
+
+  	.video-thebox-{{ parent.id }}.video-thebox-fullwidth video {
+      	max-width: 100% !important; 
+      	width: 100%;
+    }
+  	
+  	{%- if section.settings.custom_width != blank -%}
+  		.video-thebox-{{ parent.id }} video {
+  			max-width: 95% !important;
+          	width: {{ section.settings.custom_width }} !important;
+        }
+	{%- endif -%}
+  
+    {%- if section.settings.custom_top_spacing_mobile != blank or section.settings.custom_bottom_spacing_mobile != blank -%}
+      .video-thebox-{{ parent.id }} {
+        {%- if section.settings.custom_top_spacing_mobile != blank -%}
+        padding-top: {{ section.settings.custom_top_spacing_mobile }};
+        {%- endif -%}
+        {%- if section.settings.custom_bottom_spacing_mobile != blank -%}
+        padding-bottom: {{ section.settings.custom_bottom_spacing_mobile }};
+        {%- endif -%}
+      }
+    {%- endif -%}
+  
+  
+  	@media (min-width: 375px) {
+      .video-thebox-{{ parent.id }} video  {
+        min-width: 320px;
+      }
+  	}
+  	@media (min-width: 426px) {
+	  {%- if section.settings.custom_top_spacing != blank or section.settings.custom_bottom_spacing != blank -%}
+        .video-thebox-{{ parent.id }} {
+          {%- if section.settings.custom_top_spacing != blank -%}
+              padding-top: {{ section.settings.custom_top_spacing }};
+          {%- endif -%}
+          {%- if section.settings.custom_bottom_spacing != blank -%}
+              padding-bottom: {{ section.settings.custom_bottom_spacing }};
+          {%- endif -%}
+         }
+  	  {%- endif -%}
+    }
+   	@media (min-width: 725px) {
+      .video-thebox-{{ parent.id }} video {
+          height: 100% !important;
+          max-height: 665px !important;
+          {%- if section.settings.custom_height != blank -%}
+              height: {{ section.settings.custom_height }} !important;
+          {%- endif -%}
+      }
+    }
+</style>
+
+
+<div class="video-thebox video-thebox-{{ parent.id }} {%- if parent.settings.video_full_width != blank -%} video-thebox-fullwidth{%- endif -%}" data-parent-id="{{ parent.id }}" data-parent-type="video-parent"
+    {% if parent.settings.title != blank and parent.settings.show_title %} 
+      <div class="title text-center">{{ parent.settings.title }}</div>
+    {% endif %}>
+    {%- if parent.settings.video_link != blank -%}
+      <div class="video-outer">
+		{%- if parent.settings.link != blank -%}
+          <a href="{{parent.settings.link}}">
+		{% endif %}
+            {% if parent.settings.image != blank %}
+            <style>
+              #video-{{ parent.id }}{%- if parent.settings.loop != blank -%}-autoplay{%- endif -%} {
+                background: transparent url('{{ parent.settings.image_mobile | default: parent.settings.image | img_url: 'master' }}') 50% 50% / cover no-repeat;
+              }
+              @media all and (min-width: 725px) {
+                #video-{{ parent.id }}{%- if parent.settings.loop != blank -%}-autoplay{%- endif -%} {
+                  background: transparent url('{{ parent.settings.image | img_url: 'master' }}') 50% 50% / cover no-repeat;
+                }
+              }
+            </style>
+            {% endif %}
+            <video id="video-{{ parent.id }}{%- if parent.settings.loop != blank -%}-autoplay{%- endif -%}" 
+              	   {% if parent.settings.show_controls != blank %} controls="controls" {% endif %}
+                   {% if parent.settings.loop != blank %} loop="loop" {% endif %}
+                   playsinline
+				   preload="none"
+				   {% if parent.settings.loop != blank %} autoplay="autoplay" {% endif %}
+                   {% if parent.settings.play_on_scroll != blank %}play-on-scroll="1"{% endif %}
+                   {% unless parent.settings.enable_sound != blank %}muted{% endunless %}
+                   poster="{{ parent.settings.image_mobile | default: parent.settings.image | img_url: 'master' }}"
+                   >
+              		<source src='{{ parent.settings.video_link_mobile | default: parent.settings.video_link }}' type='video/mp4'>
+			</video>
+		{%- if parent.settings.link != blank -%}
+          </a>
+		{% endif %}
+      </div>
+  	{%- endif -%}
+    <script>
+      try {
+        var video = document.getElementById("video-{{ parent.id }}{%- if parent.settings.loop != blank -%}-autoplay{%- endif -%}");
+        if (video) {
+          
+          const mediaQueryList = window.matchMedia('(min-width: 725px)');
+          
+          function validateScreenSize(mediaQueryList) {
+              const currentVideo = document.getElementById("video-{{ parent.id }}{%- if parent.settings.loop != blank -%}-autoplay{%- endif -%}");
+              const newVideo = currentVideo.cloneNode(true);
+           	  newVideo.poster = '{{ parent.settings.image_mobile | default: parent.settings.image | img_url: 'master' }}'
+              if (mediaQueryList.matches) {
+                  newVideo.innerHTML = "<source src='{{ parent.settings.video_link }}' type='video/mp4'>"
+                  newVideo.poster = '{{ parent.settings.image | img_url: 'master' }}'
+              } else {
+                newVideo.innerHTML = "<source src='{{ parent.settings.video_link_mobile | default: parent.settings.video_link }}' type='video/mp4'>"
+              }
+              currentVideo.parentNode.replaceChild(newVideo, currentVideo);
+          }
+
+          mediaQueryList.addEventListener('change', event => {
+              validateScreenSize(event)
+          })
+          
+          validateScreenSize(mediaQueryList)
+          
+          video.play()
+          
+        }
+      } catch(e) {
+      	console.log(e) 
+      }
+    </script>
+</div>

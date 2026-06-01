@@ -1,0 +1,339 @@
+{%- assign component_class = 'feature-columns-dunk__' | append: section.id -%}
+
+<style>
+  .{{ component_class }} {
+    width: 100%;
+    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+  }
+  .{{ component_class }}__inner {
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 0 56px;
+  }
+  {% if section.settings.show_top_border %}
+  .{{ component_class }}__separator {
+    height: 1px;
+    background: #111;
+    margin: 0 56px {{ section.settings.padding_top }}px;
+  }
+  {% endif %}
+  .{{ component_class }}__grid {
+    display: grid;
+    grid-template-columns: repeat({{ section.blocks.size | at_most: 4 | at_least: 1 }}, minmax(0, 1fr));
+    gap: 32px;
+  }
+  .{{ component_class }}__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .{{ component_class }}__title {
+    font-family: var(--font-body, inherit) !important;
+    font-weight: 500;
+    font-size: 18px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: #111;
+    margin: 0 0 18px;
+  }
+  .{{ component_class }}__media {
+    display: block;
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+    background: #f4f4f4;
+  }
+  .{{ component_class }}__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform .5s ease;
+  }
+  .{{ component_class }}__item:hover .{{ component_class }}__media img {
+    transform: scale(1.03);
+  }
+  .{{ component_class }}__cta {
+    display: inline-block;
+    margin-top: 16px;
+    padding: 4px 28px;
+    border: 1px solid #111;
+    border-radius: 6px;
+    background: transparent;
+    color: #111;
+    font-family: var(--font-body, inherit);
+    font-size: 14px;
+    line-height: 1.5;
+    letter-spacing: 0;
+    text-decoration: none;
+    transition: background .2s ease, color .2s ease;
+    cursor: pointer;
+  }
+  .{{ component_class }}__cta:hover {
+    background: #111;
+    color: #fff;
+  }
+  @media (max-width: 749px) {
+    .{{ component_class }} {
+      padding: {{ section.settings.padding_top_mobile }}px 0 {{ section.settings.padding_bottom_mobile }}px;
+    }
+    .{{ component_class }}__inner {
+      padding: 0 16px;
+    }
+    .{{ component_class }}__grid {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .{{ component_class }}__title {
+      font-size: 26px;
+    }
+  }
+</style>
+
+<section class="{{ component_class }}" data-section-id="{{ section.id }}" data-section-type="feature-columns-dunk">
+  {% if section.settings.show_top_border %}
+    <div class="{{ component_class }}__separator" aria-hidden="true"></div>
+  {% endif %}
+  <div class="{{ component_class }}__inner">
+    {%- if section.blocks.size > 0 -%}
+      <div class="{{ component_class }}__grid">
+        {%- for block in section.blocks -%}
+          <div class="{{ component_class }}__item" {{ block.shopify_attributes }}>
+            {%- if block.settings.title != blank -%}
+              <h3 class="{{ component_class }}__title">{{ block.settings.title | escape }}</h3>
+            {%- endif -%}
+
+            {%- assign desktop_img = block.settings.image -%}
+            {%- assign mobile_img = block.settings.image_mobile | default: desktop_img -%}
+
+            {%- comment -%} asset_filename takes priority over image_picker {%- endcomment -%}
+            {%- assign asset_desktop = '' -%}
+            {%- assign asset_mobile = '' -%}
+            {%- if block.settings.asset_filename != blank -%}
+              {%- assign asset_desktop = block.settings.asset_filename | asset_url -%}
+            {%- endif -%}
+            {%- if block.settings.asset_filename_mobile != blank -%}
+              {%- assign asset_mobile = block.settings.asset_filename_mobile | asset_url -%}
+            {%- elsif asset_desktop != '' -%}
+              {%- assign asset_mobile = asset_desktop -%}
+            {%- endif -%}
+
+            {%- if block.settings.link != blank -%}
+              <a class="{{ component_class }}__media" href="{{ block.settings.link }}" aria-label="{{ block.settings.title | escape }}">
+            {%- else -%}
+              <div class="{{ component_class }}__media">
+            {%- endif -%}
+              {%- if asset_desktop != '' -%}
+                <picture>
+                  <source media="(min-width: 750px)" srcset="{{ asset_desktop }}">
+                  <source media="(max-width: 749px)" srcset="{{ asset_mobile }}">
+                  <img src="{{ asset_desktop }}" alt="{{ block.settings.title | escape }}" loading="lazy">
+                </picture>
+              {%- elsif desktop_img != blank -%}
+                <picture>
+                  <source media="(min-width: 750px)" srcset="{{ desktop_img | img_url: '800x' }} 1x, {{ desktop_img | img_url: '1600x' }} 2x">
+                  <source media="(max-width: 749px)" srcset="{{ mobile_img | img_url: '800x' }} 1x, {{ mobile_img | img_url: '1600x' }} 2x">
+                  <img
+                    src="{{ desktop_img | img_url: '800x' }}"
+                    alt="{{ desktop_img.alt | default: block.settings.title | escape }}"
+                    loading="lazy"
+                    width="{{ desktop_img.width }}"
+                    height="{{ desktop_img.height }}">
+                </picture>
+              {%- else -%}
+                {%- capture placeholder_name -%}{% cycle 'lifestyle-1','lifestyle-2','collection-1','collection-2' %}{%- endcapture -%}
+                {{ placeholder_name | placeholder_svg_tag: 'placeholder-svg placeholder-svg--feature' }}
+              {%- endif -%}
+            {%- if block.settings.link != blank -%}
+              </a>
+            {%- else -%}
+              </div>
+            {%- endif -%}
+
+            {%- if block.settings.button_label != blank -%}
+              {%- assign cta_href = block.settings.link | default: '#' -%}
+              <a href="{{ cta_href }}" class="{{ component_class }}__cta">{{ block.settings.button_label | escape }}</a>
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": {
+    "en": "Feature columns Dunk",
+    "es": "Columnas Dunk"
+  },
+  "class": "index-section feature-columns-dunk",
+  "max_blocks": 4,
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_top_border",
+      "label": {
+        "en": "Show top divider",
+        "es": "Mostrar divisor superior"
+      },
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": {
+        "en": "Spacing",
+        "es": "Espaciado"
+      }
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": {
+        "en": "Top padding (desktop)",
+        "es": "Padding superior (desktop)"
+      },
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": {
+        "en": "Bottom padding (desktop)",
+        "es": "Padding inferior (desktop)"
+      },
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": {
+        "en": "Top padding (mobile)",
+        "es": "Padding superior (mobile)"
+      },
+      "default": 24
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": {
+        "en": "Bottom padding (mobile)",
+        "es": "Padding inferior (mobile)"
+      },
+      "default": 24
+    }
+  ],
+  "blocks": [
+    {
+      "type": "column",
+      "name": {
+        "en": "Column",
+        "es": "Columna"
+      },
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": {
+            "en": "Title",
+            "es": "Título"
+          },
+          "default": "EXPLORE"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": {
+            "en": "Image (desktop)",
+            "es": "Imagen (desktop)"
+          }
+        },
+        {
+          "type": "image_picker",
+          "id": "image_mobile",
+          "label": {
+            "en": "Image (mobile)",
+            "es": "Imagen (mobile)"
+          }
+        },
+        {
+          "type": "text",
+          "id": "asset_filename",
+          "label": {
+            "en": "Theme asset filename (overrides Image)",
+            "es": "Nombre del asset del tema (anula Imagen)"
+          },
+          "info": {
+            "en": "e.g. dunk-explore.jpg — file must exist in /assets/. Takes priority over the Image picker.",
+            "es": "ej. dunk-explore.jpg — el archivo debe existir en /assets/. Tiene prioridad sobre Imagen."
+          }
+        },
+        {
+          "type": "text",
+          "id": "asset_filename_mobile",
+          "label": {
+            "en": "Theme asset filename · Mobile",
+            "es": "Nombre del asset · Mobile"
+          },
+          "info": {
+            "en": "Optional. Falls back to desktop asset.",
+            "es": "Opcional. Si vacío, usa el asset desktop."
+          }
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": {
+            "en": "Link",
+            "es": "Enlace"
+          }
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": {
+            "en": "Button label",
+            "es": "Texto del botón"
+          },
+          "default": "Ver más"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": {
+        "en": "Feature columns Dunk",
+        "es": "Columnas Dunk"
+      },
+      "category": {
+        "en": "Dunkelvolk",
+        "es": "Dunkelvolk"
+      },
+      "blocks": [
+        { "type": "column", "settings": { "title": "EXPLORE" } },
+        { "type": "column", "settings": { "title": "MOVE" } },
+        { "type": "column", "settings": { "title": "CONNECT" } },
+        { "type": "column", "settings": { "title": "QUALITY" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

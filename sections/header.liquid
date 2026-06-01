@@ -1,0 +1,1446 @@
+{% if section.settings.message %}
+  <style>
+    {% if section.settings.logo != blank %}
+      .site-header__logo-image {
+        max-width: {{ section.settings.logo_max_width | escape }}px;
+      }
+    {% endif %}
+
+    {% if section.settings.align_logo == 'left' %}
+      .site-header__logo-image {
+        margin: 0;
+      }
+    {% endif %}
+    @media only screen and (max-width: 749px) {
+      .site-header__logo {
+		margin-top: 1px;
+    	margin-bottom: 1px;
+      }
+      {% if section.settings.logo_max_width_mobile != blank %}
+      .site-header__logo-image {
+        max-width: {{ section.settings.logo_max_width_mobile | escape }}px;
+      }
+    {% endif %}
+    }
+  </style>
+{% endif %}
+
+{% include 'search-drawer' %}
+
+<style>
+  .site-nav__dropdown.full-width {
+    width: 100vw; 
+    left: 50% !important;
+    right: 50% !important;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    top: 61px !important; /* this line added to avoid overlapping header logo */ 
+    text-align: center;
+  }
+  .site-header__mobile-nav-menu .grid__item {
+      font-size: 12px;
+      font-weight: bold;
+      font-family: 'Quicksand';
+      padding-top: 18px;
+      padding-left: 12px;
+  }
+  .site-header__mobile-nav-menu .grid__item.top-menu {
+      padding-top: 0;
+/*       padding-bottom: 0; */
+    padding-bottom: 8px;
+    
+  }
+  .site-header .grid-link-check {
+  	display: inline-block;
+  }
+  .site-header .mobile-search-bar {
+  	max-width: 98%;
+    margin: auto;
+    margin-bottom: 10px;
+  }
+  .site-header .search-bar__input {
+    border-radius: 30px;
+    min-height: 30px;
+  }
+
+  @media only screen and (max-width: 749px) {
+    .site-header__icon {
+      padding-top: 0;
+      padding-bottom: 0;
+      width: 55px;
+    }
+    .site-header__icons .btn--link, .site-header__icons .site-header__cart {
+      width: 51px;	
+    }
+    .site-header__icon:first-of-type {
+      border-right: 1px solid #dbdbdb;
+    }
+  }
+  @media screen and (min-width: 1300px) and (max-width: 1600px){
+    .medium-up--one-half {
+    width: 41%;
+	}
+  }
+  @media screen and (min-width: 1300px) and (max-width: 1410px){
+    .site-header__icons-wrapper {
+    position: relative;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    -moz-align-items: center;
+    -ms-align-items: center;
+    -o-align-items: center;
+    align-items: center;
+    -webkit-justify-content: flex-end;
+    -ms-justify-content: flex-end;
+    justify-content: flex-end;
+    /* text-align: right; */
+    margin-left: 132px;
+	}
+  }
+  @media screen and (min-width: 1300px) and (max-width: 1600px){
+    .site-header__mobile-nav-menu .grid__item {
+    font-size: 12px;
+    font-weight: bold;
+    font-family: 'Quicksand';
+    padding-top: 8px;
+    padding-left: 0px;
+	}
+  }
+  @media screen and (min-width: 1411px) and (max-width: 1600px){
+  .medium-up--one-quarter {
+        width: 31%;
+    }
+  }
+  @media screen and (min-width: 1411px) and (max-width: 1600px){
+      .site-header__icons-wrapper {
+          position: relative;
+          display: -webkit-flex;
+          display: -ms-flexbox;
+          display: flex;
+          width: 100%;
+          -ms-flex-align: center;
+          -webkit-align-items: center;
+          -moz-align-items: center;
+          -ms-align-items: center;
+          -o-align-items: center;
+          align-items: center;
+          -webkit-justify-content: flex-end;
+          -ms-justify-content: flex-end;
+          justify-content: flex-end;
+          padding-left: 84px;
+      }
+  }
+  @media screen and (max-width: 749px) {
+    .site-header__icons {
+    	width: 100%;
+    }
+  }
+  a {
+    color: #3a3a3a;
+    text-decoration: none;
+    font-family: 'Abel';
+}
+  @media screen and (min-width: 768px){
+    .site-nav {
+        text-align: center!important;
+    }
+  }
+  .icon {
+    display: inline-block;
+    width: 20px;
+    height: 30px;
+    vertical-align: middle;
+    fill: currentColor;
+}
+  @media only screen and (min-width: 750px){
+    .site-header__account, .site-header__cart {
+        padding: 0px 11px;
+    }
+  }
+  @media only screen and (max-width: 749px){
+.site-header__mobile-nav {
+  padding-top: 5px;
+    padding-bottom: 5px;
+}
+  }
+  svg.icon.icon-cart {
+    height: 29px;
+    width: 38px;
+}
+  .grid--no-gutters .grid__item {
+    padding-left: 0;
+    padding-bottom: 5px;
+}
+
+  /* ===== Dunk Header v2 ===== */
+  .dunk-header-active > header.site-header { padding: 0 !important; margin: 0 !important; border: 0 !important; min-height: 0 !important; }
+  .dunk-header-active > header.site-header > .site-header__mobile-nav { display: none !important; }
+  /* Neutralize the legacy h1 logo so SEO sees it but it doesn't paint */
+  .dunk-header-active > header.site-header .site-header__logo {
+    position: absolute;
+    width: 1px; height: 1px;
+    margin: -1px; padding: 0;
+    overflow: hidden; clip: rect(0,0,0,0);
+    white-space: nowrap; border: 0;
+  }
+  /* Always black text — overlay just removes background, keeps color */
+  .dunk-header-wrapper {
+    position: relative;
+    z-index: 50;
+    background: #fff;
+    color: #111;
+    transition: background .25s ease;
+  }
+  .dunk-header-wrapper--overlay {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    background: transparent;
+    color: #111; /* keep black even on overlay */
+  }
+  .dunk-header-wrapper--solid {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    background: #fff;
+    color: #111;
+    box-shadow: 0 1px 0 rgba(0,0,0,.08);
+    animation: dunkSlideDown .25s ease;
+  }
+  @keyframes dunkSlideDown {
+    from { transform: translateY(-100%); }
+    to { transform: translateY(0); }
+  }
+
+  .dunk-utility-row {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    padding: 6px 56px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    color: #111;
+  }
+  .dunk-utility-row__left { justify-self: start; }
+  .dunk-utility-row__right { justify-self: end; }
+  .dunk-utility-row a { color: inherit; text-decoration: none; }
+  .dunk-pill {
+    display: inline-block;
+    padding: 8px 64px;
+    min-width: 360px;
+    background: #000;
+    color: #fff !important;
+    border-radius: 999px;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-align: center;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  @media (max-width: 749px) {
+    .dunk-pill { min-width: 0; padding: 8px 36px; font-size: 11px; }
+  }
+
+  .dunk-header {
+    display: grid;
+    grid-template-columns: auto 1fr auto 1fr auto;
+    column-gap: 32px;
+    align-items: center;
+    padding: 10px 56px;
+    background: transparent;
+    color: #111;
+    border: 0;
+  }
+  .dunk-header__farleft {
+    justify-self: start;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    color: #111;
+  }
+  .dunk-header__farleft a { color: inherit; text-decoration: none; }
+  .dunk-header__farleft a:hover { opacity: .7; }
+  .dunk-header__nav {
+    display: inline-flex;
+    align-items: center;
+    gap: 22px;
+  }
+  .dunk-header__nav--left { justify-self: start; }
+  .dunk-header__nav--right { justify-self: end; }
+  .dunk-header__nav a {
+    color: #111;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    padding: 4px 0;
+  }
+  .dunk-header__nav a:hover { opacity: .7; }
+  .dunk-header__logo {
+    justify-self: center;
+    display: inline-flex;
+    align-items: center;
+    margin: 0;
+  }
+  .dunk-header__logo img { display: block; max-height: 60px; width: auto; }
+  .dunk-header__icons {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-left: 0;
+    justify-self: end;
+  }
+  .dunk-header__icons a,
+  .dunk-header__icons button {
+    color: #111 !important;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    position: relative;
+  }
+  .dunk-header__icons svg { fill: #111 !important; width: 18px; height: 18px; }
+  .dunk-header__icons .dunk-header__cart-icon {
+    display: block;
+    width: 22px;
+    height: 22px;
+    object-fit: contain;
+  }
+  .dunk-header__icons .dunk-header__cart-link { line-height: 0; }
+  .dunk-header__burger {
+    background: transparent;
+    border: 0;
+    color: inherit;
+    cursor: pointer;
+    padding: 0;
+    width: 32px;
+    height: 32px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .dunk-header__burger svg { width: 22px; height: 22px; fill: currentColor; }
+  .dunk-header__burger .icon-close { display: none; }
+  .mobile-nav-open .dunk-header__burger .icon-hamburger { display: none; }
+  .mobile-nav-open .dunk-header__burger .icon-close { display: inline-block; }
+
+  .dunk-header__cart-count {
+    position: absolute;
+    top: -6px;
+    right: -10px;
+    min-width: 16px;
+    height: 16px;
+    padding: 0 4px;
+    border-radius: 999px;
+    background: #000;
+    color: #fff;
+    font-size: 10px;
+    line-height: 16px;
+    text-align: center;
+  }
+  .dunk-header-wrapper--overlay .dunk-header__cart-count {
+    background: var(--dunk-overlay-text, #fff);
+    color: #000;
+  }
+
+  @media (max-width: 749px) {
+    .dunk-utility-row {
+      grid-template-columns: 1fr;
+      padding: 10px 16px;
+      justify-items: center;
+    }
+    .dunk-utility-row__left,
+    .dunk-utility-row__right { display: none; }
+    .dunk-header {
+      grid-template-columns: auto 1fr auto;
+      column-gap: 12px;
+      padding: 10px 16px;
+    }
+    .dunk-header__nav--desktop { display: none !important; }
+    .dunk-header__logo img { max-height: 38px; }
+    .dunk-header__icons svg { width: 18px; height: 18px; }
+  }
+  @media (min-width: 750px) {
+    .dunk-header__burger { display: none !important; }
+  }
+</style>
+
+{% for block in section.blocks %}
+	<style>
+      #SiteNav > li[data-title="{{ block.settings.menu_text }}"] > a,
+      #SiteNav > li[data-title="{{ block.settings.menu_text }}"] > button span {
+		color: {{ block.settings.menu_color }};
+	  }
+	</style>
+{% endfor %}
+
+{%- assign dunk_header = section.settings.enable_dunk_header -%}
+{%- assign overlay_active = false -%}
+{%- if dunk_header and section.settings.transparent_on_index and request.page_type == 'index' -%}
+  {%- assign overlay_active = true -%}
+{%- endif -%}
+{%- assign show_pill = false -%}
+{%- if section.settings.message and section.settings.message_text != blank -%}
+  {%- if section.settings.home_page_only == false or request.page_type == 'index' -%}
+    {%- assign show_pill = true -%}
+  {%- endif -%}
+{%- endif -%}
+
+<div data-section-id="{{ section.id }}" data-section-type="header-section" data-header-section{% if dunk_header %} class="dunk-header-active"{% endif %}>
+
+{%- if dunk_header -%}
+  <div class="dunk-header-wrapper{% if overlay_active %} dunk-header-wrapper--overlay{% endif %}"
+       data-dunk-header
+       data-overlay="{{ overlay_active }}"
+       style="--dunk-overlay-text: {{ section.settings.transparent_text_color | default: '#ffffff' }};">
+
+    {%- if section.settings.utility_left_text != blank or section.settings.utility_right_text != blank or show_pill -%}
+      <div class="dunk-utility-row">
+        <div class="dunk-utility-row__left">
+          {%- if section.settings.utility_left_text != blank -%}
+            {%- if section.settings.utility_left_link != blank -%}
+              <a href="{{ section.settings.utility_left_link }}">{{ section.settings.utility_left_text | escape }}</a>
+            {%- else -%}
+              {{ section.settings.utility_left_text | escape }}
+            {%- endif -%}
+          {%- endif -%}
+        </div>
+        <div class="dunk-utility-row__center">
+          {%- if show_pill -%}
+            {%- assign pill_bg = section.settings.color_bg | default: '#000000' -%}
+            {%- assign pill_color = section.settings.color_text | default: '#ffffff' -%}
+            {%- if section.settings.message_link != blank -%}
+              <a class="dunk-pill" href="{{ section.settings.message_link }}" style="background: {{ pill_bg }}; color: {{ pill_color }};">{{ section.settings.message_text | escape }}</a>
+            {%- else -%}
+              <span class="dunk-pill" style="background: {{ pill_bg }}; color: {{ pill_color }};">{{ section.settings.message_text | escape }}</span>
+            {%- endif -%}
+          {%- endif -%}
+        </div>
+        <div class="dunk-utility-row__right">
+          {%- if section.settings.utility_right_text != blank -%}
+            {%- if section.settings.utility_right_link != blank -%}
+              <a href="{{ section.settings.utility_right_link }}">{{ section.settings.utility_right_text | escape }}</a>
+            {%- else -%}
+              {{ section.settings.utility_right_text | escape }}
+            {%- endif -%}
+          {%- endif -%}
+        </div>
+      </div>
+    {%- endif -%}
+
+    <div class="dunk-header" role="banner">
+      {%- comment -%} Far left: Tiendas (single link) · mobile burger {%- endcomment -%}
+      <div class="dunk-header__farleft dunk-header__nav--desktop">
+        {%- if section.settings.farleft_text != blank -%}
+          {%- if section.settings.farleft_link != blank -%}
+            <a href="{{ section.settings.farleft_link }}">{{ section.settings.farleft_text | escape }}</a>
+          {%- else -%}
+            {{ section.settings.farleft_text | escape }}
+          {%- endif -%}
+        {%- endif -%}
+      </div>
+      <button type="button" class="dunk-header__burger js-mobile-nav-toggle mobile-nav--open"
+              aria-controls="MobileNav" aria-expanded="false"
+              aria-label="{{ 'layout.navigation.menu' | t }}">
+        {% include 'icon-hamburger' %}
+        {% include 'icon-close' %}
+      </button>
+
+      {%- comment -%} Left of logo: main nav (Ropa Calzado Accesorios) {%- endcomment -%}
+      <div class="dunk-header__nav dunk-header__nav--left dunk-header__nav--desktop">
+        {%- if linklists[section.settings.main_linklist].links.size > 0 -%}
+          {%- for link in linklists[section.settings.main_linklist].links -%}
+            <a href="{{ link.url }}"{% if link.current %} aria-current="page"{% endif %}>{{ link.title | escape }}</a>
+          {%- endfor -%}
+        {%- endif -%}
+      </div>
+
+      {%- comment -%} Center: logo (h1 stays on the legacy header for SEO) {%- endcomment -%}
+      <div class="dunk-header__logo">
+        <a href="{{ routes.root_url }}" aria-label="{{ shop.name | escape }}">
+          {%- if section.settings.logo != blank -%}
+            <img src="{{ section.settings.logo | img_url: '500x' }}"
+                 srcset="{{ section.settings.logo | img_url: '500x' }} 1x, {{ section.settings.logo | img_url: '1000x' }} 2x"
+                 alt="{{ section.settings.logo.alt | default: shop.name | escape }}">
+          {%- else -%}
+            <span>{{ shop.name }}</span>
+          {%- endif -%}
+        </a>
+      </div>
+
+      {%- comment -%} Right of logo: secondary nav (About Us · The Pima Journey · Explorer's Club) {%- endcomment -%}
+      <div class="dunk-header__nav dunk-header__nav--right dunk-header__nav--desktop">
+        {%- if linklists[section.settings.secondary_linklist].links.size > 0 -%}
+          {%- for link in linklists[section.settings.secondary_linklist].links -%}
+            <a href="{{ link.url }}"{% if link.current %} aria-current="page"{% endif %}>{{ link.title | escape }}</a>
+          {%- endfor -%}
+        {%- endif -%}
+      </div>
+
+      {%- comment -%} Far right: icons (search, account, cart) {%- endcomment -%}
+      <div class="dunk-header__icons">
+        <button type="button" class="js-drawer-open-top" aria-label="{{ 'general.search.submit' | t }}">
+          {% include 'icon-search' %}
+        </button>
+        {%- if shop.customer_accounts_enabled -%}
+          {%- if customer -%}
+            <a href="{{ routes.account_url }}" aria-label="{{ 'layout.customer.account' | t }}">
+              {% include 'icon-login' %}
+            </a>
+          {%- else -%}
+            <a href="{{ routes.account_login_url }}" aria-label="{{ 'layout.customer.log_in' | t }}">
+              {% include 'icon-login' %}
+            </a>
+          {%- endif -%}
+        {%- endif -%}
+        <a href="{{ routes.cart_url }}" aria-label="{{ 'layout.cart.title' | t }}" class="dunk-header__cart-link">
+          <img class="dunk-header__cart-icon" src="{{ 'backpack.png' | asset_url }}" alt="" width="22" height="22" loading="eager">
+          <span id="DunkCartCount" class="dunk-header__cart-count{% if cart.item_count == 0 %} hide{% endif %}" data-cart-count-bubble>
+            <span data-cart-count>{{ cart.item_count }}</span>
+          </span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      var wrapper = document.querySelector('[data-dunk-header]');
+      if (!wrapper) return;
+      var isOverlay = wrapper.getAttribute('data-overlay') === 'true';
+      var threshold = 60;
+      var lastSolid = null;
+      function onScroll() {
+        var solid = window.scrollY > threshold;
+        if (solid === lastSolid) return;
+        lastSolid = solid;
+        // Always remove overlay class when scrolled (so solid bg can take over);
+        // restore overlay when back at top
+        if (isOverlay) {
+          if (solid) {
+            wrapper.classList.remove('dunk-header-wrapper--overlay');
+          } else {
+            wrapper.classList.add('dunk-header-wrapper--overlay');
+          }
+        }
+        wrapper.classList.toggle('dunk-header-wrapper--solid', solid);
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+    })();
+  </script>
+{%- endif -%}
+
+
+  <header class="site-header{% if section.settings.align_logo == 'left' %} border-bottom logo--left{% else %} logo--center{% endif %}" role="banner">
+    
+    <div class="grid grid--no-gutters grid--table site-header__mobile-nav">
+      
+      {% if section.settings.align_logo == 'center' %}
+        {%- assign logo_classes = 'medium-up--one-third medium-up--push-one-third logo-align--center' -%}
+      {% else %}
+        {%- assign logo_classes = 'two-half medium-up--one-quarter logo-align--left' -%}
+      {% endif %}
+
+      <div class="grid__item {{ logo_classes }}">
+        {% comment %}
+          Use the uploaded logo from theme settings if enabled.
+          Site name gets precedence with H1 tag on homepage, div on other pages.
+        {% endcomment %}
+        {% if request.page_type == 'index' %}
+          <h1 class="h2 site-header__logo">
+        {% else %}
+          <div class="h2 site-header__logo">
+        {% endif %}
+          {% if section.settings.logo %}
+            {%- assign img_url = section.settings.logo | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+            <a href="{{ routes.root_url }}" class="site-header__logo-image{% if section.settings.align_logo == 'center' %} site-header__logo-image--centered{% endif %}">
+              {% capture logo_alt %}{{ section.settings.logo.alt | default: shop.name }}{% endcapture %}
+              <img class="lazyload js"
+                   src="{{ section.settings.logo | img_url: '300x300' }}"
+                   data-src="{{ img_url }}"
+                   data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                   data-aspectratio="{{ section.settings.logo.aspect_ratio }}"
+                   data-sizes="auto"
+                   alt="{{ logo_alt | escape }}"
+                   style="max-width: {{ section.settings.logo_max_width }}px">
+              <noscript>
+                {% capture image_size %}{{ section.settings.logo_max_width | escape }}x{% endcapture %}
+                <img src="{{ section.settings.logo | img_url: image_size }}"
+                     srcset="{{ section.settings.logo | img_url: image_size }} 1x, {{ section.settings.logo | img_url: image_size, scale: 2 }} 2x"
+                     alt="{{ section.settings.logo.alt | default: shop.name }}"
+                     style="max-width: {{ section.settings.logo_max_width }}px;">
+              </noscript>
+            </a>
+          {% else %}
+            <a class="site-header__logo-link" href="{{ routes.root_url }}">{{ shop.name }}</a>
+          {% endif %}
+        {% if request.page_type == 'index' %}
+          </h1>
+        {% else %}
+          </div>
+        {% endif %}
+      </div>
+
+      {% if section.settings.align_logo == 'left' %}
+        <nav class="grid__item medium-up--one-half small--hide" id="AccessibleNav" role="navigation">
+          {% include 'site-nav', linklist: section.settings.main_linklist, full_width: full_width_nav %}
+        </nav>
+      {% endif %}   
+      
+      
+      <div class="grid__item {% if section.settings.align_logo == 'left' %}medium-up--one-quarter{% else %}medium-up--one-third medium-up--push-one-third{% endif %} text-right site-header__icons{% if shop.customer_accounts_enabled %} site-header__icons--plus{% endif %}">
+        {% if linklists[section.settings.top_linklist].links != blank %}
+        <div class="site-header__mobile-nav site-header__mobile-nav-menu text-left">
+            <div class="grid__item top-menu medium-up--one-whole small--hide medium-up--show">
+              {% for link in linklists[section.settings.top_linklist].links limit: 3 %}
+                <div class="grid-link-check">
+                  <a href="{{ link.url }}">
+                        {{ link.title | downcase}}{% unless forloop.last == true %}&nbsp;&nbsp;|&nbsp;&nbsp;{% endunless %}
+                   </a>
+                 </div>
+              {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+        <div class="site-header__icons-wrapper">
+          <!--Search Form-->
+          <form class="search-form search-bar__form small--hide medium-up--show" action="{{ routes.search_url }}" method="get" role="search">
+            <div class="search-form__input-wrapper">
+              <input
+                type="text"
+                name="q"
+                placeholder="{{ 'general.search.placeholder' | t }}"
+                role="combobox"
+                aria-autocomplete="list"
+                aria-owns="predictive-search-results"
+                aria-expanded="false"
+                aria-label="{{ 'general.search.placeholder' | t }}"
+                aria-haspopup="listbox"
+                class="search-form__input search-bar__input"
+                data-predictive-search-drawer-input
+              />
+              <input type="hidden" name="options[prefix]" value="last" aria-hidden="true" />
+              <div class="predictive-search-wrapper predictive-search-wrapper--drawer" data-predictive-search-mount="drawer"></div>
+            </div>
+
+            <button class="search-bar__submit search-form__submit"
+              type="submit"
+              data-search-form-submit>
+              {% include 'icon-search' %}
+              <span class="icon__fallback-text">{{ 'general.search.submit' | t }}</span>
+            </button>
+      	  </form>
+          <!--End Search Form-->
+		  
+          <!--<button type="button" class="btn--link site-header__icon" style="margin-right: 5px">
+            <a href="/account/orders" title="Seguimiento de mi pedido">
+              <svg style="display none; height:45px; width:45px;" class="icon icon-tracking" id='Capa_1' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><style>.st0{fill:#303030}</style><path class='st0' d='M22.9 12l-3.1-4.5h-2.7l.2-1.5H6.9L5.5 16.4h1.4c.2.9 1 1.6 2 1.6s1.8-.7 2-1.6h5.4v.1c.2.9 1 1.5 1.9 1.5s1.7-.6 1.9-1.5v-.1h2.2l.6-4.4zm-1.9-.9h-2.3v-1h1.6l.7 1zM8.9 17.2c-.6 0-1-.3-1.1-.8 0-.1-.1-.3-.1-.4s0-.3.1-.4c.2-.5.6-.8 1.1-.8.5 0 .9.3 1.1.8 0 .1.1.3.1.4s0 .3-.1.4c-.1.5-.5.8-1.1.8zm2-1.6c-.2-.9-1-1.6-2-1.6s-1.8.7-2 1.6h-.5l1.2-8.8h8.8l-1.2 8.8h-4.3zm7.3 1.6c-.5 0-.9-.3-1.1-.7-.1-.2-.1-.3-.1-.5 0-.1 0-.2.1-.3.1-.5.6-.9 1.1-.9.5 0 1 .4 1.1.9 0 .1.1.2.1.3 0 .2 0 .3-.1.5-.2.4-.6.7-1.1.7zm3.3-1.6h-1.4c-.2-.9-1-1.6-1.9-1.6-1 0-1.8.7-1.9 1.6h-.2l.1-.5 1-6.8h2.2l.7 1H18v2.6h3.9l.2.3-.6 3.4zM1.1 8.1h4.8v.8H1.1zM2.8 10.7h2.8v.8H2.8zM4.1 12.9h1.1v.8H4.1z'/></svg>
+              <span class="icon__fallback-text">Seguimiento de pedido</span>
+            </a>
+          </button>-->
+
+          <!--<button type="button" class="btn--link site-header__icon site-header__search-toggle js-drawer-open-top">
+            {% include 'icon-search' %}
+            <span class="icon__fallback-text">{{ 'layout.navigation.search' | t }}</span>
+          </button>-->
+
+          {% if shop.customer_accounts_enabled %}
+            {% if customer %}
+              <a href="{{ routes.account_url }}" class="site-header__icon site-header__account"  title="Iniciar Sesión">
+                {% include 'icon-login' %}
+                <span class="icon__fallback-text">{{ 'layout.customer.account' | t }}</span>
+              </a>
+            {% else %}
+              <a href="{{ routes.account_login_url }}" class="site-header__icon site-header__account" title="Iniciar Sesión">
+                {% include 'icon-login' %}
+                <span class="icon__fallback-text">{{ 'layout.customer.log_in' | t }}</span>
+              </a>
+            {% endif %}
+          {% endif %}
+
+          <a href="{{ routes.cart_url }}" class="site-header__icon site-header__cart" title="Mi carrito">
+            {% include 'icon-cart' %}
+            <span class="icon__fallback-text">{{ 'layout.cart.title' | t }}</span>
+            <div id="CartCount" class="site-header__cart-count{% if cart.item_count == 0 %} hide{% endif %}" data-cart-count-bubble>
+              <span data-cart-count>{{ cart.item_count }}</span>
+              <span class="icon__fallback-text medium-up--hide">{{ 'layout.cart.items_count' | t: count: cart.item_count }}</span>
+            </div>
+          </a>
+
+          {% unless linklists[section.settings.main_linklist] == blank %}
+            <button type="button" class="btn--link site-header__icon site-header__menu js-mobile-nav-toggle mobile-nav--open" aria-controls="MobileNav"  aria-expanded="false" aria-label="{{ 'layout.navigation.menu' | t }}" 
+                    style="border-right: none !important;">
+              {% include 'icon-hamburger' %}
+              {% include 'icon-close' %}
+            </button>
+          {% endunless %}
+        </div>
+
+      </div>
+    </div>
+
+    <nav class="mobile-nav-wrapper medium-up--hide" role="navigation">
+      <ul id="MobileNav" class="mobile-nav">
+		{% if linklists[section.settings.top_linklist].links != blank %}
+          {% for link in linklists[section.settings.top_linklist].links limit: 3 %}
+          <li class="mobile-nav__item border-top border-bottom">
+            <a href="{{ link.url }}"
+               class="mobile-nav__link"
+               >
+              <span class="mobile-nav__label">{{ link.title | upcase }}</span>
+            </a>
+          </li>
+          {% endfor %}
+        {% endif %}
+        {% for link in linklists[section.settings.main_linklist].links %}
+          {%- assign outerLoopIndex = forloop.index -%}
+
+          <li class="mobile-nav__item{% unless forloop.last %} border-bottom{% endunless %}">
+            {% if link.links != blank %}
+              {% capture child_list_handle %}{{ link.handle }}-{{ outerLoopIndex }}{% endcapture %}
+              <button type="button" class="btn--link js-toggle-submenu mobile-nav__link{% if link.child_active %} mobile-nav__link--active{% endif %}" data-target="{{ child_list_handle }}" data-level="1" aria-expanded="false">
+                <span class="mobile-nav__label">{{ link.title | escape }}</span>
+                <div class="mobile-nav__icon">
+                  {% include 'icon-chevron-right' %}
+                </div>
+              </button>
+              <ul class="mobile-nav__dropdown" data-parent="{{ child_list_handle }}" data-level="2">
+                <li class="visually-hidden" tabindex="-1" data-menu-title="2">
+                  {{- link.title }} {{ 'layout.navigation.menu' | t -}}
+                </li>
+                <li class="mobile-nav__item border-bottom">
+                  <div class="mobile-nav__table">
+                    <div class="mobile-nav__table-cell mobile-nav__return">
+                      <button class="btn--link js-toggle-submenu mobile-nav__return-btn" type="button" aria-expanded="true" aria-label="{{ link.title }}">
+                        {% include 'icon-chevron-left' %}
+                      </button>
+                    </div>
+                    <span class="mobile-nav__sublist-link mobile-nav__sublist-header mobile-nav__sublist-header--main-nav-parent">
+                      <a href="{{ link.url }}"><span class="mobile-nav__label">{{ link.title | escape }}</span></a>
+                    </span>
+                  </div>
+                </li>
+
+                {% for childlink in link.links %}
+                  <li class="mobile-nav__item{% unless forloop.last %} border-bottom{% endunless %}">
+                    {% if childlink.links != blank %}
+                      {% capture grandchild_list_handle %}{{ childlink.handle }}-{{ outerLoopIndex }}-{{ forloop.index }}{% endcapture %}
+                      <button type="button" class="btn--link js-toggle-submenu mobile-nav__link mobile-nav__sublist-link" data-target="{{ grandchild_list_handle }}" aria-expanded="false">
+                        <span class="mobile-nav__label">{{ childlink.title | escape }}</span>
+                        <div class="mobile-nav__icon">
+                          {% include 'icon-chevron-right' %}
+                        </div>
+                      </button>
+                      <ul class="mobile-nav__dropdown" data-parent="{{ grandchild_list_handle }}" data-level="3">
+                        <li class="visually-hidden" tabindex="-1" data-menu-title="3">
+                          {{- childlink.title }} {{ 'layout.navigation.menu' | t -}}
+                        </li>
+                        <li class="mobile-nav__item border-bottom">
+                          <div class="mobile-nav__table">
+                            <div class="mobile-nav__table-cell mobile-nav__return">
+                              <button type="button" class="btn--link js-toggle-submenu mobile-nav__return-btn" data-target="{{ child_list_handle }}" aria-expanded="true" aria-label="{{ childlink.title }}">
+                                {% include 'icon-chevron-left' %}
+                              </button>
+                            </div>
+                            <a href="{{ childlink.url }}"
+                              class="mobile-nav__sublist-link mobile-nav__sublist-header"
+                              {% if childlink.current %} aria-current="page"{% endif %}
+                            >
+                              <span class="mobile-nav__label">{{ childlink.title | escape }}</span>
+                            </a>
+                          </div>
+                        </li>
+                        {% for grandchildlink in childlink.links %}
+                          <li class="mobile-nav__item{% unless forloop.last %} border-bottom{% endunless %}">
+                            <a href="{{ grandchildlink.url }}"
+                              class="mobile-nav__sublist-link"
+                              {% if grandchildlink.current %} aria-current="page"{% endif %}
+                            >
+                              <span class="mobile-nav__label">{{ grandchildlink.title | escape }}</span>
+                            </a>
+                          </li>
+                        {% endfor %}
+                      </ul>
+                    {% else %}
+                      <a href="{{ childlink.url }}"
+                        class="mobile-nav__sublist-link"
+                        {% if childlink.current %} aria-current="page"{% endif %}
+                      >
+                        <span class="mobile-nav__label">{{ childlink.title | escape }}</span>
+                      </a>
+                    {% endif %}
+                  </li>
+                {% endfor %}
+              </ul>
+            {% else %}
+              <a href="{{ link.url }}"
+                class="mobile-nav__link{% if link.active %} mobile-nav__link--active{% endif %}"
+                {% if link.current %} aria-current="page"{% endif %}
+              >
+                <span class="mobile-nav__label">{{ link.title | escape }}</span>
+              </a>
+            {% endif %}
+          </li>
+        {% endfor %}
+        
+      </ul>
+    </nav>
+    <form class="search-form mobile-search-bar search-bar__form medium-up--hide" action="{{ routes.search_url }}" method="get" role="search">
+      <div class="search-form__input-wrapper">
+        <input
+               type="text"
+               name="q"
+               placeholder="{{ 'general.search.placeholder' | t }}"
+               role="combobox"
+               aria-autocomplete="list"
+               aria-owns="predictive-search-results"
+               aria-expanded="false"
+               aria-label="{{ 'general.search.placeholder' | t }}"
+               aria-haspopup="listbox"
+               class="search-form__input search-bar__input"
+               data-predictive-search-drawer-input
+               />
+        <input type="hidden" name="options[prefix]" value="last" aria-hidden="true" />
+        <div class="predictive-search-wrapper predictive-search-wrapper--drawer" data-predictive-search-mount="drawer"></div>
+      </div>
+
+      <button class="search-bar__submit search-form__submit"
+              type="submit"
+              data-search-form-submit>
+        {% include 'icon-search' %}
+        <span class="icon__fallback-text">{{ 'general.search.submit' | t }}</span>
+      </button>
+    </form>
+  </header>
+
+  {% if section.settings.align_logo == 'center' %}
+  <nav class="small--hide border-bottom" id="AccessibleNav" role="navigation">
+    {% include 'site-nav', linklist: section.settings.main_linklist, wrapper_class: 'site-nav--centered' %}
+  </nav>
+  {% endif %}
+</div>
+
+<div id='aph_bar_wrapper_182126'></div>
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": {{ shop.name | json }},
+  {% if section.settings.logo %}
+    {% assign image_size = section.settings.logo.width | append:'x' %}
+    "logo": {{ section.settings.logo | img_url: image_size | prepend: "https:" | json }},
+  {% endif %}
+  "sameAs": [
+    {{ settings.social_twitter_link | json }},
+    {{ settings.social_facebook_link | json }},
+    {{ settings.social_pinterest_link | json }},
+    {{ settings.social_instagram_link | json }},
+    {{ settings.social_tumblr_link | json }},
+    {{ settings.social_snapchat_link | json }},
+    {{ settings.social_youtube_link | json }},
+    {{ settings.social_vimeo_link | json }}
+  ],
+  "url": {{ shop.url | append: page.url | json }}
+}
+</script>
+
+{% if request.page_type == 'index' %}
+  {% assign potential_action_target = shop.url | append: routes.search_url | append: "?q={search_term_string}" %}
+  <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "WebSite",
+      "name": {{ shop.name | json }},
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {{ potential_action_target | json }},
+        "query-input": "required name=search_term_string"
+      },
+      "url": {{ shop.url | append: page.url | json }}
+    }
+  </script>
+{% endif %}
+
+{% schema %}
+{
+  "name":{
+    "da":"Overskrift",
+    "de":"Titel",
+    "en":"Header",
+    "es":"Encabezado",
+    "fi":"Ylätunniste",
+    "fr":"En-tête",
+    "hi":"हैडर",
+    "it":"Header",
+    "ja":"ヘッダー",
+    "ko":"머리글",
+    "nb":"Header",
+    "nl":"Koptekst",
+    "pt-BR":"Cabeçalho",
+    "pt-PT":"Cabeçalho",
+    "sv":"Rubrik",
+    "th":"ส่วนหัว",
+    "zh-CN":"标头",
+    "zh-TW":"標頭"
+  },
+  "settings":[
+    {
+      "type":"checkbox",
+      "id":"full_width_nav",
+      "label":{
+        "es":"Navegación Extendida",
+        "en":"Full Width Navigation"
+      }
+    },
+    {
+      "type":"radio",
+      "id":"align_logo",
+      "label":{
+        "da":"Logojustering",
+        "de":"Logo-Ausrichtung",
+        "en":"Logo alignment",
+        "es":"Alineación de logotipo",
+        "fi":"Logon tasaus",
+        "fr":"Alignement du logo",
+        "hi":"लोगो संरेखण",
+        "it":"Allineamento logo",
+        "ja":"ロゴアラインメント",
+        "ko":"로고 정렬",
+        "nb":"Logojustering",
+        "nl":"Logo-uitlijning",
+        "pt-BR":"Alinhamento do logotipo",
+        "pt-PT":"Alinhamento do logótipo",
+        "sv":"Logojustering",
+        "th":"การจัดวางโลโก้",
+        "zh-CN":"logo 对齐方式",
+        "zh-TW":"商標對齊"
+      },
+      "default":"left",
+      "options":[
+        {
+          "value":"left",
+          "label":{
+            "da":"Venstre",
+            "de":"Links",
+            "en":"Left",
+            "es":"Izquierda",
+            "fi":"Vasen",
+            "fr":"Gauche",
+            "hi":"बाएँ",
+            "it":"Sinistra",
+            "ja":"左",
+            "ko":"왼쪽",
+            "nb":"Venstre",
+            "nl":"Links",
+            "pt-BR":"Esquerda",
+            "pt-PT":"Esquerda",
+            "sv":"Vänster",
+            "th":"ด้านซ้าย",
+            "zh-CN":"左侧",
+            "zh-TW":"左方"
+          }
+        },
+        {
+          "value":"center",
+          "label":{
+            "da":"Centreret",
+            "de":"Mittig",
+            "en":"Centered",
+            "es":"Centrada",
+            "fi":"Keskitetty",
+            "fr":"Centré",
+            "hi":"केंद्र",
+            "it":"Centrato",
+            "ja":"中央揃え",
+            "ko":"센터 맞추기",
+            "nb":"Sentrert",
+            "nl":"Gecentreerd",
+            "pt-BR":"Centralizado",
+            "pt-PT":"Centrado",
+            "sv":"Centrera",
+            "th":"ตรงกลาง",
+            "zh-CN":"居中",
+            "zh-TW":"置中"
+          }
+        }
+      ]
+    },
+    {
+      "type":"image_picker",
+      "id":"logo",
+      "label":{
+        "da":"Logobillede",
+        "de":"Logo-Foto",
+        "en":"Logo image",
+        "es":"Logotipo",
+        "fi":"Logokuva",
+        "fr":"Image du logo",
+        "hi":"लोगो इमेज",
+        "it":"Immagine del logo",
+        "ja":"ロゴ画像",
+        "ko":"로고 이미지",
+        "nb":"Logobilde",
+        "nl":"Afbeelding van logo",
+        "pt-BR":"Imagem do logotipo",
+        "pt-PT":"Imagem do logótipo",
+        "sv":"Logobild",
+        "th":"รูปภาพโลโก้",
+        "zh-CN":"logo 图片",
+        "zh-TW":"標誌圖片"
+      }
+    },
+    {
+      "type":"range",
+      "id":"logo_max_width",
+      "label":{
+        "da":"Tilpasset logobredde",
+        "de":"Logobreite",
+        "en":"Custom logo width",
+        "es":"Ancho del logotipo personalizado",
+        "fi":"Mukautetun logon leveys",
+        "fr":"Largeur personnalisée du logo",
+        "hi":"कस्टम लोगो की चौड़ाई",
+        "it":"Larghezza logo personalizzato",
+        "ja":"ロゴの幅をカスタマイズする",
+        "ko":"사용자 지정 로고 폭",
+        "nb":"Tilpasset logobredde",
+        "nl":"Aangepaste logo-breedte",
+        "pt-BR":"Largura do logotipo personalizado",
+        "pt-PT":"Largura de logótipo personalizada",
+        "sv":"Anpassad logotypsbredd",
+        "th":"ความกว้างของโลโก้แบบกำหนดเอง",
+        "zh-CN":"自定义 logo 宽度",
+        "zh-TW":"自訂商標寬度"
+      },
+      "min":50,
+      "max":250,
+      "step":5,
+      "unit":"px",
+      "default":100
+    },
+    {
+      "type":"range",
+      "id":"logo_max_width_mobile",
+      "label":{
+        "da":"Tilpasset logobredde",
+        "de":"Logobreite",
+        "en":"Custom logo width mobile",
+        "es":"Ancho del logotipo personalizado mobile",
+        "fi":"Mukautetun logon leveys",
+        "fr":"Largeur personnalisée du logo",
+        "hi":"कस्टम लोगो की चौड़ाई",
+        "it":"Larghezza logo personalizzato",
+        "ja":"ロゴの幅をカスタマイズする",
+        "ko":"사용자 지정 로고 폭",
+        "nb":"Tilpasset logobredde",
+        "nl":"Aangepaste logo-breedte",
+        "pt-BR":"Largura do logotipo personalizado",
+        "pt-PT":"Largura de logótipo personalizada",
+        "sv":"Anpassad logotypsbredd",
+        "th":"ความกว้างของโลโก้แบบกำหนดเอง",
+        "zh-CN":"自定义 logo 宽度",
+        "zh-TW":"自訂商標寬度"
+      },
+      "min":50,
+      "max":250,
+      "step":5,
+      "unit":"px",
+      "default":55
+    },
+    {
+      "type":"link_list",
+      "id":"main_linklist",
+      "label":{
+        "da":"Menu",
+        "de":"Menü",
+        "en":"Menu",
+        "es":"Menú",
+        "fi":"Valikko",
+        "fr":"Menu",
+        "hi":"मेनू",
+        "it":"Menu",
+        "ja":"メニュー",
+        "ko":"메뉴",
+        "nb":"Meny",
+        "nl":"Menu",
+        "pt-BR":"Menu",
+        "pt-PT":"Menu",
+        "sv":"Meny",
+        "th":"เมนู",
+        "zh-CN":"菜单",
+        "zh-TW":"選單"
+      },
+      "default":"main-menu"
+    },
+    {
+      "type":"link_list",
+      "id":"top_linklist",
+      "label":{
+        "en":"Menú Superior",
+        "es":"Menú Superior"
+      }
+    },
+    {
+      "type":"link_list",
+      "id":"secondary_linklist",
+      "label":{
+        "en":"Right-side menu (Dunk header)",
+        "es":"Menú lateral derecho (Dunk header)"
+      },
+      "info":{
+        "en":"Shown to the right of the centered logo in the Dunk header layout",
+        "es":"Se muestra a la derecha del logo centrado en el layout Dunk"
+      }
+    },
+    {
+      "type":"text",
+      "id":"farleft_text",
+      "label":{
+        "en":"Far-left link · text",
+        "es":"Enlace extremo izquierdo · texto"
+      },
+      "default":"Tiendas"
+    },
+    {
+      "type":"url",
+      "id":"farleft_link",
+      "label":{
+        "en":"Far-left link · URL",
+        "es":"Enlace extremo izquierdo · URL"
+      }
+    },
+    {
+      "type":"header",
+      "content":{
+        "en":"Dunk header layout",
+        "es":"Layout Dunk del header"
+      }
+    },
+    {
+      "type":"checkbox",
+      "id":"enable_dunk_header",
+      "label":{
+        "en":"Enable Dunk header layout",
+        "es":"Activar layout Dunk del header"
+      },
+      "info":{
+        "en":"Adds utility row, centered pill announcement and split nav. Required for transparent overlay.",
+        "es":"Agrega fila utilitaria, anuncio en pill central y nav dividido. Necesario para overlay transparente."
+      },
+      "default":false
+    },
+    {
+      "type":"checkbox",
+      "id":"transparent_on_index",
+      "label":{
+        "en":"Transparent overlay on home",
+        "es":"Overlay transparente en home"
+      },
+      "info":{
+        "en":"Header overlays the hero on the homepage; switches to solid on scroll.",
+        "es":"El header se superpone al hero en home y se vuelve sólido al hacer scroll."
+      },
+      "default":false
+    },
+    {
+      "type":"color",
+      "id":"transparent_text_color",
+      "label":{
+        "en":"Header text color (transparent state)",
+        "es":"Color de texto del header (transparente)"
+      },
+      "default":"#ffffff"
+    },
+    {
+      "type":"text",
+      "id":"utility_left_text",
+      "label":{
+        "en":"Utility row · left text",
+        "es":"Fila utilitaria · texto izquierdo"
+      },
+      "default":"Move. Explore. Connect"
+    },
+    {
+      "type":"url",
+      "id":"utility_left_link",
+      "label":{
+        "en":"Utility row · left link",
+        "es":"Fila utilitaria · enlace izquierdo"
+      }
+    },
+    {
+      "type":"text",
+      "id":"utility_right_text",
+      "label":{
+        "en":"Utility row · right text",
+        "es":"Fila utilitaria · texto derecho"
+      },
+      "default":"Lima - Perú · Since 1996"
+    },
+    {
+      "type":"url",
+      "id":"utility_right_link",
+      "label":{
+        "en":"Utility row · right link",
+        "es":"Fila utilitaria · enlace derecho"
+      }
+    },
+    {
+      "type":"header",
+      "content":{
+        "da":"Meddelelseslinje",
+        "de":"Ankündigungsbereich",
+        "en":"Announcement bar",
+        "es":"Barra de anuncios",
+        "fi":"Ilmoituspalkki",
+        "fr":"Barre d'annonces",
+        "hi":"घोषणा बार",
+        "it":"Barra degli annunci",
+        "ja":"告知バー",
+        "ko":"공지 표시줄",
+        "nb":"Kunngjøringslinje",
+        "nl":"Aankondigingsbalk",
+        "pt-BR":"Barra de avisos",
+        "pt-PT":"Barra de comunicado",
+        "sv":"Meddelandefält",
+        "th":"แถบประกาศ",
+        "zh-CN":"公告栏",
+        "zh-TW":"公告列"
+      }
+    },
+    {
+      "type":"checkbox",
+      "id":"message",
+      "label":{
+        "da":"Vis meddelelse",
+        "de":"Ankündigung anzeigen",
+        "en":"Show announcement",
+        "es":"Mostrar anuncio",
+        "fi":"Näytä ilmoitus",
+        "fr":"Afficher l'annonce",
+        "hi":"घोषणा डिखाएं",
+        "it":"Mostra annuncio",
+        "ja":"告知を表示する",
+        "ko":"공지 표시",
+        "nb":"Vis kunngjøring",
+        "nl":"Aankondiging weergeven",
+        "pt-BR":"Exibir anúncio",
+        "pt-PT":"Mostrar comunicado",
+        "sv":"Visa tillkännagivande",
+        "th":"แสดงประกาศ",
+        "zh-CN":"显示公告",
+        "zh-TW":"顯示公告"
+      },
+      "default":false
+    },
+    {
+      "type":"checkbox",
+      "id":"home_page_only",
+      "label":{
+        "da":"Kun startside",
+        "de":"Nur Startseite",
+        "en":"Home page only",
+        "es":"Solo página de inicio",
+        "fi":"Vain etusivu",
+        "fr":"Page d'accueil uniquement",
+        "hi":"केवल होमपेज",
+        "it":"Solo home page",
+        "ja":"ホームページのみ",
+        "ko":"홈페이지만",
+        "nb":"Kun på startsiden",
+        "nl":"Alleen homepage",
+        "pt-BR":"Apenas na página inicial",
+        "pt-PT":"Apenas a página inicial",
+        "sv":"Endast hemsida",
+        "th":"หน้าแรกเท่านั้น",
+        "zh-CN":"仅主页",
+        "zh-TW":"僅限首頁"
+      },
+      "default":true
+    },
+    {
+      "type":"html",
+      "id":"message_text",
+      "label":{
+        "da":"Tekst",
+        "de":"Text",
+        "en":"Text",
+        "es":"Texto",
+        "fi":"Teksti",
+        "fr":"Texte",
+        "hi":"टेक्स्ट",
+        "it":"Testo",
+        "ja":"テキスト",
+        "ko":"텍스트",
+        "nb":"Tekst",
+        "nl":"Tekst",
+        "pt-BR":"Texto",
+        "pt-PT":"Texto",
+        "sv":"Text",
+        "th":"ข้อความ",
+        "zh-CN":"文本",
+        "zh-TW":"文字"
+      },
+      "default":{
+        "da":"Meddel noget her",
+        "de":"Hier etwas ankündigen",
+        "en":"Announce something here",
+        "es":"Anuncia algo aquí",
+        "fi":"Ilmoita jotakin tässä",
+        "fr":"Annoncez quelque chose ici",
+        "hi":"यहां कुछ घोषित करें",
+        "it":"Annuncia qualcosa qui",
+        "ja":"ここで告知してください",
+        "ko":"여기에 공지하십시오",
+        "nb":"Kunngjør noe her",
+        "nl":"Kondig hier iets aan",
+        "pt-BR":"Anuncie algo aqui",
+        "pt-PT":"Anunciar algo aqui",
+        "sv":"Meddela något här",
+        "th":"ประกาศข้อความที่นี่",
+        "zh-CN":"在此处进行公告",
+        "zh-TW":"在此公告資訊"
+      }
+    },
+    {
+      "type":"url",
+      "id":"message_link",
+      "label":{
+        "da":"Link",
+        "de":"Link",
+        "en":"Link",
+        "es":"Enlace",
+        "fi":"Linkki",
+        "fr":"Lien",
+        "hi":"लिंक",
+        "it":"Link",
+        "ja":"リンク",
+        "ko":"링크",
+        "nb":"Kobling",
+        "nl":"Link",
+        "pt-BR":"Link",
+        "pt-PT":"Ligação",
+        "sv":"Länk",
+        "th":"ลิงก์",
+        "zh-CN":"链接",
+        "zh-TW":"連結"
+      },
+      "info":{
+        "da":"Valgfri",
+        "de":"Optional",
+        "en":"Optional",
+        "es":"Opcional",
+        "fi":"Valinnainen",
+        "fr":"Facultatif",
+        "hi":"वैकल्पिक",
+        "it":"Facoltativo",
+        "ja":"オプション",
+        "ko":"선택 사항",
+        "nb":"Valgfritt",
+        "nl":"Optioneel",
+        "pt-BR":"Opcional",
+        "pt-PT":"Opcional",
+        "sv":"Valfritt",
+        "th":"ไม่จำเป็น",
+        "zh-CN":"可选",
+        "zh-TW":"(選填)"
+      }
+    },
+    {
+      "type":"color",
+      "id":"color_bg",
+      "label":{
+        "da":"Bjælke",
+        "de":"Zeile",
+        "en":"Bar",
+        "es":"Barra",
+        "fi":"Palkki",
+        "fr":"Barre",
+        "hi":"बार",
+        "it":"Barra",
+        "ja":"バー",
+        "ko":"바",
+        "nb":"Felt",
+        "nl":"Balk",
+        "pt-BR":"Barra",
+        "pt-PT":"Barra",
+        "sv":"Fält",
+        "th":"แถบ",
+        "zh-CN":"栏",
+        "zh-TW":"橫條"
+      },
+      "default":"#3a3a3a"
+    },
+    {
+      "type":"color",
+      "id":"color_text",
+      "label":{
+        "da":"Tekst",
+        "de":"Text",
+        "en":"Text",
+        "es":"Texto",
+        "fi":"Teksti",
+        "fr":"Texte",
+        "hi":"टेक्स्ट",
+        "it":"Testo",
+        "ja":"テキスト",
+        "ko":"텍스트",
+        "nb":"Tekst",
+        "nl":"Tekst",
+        "pt-BR":"Texto",
+        "pt-PT":"Texto",
+        "sv":"Text",
+        "th":"ข้อความ",
+        "zh-CN":"文本",
+        "zh-TW":"文字"
+      },
+      "default":"#ffffff"
+    },
+    {
+      "type":"checkbox",
+      "id":"show_announcement_bar_line",
+      "label":{
+        "en":"Show bottom line",
+        "es":"Mostrar línea inferior"
+      },
+      "default":true
+    },
+    {
+      "type":"color",
+      "id":"announcement_bar_line_bg",
+      "label":{
+        "en":"Line",
+        "es":"Linea"
+      },
+      "default":"#064888"
+    }
+  ],
+	"max_blocks": 20,
+    "blocks":[
+      {
+        "type":"menu-color",
+        "name":"Menu Color",
+        "settings":[
+          {
+            "type":"text",
+            "id":"menu_text",
+            "label":"Texto del menú"
+          },
+          {
+            "type":"color",
+            "id":"menu_color",
+            "label":"color",
+			"default": "#000000"
+          }
+        ]
+      }
+    ]
+}
+{% endschema %}

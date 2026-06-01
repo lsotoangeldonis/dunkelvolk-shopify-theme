@@ -1,0 +1,33 @@
+# Editor / IDE atomic-save temp files
+*.tmp
+*.tmp.*
+*~
+*.swp
+*.swo
+.#*
+\#*\#
+
+# OS metadata
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Source PDFs / design docs (not part of the theme)
+*.pdf
+
+# Font source directories — only assets/avenir_*.woff2 + assets/FatFrank_Heavy.otf are uploaded
+/fonts/
+/FatFrank_Heavy.otf
+/Avenir.ttc
+
+# Backups
+*.bak
+*.orig
+*.rej
+
+# Editor working dirs
+.vscode/
+.idea/
+
+# Source images (already copied into assets/ with clean names)
+/sources/
