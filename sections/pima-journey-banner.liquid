@@ -1,0 +1,147 @@
+{%- assign component_class = 'pima-journey-banner__' | append: section.id -%}
+
+<style>
+  /* Cancel extra padding-top on this landing page */
+  body.template-pimajourney .main-content,
+  body.template-pimajourney #PageContainer {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+  }
+  body.template-pimajourney .shopify-section:first-of-type {
+    margin-top: 0;
+  }
+
+  .{{ component_class }} {
+    position: relative;
+    width: 100%;
+    min-height: 85vh;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+  }
+
+  .{{ component_class }}__image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+
+  .{{ component_class }}__content {
+    position: relative;
+    z-index: 2;
+    padding: 0 48px 56px;
+  }
+
+  .{{ component_class }}__title {
+    font-family: var(--font-display, sans-serif);
+    font-size: clamp(42px, 5.5vw, 80px);
+    font-weight: 900;
+    color: #fff;
+    line-height: 1;
+    letter-spacing: -0.01em;
+    margin: 0;
+    text-transform: uppercase;
+    text-shadow: 0 2px 16px rgba(0, 0, 0, 0.18);
+  }
+
+  @media (max-width: 749px) {
+    .{{ component_class }} {
+      min-height: 72vh;
+    }
+    .{{ component_class }}__content {
+      padding: 0 24px 40px;
+    }
+    .{{ component_class }}__title {
+      font-size: clamp(32px, 9vw, 52px);
+    }
+  }
+</style>
+
+<div class="{{ component_class }}">
+  {%- assign mobile_src = '' -%}
+  {%- if section.settings.asset_filename_mobile != blank -%}
+    {%- assign mobile_src = section.settings.asset_filename_mobile | asset_url -%}
+  {%- elsif section.settings.image_mobile != blank -%}
+    {%- assign mobile_src = section.settings.image_mobile | img_url: '800x' -%}
+  {%- endif -%}
+
+  {%- assign desktop_src = '' -%}
+  {%- if section.settings.asset_filename != blank -%}
+    {%- assign desktop_src = section.settings.asset_filename | asset_url -%}
+  {%- elsif section.settings.image != blank -%}
+    {%- assign desktop_src = section.settings.image | img_url: '1600x' -%}
+  {%- endif -%}
+
+  <picture>
+    {%- if mobile_src != blank -%}
+      <source media="(max-width: 749px)" srcset="{{ mobile_src }}">
+    {%- endif -%}
+    {%- if desktop_src != blank -%}
+      <img
+        class="{{ component_class }}__image"
+        src="{{ desktop_src }}"
+        alt="{{ section.settings.heading | escape }}"
+        loading="eager"
+        fetchpriority="high"
+      >
+    {%- else -%}
+      {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+    {%- endif -%}
+  </picture>
+
+  <div class="{{ component_class }}__content">
+    {%- if section.settings.heading != blank -%}
+      <h1 class="{{ component_class }}__title">{{ section.settings.heading }}</h1>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Pima Journey: Banner",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Título del banner",
+      "default": "EXPLORE. CONNECT"
+    },
+    {
+      "type": "text",
+      "id": "asset_filename",
+      "label": "Imagen desktop (assets/)",
+      "info": "Ej: bannerpima.png — tiene prioridad sobre image picker"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Imagen desktop (Shopify Files)"
+    },
+    {
+      "type": "text",
+      "id": "asset_filename_mobile",
+      "label": "Imagen mobile (assets/)",
+      "info": "Ej: bannerpimamobile.png — tiene prioridad sobre image picker"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Imagen mobile (Shopify Files)"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Pima Journey: Banner",
+      "settings": {
+        "heading": "EXPLORE. CONNECT",
+        "asset_filename": "bannerpima.png",
+        "asset_filename_mobile": "bannerpimamobile.png"
+      }
+    }
+  ]
+}
+{% endschema %}
