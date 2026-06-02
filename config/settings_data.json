@@ -1546,6 +1546,8 @@
               "image_mobile": "shopify://shop_images/Banner_Mobile_DSTW.jpg",
               "asset_filename": "banner-ppal.png",
               "asset_filename_mobile": "banner-ppal.png",
+              "video_filename": "videohero.mp4",
+              "video_filename_mobile": "",
               "video_link": "",
               "video_link_mobile": "",
               "video_full_width": true,

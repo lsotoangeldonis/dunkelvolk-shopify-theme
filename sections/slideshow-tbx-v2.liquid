@@ -145,6 +145,15 @@
             {%- if block.settings.video_link != blank -%}
               {%- assign block_has_video = true -%}
             {%- endif -%}
+            {%- assign video_asset_src = '' -%}
+            {%- assign video_asset_src_mobile = '' -%}
+            {%- if block.settings.video_filename != blank -%}
+              {%- assign video_asset_src = block.settings.video_filename | asset_url -%}
+              {%- assign video_asset_src_mobile = video_asset_src -%}
+            {%- endif -%}
+            {%- if block.settings.video_filename_mobile != blank -%}
+              {%- assign video_asset_src_mobile = block.settings.video_filename_mobile | asset_url -%}
+            {%- endif -%}
             <div class="slideshow__slide slideshow__slide--{{ block.id }}" {{ block.shopify_attributes }}>
               {% if block_image == blank and block_has_video == blank and use_asset == false %}
                 <div class="slideshow__image js">
@@ -158,7 +167,17 @@
                 {% if block.settings.button_link != blank %}
                     <a href="{{ block.settings.button_link }}">
                 {% endif %}
-                {% if block_has_video %}
+                {% if video_asset_src != '' %}
+                  <video class="slideshow__image box ratio-container {% if forloop.first %}first{% endif %}"
+                    autoplay loop muted playsinline
+                    style="width:100%;height:100%;object-fit:cover;display:block;">
+                    {%- if video_asset_src_mobile != video_asset_src -%}
+                      <source media="(max-width: 749px)" src="{{ video_asset_src_mobile }}">
+                    {%- endif -%}
+                    <source src="{{ video_asset_src }}">
+                  </video>
+                  {% if section.settings.show_overlay %}<div class="slideshow__overlay"></div>{% endif %}
+                {% elsif block_has_video %}
                   {% include 'video-thebox' %}
                 {% elsif use_asset %}
                   <div>
@@ -1154,6 +1173,30 @@
           "info":{
             "en":"Optional. If empty, falls back to the desktop asset.",
             "es":"Opcional. Si se deja vacío, usa el asset desktop."
+          }
+        },
+        {
+          "type":"text",
+          "id":"video_filename",
+          "label":{
+            "en":"Video filename · Desktop (assets/)",
+            "es":"Nombre del video · Desktop (assets/)"
+          },
+          "info":{
+            "en":"e.g. pajaro.mp4 — file in /assets/. Autoplay, loop, muted. Takes priority over video_link.",
+            "es":"ej. pajaro.mp4 — archivo en /assets/. Autoplay, loop, muted. Tiene prioridad sobre video_link."
+          }
+        },
+        {
+          "type":"text",
+          "id":"video_filename_mobile",
+          "label":{
+            "en":"Video filename · Mobile (assets/)",
+            "es":"Nombre del video · Mobile (assets/)"
+          },
+          "info":{
+            "en":"Optional. Falls back to desktop video if empty.",
+            "es":"Opcional. Usa el video desktop si está vacío."
           }
         },
         {
