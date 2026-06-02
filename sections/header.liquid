@@ -179,6 +179,7 @@
   /* ===== Dunk Header v2 ===== */
   .dunk-header-active > header.site-header { padding: 0 !important; margin: 0 !important; border: 0 !important; min-height: 0 !important; }
   .dunk-header-active > header.site-header > .site-header__mobile-nav { display: none !important; }
+  .dunk-header-active > header.site-header .mobile-search-bar { display: none !important; }
   /* Neutralize the legacy h1 logo so SEO sees it but it doesn't paint */
   .dunk-header-active > header.site-header .site-header__logo {
     position: absolute;
@@ -283,6 +284,7 @@
     margin: 0;
   }
   .dunk-header__logo img { display: block; max-height: 60px; width: auto; }
+  .dunk-header__logo-mobile { display: none; }
   .dunk-header__icons {
     display: inline-flex;
     align-items: center;
@@ -346,20 +348,33 @@
   }
 
   @media (max-width: 749px) {
+    /* Overlay becomes relative on mobile so the nav drawer flows below the header */
+    .dunk-header-wrapper--overlay {
+      position: relative;
+    }
     .dunk-utility-row {
-      grid-template-columns: 1fr;
-      padding: 10px 16px;
-      justify-items: center;
+      padding: 16px 16px;
+      justify-content: center;
     }
     .dunk-utility-row__left,
     .dunk-utility-row__right { display: none; }
     .dunk-header {
-      grid-template-columns: auto 1fr auto;
-      column-gap: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       padding: 10px 16px;
+      position: relative;
+      min-height: 72px;
     }
     .dunk-header__nav--desktop { display: none !important; }
-    .dunk-header__logo img { max-height: 38px; }
+    .dunk-header__logo {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .dunk-header__logo img.dunk-header__logo-desktop,
+    .dunk-header__logo span.dunk-header__logo-desktop { display: none !important; }
+    .dunk-header__logo-mobile { display: block !important; max-height: 52px; width: auto; }
     .dunk-header__icons svg { width: 18px; height: 18px; }
   }
   @media (min-width: 750px) {
@@ -469,11 +484,18 @@
       <div class="dunk-header__logo">
         <a href="{{ routes.root_url }}" aria-label="{{ shop.name | escape }}">
           {%- if section.settings.logo != blank -%}
-            <img src="{{ section.settings.logo | img_url: '500x' }}"
+            <img class="dunk-header__logo-desktop"
+                 src="{{ section.settings.logo | img_url: '500x' }}"
                  srcset="{{ section.settings.logo | img_url: '500x' }} 1x, {{ section.settings.logo | img_url: '1000x' }} 2x"
                  alt="{{ section.settings.logo.alt | default: shop.name | escape }}">
           {%- else -%}
-            <span>{{ shop.name }}</span>
+            <span class="dunk-header__logo-desktop">{{ shop.name }}</span>
+          {%- endif -%}
+          {%- if section.settings.logo_mobile_filename != blank -%}
+            <img class="dunk-header__logo-mobile"
+                 src="{{ section.settings.logo_mobile_filename | asset_url }}"
+                 alt="{{ shop.name | escape }}"
+                 loading="eager">
           {%- endif -%}
         </a>
       </div>
@@ -1058,6 +1080,18 @@
       "step":5,
       "unit":"px",
       "default":55
+    },
+    {
+      "type":"text",
+      "id":"logo_mobile_filename",
+      "label":{
+        "en":"Mobile logo filename (assets/)",
+        "es":"Logo mobile (assets/)"
+      },
+      "info":{
+        "en":"e.g. logomobile.webp — shown only on mobile, replaces the main logo.",
+        "es":"ej. logomobile.webp — visible solo en mobile, reemplaza el logo principal."
+      }
     },
     {
       "type":"link_list",

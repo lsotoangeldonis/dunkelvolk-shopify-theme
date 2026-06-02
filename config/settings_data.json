@@ -71,6 +71,7 @@
           "top_linklist": "menu-superior",
           "dunk_left_linklist": "",
           "secondary_linklist": "menu-secundario",
+          "logo_mobile_filename": "logomobile.webp",
           "farleft_text": "",
           "farleft_link": "",
           "enable_dunk_header": true,
