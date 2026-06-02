@@ -177,7 +177,7 @@
 }
 
   /* ===== Dunk Header v2 ===== */
-  .dunk-header-active > header.site-header { padding: 0 !important; margin: 0 !important; border: 0 !important; min-height: 0 !important; }
+  .dunk-header-active > header.site-header { padding: 0 !important; margin: 0 !important; border: 0 !important; min-height: 0 !important; position: relative !important; }
   .dunk-header-active > header.site-header > .site-header__mobile-nav { display: none !important; }
   .dunk-header-active > header.site-header .mobile-search-bar { display: none !important; }
   /* Neutralize the legacy h1 logo so SEO sees it but it doesn't paint */
@@ -191,7 +191,7 @@
   /* Always black text — overlay just removes background, keeps color */
   .dunk-header-wrapper {
     position: relative;
-    z-index: 50;
+    z-index: 9999;
     background: #fff;
     color: #111;
     transition: background .25s ease;
@@ -324,9 +324,10 @@
     justify-content: center;
   }
   .dunk-header__burger svg { width: 22px; height: 22px; fill: currentColor; }
-  .dunk-header__burger .icon-close { display: none; }
-  .mobile-nav-open .dunk-header__burger .icon-hamburger { display: none; }
-  .mobile-nav-open .dunk-header__burger .icon-close { display: inline-block; }
+  .dunk-header__burger .icon-close { display: none !important; }
+  .mobile-nav-open .dunk-header__burger .icon-hamburger { display: none !important; }
+  .mobile-nav-open .dunk-header__burger .icon-close { display: inline-block !important; }
+  body.mobile-nav-open { overflow: hidden !important; }
 
   .dunk-header__cart-count {
     position: absolute;
@@ -349,9 +350,22 @@
 
   @media (max-width: 749px) {
     /* Overlay becomes relative on mobile so the nav drawer flows below the header */
-    .dunk-header-wrapper--overlay {
-      position: relative;
+    .dunk-header-wrapper--overlay { position: relative; }
+    /* Push the mobile nav below the Dunk header using the measured height */
+    .dunk-header-active .mobile-nav-wrapper {
+      top: var(--dunk-header-height, 144px) !important;
+      position: fixed !important;
+      left: 0 !important;
+      right: 0 !important;
+      bottom: 0 !important;
+      width: 100% !important;
+      overflow-y: auto !important;
     }
+    .dunk-header-active .mobile-nav-wrapper.js-menu--is-open {
+      display: block !important;
+    }
+    /* Burger: always visible on mobile; switch to X when nav is open */
+    .dunk-header__burger { display: flex !important; }
     .dunk-utility-row {
       padding: 16px 16px;
       justify-content: center;
@@ -559,6 +573,16 @@
       }
       window.addEventListener('scroll', onScroll, { passive: true });
       onScroll();
+
+      // Expose header height as CSS variable for mobile nav offset
+      function setNavOffset() {
+        var wrapperEl = document.querySelector('.dunk-header-wrapper');
+        if (wrapperEl) {
+          document.documentElement.style.setProperty('--dunk-header-height', wrapperEl.offsetHeight + 'px');
+        }
+      }
+      setNavOffset();
+      window.addEventListener('resize', setNavOffset, { passive: true });
     })();
   </script>
 {%- endif -%}
