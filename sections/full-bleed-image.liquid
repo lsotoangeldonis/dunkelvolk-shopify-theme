@@ -31,11 +31,14 @@
     letter-spacing: 0.04em;
     text-transform: uppercase;
   }
+  .{{ component_class }}__video--mobile { display: none; }
   @media (max-width: 749px) {
     .{{ component_class }} {
       margin: {{ section.settings.margin_top_mobile }}px 0 {{ section.settings.margin_bottom_mobile }}px;
     }
     .{{ component_class }}__placeholder { aspect-ratio: 4 / 5; }
+    .{{ component_class }}__video--desktop { display: none; }
+    .{{ component_class }}__video--mobile { display: block; }
   }
 </style>
 
@@ -46,7 +49,13 @@
     <div class="{{ component_class }}__media">
   {%- endif -%}
     {%- if section.settings.video_filename != blank -%}
-      <video src="{{ section.settings.video_filename | asset_url }}" autoplay loop muted playsinline></video>
+      {%- assign video_mobile_file = section.settings.video_filename_mobile -%}
+      {%- if video_mobile_file != blank -%}
+        <video class="{{ component_class }}__video--desktop" src="{{ section.settings.video_filename | asset_url }}" autoplay loop muted playsinline></video>
+        <video class="{{ component_class }}__video--mobile" src="{{ video_mobile_file | asset_url }}" autoplay loop muted playsinline></video>
+      {%- else -%}
+        <video src="{{ section.settings.video_filename | asset_url }}" autoplay loop muted playsinline></video>
+      {%- endif -%}
     {%- elsif section.settings.image != blank -%}
       {%- assign desktop_img = section.settings.image -%}
       {%- assign mobile_img = section.settings.image_mobile | default: desktop_img -%}
@@ -78,8 +87,14 @@
     {
       "type": "text",
       "id": "video_filename",
-      "label": { "en": "Video filename (assets/)", "es": "Nombre del video (assets/)" },
-      "info": { "en": "File in /assets/ e.g. pajaro.mp4 — takes priority over image.", "es": "Archivo en /assets/ ej. pajaro.mp4 — tiene prioridad sobre la imagen." }
+      "label": { "en": "Video (desktop) · filename in assets/", "es": "Video (desktop) · nombre en assets/" },
+      "info": { "en": "e.g. pajaro.mp4 — takes priority over image.", "es": "ej. pajaro.mp4 — tiene prioridad sobre la imagen." }
+    },
+    {
+      "type": "text",
+      "id": "video_filename_mobile",
+      "label": { "en": "Video (mobile) · filename in assets/", "es": "Video (mobile) · nombre en assets/" },
+      "info": { "en": "Optional. Falls back to desktop video if empty.", "es": "Opcional. Usa el video desktop si está vacío." }
     },
     {
       "type": "image_picker",

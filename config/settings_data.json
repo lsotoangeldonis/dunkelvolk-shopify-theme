@@ -1551,7 +1551,7 @@
               "video_full_width": true,
               "loop": true,
               "play_on_scroll": true,
-              "slide_title": "For those who've grown, but never stop searching.",
+              "slide_title": "For those who've grown,<br>but never stop searching.",
               "subheading": "Not to escape — but to connect.",
               "button_label": "Shop Now",
               "button_link": "shopify://collections/catalogo",
@@ -1620,7 +1620,7 @@
           "autorotate": false,
           "autorotate_speed": 5,
           "custom_js": "",
-          "custom_css": ""
+          "custom_css": "[data-section-id='8057608e-f272-4618-ac43-8220d583259f'] .text-right .mega-title { max-width: 100%; margin-left: auto; }"
         }
       },
       "slideshow-tbx-v2": {
