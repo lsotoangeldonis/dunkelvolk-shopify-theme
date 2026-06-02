@@ -206,7 +206,13 @@
     {%- comment -%} Desktop-only side-by-side image grid {%- endcomment -%}
     <div class="{{ component_class }}__images">
       <div class="{{ component_class }}__image">
-        {%- if section.settings.image_1 != blank -%}
+        {%- assign video_file = section.settings.video_filename | default: 'video916.mp4' -%}
+        <video src="{{ video_file | asset_url }}" autoplay loop muted playsinline></video>
+      </div>
+      <div class="{{ component_class }}__image">
+        {%- if section.settings.asset_filename_1 != blank -%}
+          <img src="{{ section.settings.asset_filename_1 | asset_url }}" alt="" loading="lazy">
+        {%- elsif section.settings.image_1 != blank -%}
           {%- assign img = section.settings.image_1 -%}
           <img
             srcset="{{ img | img_url: '600x' }} 600w, {{ img | img_url: '1200x' }} 1200w"
@@ -217,10 +223,6 @@
         {%- else -%}
           {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
         {%- endif -%}
-      </div>
-      <div class="{{ component_class }}__image">
-        {%- assign video_file = section.settings.video_filename | default: 'video916.mp4' -%}
-        <video src="{{ video_file | asset_url }}" autoplay loop muted playsinline></video>
       </div>
     </div>
   </div>
@@ -274,9 +276,15 @@
       "content": { "en": "Images", "es": "Imágenes" }
     },
     {
+      "type": "text",
+      "id": "asset_filename_1",
+      "label": { "en": "Image 1 filename (assets/)", "es": "Imagen 1 nombre de archivo (assets/)" },
+      "info": { "en": "e.g. dunknnn.webp — takes priority over image picker.", "es": "ej. dunknnn.webp — tiene prioridad sobre el selector de imagen." }
+    },
+    {
       "type": "image_picker",
       "id": "image_1",
-      "label": { "en": "Image 1", "es": "Imagen 1" }
+      "label": { "en": "Image 1 (fallback)", "es": "Imagen 1 (fallback)" }
     },
     {
       "type": "image_picker",
