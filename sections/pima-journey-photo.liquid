@@ -1,0 +1,143 @@
+{%- assign component_class = 'pima-journey-photo__' | append: section.id -%}
+
+<style>
+  .{{ component_class }} {
+    background: #fff;
+    padding: 56px 0;
+  }
+
+  /* Desktop: imagen centrada con márgenes */
+  .{{ component_class }}__desktop {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .{{ component_class }}__desktop img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* Mobile: oculto por defecto */
+  .{{ component_class }}__mobile {
+    display: none;
+  }
+
+  @media (max-width: 749px) {
+    .{{ component_class }} {
+      padding: 0;
+    }
+
+    /* Desktop wrapper oculto en mobile */
+    .{{ component_class }}__desktop {
+      display: none;
+    }
+
+    /* Mobile: dos imágenes apiladas full-width */
+    .{{ component_class }}__mobile {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .{{ component_class }}__mobile img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+  }
+</style>
+
+<section class="{{ component_class }}">
+  {%- assign primary_src = '' -%}
+  {%- if section.settings.asset_filename != blank -%}
+    {%- assign primary_src = section.settings.asset_filename | asset_url -%}
+  {%- elsif section.settings.image != blank -%}
+    {%- assign primary_src = section.settings.image | img_url: '1600x' -%}
+  {%- endif -%}
+
+  {%- assign secondary_src = '' -%}
+  {%- if section.settings.asset_filename_mobile != blank -%}
+    {%- assign secondary_src = section.settings.asset_filename_mobile | asset_url -%}
+  {%- elsif section.settings.image_mobile != blank -%}
+    {%- assign secondary_src = section.settings.image_mobile | img_url: '800x' -%}
+  {%- endif -%}
+
+  <!-- Desktop: imagen única centrada -->
+  <div class="{{ component_class }}__desktop">
+    {%- if primary_src != blank -%}
+      <img
+        src="{{ primary_src }}"
+        alt="{{ section.settings.alt | escape }}"
+        loading="lazy"
+      >
+    {%- else -%}
+      {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+    {%- endif -%}
+  </div>
+
+  <!-- Mobile: dos imágenes apiladas -->
+  <div class="{{ component_class }}__mobile">
+    {%- if primary_src != blank -%}
+      <img
+        src="{{ primary_src }}"
+        alt="{{ section.settings.alt | escape }}"
+        loading="lazy"
+      >
+    {%- endif -%}
+    {%- if secondary_src != blank -%}
+      <img
+        src="{{ secondary_src }}"
+        alt="{{ section.settings.alt | escape }}"
+        loading="lazy"
+      >
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Pima Journey: Foto editorial",
+  "settings": [
+    {
+      "type": "text",
+      "id": "asset_filename",
+      "label": "Imagen principal (assets/)",
+      "info": "Desktop + primera imagen mobile. Ej: miraplaya.png",
+      "default": "miraplaya.png"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Imagen principal (Shopify Files)"
+    },
+    {
+      "type": "text",
+      "id": "asset_filename_mobile",
+      "label": "Segunda imagen mobile (assets/)",
+      "info": "Solo visible en mobile. Ej: mirahorizontemobile.png",
+      "default": "mirahorizontemobile.png"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Segunda imagen mobile (Shopify Files)"
+    },
+    {
+      "type": "text",
+      "id": "alt",
+      "label": "Texto alternativo (accesibilidad)"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Pima Journey: Foto editorial",
+      "settings": {
+        "asset_filename": "miraplaya.png",
+        "asset_filename_mobile": "mirahorizontemobile.png"
+      }
+    }
+  ]
+}
+{% endschema %}
