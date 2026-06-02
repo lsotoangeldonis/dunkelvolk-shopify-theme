@@ -95,7 +95,8 @@
     overflow: hidden;
     background: #1a1a1a;
   }
-  .{{ component_class }}__image img {
+  .{{ component_class }}__image img,
+  .{{ component_class }}__image video {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -218,17 +219,8 @@
         {%- endif -%}
       </div>
       <div class="{{ component_class }}__image">
-        {%- if section.settings.image_2 != blank -%}
-          {%- assign img = section.settings.image_2 -%}
-          <img
-            srcset="{{ img | img_url: '600x' }} 600w, {{ img | img_url: '1200x' }} 1200w"
-            src="{{ img | img_url: '800x' }}"
-            sizes="(max-width: 749px) 100vw, 350px"
-            alt="{{ img.alt | escape }}"
-            loading="lazy">
-        {%- else -%}
-          {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
-        {%- endif -%}
+        {%- assign video_file = section.settings.video_filename | default: 'video916.mp4' -%}
+        <video src="{{ video_file | asset_url }}" autoplay loop muted playsinline></video>
       </div>
     </div>
   </div>
@@ -289,7 +281,14 @@
     {
       "type": "image_picker",
       "id": "image_2",
-      "label": { "en": "Image 2", "es": "Imagen 2" }
+      "label": { "en": "Image 2 (mobile only)", "es": "Imagen 2 (solo mobile)" }
+    },
+    {
+      "type": "text",
+      "id": "video_filename",
+      "label": { "en": "Video filename (desktop, assets/)", "es": "Nombre del video (desktop, assets/)" },
+      "default": "video916.mp4",
+      "info": { "en": "File in /assets/ folder. Replaces image 2 on desktop.", "es": "Archivo en /assets/. Reemplaza imagen 2 en desktop." }
     },
     {
       "type": "header",

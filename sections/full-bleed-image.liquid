@@ -12,10 +12,10 @@
     overflow: hidden;
     background: #1a1a1a;
   }
-  .{{ component_class }}__media img {
+  .{{ component_class }}__media img,
+  .{{ component_class }}__media video {
     width: 100%;
     height: auto;
-    object-fit: cover;
     display: block;
   }
   .{{ component_class }}__placeholder {
@@ -45,7 +45,9 @@
   {%- else -%}
     <div class="{{ component_class }}__media">
   {%- endif -%}
-    {%- if section.settings.image != blank -%}
+    {%- if section.settings.video_filename != blank -%}
+      <video src="{{ section.settings.video_filename | asset_url }}" autoplay loop muted playsinline></video>
+    {%- elsif section.settings.image != blank -%}
       {%- assign desktop_img = section.settings.image -%}
       {%- assign mobile_img = section.settings.image_mobile | default: desktop_img -%}
       <picture>
@@ -55,7 +57,7 @@
       </picture>
     {%- else -%}
       <div class="{{ component_class }}__placeholder">
-        {{ section.settings.placeholder_text | default: 'Imagen full-width · sube tu foto' }}
+        {{ section.settings.placeholder_text | default: 'Video o imagen full-width' }}
       </div>
     {%- endif -%}
   {%- if section.settings.link != blank -%}
@@ -74,9 +76,15 @@
   "class": "index-section index-section--flush full-bleed-image",
   "settings": [
     {
+      "type": "text",
+      "id": "video_filename",
+      "label": { "en": "Video filename (assets/)", "es": "Nombre del video (assets/)" },
+      "info": { "en": "File in /assets/ e.g. pajaro.mp4 — takes priority over image.", "es": "Archivo en /assets/ ej. pajaro.mp4 — tiene prioridad sobre la imagen." }
+    },
+    {
       "type": "image_picker",
       "id": "image",
-      "label": { "en": "Image (desktop)", "es": "Imagen (desktop)" }
+      "label": { "en": "Image fallback (desktop)", "es": "Imagen fallback (desktop)" }
     },
     {
       "type": "image_picker",
