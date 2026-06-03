@@ -279,21 +279,29 @@
     white-space: nowrap;
   }
 
-  /* Mid-size laptops: tighten paddings, gaps, font so nothing collides with icons */
+  /* Icons must never compress */
+  .dunk-header__icons { flex-shrink: 0; min-width: max-content; }
+
+  /* Standard laptops 1281-1440 — keep generous but tighten gaps */
+  @media (min-width: 1281px) and (max-width: 1440px) {
+    .dunk-header { column-gap: 20px; padding: 10px 32px; }
+    .dunk-header__nav { gap: 18px; }
+    .dunk-header__nav a { font-size: 12px; }
+  }
+  /* Mid-size laptops 750-1280 */
   @media (min-width: 750px) and (max-width: 1280px) {
-    .dunk-header {
-      column-gap: 16px;
-      padding: 10px 24px;
-    }
-    .dunk-header__nav { gap: 14px; }
+    .dunk-header { column-gap: 14px; padding: 10px 20px; }
+    .dunk-header__nav { gap: 12px; }
     .dunk-header__nav a { font-size: 12px; }
     .dunk-header__icons { gap: 10px; }
-    .dunk-utility-row { padding: 16px 24px; }
+    .dunk-utility-row { padding: 16px 20px; }
   }
+  /* Small laptops 750-1100 */
   @media (min-width: 750px) and (max-width: 1100px) {
     .dunk-header__nav a { font-size: 11px; }
-    .dunk-header__nav { gap: 10px; }
-    .dunk-header__logo img { max-height: 48px; }
+    .dunk-header__nav { gap: 8px; }
+    .dunk-header__logo img { max-height: 44px; }
+    .dunk-header { column-gap: 10px; padding: 10px 14px; }
   }
   .dunk-header__nav a:hover { opacity: .7; }
   .dunk-header__logo {

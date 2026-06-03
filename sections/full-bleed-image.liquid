@@ -43,18 +43,31 @@
 </style>
 
 <section class="{{ component_class }}" data-section-id="{{ section.id }}" data-section-type="full-bleed-image">
+  {%- comment -%} Resolve video source priority: video_url > video_filename (asset) {%- endcomment -%}
+  {%- assign video_desktop_src = '' -%}
+  {%- assign video_mobile_src = '' -%}
+  {%- if section.settings.video_url != blank -%}
+    {%- assign video_desktop_src = section.settings.video_url -%}
+  {%- elsif section.settings.video_filename != blank -%}
+    {%- assign video_desktop_src = section.settings.video_filename | asset_url -%}
+  {%- endif -%}
+  {%- if section.settings.video_url_mobile != blank -%}
+    {%- assign video_mobile_src = section.settings.video_url_mobile -%}
+  {%- elsif section.settings.video_filename_mobile != blank -%}
+    {%- assign video_mobile_src = section.settings.video_filename_mobile | asset_url -%}
+  {%- endif -%}
+
   {%- if section.settings.link != blank -%}
     <a class="{{ component_class }}__media" href="{{ section.settings.link }}">
   {%- else -%}
     <div class="{{ component_class }}__media">
   {%- endif -%}
-    {%- if section.settings.video_filename != blank -%}
-      {%- assign video_mobile_file = section.settings.video_filename_mobile -%}
-      {%- if video_mobile_file != blank -%}
-        <video class="{{ component_class }}__video--desktop" src="{{ section.settings.video_filename | asset_url }}" autoplay loop muted playsinline></video>
-        <video class="{{ component_class }}__video--mobile" src="{{ video_mobile_file | asset_url }}" autoplay loop muted playsinline></video>
+    {%- if video_desktop_src != '' -%}
+      {%- if video_mobile_src != '' -%}
+        <video class="{{ component_class }}__video--desktop" src="{{ video_desktop_src }}" autoplay loop muted playsinline></video>
+        <video class="{{ component_class }}__video--mobile" src="{{ video_mobile_src }}" autoplay loop muted playsinline></video>
       {%- else -%}
-        <video src="{{ section.settings.video_filename | asset_url }}" autoplay loop muted playsinline></video>
+        <video src="{{ video_desktop_src }}" autoplay loop muted playsinline></video>
       {%- endif -%}
     {%- elsif section.settings.image != blank -%}
       {%- assign desktop_img = section.settings.image -%}
@@ -85,16 +98,28 @@
   "class": "index-section index-section--flush full-bleed-image",
   "settings": [
     {
+      "type": "url",
+      "id": "video_url",
+      "label": { "en": "Video URL (desktop)", "es": "URL del video (desktop)" },
+      "info": { "en": "External video URL (e.g. Shopify CDN .mp4). Takes priority over asset filename and image.", "es": "URL externa (ej. .mp4 en Shopify CDN). Tiene prioridad sobre el filename y la imagen." }
+    },
+    {
+      "type": "url",
+      "id": "video_url_mobile",
+      "label": { "en": "Video URL (mobile)", "es": "URL del video (mobile)" },
+      "info": { "en": "Optional. Falls back to desktop URL.", "es": "Opcional. Usa la URL desktop si está vacío." }
+    },
+    {
       "type": "text",
       "id": "video_filename",
-      "label": { "en": "Video (desktop) · filename in assets/", "es": "Video (desktop) · nombre en assets/" },
-      "info": { "en": "e.g. pajaro.mp4 — takes priority over image.", "es": "ej. pajaro.mp4 — tiene prioridad sobre la imagen." }
+      "label": { "en": "Video filename in assets/ (desktop)", "es": "Filename del video en assets/ (desktop)" },
+      "info": { "en": "Alternative to Video URL. e.g. pajaro.mp4 — file in /assets/.", "es": "Alternativa a Video URL. ej. pajaro.mp4 — archivo en /assets/." }
     },
     {
       "type": "text",
       "id": "video_filename_mobile",
-      "label": { "en": "Video (mobile) · filename in assets/", "es": "Video (mobile) · nombre en assets/" },
-      "info": { "en": "Optional. Falls back to desktop video if empty.", "es": "Opcional. Usa el video desktop si está vacío." }
+      "label": { "en": "Video filename in assets/ (mobile)", "es": "Filename del video en assets/ (mobile)" },
+      "info": { "en": "Optional. Falls back to desktop filename.", "es": "Opcional. Usa el desktop si está vacío." }
     },
     {
       "type": "image_picker",

@@ -1554,10 +1554,10 @@
               "video_full_width": true,
               "loop": true,
               "play_on_scroll": true,
-              "slide_title": "For those who've grown,<br>but never stop searching.",
-              "subheading": "Not to escape — but to connect.",
-              "button_label": "Shop Now",
-              "button_link": "shopify://collections/catalogo",
+              "slide_title": "",
+              "subheading": "",
+              "button_label": "",
+              "button_link": "",
               "left_button_label": "",
               "right_button_label": "",
               "left_button_link": "",
@@ -2140,6 +2140,10 @@
       "full_bleed_image_home": {
         "type": "full-bleed-image",
         "settings": {
+          "video_url": "https://cdn.shopify.com/videos/c/o/v/ba7125d36dbe4f67b4998560244bb1ee.mp4",
+          "video_url_mobile": "",
+          "video_filename": "",
+          "video_filename_mobile": "",
           "image": "",
           "image_mobile": "",
           "link": "",
@@ -2199,13 +2203,7 @@
           "benefit_4": { "type": "benefit", "settings": { "text": "10% OFF EN TU PRIMERA COMPRA" } },
           "benefit_5": { "type": "benefit", "settings": { "text": "CONTENIDO EXCLUSIVO" } }
         },
-        "block_order": [
-          "benefit_1",
-          "benefit_2",
-          "benefit_3",
-          "benefit_4",
-          "benefit_5"
-        ],
+        "block_order": [],
         "settings": {
           "show_brand_text": true,
           "brand_text": "DUNKELVOLK",
