@@ -64,7 +64,7 @@
         "settings": {
           "full_width_nav": false,
           "align_logo": "left",
-          "logo": "shopify://shop_images/DUNKELVOLK_WEB.png",
+          "logo": "shopify://shop_images/logo-dunk-26.png",
           "logo_max_width": 250,
           "logo_max_width_mobile": 170,
           "main_linklist": "main-menu",
@@ -2157,15 +2157,15 @@
       "logo_banner_home": {
         "type": "logo-banner-dunk",
         "settings": {
-          "logo": "shopify://shop_images/DUNKELVOLK_WEB.png",
+          "logo": "shopify://shop_images/logo-dunk-alto.png",
           "link": "",
           "bg_color": "#ffffff",
-          "logo_max_width": 280,
-          "logo_max_width_mobile": 160,
-          "padding_top": 60,
-          "padding_bottom": 60,
-          "padding_top_mobile": 36,
-          "padding_bottom_mobile": 36
+          "logo_max_width": 500,
+          "logo_max_width_mobile": 240,
+          "padding_top": 80,
+          "padding_bottom": 80,
+          "padding_top_mobile": 48,
+          "padding_bottom_mobile": 48
         }
       },
       "pima_tee_grid_home": {
