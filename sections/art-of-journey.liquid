@@ -3,11 +3,13 @@
 <style>
   .{{ component_class }} {
     width: 100%;
-    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+    padding: {{ section.settings.padding_top }}
+    px 0{{ section.settings.padding_bottom }}px;
     background: {{ section.settings.bg_color }};
     color: {{ section.settings.text_color }};
   }
-  .{{ component_class }}__inner {
+  .{{ component_class }}
+  __inner {
     max-width: 1500px;
     margin: 0 auto;
     padding: 0 56px;
@@ -16,18 +18,21 @@
     gap: 64px;
     align-items: stretch;
   }
-  .{{ component_class }}__text {
-    padding-left: 0px;
+  .{{ component_class }}
+  __text {
+    padding-left: 0;
     padding-right: 0;
     max-width: 460px;
   }
-  .{{ component_class }}__title-wrap {
+  .{{ component_class }}
+  __title-wrap {
     border-left: 3px solid #111;
     padding-left: 16px;
     margin-bottom: 28px;
     margin-left: -24px;
   }
-  .{{ component_class }}__title {
+  .{{ component_class }}
+  __title {
     font-family: var(--font-display, inherit) !important;
     font-weight: 800;
     font-size: clamp(36px, 4.4vw, 64px);
@@ -36,7 +41,8 @@
     margin: 0;
     color: inherit;
   }
-  .{{ component_class }}__subtitle {
+  .{{ component_class }}
+  __subtitle {
     font-family: var(--font-body, 'Times New Roman', Times, serif);
     font-style: italic;
     font-size: 16px;
@@ -44,7 +50,8 @@
     color: inherit;
     opacity: .9;
   }
-  .{{ component_class }}__body p {
+  .{{ component_class }}
+  __body p {
     font-family: var(--font-body, inherit);
     font-size: 15px;
     font-weight: 500;
@@ -52,14 +59,18 @@
     margin: 0 0 14px;
     color: #111;
   }
-  .{{ component_class }}__quote {
+  .{{ component_class }}
+  __quote {
     margin: 28px 0 22px;
-    font-family: 'Times New Roman', Times, serif;
+    font-family: 'Times New Roman'
+    , Times
+    , serif;
     font-style: italic;
     font-size: 18px;
     text-align: center;
   }
-  .{{ component_class }}__cta {
+  .{{ component_class }}
+  __cta {
     display: inline-block;
     padding: 6px 28px;
     border: 1px solid #111;
@@ -70,24 +81,31 @@
     line-height: 1.4;
     letter-spacing: 0.01em;
     text-decoration: none;
-    transition: background .2s ease, color .2s ease;
+    transition: background 0.2s ease
+    , color 0.2s ease;
   }
   .{{ component_class }}__cta:hover {
     background: #111;
     color: #fff;
   }
-  .{{ component_class }}__cta-wrap {
+  .{{ component_class }}
+  __cta-wrap {
     text-align: center;
     margin-top: 8px;
   }
-  .{{ component_class }}__image-mobile-1 { display: none; }
-  .{{ component_class }}__images {
+  .{{ component_class }}
+  __image-mobile-1 {
+    display: none;
+  }
+  .{{ component_class }}
+  __images {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 18px;
     align-self: stretch;
   }
-  .{{ component_class }}__image {
+  .{{ component_class }}
+  __image {
     width: 100%;
     height: 100%;
     min-height: 580px;
@@ -95,8 +113,10 @@
     overflow: hidden;
     background: #1a1a1a;
   }
-  .{{ component_class }}__image img,
-  .{{ component_class }}__image video {
+  .{{ component_class }}
+  __image img
+  , .{{ component_class }}
+  __image video {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -104,19 +124,25 @@
   }
   @media (max-width: 749px) {
     .{{ component_class }} {
-      padding: {{ section.settings.padding_top_mobile }}px 0 {{ section.settings.padding_bottom_mobile }}px;
+      padding: {{ section.settings.padding_top_mobile }}
+      px 0{{ section.settings.padding_bottom_mobile }}px;
     }
-    .{{ component_class }}__inner {
+    .{{ component_class }}
+    __inner {
       grid-template-columns: 1fr;
       gap: 0;
       padding: 0 16px;
     }
-    .{{ component_class }}__title {
+    .{{ component_class }}
+    __title {
       font-size: 36px;
     }
     /* Hide desktop image grid on mobile, show interleaved version */
-    .{{ component_class }}__images { display: none; }
-    .{{ component_class }}__image-mobile-1 {
+    .{{ component_class }}__images {
+      display: none;
+    }
+    .{{ component_class }}
+    __image-mobile-1 {
       display: block;
       width: 100%;
       aspect-ratio: 4 / 5;
@@ -124,16 +150,27 @@
       background: #1a1a1a;
       margin: 0 0 22px;
     }
-    .{{ component_class }}__image-mobile-1 img,
-    .{{ component_class }}__image-mobile-1 video {
+    .{{ component_class }}
+    __image-mobile-1 img
+    , .{{ component_class }}
+    __image-mobile-1 video {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
     }
-    .{{ component_class }}__text { padding-right: 0; }
-    .{{ component_class }}__body p { font-size: 14px; }
-    .{{ component_class }}__title-wrap { margin-bottom: 18px; }
+    .{{ component_class }}
+    __text {
+      padding-right: 0;
+    }
+    .{{ component_class }}
+    __body p {
+      font-size: 14px;
+    }
+    .{{ component_class }}
+    __title-wrap {
+      margin-bottom: 18px;
+    }
     /* Image 2 appears below the body on mobile (last image stays at end) */
     .{{ component_class }}__image-mobile-2 {
       display: block;
@@ -143,7 +180,8 @@
       background: #1a1a1a;
       margin: 22px 0 0;
     }
-    .{{ component_class }}__image-mobile-2 img {
+    .{{ component_class }}
+    __image-mobile-2 img {
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -151,8 +189,11 @@
     }
   }
   @media (min-width: 750px) {
-    .{{ component_class }}__image-mobile-1,
-    .{{ component_class }}__image-mobile-2 { display: none; }
+    .{{ component_class }}__image-mobile-1
+    , .{{ component_class }}
+    __image-mobile-2 {
+      display: none;
+    }
   }
 </style>
 
@@ -220,7 +261,10 @@
             alt="{{ section.settings.image_2.alt | escape }}"
             loading="lazy">
         {%- elsif section.settings.asset_filename_1 != blank -%}
-          <img src="{{ section.settings.asset_filename_1 | asset_url }}" alt="" loading="lazy">
+          <img
+            src="{{ section.settings.asset_filename_1 | asset_url }}"
+            alt=""
+            loading="lazy">
         {%- elsif section.settings.image_1 != blank -%}
           <img
             src="{{ section.settings.image_1 | img_url: '900x' }}"
