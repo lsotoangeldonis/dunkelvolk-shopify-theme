@@ -124,7 +124,8 @@
       background: #1a1a1a;
       margin: 0 0 22px;
     }
-    .{{ component_class }}__image-mobile-1 img {
+    .{{ component_class }}__image-mobile-1 img,
+    .{{ component_class }}__image-mobile-1 video {
       width: 100%;
       height: 100%;
       object-fit: cover;
@@ -171,7 +172,11 @@
 
       {%- comment -%} Mobile-only image 1 (interleaved between title and body) {%- endcomment -%}
       <div class="{{ component_class }}__image-mobile-1">
-        {%- if section.settings.image_1 != blank -%}
+        {%- if section.settings.video_filename_mobile != blank -%}
+          <video src="{{ section.settings.video_filename_mobile | asset_url }}" autoplay loop muted playsinline></video>
+        {%- elsif section.settings.asset_filename_1 != blank -%}
+          <img src="{{ section.settings.asset_filename_1 | asset_url }}" alt="" loading="lazy">
+        {%- elsif section.settings.image_1 != blank -%}
           <img src="{{ section.settings.image_1 | img_url: '900x' }}" alt="{{ section.settings.image_1.alt | escape }}" loading="lazy">
         {%- else -%}
           {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
@@ -297,6 +302,13 @@
       "label": { "en": "Video filename (desktop, assets/)", "es": "Nombre del video (desktop, assets/)" },
       "default": "video916.mp4",
       "info": { "en": "File in /assets/ folder. Replaces image 2 on desktop.", "es": "Archivo en /assets/. Reemplaza imagen 2 en desktop." }
+    },
+    {
+      "type": "text",
+      "id": "video_filename_mobile",
+      "label": { "en": "Video filename (mobile, assets/)", "es": "Nombre del video (mobile, assets/)" },
+      "default": "video916.mp4",
+      "info": { "en": "File in /assets/. Shows in place of image 1 on mobile. Leave blank to show the image instead.", "es": "Archivo en /assets/. Se muestra en lugar de imagen 1 en mobile. Dejar vacío para mostrar imagen." }
     },
     {
       "type": "header",

@@ -66,6 +66,50 @@
     opacity: .95;
     text-shadow: 0 2px 12px rgba(0,0,0,.35);
   }
+  /* Mobile caption (above images) and CTA (below images) */
+  .{{ component_class }}__mobile-caption {
+    display: none;
+    padding: 0 16px 16px;
+  }
+  .{{ component_class }}__mobile-caption-heading {
+    font-family: var(--font-body, inherit);
+    font-weight: 800;
+    font-size: 20px;
+    line-height: 1.2;
+    margin: 0 0 4px;
+    color: inherit;
+  }
+  .{{ component_class }}__mobile-caption-sub {
+    font-family: var(--font-body, inherit);
+    font-size: 14px;
+    font-weight: 400;
+    margin: 0;
+    color: inherit;
+    opacity: .85;
+  }
+  .{{ component_class }}__mobile-cta-wrap {
+    display: none;
+    text-align: center;
+    padding: 16px 16px 0;
+  }
+  .{{ component_class }}__mobile-cta {
+    display: inline-block;
+    padding: 4px 28px;
+    border: 1px solid #111;
+    border-radius: 6px;
+    background: transparent;
+    color: #111;
+    font-family: var(--font-body, inherit);
+    font-size: 14px;
+    line-height: 1.5;
+    letter-spacing: 0;
+    text-decoration: none;
+    transition: background .2s ease, color .2s ease;
+  }
+  .{{ component_class }}__mobile-cta:hover {
+    background: #111;
+    color: #fff;
+  }
   @media (max-width: 749px) {
     .{{ component_class }} {
       padding: {{ section.settings.padding_top_mobile }}px 0 {{ section.settings.padding_bottom_mobile }}px;
@@ -74,6 +118,8 @@
     .{{ component_class }}__heading { font-size: 14px; }
     .{{ component_class }}__sub { font-size: 11px; }
     .{{ component_class }}__text { padding: 0 14px; bottom: 14px; }
+    .{{ component_class }}__mobile-caption { display: block; }
+    .{{ component_class }}__mobile-cta-wrap { display: block; }
   }
 </style>
 
@@ -101,6 +147,16 @@
 {%- endif -%}
 
 <section class="{{ component_class }} {{ component_class }}--{{ layout }}" data-section-id="{{ section.id }}" data-section-type="image-quote-split">
+  {%- if section.settings.mobile_heading != blank or section.settings.mobile_sub != blank -%}
+    <div class="{{ component_class }}__mobile-caption">
+      {%- if section.settings.mobile_heading != blank -%}
+        <p class="{{ component_class }}__mobile-caption-heading">{{ section.settings.mobile_heading | escape }}</p>
+      {%- endif -%}
+      {%- if section.settings.mobile_sub != blank -%}
+        <p class="{{ component_class }}__mobile-caption-sub">{{ section.settings.mobile_sub | escape }}</p>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
   <div class="{{ component_class }}__media-row">
     {%- comment -%} LEFT (or single) image {%- endcomment -%}
     {%- if section.settings.link_left != blank -%}
@@ -138,6 +194,11 @@
       {%- endif -%}
     {%- endif -%}
   </div>
+  {%- if section.settings.mobile_button_label != blank -%}
+    <div class="{{ component_class }}__mobile-cta-wrap">
+      <a href="{{ section.settings.mobile_button_link | default: '#' }}" class="{{ component_class }}__mobile-cta">{{ section.settings.mobile_button_label | escape }}</a>
+    </div>
+  {%- endif -%}
 </section>
 
 {% schema %}
@@ -209,6 +270,30 @@
       "type": "url",
       "id": "link_right",
       "label": { "en": "Right image link", "es": "Enlace imagen derecha" }
+    },
+    {
+      "type": "header",
+      "content": { "en": "Mobile caption & button", "es": "Caption y botón mobile" }
+    },
+    {
+      "type": "text",
+      "id": "mobile_heading",
+      "label": { "en": "Heading (mobile only)", "es": "Título (solo mobile)" }
+    },
+    {
+      "type": "text",
+      "id": "mobile_sub",
+      "label": { "en": "Subtext (mobile only)", "es": "Subtexto (solo mobile)" }
+    },
+    {
+      "type": "text",
+      "id": "mobile_button_label",
+      "label": { "en": "Button label (mobile only)", "es": "Texto del botón (solo mobile)" }
+    },
+    {
+      "type": "url",
+      "id": "mobile_button_link",
+      "label": { "en": "Button link (mobile only)", "es": "Enlace del botón (solo mobile)" }
     },
     {
       "type": "color",
