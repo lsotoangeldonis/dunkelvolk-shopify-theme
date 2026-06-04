@@ -1,0 +1,143 @@
+{%- comment -%}
+  About Us — Hero (full-bleed autoplay video).
+  Video sources via asset_filename pattern (assets/) with desktop + mobile swap.
+  Falls back to image_picker / poster image when no video is set.
+{%- endcomment -%}
+{%- assign component_class = 'aboutus-hero__' | append: section.id -%}
+
+{%- assign video_desktop = '' -%}
+{%- if section.settings.video_filename != blank -%}
+  {%- assign video_desktop = section.settings.video_filename | asset_url -%}
+{%- endif -%}
+
+{%- assign video_mobile = '' -%}
+{%- if section.settings.video_filename_mobile != blank -%}
+  {%- assign video_mobile = section.settings.video_filename_mobile | asset_url -%}
+{%- endif -%}
+
+{%- assign poster_desktop = '' -%}
+{%- if section.settings.poster_filename != blank -%}
+  {%- assign poster_desktop = section.settings.poster_filename | asset_url -%}
+{%- elsif section.settings.poster != blank -%}
+  {%- assign poster_desktop = section.settings.poster | img_url: '2000x' -%}
+{%- endif -%}
+
+<style>
+  /* Kill any top gap inherited from theme.scss so the hero sits flush under the header. */
+  html body #PageContainer,
+  html body #MainContent,
+  html body .page-container,
+  html body .main-content {
+    padding-top: 0 !important;
+    padding-block-start: 0 !important;
+    margin-top: 0 !important;
+    margin-block-start: 0 !important;
+  }
+  html body #MainContent > .shopify-section:first-child,
+  html body .main-content > .shopify-section:first-child,
+  html body #PageContainer > .shopify-section:first-child {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+  #shopify-section-{{ section.id }} {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+
+  .{{ component_class }} {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    background: #000;
+    line-height: 0;
+  }
+  .{{ component_class }}__video {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+  .{{ component_class }}__video--mobile { display: none; }
+
+  @media (max-width: 749px) {
+    .{{ component_class }}__video--desktop { display: none; }
+    {%- if video_mobile != '' -%}
+      .{{ component_class }}__video--mobile { display: block; }
+    {%- endif -%}
+  }
+</style>
+
+<section class="{{ component_class }}">
+  {%- if video_desktop != '' -%}
+    <video
+      class="{{ component_class }}__video {{ component_class }}__video--desktop"
+      autoplay muted loop playsinline
+      preload="auto"
+      {% if poster_desktop != '' %}poster="{{ poster_desktop }}"{% endif %}
+    >
+      <source src="{{ video_desktop }}" type="video/mp4">
+    </video>
+    {%- if video_mobile != '' -%}
+      <video
+        class="{{ component_class }}__video {{ component_class }}__video--mobile"
+        autoplay muted loop playsinline
+        preload="auto"
+        {% if poster_desktop != '' %}poster="{{ poster_desktop }}"{% endif %}
+      >
+        <source src="{{ video_mobile }}" type="video/mp4">
+      </video>
+    {%- endif -%}
+  {%- elsif poster_desktop != '' -%}
+    <img class="{{ component_class }}__video {{ component_class }}__video--desktop" src="{{ poster_desktop }}" alt="{{ section.settings.alt | escape }}" loading="eager" fetchpriority="high">
+  {%- else -%}
+    {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+  {%- endif -%}
+</section>
+
+{% schema %}
+{
+  "name": "About Us: Hero video",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Video (assets/)"
+    },
+    {
+      "type": "text",
+      "id": "video_filename",
+      "label": "Video desktop (assets/, .mp4)",
+      "info": "Ej: dunk-aboutus-hero.mp4"
+    },
+    {
+      "type": "text",
+      "id": "video_filename_mobile",
+      "label": "Video mobile (assets/, .mp4)",
+      "info": "Ej: dunk-aboutus-hero-mobile.mp4"
+    },
+    {
+      "type": "header",
+      "content": "Poster / fallback"
+    },
+    {
+      "type": "text",
+      "id": "poster_filename",
+      "label": "Poster (assets/)"
+    },
+    {
+      "type": "image_picker",
+      "id": "poster",
+      "label": "Poster (Shopify Files)"
+    },
+    {
+      "type": "text",
+      "id": "alt",
+      "label": "Texto alternativo"
+    }
+  ],
+  "presets": [
+    {
+      "name": "About Us: Hero video"
+    }
+  ]
+}
+{% endschema %}

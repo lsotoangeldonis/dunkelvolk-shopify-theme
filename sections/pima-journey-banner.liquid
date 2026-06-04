@@ -1,6 +1,8 @@
 {%- assign component_class = 'pima-journey-banner__' | append: section.id -%}
 {%- assign caption_position = section.settings.caption_position | default: 'bottom-left' -%}
 {%- assign caption_style = section.settings.caption_style | default: 'display' -%}
+{%- assign image_fit = section.settings.image_fit | default: 'cover' -%}
+{%- assign object_position = section.settings.object_position | default: 'center' -%}
 
 <style>
   /* Loaded only on pages with this section. Kill ALL possible sources of top gap
@@ -31,18 +33,35 @@
   .{{ component_class }} {
     position: relative;
     width: 100%;
-    min-height: 100vh;
     overflow: hidden;
     display: flex;
   }
-
-  .{{ component_class }}__image {
+  /* cover: image fills section (100vh), may crop */
+  .{{ component_class }}--fit-cover { min-height: 100vh; }
+  .{{ component_class }}--fit-cover .{{ component_class }}__image {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center;
+    object-position: {{ object_position }};
+    display: block;
+  }
+  /* natural: full-screen section (100vh), image COMPLETE inside (contain).
+     May leave white bands if image aspect doesn't match viewport. */
+  .{{ component_class }}--fit-natural {
+    min-height: 100vh;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+  }
+  .{{ component_class }}--fit-natural .{{ component_class }}__image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: {{ object_position }};
     display: block;
   }
 
@@ -105,7 +124,7 @@
   }
 </style>
 
-<div class="{{ component_class }} {{ component_class }}--{{ caption_position }} {{ component_class }}--style-{{ caption_style }}">
+<div class="{{ component_class }} {{ component_class }}--{{ caption_position }} {{ component_class }}--style-{{ caption_style }} {{ component_class }}--fit-{{ image_fit }}">
   {%- assign mobile_src = '' -%}
   {%- if section.settings.asset_filename_mobile != blank -%}
     {%- assign mobile_src = section.settings.asset_filename_mobile | asset_url -%}
@@ -170,10 +189,38 @@
       "id": "caption_style",
       "label": "Estilo del caption",
       "options": [
-        { "value": "display", "label": "Display (FatFrank, mega, uppercase) — slide 11/EXPLORE.CONNECT" },
-        { "value": "body",    "label": "Body (Avenir, medio, mixed case) — slide 16/For those who follow…" }
+        { "value": "display", "label": "Display (FatFrank, mega, uppercase)" },
+        { "value": "body",    "label": "Body (Avenir, medio, mixed case)" }
       ],
       "default": "display"
+    },
+    {
+      "type": "select",
+      "id": "image_fit",
+      "label": "Ajuste de imagen",
+      "options": [
+        { "value": "cover",   "label": "Cover (full-screen, puede recortar)" },
+        { "value": "natural", "label": "Natural (muestra la imagen completa, sin recortar)" }
+      ],
+      "default": "cover"
+    },
+    {
+      "type": "select",
+      "id": "object_position",
+      "label": "Posición de la imagen (anclaje)",
+      "info": "Dónde se ancla la imagen cuando hay recorte o letterbox.",
+      "options": [
+        { "value": "top",          "label": "Arriba (top)" },
+        { "value": "center",       "label": "Centro (center)" },
+        { "value": "bottom",       "label": "Abajo (bottom)" },
+        { "value": "left",         "label": "Izquierda" },
+        { "value": "right",        "label": "Derecha" },
+        { "value": "top left",     "label": "Arriba-izquierda" },
+        { "value": "top right",    "label": "Arriba-derecha" },
+        { "value": "bottom left",  "label": "Abajo-izquierda" },
+        { "value": "bottom right", "label": "Abajo-derecha" }
+      ],
+      "default": "center"
     },
     {
       "type": "header",

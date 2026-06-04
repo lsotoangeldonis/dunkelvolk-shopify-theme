@@ -55,6 +55,7 @@
         "heading": "",
         "caption_position": "top-right",
         "caption_style": "body",
+        "image_fit": "natural",
         "asset_filename": "dunk-journey-curiosity-banner.jpg",
         "asset_filename_mobile": "dunk-journey-curiosity-banner-mobile.jpg"
       }

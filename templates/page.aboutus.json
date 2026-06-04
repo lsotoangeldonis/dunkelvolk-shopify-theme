@@ -1,0 +1,50 @@
+{
+  "sections": {
+    "s01-hero": {
+      "type": "aboutus-hero",
+      "settings": {
+        "video_filename": "dunk-aboutus-hero.mp4",
+        "video_filename_mobile": "dunk-aboutus-hero-mobile.mp4",
+        "alt": "Dunkelvolk - El nuevo explorador"
+      }
+    },
+    "s02-explorer": {
+      "type": "aboutus-text-video",
+      "settings": {
+        "heading": "EL NUEVO EXPLORADOR",
+        "body": "<p>“A veces el camino no pide prisa. Pide silencio. Pide detenerse, respirar el aire de la mañana y escuchar cómo el mundo sigue su ritmo. En esos momentos entiendes algo simple: explorar no siempre es avanzar...<br>a veces es simplemente estar.”</p>",
+        "text_align": "left",
+        "video_filename": "dunk-aboutus-explorer.mp4",
+        "video_filename_mobile": "dunk-aboutus-explorer-mobile.mp4"
+      }
+    },
+    "s03-connect": {
+      "type": "aboutus-text-duo",
+      "settings": {
+        "heading": "UNA NUEVA FORMA DE CONECTAR",
+        "body": "<p>A veces salir no es escapar.</p><p>Es escuchar ese impulso que te empuja a moverte, a caminar sin prisa, a perderte un poco para encontrarte mejor.</p><p>El camino no siempre lleva a un lugar nuevo, A veces te lleva a conectar con la naturaleza, a una conversación profunda, a entender las tradiciones o incluso te lleva de vuelta a ti.</p>",
+        "text_align": "left",
+        "video1_filename": "dunk-aboutus-connect-01.mp4",
+        "video1_filename_mobile": "dunk-aboutus-connect-01-mobile.mp4",
+        "video2_filename": "dunk-aboutus-connect-02.mp4",
+        "video2_filename_mobile": "dunk-aboutus-connect-02-mobile.mp4"
+      }
+    },
+    "s04-quality": {
+      "type": "aboutus-quality-logo",
+      "settings": {
+        "heading": "EXPLORING QUALITY",
+        "body": "<p>“Exploring Quality” representa la búsqueda constante de Dunkelvolk por crear prendas que trasciendan temporadas y acompañen experiencias reales. Cada polo nace de un proceso de producción cuidado al detalle, donde la calidad no es un atributo, sino una decisión desde el origen. Trabajamos con materiales nobles como el algodón Pima peruano, reconocido por su suavidad, resistencia y durabilidad excepcional. El resultado son piezas cómodas, auténticas y diseñadas para conectar con el movimiento cotidiano desde la simplicidad y la excelencia.</p>",
+        "text_align": "justify",
+        "logo_filename": "dunk-journey-logo-circle.jpg",
+        "wordmark": "DUNKELVOLK"
+      }
+    }
+  },
+  "order": [
+    "s01-hero",
+    "s02-explorer",
+    "s03-connect",
+    "s04-quality"
+  ]
+}

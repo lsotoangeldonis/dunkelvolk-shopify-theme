@@ -1,0 +1,165 @@
+{%- comment -%}
+  About Us — Text block (heading + body) above a full-bleed autoplay video.
+  Used for "EL NUEVO EXPLORADOR".
+{%- endcomment -%}
+{%- assign component_class = 'aboutus-text-video__' | append: section.id -%}
+{%- assign text_align = section.settings.text_align | default: 'left' -%}
+
+{%- assign video_desktop = '' -%}
+{%- if section.settings.video_filename != blank -%}
+  {%- assign video_desktop = section.settings.video_filename | asset_url -%}
+{%- endif -%}
+{%- assign video_mobile = '' -%}
+{%- if section.settings.video_filename_mobile != blank -%}
+  {%- assign video_mobile = section.settings.video_filename_mobile | asset_url -%}
+{%- endif -%}
+{%- assign poster_src = '' -%}
+{%- if section.settings.poster_filename != blank -%}
+  {%- assign poster_src = section.settings.poster_filename | asset_url -%}
+{%- elsif section.settings.poster != blank -%}
+  {%- assign poster_src = section.settings.poster | img_url: '1600x' -%}
+{%- endif -%}
+
+<style>
+  .{{ component_class }}__text {
+    padding: 64px 48px 36px;
+    max-width: 1600px;
+    margin: 0 auto;
+    text-align: {{ text_align }};
+  }
+  .{{ component_class }}__heading {
+    font-family: var(--font-body, sans-serif);
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #111;
+    margin: 0 0 22px;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    font-size: clamp(30px, 4.6vw, 52px);
+  }
+  .{{ component_class }}__body {
+    font-family: var(--font-body, sans-serif);
+    color: #111;
+    font-size: clamp(16px, 1.45vw, 21px);
+    font-weight: 400;
+    line-height: 1.55;
+  }
+  .{{ component_class }}__body p { margin: 0 0 0.4em; }
+  .{{ component_class }}__body p:last-child { margin-bottom: 0; }
+
+  .{{ component_class }}__media {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    background: #000;
+    line-height: 0;
+  }
+  .{{ component_class }}__video {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .{{ component_class }}__video--mobile { display: none; }
+
+  @media (max-width: 749px) {
+    .{{ component_class }}__text { padding: 40px 24px 26px; }
+    .{{ component_class }}__heading { font-size: clamp(26px, 8vw, 40px); margin-bottom: 16px; }
+    .{{ component_class }}__body { font-size: 16px; }
+    .{{ component_class }}__video--desktop { display: none; }
+    {%- if video_mobile != '' -%}
+      .{{ component_class }}__video--mobile { display: block; }
+    {%- endif -%}
+  }
+</style>
+
+<section class="{{ component_class }}">
+  {%- if section.settings.heading != blank or section.settings.body != blank -%}
+    <div class="{{ component_class }}__text">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="{{ component_class }}__heading">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      {%- if section.settings.body != blank -%}
+        <div class="{{ component_class }}__body rte">{{ section.settings.body }}</div>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+
+  <div class="{{ component_class }}__media">
+    {%- if video_desktop != '' -%}
+      <video class="{{ component_class }}__video {{ component_class }}__video--desktop" autoplay muted loop playsinline preload="metadata" {% if poster_src != '' %}poster="{{ poster_src }}"{% endif %}>
+        <source src="{{ video_desktop }}" type="video/mp4">
+      </video>
+      {%- if video_mobile != '' -%}
+        <video class="{{ component_class }}__video {{ component_class }}__video--mobile" autoplay muted loop playsinline preload="metadata" {% if poster_src != '' %}poster="{{ poster_src }}"{% endif %}>
+          <source src="{{ video_mobile }}" type="video/mp4">
+        </video>
+      {%- endif -%}
+    {%- elsif poster_src != '' -%}
+      <img class="{{ component_class }}__video" src="{{ poster_src }}" alt="" loading="lazy">
+    {%- else -%}
+      {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "About Us: Texto + video",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Título"
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Texto"
+    },
+    {
+      "type": "select",
+      "id": "text_align",
+      "label": "Alineación del texto",
+      "options": [
+        { "value": "left", "label": "Izquierda" },
+        { "value": "center", "label": "Centro" },
+        { "value": "justify", "label": "Justificado" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "header",
+      "content": "Video (assets/)"
+    },
+    {
+      "type": "text",
+      "id": "video_filename",
+      "label": "Video desktop (assets/, .mp4)"
+    },
+    {
+      "type": "text",
+      "id": "video_filename_mobile",
+      "label": "Video mobile (assets/, .mp4)"
+    },
+    {
+      "type": "header",
+      "content": "Poster / fallback"
+    },
+    {
+      "type": "text",
+      "id": "poster_filename",
+      "label": "Poster (assets/)"
+    },
+    {
+      "type": "image_picker",
+      "id": "poster",
+      "label": "Poster (Shopify Files)"
+    }
+  ],
+  "presets": [
+    {
+      "name": "About Us: Texto + video"
+    }
+  ]
+}
+{% endschema %}

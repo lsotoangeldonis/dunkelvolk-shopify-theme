@@ -1,0 +1,197 @@
+{%- comment -%}
+  About Us — Text block (heading + body) above two side-by-side autoplay videos.
+  Used for "UNA NUEVA FORMA DE CONECTAR". Videos stack on mobile.
+{%- endcomment -%}
+{%- assign component_class = 'aboutus-text-duo__' | append: section.id -%}
+{%- assign text_align = section.settings.text_align | default: 'left' -%}
+
+{%- assign v1_desktop = '' -%}
+{%- if section.settings.video1_filename != blank -%}{%- assign v1_desktop = section.settings.video1_filename | asset_url -%}{%- endif -%}
+{%- assign v1_mobile = '' -%}
+{%- if section.settings.video1_filename_mobile != blank -%}{%- assign v1_mobile = section.settings.video1_filename_mobile | asset_url -%}{%- endif -%}
+{%- assign v2_desktop = '' -%}
+{%- if section.settings.video2_filename != blank -%}{%- assign v2_desktop = section.settings.video2_filename | asset_url -%}{%- endif -%}
+{%- assign v2_mobile = '' -%}
+{%- if section.settings.video2_filename_mobile != blank -%}{%- assign v2_mobile = section.settings.video2_filename_mobile | asset_url -%}{%- endif -%}
+{%- assign p1 = '' -%}
+{%- if section.settings.poster1_filename != blank -%}{%- assign p1 = section.settings.poster1_filename | asset_url -%}{%- endif -%}
+{%- assign p2 = '' -%}
+{%- if section.settings.poster2_filename != blank -%}{%- assign p2 = section.settings.poster2_filename | asset_url -%}{%- endif -%}
+
+<style>
+  .{{ component_class }}__text {
+    padding: 64px 48px 28px;
+    max-width: 1600px;
+    margin: 0 auto;
+    text-align: {{ text_align }};
+  }
+  .{{ component_class }}__heading {
+    font-family: var(--font-body, sans-serif);
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #111;
+    margin: 0 0 22px;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    font-size: clamp(30px, 4.6vw, 52px);
+  }
+  .{{ component_class }}__body {
+    font-family: var(--font-body, sans-serif);
+    color: #111;
+    font-size: clamp(16px, 1.45vw, 21px);
+    font-weight: 400;
+    line-height: 1.55;
+  }
+  .{{ component_class }}__body p { margin: 0 0 0.4em; }
+  .{{ component_class }}__body p:last-child { margin-bottom: 0; }
+
+  .{{ component_class }}__grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    padding: 12px 48px 56px;
+    max-width: 1600px;
+    margin: 0 auto;
+  }
+  .{{ component_class }}__cell {
+    position: relative;
+    overflow: hidden;
+    background: #000;
+    line-height: 0;
+  }
+  .{{ component_class }}__video {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .{{ component_class }}__video--mobile { display: none; }
+
+  @media (max-width: 749px) {
+    .{{ component_class }}__text { padding: 40px 24px 20px; }
+    .{{ component_class }}__heading { font-size: clamp(26px, 8vw, 40px); margin-bottom: 16px; }
+    .{{ component_class }}__body { font-size: 16px; }
+    .{{ component_class }}__grid {
+      grid-template-columns: 1fr;
+      gap: 16px;
+      padding: 8px 24px 40px;
+    }
+    .{{ component_class }}__video--desktop { display: none; }
+    .{{ component_class }}__video--mobile { display: block; }
+  }
+</style>
+
+<section class="{{ component_class }}">
+  {%- if section.settings.heading != blank or section.settings.body != blank -%}
+    <div class="{{ component_class }}__text">
+      {%- if section.settings.heading != blank -%}
+        <h2 class="{{ component_class }}__heading">{{ section.settings.heading }}</h2>
+      {%- endif -%}
+      {%- if section.settings.body != blank -%}
+        <div class="{{ component_class }}__body rte">{{ section.settings.body }}</div>
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+
+  <div class="{{ component_class }}__grid">
+    <div class="{{ component_class }}__cell">
+      {%- if v1_desktop != '' -%}
+        <video class="{{ component_class }}__video {{ component_class }}__video--desktop" autoplay muted loop playsinline preload="metadata" {% if p1 != '' %}poster="{{ p1 }}"{% endif %}>
+          <source src="{{ v1_desktop }}" type="video/mp4">
+        </video>
+        <video class="{{ component_class }}__video {{ component_class }}__video--mobile" autoplay muted loop playsinline preload="metadata" {% if p1 != '' %}poster="{{ p1 }}"{% endif %}>
+          <source src="{% if v1_mobile != '' %}{{ v1_mobile }}{% else %}{{ v1_desktop }}{% endif %}" type="video/mp4">
+        </video>
+      {%- elsif p1 != '' -%}
+        <img class="{{ component_class }}__video" src="{{ p1 }}" alt="" loading="lazy">
+      {%- else -%}
+        {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+      {%- endif -%}
+    </div>
+    <div class="{{ component_class }}__cell">
+      {%- if v2_desktop != '' -%}
+        <video class="{{ component_class }}__video {{ component_class }}__video--desktop" autoplay muted loop playsinline preload="metadata" {% if p2 != '' %}poster="{{ p2 }}"{% endif %}>
+          <source src="{{ v2_desktop }}" type="video/mp4">
+        </video>
+        <video class="{{ component_class }}__video {{ component_class }}__video--mobile" autoplay muted loop playsinline preload="metadata" {% if p2 != '' %}poster="{{ p2 }}"{% endif %}>
+          <source src="{% if v2_mobile != '' %}{{ v2_mobile }}{% else %}{{ v2_desktop }}{% endif %}" type="video/mp4">
+        </video>
+      {%- elsif p2 != '' -%}
+        <img class="{{ component_class }}__video" src="{{ p2 }}" alt="" loading="lazy">
+      {%- else -%}
+        {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "About Us",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Título"
+    },
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Texto"
+    },
+    {
+      "type": "select",
+      "id": "text_align",
+      "label": "Alineación del texto",
+      "options": [
+        { "value": "left", "label": "Izquierda" },
+        { "value": "center", "label": "Centro" },
+        { "value": "justify", "label": "Justificado" }
+      ],
+      "default": "left"
+    },
+    {
+      "type": "header",
+      "content": "Video 1 (izquierda)"
+    },
+    {
+      "type": "text",
+      "id": "video1_filename",
+      "label": "Video desktop (assets/, .mp4)"
+    },
+    {
+      "type": "text",
+      "id": "video1_filename_mobile",
+      "label": "Video mobile (assets/, .mp4)"
+    },
+    {
+      "type": "text",
+      "id": "poster1_filename",
+      "label": "Poster (assets/)"
+    },
+    {
+      "type": "header",
+      "content": "Video 2 (derecha)"
+    },
+    {
+      "type": "text",
+      "id": "video2_filename",
+      "label": "Video desktop (assets/, .mp4)"
+    },
+    {
+      "type": "text",
+      "id": "video2_filename_mobile",
+      "label": "Video mobile (assets/, .mp4)"
+    },
+    {
+      "type": "text",
+      "id": "poster2_filename",
+      "label": "Poster (assets/)"
+    }
+  ],
+  "presets": [
+    {
+      "name": "About Us: Texto + 2 videos"
+    }
+  ]
+}
+{% endschema %}
