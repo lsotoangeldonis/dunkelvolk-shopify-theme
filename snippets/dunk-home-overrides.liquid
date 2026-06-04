@@ -43,6 +43,14 @@
   }
   body.template-index .shopify-section.slideshow-thebox--section { margin-top: 0; }
 
+  /* Tighten the gap below the hero: the legacy .index-section class adds
+     55px (desktop) of padding-top to the feature-columns wrapper, stacking
+     on top of the section's own padding_top. Neutralize it so only the
+     section's own (customizer-editable) padding controls the spacing. */
+  body.template-index .shopify-section.slideshow-thebox--section + .shopify-section.index-section {
+    padding-top: 0 !important;
+  }
+
   /* Header overlay forced on home (transparent at top, white+sticky on scroll) */
   body.template-index .dunk-header-wrapper {
     position: absolute !important;

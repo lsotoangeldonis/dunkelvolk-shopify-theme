@@ -1,0 +1,83 @@
+{%- comment -%}
+  Slide 20 top: brand statement — centered prose paragraph in bold body font,
+  no images. Used right before the MOVE film card.
+{%- endcomment -%}
+{%- assign component_class = 'pima-journey-statement__' | append: section.id -%}
+
+<style>
+  .{{ component_class }} {
+    background: {{ section.settings.bg_color | default: '#ffffff' }};
+    padding: 80px 0;
+  }
+  .{{ component_class }}__inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 56px;
+    text-align: center;
+  }
+  .{{ component_class }}__text {
+    font-family: var(--font-body, sans-serif);
+    font-size: clamp(20px, 2vw, 32px);
+    font-weight: 800;
+    color: {{ section.settings.text_color | default: '#111111' }};
+    line-height: 1.32;
+    margin: 0;
+  }
+  .{{ component_class }}__text p {
+    margin: 0 0 8px;
+  }
+  .{{ component_class }}__text p:last-child {
+    margin-bottom: 0;
+  }
+  @media (max-width: 749px) {
+    .{{ component_class }} {
+      padding: 48px 0;
+    }
+    .{{ component_class }}__inner {
+      padding: 0 24px;
+    }
+    .{{ component_class }}__text {
+      font-size: clamp(16px, 4.4vw, 22px);
+      line-height: 1.4;
+    }
+  }
+</style>
+
+<section class="{{ component_class }}">
+  <div class="{{ component_class }}__inner">
+    {%- if section.settings.body != blank -%}
+      <div class="{{ component_class }}__text">{{ section.settings.body }}</div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Pima Journey · Frase",
+  "settings": [
+    {
+      "type": "richtext",
+      "id": "body",
+      "label": "Texto de la frase",
+      "default": "<p>“Dunkelvolk crea prendas para quienes entienden que explorar es conectar: con la naturaleza, con su comunidad y consigo mismos.</p><p>Diseñamos piezas funcionales, con estética pero con carácter, elaboradas con materiales de excelencia como el algodón Pima,</p><p>pensadas para durar, acompañar y trascender”</p>"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Color de fondo",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Color del texto",
+      "default": "#111111"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Pima Journey · Frase"
+    }
+  ]
+}
+{% endschema %}

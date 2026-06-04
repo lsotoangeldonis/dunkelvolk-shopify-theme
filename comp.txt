@@ -1,0 +1,10 @@
+png pdf_comp/p22_X4_400x225.png
+png pdf_comp/p22_X7_800x53.png
+png pdf_comp/p22_X9_800x774.png
+png pdf_comp/p22_X11_797x800.png
+png pdf_comp/p22_X13_697x800.png
+jpg pdf_comp/p22_X15_1280x720.jpg
+jpg pdf_comp/p23_X4_1280x720.jpg
+jpg pdf_comp/p24_X4_720x1280.jpg
+jpg pdf_comp/p24_X6_720x1280.jpg
+png pdf_comp/p25_X4_720x328.png

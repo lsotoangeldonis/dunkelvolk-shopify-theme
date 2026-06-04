@@ -1,37 +1,44 @@
 {%- assign component_class = 'pima-journey-quote-split__' | append: section.id -%}
+{%- assign layout = section.settings.layout | default: 'portrait-left' -%}
 
 <style>
   .{{ component_class }} {
     background: #fff;
+    padding: 80px;
   }
 
   .{{ component_class }}__inner {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    min-height: 520px;
+    align-items: stretch;
+    /* No min-height: rows auto-size to portrait's natural height */
   }
 
-  /* Foto retrato izquierda — ocupa toda la altura del grid row */
+  /* portrait-right mode: swap visual order on desktop */
+  .{{ component_class }}--portrait-right .{{ component_class }}__portrait { order: 2; }
+  .{{ component_class }}--portrait-right .{{ component_class }}__content { order: 1; }
+
+  /* Foto retrato — se muestra COMPLETA con su aspect ratio natural, sin recortes */
   .{{ component_class }}__portrait {
-    position: relative;
-    overflow: hidden;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
   }
-
   .{{ component_class }}__portrait img {
-    position: absolute;
-    inset: 0;
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center top;
+    height: auto;
+    max-height: 100%;
+    object-fit: contain;
     display: block;
   }
 
-  /* Columna derecha: cita + foto secundaria */
+  /* Columna content: cita arriba + foto auxiliar con espacio razonable (no push al fondo) */
   .{{ component_class }}__content {
     display: flex;
     flex-direction: column;
-    padding: 64px 56px;
+    justify-content: flex-start;
+    gap: 140px;
+    padding: 140px 56px 32px;
     background: #fff;
   }
 
@@ -39,23 +46,27 @@
     border-left: 3px solid #111;
     padding-left: 22px;
     margin: 0;
+    max-width: 610px;
+    text-align: left;
   }
+  .{{ component_class }}--portrait-right .{{ component_class }}__quote { margin-left: 0; }
 
   .{{ component_class }}__quote p {
     font-family: var(--font-body, sans-serif);
-    font-size: clamp(24px, 2.4vw, 36px);
+    font-size: 42px;
     font-weight: 800;
     color: #111;
-    line-height: 1.22;
+    line-height: 1.15;
     margin: 0;
+    text-align: left;
   }
 
-  /* Foto secundaria: empujada al fondo, alineada a la derecha, ~65% de la columna */
+  /* Foto auxiliar: 60% del ancho, centrada horizontalmente, con margen superior 60px */
   .{{ component_class }}__secondary {
-    margin-top: auto;
-    padding-top: 48px;
-    width: 65%;
-    align-self: flex-end;
+    margin-top: 60px;
+    padding-top: 0;
+    width: 70%;
+    align-self: center;
   }
 
   .{{ component_class }}__secondary img {
@@ -69,10 +80,16 @@
       grid-template-columns: 1fr;
       min-height: auto;
     }
+    /* Mobile order: portrait FIRST (above the quote), then content. Hold for both layouts. */
+    .{{ component_class }}__portrait,
+    .{{ component_class }}--portrait-right .{{ component_class }}__portrait { order: 1; display: block; }
+    .{{ component_class }}__content,
+    .{{ component_class }}--portrait-right .{{ component_class }}__content { order: 2; }
 
-    /* Retrato oculto en mobile */
+    /* Portrait visible on mobile in normal flow (height auto) */
     .{{ component_class }}__portrait {
-      display: none;
+      position: relative;
+      min-height: 460px;
     }
 
     .{{ component_class }}__content {
@@ -87,18 +104,31 @@
   }
 </style>
 
-<section class="{{ component_class }}">
+<section class="{{ component_class }} {{ component_class }}--{{ layout }}">
   <div class="{{ component_class }}__inner">
 
-    {%- assign portrait_src = '' -%}
+    {%- comment -%} Portrait: prefer mobile asset on small screens via <picture> {%- endcomment -%}
+    {%- assign portrait_desktop = '' -%}
     {%- if section.settings.portrait_filename != blank -%}
-      {%- assign portrait_src = section.settings.portrait_filename | asset_url -%}
+      {%- assign portrait_desktop = section.settings.portrait_filename | asset_url -%}
     {%- elsif section.settings.portrait_image != blank -%}
-      {%- assign portrait_src = section.settings.portrait_image | img_url: '900x' -%}
+      {%- assign portrait_desktop = section.settings.portrait_image | img_url: '1200x' -%}
     {%- endif -%}
+    {%- assign portrait_mobile = '' -%}
+    {%- if section.settings.portrait_filename_mobile != blank -%}
+      {%- assign portrait_mobile = section.settings.portrait_filename_mobile | asset_url -%}
+    {%- elsif section.settings.portrait_image_mobile != blank -%}
+      {%- assign portrait_mobile = section.settings.portrait_image_mobile | img_url: '900x' -%}
+    {%- else -%}
+      {%- assign portrait_mobile = portrait_desktop -%}
+    {%- endif -%}
+
     <div class="{{ component_class }}__portrait">
-      {%- if portrait_src != blank -%}
-        <img src="{{ portrait_src }}" alt="" loading="lazy">
+      {%- if portrait_desktop != blank -%}
+        <picture>
+          <source media="(max-width: 749px)" srcset="{{ portrait_mobile }}">
+          <img src="{{ portrait_desktop }}" alt="" loading="lazy">
+        </picture>
       {%- endif -%}
     </div>
 
@@ -109,15 +139,27 @@
         </blockquote>
       {%- endif -%}
 
-      {%- assign secondary_src = '' -%}
+      {%- comment -%} Secondary aux photo with mobile variant {%- endcomment -%}
+      {%- assign secondary_desktop = '' -%}
       {%- if section.settings.secondary_filename != blank -%}
-        {%- assign secondary_src = section.settings.secondary_filename | asset_url -%}
+        {%- assign secondary_desktop = section.settings.secondary_filename | asset_url -%}
       {%- elsif section.settings.secondary_image != blank -%}
-        {%- assign secondary_src = section.settings.secondary_image | img_url: '800x' -%}
+        {%- assign secondary_desktop = section.settings.secondary_image | img_url: '1000x' -%}
       {%- endif -%}
-      {%- if secondary_src != blank -%}
+      {%- assign secondary_mobile = '' -%}
+      {%- if section.settings.secondary_filename_mobile != blank -%}
+        {%- assign secondary_mobile = section.settings.secondary_filename_mobile | asset_url -%}
+      {%- elsif section.settings.secondary_image_mobile != blank -%}
+        {%- assign secondary_mobile = section.settings.secondary_image_mobile | img_url: '800x' -%}
+      {%- else -%}
+        {%- assign secondary_mobile = secondary_desktop -%}
+      {%- endif -%}
+      {%- if secondary_desktop != blank -%}
         <div class="{{ component_class }}__secondary">
-          <img src="{{ secondary_src }}" alt="" loading="lazy">
+          <picture>
+            <source media="(max-width: 749px)" srcset="{{ secondary_mobile }}">
+            <img src="{{ secondary_desktop }}" alt="" loading="lazy">
+          </picture>
         </div>
       {%- endif -%}
     </div>
@@ -130,42 +172,75 @@
   "name": "Pima Journey: Quote Split",
   "settings": [
     {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout (desktop)",
+      "options": [
+        { "value": "portrait-left",  "label": "Retrato izquierda · cita derecha (slide 14)" },
+        { "value": "portrait-right", "label": "Cita izquierda · retrato derecha (slide 17)" }
+      ],
+      "default": "portrait-left"
+    },
+    {
       "type": "textarea",
       "id": "quote",
       "label": "Cita",
       "default": "“Pensé que estaba documentando un viaje, pero en realidad estaba entendiendo el mío.”"
     },
     {
+      "type": "header",
+      "content": "Foto retrato (lado completo)"
+    },
+    {
       "type": "text",
       "id": "portrait_filename",
-      "label": "Foto retrato izquierda (assets/)",
-      "info": "Ej: mirahorizontemobile.png — se oculta en mobile",
-      "default": "mirahorizontemobile.png"
+      "label": "Foto retrato · desktop (assets/)"
     },
     {
       "type": "image_picker",
       "id": "portrait_image",
-      "label": "Foto retrato izquierda (Shopify Files)"
+      "label": "Foto retrato · desktop (Shopify Files)"
+    },
+    {
+      "type": "text",
+      "id": "portrait_filename_mobile",
+      "label": "Foto retrato · mobile (assets/)"
+    },
+    {
+      "type": "image_picker",
+      "id": "portrait_image_mobile",
+      "label": "Foto retrato · mobile (Shopify Files)"
+    },
+    {
+      "type": "header",
+      "content": "Foto auxiliar (abajo)"
     },
     {
       "type": "text",
       "id": "secondary_filename",
-      "label": "Foto secundaria (assets/)",
-      "info": "Ej: camionjour.png — aparece abajo-derecha en desktop, full-width en mobile",
-      "default": "camionjour.png"
+      "label": "Foto auxiliar · desktop (assets/)"
     },
     {
       "type": "image_picker",
       "id": "secondary_image",
-      "label": "Foto secundaria (Shopify Files)"
+      "label": "Foto auxiliar · desktop (Shopify Files)"
+    },
+    {
+      "type": "text",
+      "id": "secondary_filename_mobile",
+      "label": "Foto auxiliar · mobile (assets/)"
+    },
+    {
+      "type": "image_picker",
+      "id": "secondary_image_mobile",
+      "label": "Foto auxiliar · mobile (Shopify Files)"
     }
   ],
   "presets": [
     {
       "name": "Pima Journey: Quote Split",
       "settings": {
-        "portrait_filename": "mirahorizontemobile.png",
-        "secondary_filename": "camionjour.png"
+        "layout": "portrait-left"
       }
     }
   ]

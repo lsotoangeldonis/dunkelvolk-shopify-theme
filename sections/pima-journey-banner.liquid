@@ -1,23 +1,39 @@
 {%- assign component_class = 'pima-journey-banner__' | append: section.id -%}
+{%- assign caption_position = section.settings.caption_position | default: 'bottom-left' -%}
+{%- assign caption_style = section.settings.caption_style | default: 'display' -%}
 
 <style>
-  /* Cancel extra padding-top on this landing page */
-  body.template-pimajourney .main-content,
-  body.template-pimajourney #PageContainer {
+  /* Loaded only on pages with this section. Kill ALL possible sources of top gap
+     above the banner. Using ID selectors (#MainContent, #PageContainer) so we beat
+     any class-based rule in theme.scss regardless of specificity. */
+  html body #PageContainer,
+  html body #MainContent,
+  html body .page-container,
+  html body .main-content {
     padding-top: 0 !important;
+    padding-block-start: 0 !important;
     margin-top: 0 !important;
+    margin-block-start: 0 !important;
   }
-  body.template-pimajourney .shopify-section:first-of-type {
-    margin-top: 0;
+  /* The first shopify-section wrapper inside main also gets zeroed */
+  html body #MainContent > .shopify-section:first-child,
+  html body .main-content > .shopify-section:first-child,
+  html body #PageContainer > .shopify-section:first-child {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+  /* Neutralize the section's own wrapper too */
+  #shopify-section-{{ section.id }} {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
   }
 
   .{{ component_class }} {
     position: relative;
     width: 100%;
-    min-height: 85vh;
+    min-height: 100vh;
     overflow: hidden;
     display: flex;
-    align-items: flex-end;
   }
 
   .{{ component_class }}__image {
@@ -33,35 +49,63 @@
   .{{ component_class }}__content {
     position: relative;
     z-index: 2;
-    padding: 0 48px 56px;
+    padding: 56px 48px;
+    width: 100%;
+    display: flex;
   }
 
+  .{{ component_class }}--bottom-left  .{{ component_class }}__content { align-items: flex-end;   justify-content: flex-start; }
+  .{{ component_class }}--bottom-right .{{ component_class }}__content { align-items: flex-end;   justify-content: flex-end; }
+  .{{ component_class }}--top-left     .{{ component_class }}__content { align-items: flex-start; justify-content: flex-start; }
+  .{{ component_class }}--top-right    .{{ component_class }}__content { align-items: flex-start; justify-content: flex-end; }
+
   .{{ component_class }}__title {
+    color: #fff;
+    margin: 0;
+    text-shadow: 0 2px 16px rgba(0, 0, 0, 0.22);
+  }
+
+  /* Display style: FatFrank Heavy, mega size, uppercase */
+  .{{ component_class }}--style-display .{{ component_class }}__title {
     font-family: var(--font-display, sans-serif);
     font-size: clamp(42px, 5.5vw, 80px);
     font-weight: 900;
-    color: #fff;
     line-height: 1;
     letter-spacing: -0.01em;
-    margin: 0;
     text-transform: uppercase;
-    text-shadow: 0 2px 16px rgba(0, 0, 0, 0.18);
   }
+
+  /* Body style: Avenir Heavy, medium size, mixed case */
+  .{{ component_class }}--style-body .{{ component_class }}__title {
+    font-family: var(--font-body, sans-serif);
+    font-size: clamp(24px, 2.6vw, 40px);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: 0;
+    max-width: 520px;
+  }
+
+  /* Text alignment matches anchor */
+  .{{ component_class }}--bottom-right .{{ component_class }}__title,
+  .{{ component_class }}--top-right    .{{ component_class }}__title { text-align: right; }
 
   @media (max-width: 749px) {
     .{{ component_class }} {
-      min-height: 72vh;
+      min-height: 100vh;
     }
     .{{ component_class }}__content {
-      padding: 0 24px 40px;
+      padding: 40px 24px;
     }
-    .{{ component_class }}__title {
+    .{{ component_class }}--style-display .{{ component_class }}__title {
       font-size: clamp(32px, 9vw, 52px);
+    }
+    .{{ component_class }}--style-body .{{ component_class }}__title {
+      font-size: clamp(18px, 5.5vw, 28px);
     }
   }
 </style>
 
-<div class="{{ component_class }}">
+<div class="{{ component_class }} {{ component_class }}--{{ caption_position }} {{ component_class }}--style-{{ caption_style }}">
   {%- assign mobile_src = '' -%}
   {%- if section.settings.asset_filename_mobile != blank -%}
     {%- assign mobile_src = section.settings.asset_filename_mobile | asset_url -%}
@@ -73,7 +117,7 @@
   {%- if section.settings.asset_filename != blank -%}
     {%- assign desktop_src = section.settings.asset_filename | asset_url -%}
   {%- elsif section.settings.image != blank -%}
-    {%- assign desktop_src = section.settings.image | img_url: '1600x' -%}
+    {%- assign desktop_src = section.settings.image | img_url: '2000x' -%}
   {%- endif -%}
 
   <picture>
@@ -93,11 +137,11 @@
     {%- endif -%}
   </picture>
 
-  <div class="{{ component_class }}__content">
-    {%- if section.settings.heading != blank -%}
+  {%- if section.settings.heading != blank -%}
+    <div class="{{ component_class }}__content">
       <h1 class="{{ component_class }}__title">{{ section.settings.heading }}</h1>
-    {%- endif -%}
-  </div>
+    </div>
+  {%- endif -%}
 </div>
 
 {% schema %}
@@ -107,14 +151,38 @@
     {
       "type": "text",
       "id": "heading",
-      "label": "Título del banner",
-      "default": "EXPLORE. CONNECT"
+      "label": "Texto del banner (vacío = sin caption)"
+    },
+    {
+      "type": "select",
+      "id": "caption_position",
+      "label": "Posición del caption",
+      "options": [
+        { "value": "bottom-left",  "label": "Abajo izquierda" },
+        { "value": "bottom-right", "label": "Abajo derecha" },
+        { "value": "top-left",     "label": "Arriba izquierda" },
+        { "value": "top-right",    "label": "Arriba derecha" }
+      ],
+      "default": "bottom-left"
+    },
+    {
+      "type": "select",
+      "id": "caption_style",
+      "label": "Estilo del caption",
+      "options": [
+        { "value": "display", "label": "Display (FatFrank, mega, uppercase) — slide 11/EXPLORE.CONNECT" },
+        { "value": "body",    "label": "Body (Avenir, medio, mixed case) — slide 16/For those who follow…" }
+      ],
+      "default": "display"
+    },
+    {
+      "type": "header",
+      "content": "Imagen"
     },
     {
       "type": "text",
       "id": "asset_filename",
-      "label": "Imagen desktop (assets/)",
-      "info": "Ej: bannerpima.png — tiene prioridad sobre image picker"
+      "label": "Imagen desktop (assets/)"
     },
     {
       "type": "image_picker",
@@ -124,8 +192,7 @@
     {
       "type": "text",
       "id": "asset_filename_mobile",
-      "label": "Imagen mobile (assets/)",
-      "info": "Ej: bannerpimamobile.png — tiene prioridad sobre image picker"
+      "label": "Imagen mobile (assets/)"
     },
     {
       "type": "image_picker",
@@ -137,9 +204,8 @@
     {
       "name": "Pima Journey: Banner",
       "settings": {
-        "heading": "EXPLORE. CONNECT",
-        "asset_filename": "bannerpima.png",
-        "asset_filename_mobile": "bannerpimamobile.png"
+        "caption_position": "bottom-left",
+        "caption_style": "display"
       }
     }
   ]

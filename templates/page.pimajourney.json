@@ -1,0 +1,121 @@
+{
+  "sections": {
+    "s01-banner-hero": {
+      "type": "pima-journey-banner",
+      "settings": {
+        "heading": "",
+        "caption_position": "bottom-left",
+        "caption_style": "display",
+        "asset_filename": "dunk-journey-hero-desktop.jpg",
+        "asset_filename_mobile": "dunk-journey-hero-mobile.jpg"
+      }
+    },
+    "s02-manifesto": {
+      "type": "pima-journey-manifesto",
+      "settings": {
+        "title": "THE ART OF JOURNEY",
+        "subtitle": "no es escapar, es elegir moverse con intención.",
+        "body": "<p>No todo viaje se mide en distancia. Algunos se miden con las emociones que nos generan.</p><p>Este journey representa la nueva identidad de Dunkelvolk, un explorador consciente que entiende el movimiento como una forma de conexión.</p><p>No se trata de llegar más lejos, sino de moverse con propósito.</p><p>Explorar es salir, descubrir y observar, pero también es detenerse, sentir y entender.</p><p>Cada paso construye. Cada experiencia transforma. Porque al final, no somos el destino al que llegamos, sino el viaje que elegimos hacer.</p><p>¿Desde la mirada de Lorenzo Urbina, filmmaker documentalista, este journey retrata una historia de conexión con uno mismo. Un viaje que empezó desde la curiosidad… y que terminó conectándolo con si mismo.</p>",
+        "icon_filename": "dunk-journey-logo-circle.jpg"
+      }
+    },
+    "s03-photo-rocks": {
+      "type": "pima-journey-photo",
+      "settings": {
+        "asset_filename": "dunk-journey-photo-rocks.jpg",
+        "asset_filename_mobile": "dunk-journey-photo-rocks-mobile.jpg",
+        "alt": "Hombre parado en rocas frente al mar"
+      }
+    },
+    "s04-quote-lorenzo": {
+      "type": "pima-journey-quote-split",
+      "settings": {
+        "layout": "portrait-left",
+        "quote": "“Pensé que estaba documentando un viaje, pero en realidad estaba entendiendo el mío.”",
+        "portrait_filename": "dunk-journey-portrait-lorenzo.jpg",
+        "portrait_filename_mobile": "dunk-journey-portrait-lorenzo-mobile.jpg",
+        "secondary_filename": "dunk-journey-aux-truck.jpg",
+        "secondary_filename_mobile": "dunk-journey-aux-truck-mobile.jpg"
+      }
+    },
+    "s05-film-art": {
+      "type": "pima-journey-film-card",
+      "settings": {
+        "layout": "boxed",
+        "bg_color": "#ffffff",
+        "title": "",
+        "brand": "",
+        "asset_filename": "dunk-journey-filmcard-art.jpg",
+        "asset_filename_mobile": "dunk-journey-filmcard-art-mobile.jpg"
+      }
+    },
+    "s06-curiosity-banner": {
+      "type": "pima-journey-banner",
+      "settings": {
+        "heading": "",
+        "caption_position": "top-right",
+        "caption_style": "body",
+        "asset_filename": "dunk-journey-curiosity-banner.jpg",
+        "asset_filename_mobile": "dunk-journey-curiosity-banner-mobile.jpg"
+      }
+    },
+    "s07-quote-walking": {
+      "type": "pima-journey-quote-split",
+      "settings": {
+        "layout": "portrait-right",
+        "quote": "“A veces olvidamos la importancia de conectar. Con las personas. Con esas conversaciones que enseñan más que años de teoría. Con las tradiciones. Compartir un plato, una historia, un momento.”",
+        "portrait_filename": "dunk-journey-portrait-walking.jpg",
+        "portrait_filename_mobile": "dunk-journey-portrait-walking-mobile.jpg",
+        "secondary_filename": "dunk-journey-aux-tree.jpg",
+        "secondary_filename_mobile": "dunk-journey-aux-tree-mobile.jpg"
+      }
+    },
+    "s08-photo-mountain": {
+      "type": "pima-journey-photo",
+      "settings": {
+        "asset_filename": "dunk-journey-photo-mountain.jpg",
+        "asset_filename_mobile": "dunk-journey-photo-mountain-mobile.jpg",
+        "alt": "Hombre caminando con mochila frente a una montaña"
+      }
+    },
+    "s09-side-photos": {
+      "type": "pima-journey-side-photos",
+      "settings": {
+        "asset_filename_desktop": "dunk-journey-side-truck-boat.jpg",
+        "asset_filename_mobile_left": "dunk-journey-side-truck-boat-mobile.jpg",
+        "asset_filename_mobile_right": "dunk-journey-side-man-away-mobile.jpg"
+      }
+    },
+    "s10-statement": {
+      "type": "pima-journey-statement",
+      "settings": {
+        "body": "<p>“Dunkelvolk crea prendas para quienes entienden que explorar es conectar: con la naturaleza, con su comunidad y consigo mismos.</p><p>Diseñamos piezas funcionales, con estética pero con carácter, elaboradas con materiales de excelencia como el algodón Pima,</p><p>pensadas para durar, acompañar y trascender”</p>",
+        "bg_color": "#ffffff",
+        "text_color": "#111111"
+      }
+    },
+    "s11-film-move": {
+      "type": "pima-journey-film-card",
+      "settings": {
+        "title": "MOVE",
+        "title_color": "#f49d3a",
+        "brand": "DUNKELVOLK",
+        "asset_filename": "dunk-journey-filmcard-move.jpg",
+        "asset_filename_mobile": "dunk-journey-filmcard-move-mobile.jpg"
+      }
+    }
+  },
+  "order": [
+    "s01-banner-hero",
+    "s02-manifesto",
+    "s03-photo-rocks",
+    "s04-quote-lorenzo",
+    "s05-film-art",
+    "s06-curiosity-banner",
+    "s07-quote-walking",
+    "s08-photo-mountain",
+    "s09-side-photos",
+    "s10-statement",
+    "s11-film-move"
+  ]
+}

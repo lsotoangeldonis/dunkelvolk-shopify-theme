@@ -250,25 +250,50 @@
   }
 
   .dunk-header {
-    display: flex !important;
+    display: grid !important;
+    grid-template-columns: 1fr auto 1fr;
+    column-gap: 24px;
     align-items: center;
     padding: 10px 48px;
     background: transparent;
     color: #111;
     border: 0;
     position: relative;
-    gap: 0;
   }
   .dunk-header__farleft { display: none !important; }
-  .dunk-header__nav {
+  /* Left nav fills its column from the left */
+  .dunk-header__nav--left {
+    grid-column: 1;
+    justify-self: center;
     display: flex !important;
     align-items: center;
     gap: 22px;
-    flex: 1 1 0;
+    min-width: 0;
+    overflow: hidden;
+  }
+  /* Logo always centered in the middle column */
+  .dunk-header__logo {
+    grid-column: 2;
+    justify-self: center;
+    display: inline-flex;
+    align-items: center;
+  }
+  /* Right side: nav + icons share column 3, justified to the end */
+  .dunk-header__right {
+    grid-column: 3;
+    justify-self: center;
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    min-width: 0;
+    max-width: 100%;
+  }
+  .dunk-header__nav--right {
+    display: flex !important;
+    align-items: center;
+    gap: 22px;
     min-width: 0;
   }
-  .dunk-header__nav--left { justify-content: flex-start; }
-  .dunk-header__nav--right { justify-content: flex-end; margin-right: 28px; }
   .dunk-header__nav a {
     color: #111;
     text-decoration: none;
@@ -278,47 +303,41 @@
     padding: 4px 0;
     white-space: nowrap;
   }
-  /* Logo stays centered visually because the two nav columns are flex:1 equal */
-  .dunk-header__logo { flex: 0 0 auto; margin: 0 28px; }
 
-  /* Icons: never compress, always at the very end */
+  /* Icons: never compress, always last */
   .dunk-header__icons {
-    flex: 0 0 auto !important;
+    flex: 0 0 auto;
     min-width: max-content;
   }
 
   /* Standard laptops 1281-1440 */
   @media (min-width: 1281px) and (max-width: 1440px) {
-    .dunk-header { padding: 10px 32px; }
+    .dunk-header { padding: 10px 32px; column-gap: 20px; }
     .dunk-header__nav { gap: 18px; }
     .dunk-header__nav a { font-size: 12px; }
-    .dunk-header__logo { margin: 0 20px; }
-    .dunk-header__logo img { max-height: 80px; }
-    .dunk-header__nav--right { margin-right: 20px; }
+    .dunk-header__right { gap: 22px; }
+    .dunk-header__logo img { max-height: 32px; }
   }
   /* Mid-size laptops 750-1280 */
   @media (min-width: 750px) and (max-width: 1280px) {
-    .dunk-header { padding: 10px 20px; }
+    .dunk-header { padding: 10px 20px; column-gap: 14px; }
     .dunk-header__nav { gap: 12px; }
     .dunk-header__nav a { font-size: 12px; }
+    .dunk-header__right { gap: 16px; }
     .dunk-header__icons { gap: 10px; }
-    .dunk-header__logo { margin: 0 16px; }
-    .dunk-header__logo img { max-height: 64px; }
-    .dunk-header__nav--right { margin-right: 14px; }
+    .dunk-header__logo img { max-height: 28px; }
     .dunk-utility-row { padding: 16px 20px; }
   }
   /* Small laptops 750-1100 */
   @media (min-width: 750px) and (max-width: 1100px) {
     .dunk-header__nav a { font-size: 11px; }
     .dunk-header__nav { gap: 8px; }
-    .dunk-header__logo img { max-height: 52px; }
-    .dunk-header { padding: 10px 14px; }
-    .dunk-header__logo { margin: 0 12px; }
-    .dunk-header__nav--right { margin-right: 10px; }
+    .dunk-header__right { gap: 12px; }
+    .dunk-header__logo img { max-height: 24px; }
+    .dunk-header { padding: 10px 14px; column-gap: 10px; }
   }
   .dunk-header__nav a:hover { opacity: .7; }
-  .dunk-header__logo { display: inline-flex; align-items: center; }
-  .dunk-header__logo img { display: block; max-height: 96px; width: auto; }
+  .dunk-header__logo img { display: block; max-height: 36px; width: auto; }
   .dunk-header__logo-mobile { display: none; }
   .dunk-header__icons {
     display: inline-flex;
@@ -548,37 +567,37 @@
         </a>
       </div>
 
-      {%- comment -%} Right of logo: secondary nav (About Us · The Pima Journey · Explorer's Club) {%- endcomment -%}
-      <div class="dunk-header__nav dunk-header__nav--right dunk-header__nav--desktop">
-        {%- if linklists[section.settings.secondary_linklist].links.size > 0 -%}
-          {%- for link in linklists[section.settings.secondary_linklist].links -%}
-            <a href="{{ link.url }}"{% if link.current %} aria-current="page"{% endif %}>{{ link.title | escape }}</a>
-          {%- endfor -%}
-        {%- endif -%}
-      </div>
-
-      {%- comment -%} Far right: icons (search, account, cart) {%- endcomment -%}
-      <div class="dunk-header__icons">
-        <button type="button" class="js-drawer-open-top" aria-label="{{ 'general.search.submit' | t }}">
-          {% include 'icon-search' %}
-        </button>
-        {%- if shop.customer_accounts_enabled -%}
-          {%- if customer -%}
-            <a href="{{ routes.account_url }}" aria-label="{{ 'layout.customer.account' | t }}">
-              {% include 'icon-login' %}
-            </a>
-          {%- else -%}
-            <a href="{{ routes.account_login_url }}" aria-label="{{ 'layout.customer.log_in' | t }}">
-              {% include 'icon-login' %}
-            </a>
+      {%- comment -%} Right side: secondary nav + icons grouped in a single flex container {%- endcomment -%}
+      <div class="dunk-header__right">
+        <div class="dunk-header__nav dunk-header__nav--right dunk-header__nav--desktop">
+          {%- if linklists[section.settings.secondary_linklist].links.size > 0 -%}
+            {%- for link in linklists[section.settings.secondary_linklist].links -%}
+              <a href="{{ link.url }}"{% if link.current %} aria-current="page"{% endif %}>{{ link.title | escape }}</a>
+            {%- endfor -%}
           {%- endif -%}
-        {%- endif -%}
-        <a href="{{ routes.cart_url }}" aria-label="{{ 'layout.cart.title' | t }}" class="dunk-header__cart-link">
-          <img class="dunk-header__cart-icon" src="{{ 'backpack.png' | asset_url }}" alt="" width="22" height="22" loading="eager">
-          <span id="DunkCartCount" class="dunk-header__cart-count{% if cart.item_count == 0 %} hide{% endif %}" data-cart-count-bubble>
-            <span data-cart-count>{{ cart.item_count }}</span>
-          </span>
-        </a>
+        </div>
+        <div class="dunk-header__icons">
+          <button type="button" class="js-drawer-open-top" aria-label="{{ 'general.search.submit' | t }}">
+            {% include 'icon-search' %}
+          </button>
+          {%- if shop.customer_accounts_enabled -%}
+            {%- if customer -%}
+              <a href="{{ routes.account_url }}" aria-label="{{ 'layout.customer.account' | t }}">
+                {% include 'icon-login' %}
+              </a>
+            {%- else -%}
+              <a href="{{ routes.account_login_url }}" aria-label="{{ 'layout.customer.log_in' | t }}">
+                {% include 'icon-login' %}
+              </a>
+            {%- endif -%}
+          {%- endif -%}
+          <a href="{{ routes.cart_url }}" aria-label="{{ 'layout.cart.title' | t }}" class="dunk-header__cart-link">
+            <img class="dunk-header__cart-icon" src="{{ 'backpack.png' | asset_url }}" alt="" width="22" height="22" loading="eager">
+            <span id="DunkCartCount" class="dunk-header__cart-count{% if cart.item_count == 0 %} hide{% endif %}" data-cart-count-bubble>
+              <span data-cart-count>{{ cart.item_count }}</span>
+            </span>
+          </a>
+        </div>
       </div>
     </div>
   </div>

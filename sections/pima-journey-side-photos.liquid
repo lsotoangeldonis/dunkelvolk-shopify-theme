@@ -1,0 +1,143 @@
+{%- comment -%}
+  Slide 19: side-by-side composition.
+  Desktop: single pre-composed wide image (both halves in one file).
+  Mobile:  two separate images stacked vertically.
+{%- endcomment -%}
+{%- assign component_class = 'pima-journey-side-photos__' | append: section.id -%}
+
+<style>
+  .{{ component_class }} {
+    background: #fff;
+    padding: 56px 0;
+  }
+  .{{ component_class }}__inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+  /* Desktop: single composed image */
+  .{{ component_class }}__desktop {
+    display: block;
+    width: 100%;
+  }
+  .{{ component_class }}__desktop img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .{{ component_class }}__mobile { display: none; }
+
+  @media (max-width: 749px) {
+    .{{ component_class }} {
+      padding: 0;
+    }
+    .{{ component_class }}__inner {
+      padding: 0;
+    }
+    .{{ component_class }}__desktop { display: none; }
+    .{{ component_class }}__mobile {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .{{ component_class }}__mobile img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+  }
+</style>
+
+<section class="{{ component_class }}">
+  <div class="{{ component_class }}__inner">
+
+    {%- comment -%} Desktop: single composed image {%- endcomment -%}
+    {%- assign desktop_src = '' -%}
+    {%- if section.settings.asset_filename_desktop != blank -%}
+      {%- assign desktop_src = section.settings.asset_filename_desktop | asset_url -%}
+    {%- elsif section.settings.image_desktop != blank -%}
+      {%- assign desktop_src = section.settings.image_desktop | img_url: '2000x' -%}
+    {%- endif -%}
+    {%- if desktop_src != blank -%}
+      <div class="{{ component_class }}__desktop">
+        <img src="{{ desktop_src }}" alt="" loading="lazy">
+      </div>
+    {%- endif -%}
+
+    {%- comment -%} Mobile: 2 stacked images {%- endcomment -%}
+    {%- assign mobile_left = '' -%}
+    {%- if section.settings.asset_filename_mobile_left != blank -%}
+      {%- assign mobile_left = section.settings.asset_filename_mobile_left | asset_url -%}
+    {%- elsif section.settings.image_mobile_left != blank -%}
+      {%- assign mobile_left = section.settings.image_mobile_left | img_url: '900x' -%}
+    {%- endif -%}
+    {%- assign mobile_right = '' -%}
+    {%- if section.settings.asset_filename_mobile_right != blank -%}
+      {%- assign mobile_right = section.settings.asset_filename_mobile_right | asset_url -%}
+    {%- elsif section.settings.image_mobile_right != blank -%}
+      {%- assign mobile_right = section.settings.image_mobile_right | img_url: '900x' -%}
+    {%- endif -%}
+    {%- if mobile_left != blank or mobile_right != blank -%}
+      <div class="{{ component_class }}__mobile">
+        {%- if mobile_left != blank -%}
+          <img src="{{ mobile_left }}" alt="" loading="lazy">
+        {%- endif -%}
+        {%- if mobile_right != blank -%}
+          <img src="{{ mobile_right }}" alt="" loading="lazy">
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Pima Journey · 2 fotos",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Desktop · 1 imagen compuesta (ambos lados)"
+    },
+    {
+      "type": "text",
+      "id": "asset_filename_desktop",
+      "label": "Imagen desktop (assets/)"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_desktop",
+      "label": "Imagen desktop (Shopify Files)"
+    },
+    {
+      "type": "header",
+      "content": "Mobile · 2 imágenes apiladas"
+    },
+    {
+      "type": "text",
+      "id": "asset_filename_mobile_left",
+      "label": "Imagen mobile 1 (assets/)"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile_left",
+      "label": "Imagen mobile 1 (Shopify Files)"
+    },
+    {
+      "type": "text",
+      "id": "asset_filename_mobile_right",
+      "label": "Imagen mobile 2 (assets/)"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile_right",
+      "label": "Imagen mobile 2 (Shopify Files)"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Pima Journey · 2 fotos"
+    }
+  ]
+}
+{% endschema %}

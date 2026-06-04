@@ -1,97 +1,35 @@
 {%- assign component_class = 'pima-journey-manifesto__' | append: section.id -%}
 
+{%- comment -%}
+  IMPORTANT: do NOT let auto-formatters break the CSS selectors below into
+  multiple lines. The class is built from Liquid `{{ component_class }}` +
+  BEM suffix (e.g. `__inner`). If a formatter inserts a newline between them,
+  CSS parses two separate selectors and the styles silently fail.
+  Keep each `.{{ component_class }}__xxx` on a single line.
+  (See `.prettierrc` / `.editorconfig` if your editor reformats Liquid CSS.)
+{%- endcomment -%}
+
 <style>
-  .{{ component_class }} {
-    background: #fff;
-    padding: 80px 0;
+  .{{ component_class }} { background: #fff; padding: 120px 0; }
+  .{{ component_class }}__inner { max-width: 1300px; margin: 0 auto; padding: 0 64px; display: grid; grid-template-columns: 1fr 1fr; gap: 96px; }
+  .{{ component_class }}__left { display: flex; flex-direction: column; }
+  .{{ component_class }}__heading-block { border-left: 3px solid #111; padding-left: 22px; padding-bottom: 80px; }
+  .{{ component_class }}__title { font-family: var(--font-display, sans-serif); font-size: clamp(26px, 2.8vw, 42px); font-weight: 900; color: #111; line-height: 1.05; margin: 0 0 8px; text-transform: uppercase; }
+  .{{ component_class }}__subtitle { font-family: var(--font-display, sans-serif); font-size: clamp(22px, 2.5vw, 38px); font-weight: 900; color: #111; line-height: 1.18; margin: 0; }
+  .{{ component_class }}__icon { margin-top: 32px; width: 130px !important; height: 130px !important; flex-shrink: 0; }
+  .{{ component_class }}__icon img { width: 130px !important; height: 130px !important; max-width: none !important; object-fit: contain; display: block; }
+  @media (min-width: 750px) and (max-width: 1280px) {
+    .{{ component_class }}__icon, .{{ component_class }}__icon img { width: 110px !important; height: 110px !important; }
   }
-
-  .{{ component_class }}__inner {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 48px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
-  }
-
-  .{{ component_class }}__left {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .{{ component_class }}__heading-block {
-    border-left: 3px solid #111;
-    padding-left: 22px;
-  }
-
-  .{{ component_class }}__title {
-    font-family: var(--font-display, sans-serif);
-    font-size: clamp(26px, 2.8vw, 42px);
-    font-weight: 900;
-    color: #111;
-    line-height: 1.05;
-    margin: 0 0 8px;
-    text-transform: uppercase;
-  }
-
-  .{{ component_class }}__subtitle {
-    font-family: var(--font-display, sans-serif);
-    font-size: clamp(22px, 2.5vw, 38px);
-    font-weight: 900;
-    color: #111;
-    line-height: 1.18;
-    margin: 0;
-  }
-
-  .{{ component_class }}__icon {
-    margin-top: auto;
-    padding-top: 56px;
-    width: 80px;
-    height: 80px;
-  }
-
-  .{{ component_class }}__icon img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    display: block;
-  }
-
-  .{{ component_class }}__body p {
-    font-family: var(--font-body, sans-serif);
-    font-size: clamp(14px, 1vw, 16px);
-    font-weight: 400;
-    color: #111;
-    line-height: 1.65;
-    margin: 0 0 20px;
-  }
-
-  .{{ component_class }}__body p:last-child {
-    margin-bottom: 0;
-  }
-
+  .{{ component_class }}__body p { font-family: var(--font-body, sans-serif); font-size: clamp(16px, 1.25vw, 19px); font-weight: 400; color: #111; line-height: 1.65; margin: 0 0 22px; }
+  .{{ component_class }}__body p:last-child { margin-bottom: 0; }
   @media (max-width: 749px) {
-    .{{ component_class }} {
-      padding: 52px 0;
-    }
-    .{{ component_class }}__inner {
-      grid-template-columns: 1fr;
-      gap: 32px;
-      padding: 0 24px;
-    }
-    .{{ component_class }}__title {
-      font-size: clamp(22px, 6vw, 32px);
-    }
-    .{{ component_class }}__subtitle {
-      font-size: clamp(20px, 5.5vw, 28px);
-    }
-    .{{ component_class }}__icon {
-      display: none;
-    }
-    .{{ component_class }}__body p {
-      font-size: 15px;
-    }
+    .{{ component_class }} { padding: 52px 0; }
+    .{{ component_class }}__inner { grid-template-columns: 1fr; gap: 32px; padding: 0 24px; }
+    .{{ component_class }}__title { font-size: clamp(22px, 6vw, 32px); }
+    .{{ component_class }}__subtitle { font-size: clamp(20px, 5.5vw, 28px); }
+    .{{ component_class }}__icon { display: none; }
+    .{{ component_class }}__body p { font-size: 15px; }
   }
 </style>
 
@@ -115,7 +53,7 @@
       {%- endif -%}
       {%- if icon_src != blank -%}
         <div class="{{ component_class }}__icon">
-          <img src="{{ icon_src }}" alt="Dunkelvolk" loading="lazy" width="80" height="80">
+          <img src="{{ icon_src }}" alt="Dunkelvolk" loading="lazy" width="130" height="130">
         </div>
       {%- endif -%}
     </div>

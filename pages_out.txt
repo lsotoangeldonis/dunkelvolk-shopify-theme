@@ -1,0 +1,14 @@
+PAGE 22 (obj 30) xobjects: 6
+  png pdf_pages/p22_X4_obj222_400x225.png 400x225 c3
+  png pdf_pages/p22_X7_obj223_800x53.png 800x53 c3
+  png pdf_pages/p22_X9_obj224_800x774.png 800x774 c3
+  png pdf_pages/p22_X11_obj225_797x800.png 797x800 c3
+  png pdf_pages/p22_X13_obj226_697x800.png 697x800 c3
+  jpg pdf_pages/p22_X15_obj227_1280x720.jpg
+PAGE 23 (obj 31) xobjects: 1
+  jpg pdf_pages/p23_X4_obj231_1280x720.jpg
+PAGE 24 (obj 32) xobjects: 2
+  jpg pdf_pages/p24_X4_obj235_720x1280.jpg
+  jpg pdf_pages/p24_X6_obj236_720x1280.jpg
+PAGE 25 (obj 33) xobjects: 1
+  png pdf_pages/p25_X4_obj240_720x328.png 720x328 c3

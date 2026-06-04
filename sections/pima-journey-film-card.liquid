@@ -1,0 +1,214 @@
+{%- comment -%}
+  Film title card — used in slides 15 (THE ART OF JOURNEY) and 20-bottom (MOVE).
+  Two layout modes:
+    - "full-bleed": single image edge-to-edge with title/brand overlay
+    - "boxed":      image centered with white margins, no overlay (text baked in image)
+{%- endcomment -%}
+{%- assign component_class = 'pima-journey-film-card__' | append: section.id -%}
+{%- assign layout = section.settings.layout | default: 'full-bleed' -%}
+
+<style>
+  .{{ component_class }} {
+    position: relative;
+    width: 100%;
+    background: {{ section.settings.bg_color | default: '#ffffff' }};
+    overflow: hidden;
+    {% if layout == 'boxed' %} padding: 80px 120px; {% endif %}
+  }
+  .{{ component_class }}__media {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #000;
+  }
+
+  /* Boxed: image centered with white margins on all 4 sides.
+     Using a FIXED class (not tied to section.id) to avoid any character/escape
+     issues with the dynamic ID in JSON templates. */
+  .pima-film-card-boxed {
+    padding: 96px 96px !important;
+  }
+  .pima-film-card-boxed .{{ component_class }}__media {
+    max-width: 1200px !important;
+    margin: 0 auto !important;
+  }
+  @media (max-width: 1200px) {
+    .pima-film-card-boxed { padding: 64px 48px !important; }
+  }
+  @media (max-width: 749px) {
+    .pima-film-card-boxed { padding: 32px 20px !important; }
+  }
+  .{{ component_class }}__media img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+  }
+  .{{ component_class }}__overlay {
+    position: absolute;
+    z-index: 2;
+    top: 50%;
+    right: 8%;
+    transform: translateY(-50%);
+    text-align: right;
+    color: #fff;
+    pointer-events: none;
+  }
+  .{{ component_class }}__title {
+    font-family: var(--font-display, sans-serif);
+    font-size: clamp(28px, 4.4vw, 64px);
+    font-weight: 900;
+    line-height: 0.95;
+    letter-spacing: 0.02em;
+    color: {{ section.settings.title_color | default: '#ffffff' }};
+    margin: 0;
+    text-transform: uppercase;
+    text-shadow: 0 2px 16px rgba(0,0,0,0.4);
+  }
+  .{{ component_class }}__brand {
+    font-family: var(--font-display, sans-serif);
+    font-size: clamp(11px, 1vw, 14px);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: 0.18em;
+    color: #fff;
+    margin: 28px 0 0;
+    text-transform: uppercase;
+  }
+
+  @media (max-width: 749px) {
+    .{{ component_class }}__media {
+      aspect-ratio: 9 / 13;
+    }
+    .{{ component_class }}__overlay {
+      right: 6%;
+      top: auto;
+      bottom: 8%;
+      transform: none;
+    }
+    .{{ component_class }}__title {
+      font-size: clamp(28px, 9vw, 44px);
+    }
+    .{{ component_class }}__brand {
+      font-size: 11px;
+      margin-top: 18px;
+    }
+  }
+</style>
+
+<section class="{{ component_class }} {{ component_class }}--{{ layout }}">
+  <div class="{{ component_class }}__media">
+    {%- assign desktop_src = '' -%}
+    {%- if section.settings.asset_filename != blank -%}
+      {%- assign desktop_src = section.settings.asset_filename | asset_url -%}
+    {%- elsif section.settings.image != blank -%}
+      {%- assign desktop_src = section.settings.image | img_url: '2000x' -%}
+    {%- endif -%}
+    {%- assign mobile_src = '' -%}
+    {%- if section.settings.asset_filename_mobile != blank -%}
+      {%- assign mobile_src = section.settings.asset_filename_mobile | asset_url -%}
+    {%- elsif section.settings.image_mobile != blank -%}
+      {%- assign mobile_src = section.settings.image_mobile | img_url: '900x' -%}
+    {%- else -%}
+      {%- assign mobile_src = desktop_src -%}
+    {%- endif -%}
+
+    {%- if desktop_src != blank -%}
+      <picture>
+        <source media="(max-width: 749px)" srcset="{{ mobile_src }}">
+        <img src="{{ desktop_src }}" alt="{{ section.settings.title | escape }}" loading="lazy">
+      </picture>
+    {%- else -%}
+      {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
+    {%- endif -%}
+
+    {%- if section.settings.title != blank or section.settings.brand != blank -%}
+      <div class="{{ component_class }}__overlay">
+        {%- if section.settings.title != blank -%}
+          <h2 class="{{ component_class }}__title">{{ section.settings.title | newline_to_br }}</h2>
+        {%- endif -%}
+        {%- if section.settings.brand != blank -%}
+          <p class="{{ component_class }}__brand">{{ section.settings.brand | escape }}</p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Pima Journey · Film",
+  "settings": [
+    {
+      "type": "select",
+      "id": "layout",
+      "label": "Layout",
+      "options": [
+        { "value": "full-bleed", "label": "img edge-to-edge + overlay" },
+        { "value": "boxed",      "label": "img centrada con margen blanco, sin overlay" }
+      ],
+      "default": "full-bleed"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Color de fondo (modo boxed)",
+      "default": "#ffffff"
+    },
+    {
+      "type": "textarea",
+      "id": "title",
+      "label": "Título grande (newlines = saltos de línea)",
+      "default": "THE ART\nOF JOURNEY"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Color del título",
+      "default": "#ffffff"
+    },
+    {
+      "type": "text",
+      "id": "brand",
+      "label": "Marca (debajo del título)",
+      "default": "DUNKELVOLK"
+    },
+    {
+      "type": "header",
+      "content": "Imagen"
+    },
+    {
+      "type": "text",
+      "id": "asset_filename",
+      "label": "Imagen desktop (assets/)"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Imagen desktop (Shopify Files)"
+    },
+    {
+      "type": "text",
+      "id": "asset_filename_mobile",
+      "label": "Imagen mobile (assets/)"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "Imagen mobile (Shopify Files)"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Pima Journey · Film",
+      "settings": {
+        "title": "THE ART\nOF JOURNEY",
+        "brand": "DUNKELVOLK"
+      }
+    }
+  ]
+}
+{% endschema %}

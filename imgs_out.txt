@@ -1,0 +1,9 @@
+JPEG images found: 8
+pdf_imgs/img_01_obj4_1280x720.jpg 110KB
+pdf_imgs/img_02_obj55_1280x720.jpg 134KB
+pdf_imgs/img_03_obj133_720x1280.jpg 135KB
+pdf_imgs/img_04_obj140_1280x720.jpg 110KB
+pdf_imgs/img_05_obj227_1280x720.jpg 114KB
+pdf_imgs/img_06_obj230_1280x720.jpg 46KB
+pdf_imgs/img_07_obj234_720x1280.jpg 64KB
+pdf_imgs/img_08_obj236_720x1280.jpg 54KB
