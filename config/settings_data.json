@@ -2195,7 +2195,8 @@
           "padding_top": 60,
           "padding_bottom": 60,
           "padding_top_mobile": 36,
-          "padding_bottom_mobile": 36
+          "padding_bottom_mobile": 36,
+          "intercalate_mobile": true
         }
       },
       "dunk_explorers_club_home": {

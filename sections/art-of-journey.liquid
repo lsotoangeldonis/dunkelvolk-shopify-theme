@@ -25,7 +25,7 @@
     border-left: 3px solid #111;
     padding-left: 16px;
     margin-bottom: 28px;
-    margin-left: -24px; /* extends the bar to the left of the text padding */
+    margin-left: -24px;
   }
   .{{ component_class }}__title {
     font-family: var(--font-display, inherit) !important;
@@ -156,7 +156,10 @@
   }
 </style>
 
-<section class="{{ component_class }}" data-section-id="{{ section.id }}" data-section-type="art-of-journey">
+<section
+  class="{{ component_class }}"
+  data-section-id="{{ section.id }}"
+  data-section-type="art-of-journey">
   <div class="{{ component_class }}__inner">
     <div class="{{ component_class }}__text">
       {%- if section.settings.title != blank or section.settings.subtitle != blank -%}
@@ -173,11 +176,22 @@
       {%- comment -%} Mobile-only image 1 (interleaved between title and body) {%- endcomment -%}
       <div class="{{ component_class }}__image-mobile-1">
         {%- if section.settings.video_filename_mobile != blank -%}
-          <video src="{{ section.settings.video_filename_mobile | asset_url }}" autoplay loop muted playsinline></video>
+          <video
+            src="{{ section.settings.video_filename_mobile | asset_url }}"
+            autoplay
+            loop
+            muted
+            playsinline></video>
         {%- elsif section.settings.asset_filename_1 != blank -%}
-          <img src="{{ section.settings.asset_filename_1 | asset_url }}" alt="" loading="lazy">
+          <img
+            src="{{ section.settings.asset_filename_1 | asset_url }}"
+            alt=""
+            loading="lazy">
         {%- elsif section.settings.image_1 != blank -%}
-          <img src="{{ section.settings.image_1 | img_url: '900x' }}" alt="{{ section.settings.image_1.alt | escape }}" loading="lazy">
+          <img
+            src="{{ section.settings.image_1 | img_url: '900x' }}"
+            alt="{{ section.settings.image_1.alt | escape }}"
+            loading="lazy">
         {%- else -%}
           {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
         {%- endif -%}
@@ -201,7 +215,17 @@
       {%- comment -%} Mobile-only image 2 (after body) {%- endcomment -%}
       <div class="{{ component_class }}__image-mobile-2">
         {%- if section.settings.image_2 != blank -%}
-          <img src="{{ section.settings.image_2 | img_url: '900x' }}" alt="{{ section.settings.image_2.alt | escape }}" loading="lazy">
+          <img
+            src="{{ section.settings.image_2 | img_url: '900x' }}"
+            alt="{{ section.settings.image_2.alt | escape }}"
+            loading="lazy">
+        {%- elsif section.settings.asset_filename_1 != blank -%}
+          <img src="{{ section.settings.asset_filename_1 | asset_url }}" alt="" loading="lazy">
+        {%- elsif section.settings.image_1 != blank -%}
+          <img
+            src="{{ section.settings.image_1 | img_url: '900x' }}"
+            alt="{{ section.settings.image_1.alt | escape }}"
+            loading="lazy">
         {%- else -%}
           {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
         {%- endif -%}
@@ -212,11 +236,19 @@
     <div class="{{ component_class }}__images">
       <div class="{{ component_class }}__image">
         {%- assign video_file = section.settings.video_filename | default: 'video916.mp4' -%}
-        <video src="{{ video_file | asset_url }}" autoplay loop muted playsinline></video>
+        <video
+          src="{{ video_file | asset_url }}"
+          autoplay
+          loop
+          muted
+          playsinline></video>
       </div>
       <div class="{{ component_class }}__image">
         {%- if section.settings.asset_filename_1 != blank -%}
-          <img src="{{ section.settings.asset_filename_1 | asset_url }}" alt="" loading="lazy">
+          <img
+            src="{{ section.settings.asset_filename_1 | asset_url }}"
+            alt=""
+            loading="lazy">
         {%- elsif section.settings.image_1 != blank -%}
           {%- assign img = section.settings.image_1 -%}
           <img
@@ -234,154 +266,207 @@
 </section>
 
 {% schema %}
-{
-  "name": {
-    "en": "The Art of Journey",
-    "es": "The Art of Journey"
-  },
-  "class": "index-section art-of-journey",
-  "settings": [
-    {
-      "type": "text",
-      "id": "title",
-      "label": { "en": "Title", "es": "Título" },
-      "default": "THE ART OF JOURNEY"
+  {
+    "name": {
+      "en": "The Art of Journey",
+      "es": "The Art of Journey"
     },
-    {
-      "type": "text",
-      "id": "subtitle",
-      "label": { "en": "Subtitle", "es": "Subtítulo" },
-      "default": "Exploring with intention"
-    },
-    {
-      "type": "richtext",
-      "id": "body",
-      "label": { "en": "Body text", "es": "Cuerpo de texto" },
-      "default": "<p>En un mundo que no se detiene, la exploración se volvió ruido. Movimiento sin intención. Libertad sin profundidad.</p><p>Explorar no es escapar, es elegir salir del automático. Es un recorrido hacia adentro, para reconectar con uno mismo.</p><p>A través de la mirada de Lorenzo Urbina, filmmaker documentalista, este viaje propone otra forma de moverse: más consciente, más presente.</p><p>No se trata de llegar más lejos, sino de entender mejor. Un explorador consciente no busca acumular experiencias, sino conectar con lo que realmente importa.</p>"
-    },
-    {
-      "type": "richtext",
-      "id": "quote",
-      "label": { "en": "Quote", "es": "Cita" },
-      "default": "<p>“Explorar no es llegar más lejos, es conectar más profundo.”</p>"
-    },
-    {
-      "type": "text",
-      "id": "button_label",
-      "label": { "en": "Button label", "es": "Texto del botón" },
-      "default": "Ver más"
-    },
-    {
-      "type": "url",
-      "id": "button_link",
-      "label": { "en": "Button link", "es": "Enlace del botón" }
-    },
-    {
-      "type": "header",
-      "content": { "en": "Images", "es": "Imágenes" }
-    },
-    {
-      "type": "text",
-      "id": "asset_filename_1",
-      "label": { "en": "Image 1 filename (assets/)", "es": "Imagen 1 nombre de archivo (assets/)" },
-      "info": { "en": "e.g. dunknnn.webp — takes priority over image picker.", "es": "ej. dunknnn.webp — tiene prioridad sobre el selector de imagen." }
-    },
-    {
-      "type": "image_picker",
-      "id": "image_1",
-      "label": { "en": "Image 1 (fallback)", "es": "Imagen 1 (fallback)" }
-    },
-    {
-      "type": "image_picker",
-      "id": "image_2",
-      "label": { "en": "Image 2 (mobile only)", "es": "Imagen 2 (solo mobile)" }
-    },
-    {
-      "type": "text",
-      "id": "video_filename",
-      "label": { "en": "Video filename (desktop, assets/)", "es": "Nombre del video (desktop, assets/)" },
-      "default": "video916.mp4",
-      "info": { "en": "File in /assets/ folder. Replaces image 2 on desktop.", "es": "Archivo en /assets/. Reemplaza imagen 2 en desktop." }
-    },
-    {
-      "type": "text",
-      "id": "video_filename_mobile",
-      "label": { "en": "Video filename (mobile, assets/)", "es": "Nombre del video (mobile, assets/)" },
-      "default": "video916.mp4",
-      "info": { "en": "File in /assets/. Shows in place of image 1 on mobile. Leave blank to show the image instead.", "es": "Archivo en /assets/. Se muestra en lugar de imagen 1 en mobile. Dejar vacío para mostrar imagen." }
-    },
-    {
-      "type": "header",
-      "content": { "en": "Style", "es": "Estilo" }
-    },
-    {
-      "type": "color",
-      "id": "bg_color",
-      "label": { "en": "Background color", "es": "Color de fondo" },
-      "default": "#ffffff"
-    },
-    {
-      "type": "color",
-      "id": "text_color",
-      "label": { "en": "Text color", "es": "Color del texto" },
-      "default": "#111111"
-    },
-    {
-      "type": "header",
-      "content": { "en": "Spacing", "es": "Espaciado" }
-    },
-    {
-      "type": "range",
-      "id": "padding_top",
-      "min": 0,
-      "max": 160,
-      "step": 4,
-      "unit": "px",
-      "label": { "en": "Top padding (desktop)", "es": "Padding superior (desktop)" },
-      "default": 60
-    },
-    {
-      "type": "range",
-      "id": "padding_bottom",
-      "min": 0,
-      "max": 160,
-      "step": 4,
-      "unit": "px",
-      "label": { "en": "Bottom padding (desktop)", "es": "Padding inferior (desktop)" },
-      "default": 60
-    },
-    {
-      "type": "range",
-      "id": "padding_top_mobile",
-      "min": 0,
-      "max": 160,
-      "step": 4,
-      "unit": "px",
-      "label": { "en": "Top padding (mobile)", "es": "Padding superior (mobile)" },
-      "default": 36
-    },
-    {
-      "type": "range",
-      "id": "padding_bottom_mobile",
-      "min": 0,
-      "max": 160,
-      "step": 4,
-      "unit": "px",
-      "label": { "en": "Bottom padding (mobile)", "es": "Padding inferior (mobile)" },
-      "default": 36
-    }
-  ],
-  "presets": [
-    {
-      "name": {
-        "en": "The Art of Journey",
-        "es": "The Art of Journey"
+    "class": "index-section art-of-journey",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": {
+          "en": "Title",
+          "es": "Título"
+        },
+        "default": "THE ART OF JOURNEY"
       },
-      "category": {
-        "en": "Dunkelvolk",
-        "es": "Dunkelvolk"
+      {
+        "type": "text",
+        "id": "subtitle",
+        "label": {
+          "en": "Subtitle",
+          "es": "Subtítulo"
+        },
+        "default": "Exploring with intention"
+      },
+      {
+        "type": "richtext",
+        "id": "body",
+        "label": {
+          "en": "Body text",
+          "es": "Cuerpo de texto"
+        },
+        "default": "<p>En un mundo que no se detiene, la exploración se volvió ruido. Movimiento sin intención. Libertad sin profundidad.</p><p>Explorar no es escapar, es elegir salir del automático. Es un recorrido hacia adentro, para reconectar con uno mismo.</p><p>A través de la mirada de Lorenzo Urbina, filmmaker documentalista, este viaje propone otra forma de moverse: más consciente, más presente.</p><p>No se trata de llegar más lejos, sino de entender mejor. Un explorador consciente no busca acumular experiencias, sino conectar con lo que realmente importa.</p>"
+      },
+      {
+        "type": "richtext",
+        "id": "quote",
+        "label": {
+          "en": "Quote",
+          "es": "Cita"
+        },
+        "default": "<p>“Explorar no es llegar más lejos, es conectar más profundo.”</p>"
+      }, {
+        "type": "text",
+        "id": "button_label",
+        "label": {
+          "en": "Button label",
+          "es": "Texto del botón"
+        },
+        "default": "Ver más"
+      }, {
+        "type": "url",
+        "id": "button_link",
+        "label": {
+          "en": "Button link",
+          "es": "Enlace del botón"
+        }
+      }, {
+        "type": "header",
+        "content": {
+          "en": "Images",
+          "es": "Imágenes"
+        }
+      }, {
+        "type": "text",
+        "id": "asset_filename_1",
+        "label": {
+          "en": "Image 1 filename (assets/)",
+          "es": "Imagen 1 nombre de archivo (assets/)"
+        },
+        "info": {
+          "en": "e.g. dunknnn.webp — takes priority over image picker.",
+          "es": "ej. dunknnn.webp — tiene prioridad sobre el selector de imagen."
+        }
+      }, {
+        "type": "image_picker",
+        "id": "image_1",
+        "label": {
+          "en": "Image 1 (fallback)",
+          "es": "Imagen 1 (fallback)"
+        }
+      }, {
+        "type": "image_picker",
+        "id": "image_2",
+        "label": {
+          "en": "Image 2 (mobile only)",
+          "es": "Imagen 2 (solo mobile)"
+        }
+      }, {
+        "type": "text",
+        "id": "video_filename",
+        "label": {
+          "en": "Video filename (desktop, assets/)",
+          "es": "Nombre del video (desktop, assets/)"
+        },
+        "default": "video916.mp4",
+        "info": {
+          "en": "File in /assets/ folder. Replaces image 2 on desktop.",
+          "es": "Archivo en /assets/. Reemplaza imagen 2 en desktop."
+        }
+      }, {
+        "type": "text",
+        "id": "video_filename_mobile",
+        "label": {
+          "en": "Video filename (mobile, assets/)",
+          "es": "Nombre del video (mobile, assets/)"
+        },
+        "default": "video916.mp4",
+        "info": {
+          "en": "File in /assets/. Shows in place of image 1 on mobile. Leave blank to show the image instead.",
+          "es": "Archivo en /assets/. Se muestra en lugar de imagen 1 en mobile. Dejar vacío para mostrar imagen."
+        }
+      }, {
+        "type": "header",
+        "content": {
+          "en": "Style",
+          "es": "Estilo"
+        }
+      }, {
+        "type": "color",
+        "id": "bg_color",
+        "label": {
+          "en": "Background color",
+          "es": "Color de fondo"
+        },
+        "default": "#ffffff"
+      }, {
+        "type": "color",
+        "id": "text_color",
+        "label": {
+          "en": "Text color",
+          "es": "Color del texto"
+        },
+        "default": "#111111"
+      }, {
+        "type": "header",
+        "content": {
+          "en": "Spacing",
+          "es": "Espaciado"
+        }
+      }, {
+        "type": "range",
+        "id": "padding_top",
+        "min": 0,
+        "max": 160,
+        "step": 4,
+        "unit": "px",
+        "label": {
+          "en": "Top padding (desktop)",
+          "es": "Padding superior (desktop)"
+        },
+        "default": 60
+      }, {
+        "type": "range",
+        "id": "padding_bottom",
+        "min": 0,
+        "max": 160,
+        "step": 4,
+        "unit": "px",
+        "label": {
+          "en": "Bottom padding (desktop)",
+          "es": "Padding inferior (desktop)"
+        },
+        "default": 60
+      }, {
+        "type": "range",
+        "id": "padding_top_mobile",
+        "min": 0,
+        "max": 160,
+        "step": 4,
+        "unit": "px",
+        "label": {
+          "en": "Top padding (mobile)",
+          "es": "Padding superior (mobile)"
+        },
+        "default": 36
+      }, {
+        "type": "range",
+        "id": "padding_bottom_mobile",
+        "min": 0,
+        "max": 160,
+        "step": 4,
+        "unit": "px",
+        "label": {
+          "en": "Bottom padding (mobile)",
+          "es": "Padding inferior (mobile)"
+        },
+        "default": 36
       }
-    }
-  ]
-}
+    ],
+    "presets": [
+      {
+        "name": {
+          "en": "The Art of Journey",
+          "es": "The Art of Journey"
+        },
+        "category": {
+          "en": "Dunkelvolk",
+          "es": "Dunkelvolk"
+        }
+      }
+    ]
+  }
 {% endschema %}

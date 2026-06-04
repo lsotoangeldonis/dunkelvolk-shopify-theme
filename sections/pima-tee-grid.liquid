@@ -85,10 +85,24 @@
     .{{ component_class }}__title { font-size: 20px; }
     .{{ component_class }}__media { margin-bottom: 12px; }
     .{{ component_class }}__cta { padding: 5px 18px; font-size: 11px; }
+
+    /* intercalación: intercambia el orden visual de cada 2º par de cards */
+    .{{ component_class }}--intercalate .{{ component_class }}__card:nth-child(1) { order: 1; }
+    .{{ component_class }}--intercalate .{{ component_class }}__card:nth-child(2) { order: 2; }
+    .{{ component_class }}--intercalate .{{ component_class }}__card:nth-child(3) { order: 4; }
+    .{{ component_class }}--intercalate .{{ component_class }}__card:nth-child(4) { order: 3; }
+    .{{ component_class }}--intercalate .{{ component_class }}__card:nth-child(5) { order: 5; }
+    .{{ component_class }}--intercalate .{{ component_class }}__card:nth-child(6) { order: 6; }
+    .{{ component_class }}--intercalate .{{ component_class }}__card:nth-child(7) { order: 8; }
+    .{{ component_class }}--intercalate .{{ component_class }}__card:nth-child(8) { order: 7; }
   }
 </style>
 
-<section class="{{ component_class }}" data-section-id="{{ section.id }}" data-section-type="pima-tee-grid">
+{%- assign intercalate_class = '' -%}
+{%- if section.settings.intercalate_mobile -%}
+  {%- assign intercalate_class = ' ' | append: component_class | append: '--intercalate' -%}
+{%- endif -%}
+<section class="{{ component_class }}{{ intercalate_class }}" data-section-id="{{ section.id }}" data-section-type="pima-tee-grid">
   <div class="{{ component_class }}__inner">
     {%- if section.settings.title != blank -%}
       <div class="{{ component_class }}__title-wrap">
@@ -168,6 +182,13 @@
       "min": 1, "max": 3, "step": 1,
       "label": { "en": "Columns (mobile)", "es": "Columnas (mobile)" },
       "default": 2
+    },
+    {
+      "type": "checkbox",
+      "id": "intercalate_mobile",
+      "label": { "en": "Intercalate pairs on mobile", "es": "Intercalar pares en mobile" },
+      "info": { "en": "Swaps the visual order of every 2nd pair of cards on mobile (e.g. rows 1+2 keep order, rows 3+4 swap).", "es": "Invierte el orden visual de cada 2° par de tarjetas en mobile." },
+      "default": false
     },
     {
       "type": "header",
